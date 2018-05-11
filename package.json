@@ -1,0 +1,15 @@
+{
+  "name": "translate",
+  "version": "0.0.1",
+  "description": "fe article translate",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "author": "LE",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^0.8.4"
+  }
+}
