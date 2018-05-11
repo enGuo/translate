@@ -2,53 +2,55 @@
 layout: SpecialLayout
 ---
 
-# introduction
+# 介绍
 
-Learning HTML and CSS is hard, but it doesn’t have to be. This 14-chapter tutorial is one of the friendliest HTML and CSS guides on the Internet. We’ll walk you through everything from selecting a good text editor (which is surprisingly important) to building full-fledged, professional-quality web pages from scratch.
+学习 HTML 、 CSS 很难，但接下来的 14 个章节将带领你选择一个好的编辑器 ( 很重要 ) 快速打造一个成熟、高性能的网页。
 
 ![Diagram: a person creating web pages](/images/becoming-a-web-developer-0530f1.png)
 
-We designed [_HTML & CSS Is Hard_](https://internetingishard.com//html-and-css/) to be the only introduction to HTML and CSS that you’ll ever need. If you put in the effort to read every section and write every code snippet, this tutorial has the potential to replace hundreds or even thousand of dollars worth of online courses and live training.
+如果你认真读完每个章节，敲完每个代码片段 [_HTML & CSS Is Hard_](/html-css/) 将是你了解 HTML、CSS 唯一需要的，它比市面上很多在线教程和练习都实用。
 
-Our goal is to make it as easy as possible for complete beginners to become professional web developers, so if you’ve never written a line of HTML or CSS, but you’re contemplating a career shift, grab a cup of coffee, take a seat, and let’s get to work.
+我们的目标是尽可能让初学者更容易成为专业的前端，如果你从来没有写过一行 HTML、CSS 代码，但你崇尚网页开发，来吧，开启你的学习之旅!
 
 ## HTML, CSS, & JavaScript
 
-HyperText Markup Language (HTML), Cascading Style Sheets (CSS), and JavaScript are the languages that run the web. They’re very closely related, but they’re also designed for very specific tasks. Understanding how they interact will go a long way towards becoming a web developer. We’ll be expanding on this throughout the tutorial, but the gist of it is:
+HyperText Markup Language (HTML), Cascading Style Sheets (CSS), and JavaScript 是网页开发语言。它们有着紧密的联系，在网页中有各自的角色。理解它们有助于你成为一个更好的前端。
 
-* HTML is for adding meaning to raw content by marking it up.
-* CSS is for formatting that marked up content.
-* JavaScript is for making that content and formatting interactive.
+* HTML 给网页添加结构内容
+* CSS 给网页添加样式
+* JavaScript 给网页添加交互行为
 
-Think of HTML as the abstract text and images behind a web page, CSS as the page that actually gets displayed, and JavaScript as the behaviors that can manipulate both HTML and CSS.
+::: tip
+可以想象 HTML 就是网页上的 文本或图片，css 用于排版，JavaScript 给网页添加行为，可操作 css 和 HTML
+:::
 
 ![Diagram: HTML as a tree of nodes, CSS as a rendered web page, JavaScript as an interactive web page with fancy behaviors](/images/html-css-javascript-905348.png)
 
-For example, you might mark some particular run of text as a paragraph with this HTML:
+例如，你可以用下面的代码表示一个段落
 
 ```html
 <p id='some-paragraph'>This is a paragraph.</p>
 ```
 
-Then, you can set the size and color of that paragraph with some CSS:
+接着，你可以用 css 给段落添加字体大小和颜色
 
-```html
+```css
 p {
   font-size: 20px;
   color: blue;
 }
 ```
 
-And, if you want to get fancy, you can re-write that paragraph when the user clicks it with some JavaScript (we’ll save the fancy stuff for a future tutorial):
+最后，你可以用 js 让用户点击段落后修改段落的内容
 
-```html
+```js
 var p = document.getElementById('some-paragraph');
 p.addEventListener('click', function(event) {
   p.innerHTML = 'You clicked it!';
 });
 ```
 
-As you can see, HTML, CSS, and JavaScript are totally different languages, but they all refer to one another in some way. Most websites rely on all three, but the appearance of _every_ website is determined by HTML and CSS. That makes this tutorial a great starting point for your web development journey.
+正如你所见, HTML, CSS, and JavaScript 是不同的语言, 但它们用一些方式形成联系。 大多数网站都是用三者来完成, 但多数网页的外观仅用 HTML 和 css 就可以完成， 接下来的教程将开启这方面的开发之旅。
 
 ## Languages Versus “Web Development”
 
