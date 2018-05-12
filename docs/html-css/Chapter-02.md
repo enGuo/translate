@@ -2,27 +2,28 @@
 layout: SpecialLayout
 ---
 
-# basic-web-pages
+# 网页基础
 
-HTML defines the content of every web page on the Internet. By “marking up” your raw content with HTML tags, you’re able to tell web browsers how you want different parts of your content to be displayed. Creating an HTML document with properly marked up content is the first step of developing a web page.
+HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一步。
+
 
 ![Diagram: raw content turning into HTML markup turning into a web page](/images/html-markup-0761f7.png)
 
-In this chapter, we’ll build our first web page. It’ll look like crap because it won’t have any CSS attached to it, but it will serve as a thorough introduction to the HTML elements that web developers work with on a daily basis.
+在这一章，我们将开发第一个网页。没有 css 可能看起来会比较丑。网页开发者每天都跟 html 元素打交道。
 
-As you work your way through the examples, try to approach them as a more hands-on version of a WYSIWYG editor like Google Docs or Microsoft Word. We’ll be working with all the same types of content (headings, paragraphs, lists, etc), we’ll just be defining them a little bit more explicitly with HTML.
+尽量让每个网页都得遵循规范，即便他们有着相似的内容（头部，段落，列表等）
 
-## Setup
+## 安装
 
-Let’s get started by creating a new project with Atom called `basic-web-pages`. Then, make a new file called `basics.html` in that folder. This HTML file represents a single web page, and it’s where we’ll put all our code for this chapter. If you’re not already set up with Atom, be sure to read the [Introduction](https://internetingishard.com//html-and-css/introduction/) for this tutorial series.
+让我们用 atom 开始创建一个新项目`basic-web-pages`。接着新建一个`basics.html` 文件。这个 HTML 文件包含了网页所有代码。如果你还没安装 atom 可以看下[Introduction](./Chapter-01.md) 
 
 ![Diagram: editing HTML code in a text editor and viewing changes in a web browser](/images/web-dev-workflow-1faddb.png)
 
-Remember that the basic workflow for web developers is to edit HTML in their text editor and view those changes in a web browser, so this is exactly what you should be doing for each section of this chapter.
+网页开发的基本流程是在编辑器中敲代码，在浏览器中查看变化。这些就是你在这章节接下来经常要做的事。
 
-## Structure of a Web Page
+## 网页构成
 
-Add the following HTML markup to our `basics.html` file. This is what you’ll start with for every single web page you’ll ever produce. Typically, you would use a templating engine of some sort to avoid re-typing the redundant parts, but for this tutorial, we’ll be focusing on the raw HTML.
+添加代码到`basics.html`文件，接下来每个网页都有类似的结构。你可以用模板来复用一些代码，但现在我们先专注网页的内容。
 
 ```html
 <!DOCTYPE html>
@@ -36,25 +37,26 @@ Add the following HTML markup to our `basics.html` file. This is what you’ll s
 </html>
 ```
 
-First, we need to tell browsers that this is an HTML5 web page with the `<!DOCTYPE html>` line. This is just a special string that browsers look for when they try to display our web page, and it always needs to look exactly like it does above.
+首先我们用`<!DOCTYPE html>`告诉浏览器这个界面是 HTML5。
 
-Then, our entire web page needs to be wrapped in `<html>` tags. The actual `<html>` text is called an “opening tag”, while `</html>` is called a “closing tag”. Everything inside of these tags are considered part of the `<html>` “element”, which is this ethereal thing that gets created when a web browser parses your HTML tags.
+网页用`<html>`标签包裹着，`<html>`叫作起始标签，`</html>`叫作结束标签。当网页完成解析后 `<html>` 里面的元素就会被创建。
 
 ![Diagram: an HTML element composed of an opening tag and a closing tag](/images/html-tags-elements-72813b.png)
 
-Inside of the `<html>` element, we have two more elements called `<head>` and `<body>`. A web page’s head contains all of its metadata, like the page title, any CSS stylesheets, and other things that are required to render the page but you don’t necessarily want the user to see. The bulk of our HTML markup will live in the `<body>` element, which represents the visible content of the page. Note that opening up our page in a web browser won’t display anything, since it has an empty `<body>`.
+在 `<html>` 元素里, 还有两个元素 `<head>` 、 `<body>`. 网页头部包含了网站所有的元数据。像标题，级联样式表，一些你不想让用户看到的信息，
+`<body>`里面就是我们想要展示的内容。
 
 ![Diagram: web page split into <head> and <body> elements](/images/html-head-body-7c2a73.png)
 
-The purpose of this `<head>`/`<body>` split will become clearer in a few chapters after we start working with CSS.
+ 学完接下来的章节我们会对 `<head>`/`<body>` 有更深入的了解。
 
-Also notice the HTML comment syntax in the above snippet. Anything that starts with `<!--` and ends with `-->` will be completely ignored by the browser. This is useful for documenting your code and making notes to yourself.
+注释由 `<!--`开始 `-->`结束 ，网页将忽略这部分内容。所以我们可以用它来备注信息。
 
-## Page Titles
+## 标题
 
-One of the most important pieces of metadata is the title of your web page, defined by the aptly named `<title>` element. Browsers display this in the tab for your page, and Google displays it in search engine results.
+标题是元数据中重要的一部分，用`<title>` 定义，在浏览器的标签页中显示，谷歌搜索引擎与之相关。
 
-Try updating our `basic.html` file’s `<head>` to match the following:
+在 `basic.html` 文件添加 `<head>` 就像：
 
 ```html
 <!DOCTYPE html>
@@ -68,11 +70,11 @@ Try updating our `basic.html` file’s `<head>` to match the following:
 </html>
 ```
 
-When you reload the page in your browser, you should still see an empty page, but you’ll also see **Interneting Is Easy!** in the browser tab:
+打开浏览器你会看到一个标签页上显示 **Interneting Is Easy!**的空网页
 
 ![Web page showing <title> element displayed in a browser tab](/images/html-title-element-f4eb85.png)
 
-Notice how all the HTML tags in our web page are neatly nested. It’s very important to ensure that there are no overlapping elements. For instance, the `<title>` element is supposed to be inside of the `<head>`, so you’d never want to add the closing `</head>` tag before the closing `</title>` tag:
+网页有它的嵌套规则，不可以在`</head>`结束后添加`</title>` 标签
 
 ```html
 <!-- (Don't ever do this) -->
@@ -81,9 +83,9 @@ Notice how all the HTML tags in our web page are neatly nested. It’s very impo
 </title>
 ```
 
-## Paragraphs
+## 段落
 
-Titles are all well and good, but let’s do something we can actually see. The `<p>` element marks all the text inside it as a distinct paragraph. Try adding the following `<p>` element to the body of our web page:
+段落使用`<p>`元素
 
 ```html
 <!DOCTYPE html>
@@ -97,19 +99,17 @@ Titles are all well and good, but let’s do something we can actually see. The 
 </html>
 ```
 
-You should now be able to see some content on the page. Again, since this is content we want to display, it needs to go in the `<body>` element, not `<head>`.
+现在可以在浏览器中看到内容，记住是在`<body>` 元素内添加内容而不是`<head>`。
 
 ![Web page showing a <p> element with some content in it](/images/html-paragraph-element-842f23.png)
 
-Also note how the `<p>` and `<title>` elements are indented twice, while `<body>` and `<head>` are indented once. Indenting nested elements like this is an important best practice that makes your HTML easier to read for other developers (or for yourself if you come back 5 months from now and want to change some stuff).
+缩进有助于美化代码格式，便于开发。格式取决于你的团队，在 **Atom > Preferences > Editor** 中的 **Tab Type** 可以设置。
 
-It’s up to you and your development team to decide if you want to use spaces or tab characters for indents. You can set this preference in your text editor under **Atom > Preferences > Editor** and scrolling down to the **Tab Type** setting.
+## 标头
 
-## Headings
+标头用于在网页中展示，HTML 提供了6个等级的标头， `<h1>`, `<h2>`, `<h3>`, … , `<h6>`. 数字越高，权重越低。
 
-Headings are like titles, but they’re actually displayed on the page. HTML provides six levels of headings, and the corresponding elements are: `<h1>`, `<h2>`, `<h3>`, … , `<h6>`. The higher the number, the less prominent the heading.
-
-The first heading on a page should typically be an `<h1>`, so let’s insert one above our existing `<p>` element. It’s very common for the first `<h1>` element to match the `<title>` of the document, as it does here:
+ `<h1>` 内容一般跟 `<title>` 一样
 
 ```html
 <body>
@@ -118,7 +118,7 @@ The first heading on a page should typically be an `<h1>`, so let’s insert one
 </body>
 ```
 
-By default, browsers render less important headings in smaller fonts. For example, let’s include a second-level heading and see what happens:
+默认情况下，标头权重越高，字体越大。
 
 ```html
 <!DOCTYPE html>
@@ -137,15 +137,15 @@ By default, browsers render less important headings in smaller fonts. For exampl
 </html>
 ```
 
-This should result in a web page that looks something like this:
+就像
 
 ![Web page showing a big <h1> element and a smaller <h2> element](/images/html-heading-elements-f7fe6a.png)
 
-Headings are the primary way you mark up different sections of your content. They define the outline of your web page as both humans and search engines see it, which makes selecting relevant headings essential for a high-quality web page.
+好的网站应该用标头合理展示不同层级的内容
 
-## Unordered Lists
+## 无序列表
 
-Whenever you surround a piece of text with HTML tags, you’re adding new meaning to that text. Wrapping content in `<ul>` tags tells a browser that whatever is inside should be rendered as an “unordered list”. To denote individual items in that list, you wrap them in `<li>` tags, like so:
+在浏览器中用 `<ul>` 表示无序列表 内容则用 `<li>`包裹， 如
 
 ```html
 <h2>Lists</h2>
@@ -159,11 +159,11 @@ Whenever you surround a piece of text with HTML tags, you’re adding new meanin
 </ul>
 ```
 
-After adding this markup to the `<body>` element (underneath the existing content), you should see a bulleted list with a dedicated bullet for each `<li>` element:
+把内容添加到 `<body>` 元素中，浏览器展示：
 
 ![Web page showing a <ul> with <li> elements inside of it](/images/html-unordered-lists-f45526.png)
 
-The HTML specification defines strict rules about what elements can go inside other elements. In this case, `<ul>` elements should only contain `<li>` elements, which means you should never ever write something like this:
+`<ul>` 元素中不能包裹其他内容， 应该在 `<li>` 元素中添加：
 
 ```html
 <!-- (This is bad!) -->
@@ -172,7 +172,7 @@ The HTML specification defines strict rules about what elements can go inside ot
 </ul>
 ```
 
-Instead, you should wrap that paragraph with `<li>` tags:
+应该在 `<li>` 内添加段落：
 
 ```html
 <!-- (Do this instead) -->
@@ -181,11 +181,12 @@ Instead, you should wrap that paragraph with `<li>` tags:
 </ul>
 ```
 
-How do we know that `<ul>` only accepts `<li>` elements and that `<li>` allows nested paragraphs? Because the [Mozilla Developer Network](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul) (MDN) says so. MDN is a superb HTML element reference. We’ll try to cover as much as we can about how to use basic HTML elements in this tutorial, but whenever you’re not sure about a particular element, do a quick Google search for **“MDN `<some-element>`”**.
 
-## Ordered Lists
+我们怎么知道为什么 `<ul>` 只能嵌套 `<li>` 元素而 `<li>`可以嵌套段落，参考 [Mozilla Developer Network](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul) (MDN)  MDN 是一个比较好的 HTML 规范参考网站。 本教程会讲解一些基础元素，详情可以通过 **“MDN `<some-element>`”** 来查阅更具体的内容。
 
-With an unordered list, rearranging the `<li>` elements shouldn’t change the meaning of the list. If the sequence of list items does matter, you should use an “ordered list” instead. To create an ordered list, simply change the parent `<ul>` element to `<ol>`. Append the following content to the **Lists** section of `basics.html`:
+## 有序列表
+
+如果列表有序号则应该使用 `<ol>`.在 `basics.html` 添加如下内容:
 
 ```html
 <p>This is what an ordered list looks like:</p>
@@ -199,21 +200,21 @@ With an unordered list, rearranging the `<li>` elements shouldn’t change the m
 </ol>
 ```
 
-When you reload the page in your browser, you’ll notice that the browser automatically incremented the count for each `<li>` element. In [Hello, CSS](https://internetingishard.com//html-and-css/hello-css/), we’ll learn how to change what type of numbers get displayed.
+刷新界面后就可以看到有序列表，在[Hello, CSS](./Chapter-04.md)章节中,我们将学习如何修改列表样式。
 
 ![Web page showing a <ol> with <li> elements inside of it](/images/html-ordered-lists-120411.png)
 
-The difference between an unordered list and an ordered list might seem silly, but it really does have significance to web browsers, search engines, and, of course, human readers. It’s also easier than manually numbering each list item.
+无序和有序对于搜索引擎和用户体验是不一样的。
 
-Step-by-step procedures like recipes, instructions, and even tables of contents are good candidates for ordered lists, while `<ul>` lists are better for representing item inventories, product features, pro/con comparisons, and navigational menus.
+步骤比较适合使用有序列表，而 `<ul>` 更适合列举特性等。
 
-## Emphasis (Italic) Elements
+## 斜体元素
 
-So far, we’ve only been working with “block-level elements” (also called “flow content”). The other major type of content is “inline elements” or “phrasing content”, which are treated a little bit differently. Block-level elements are always drawn on a new line, while inline elements can affect sections of text anywhere within a line.
+至此，我们仅接触了“块级元素”，“行内元素”是另一个重要部分，块级元素会强制换行，行内元素在一行内显示。
 
 ![Diagram: comparison of block elements (wrapping several inline elements) with inline elements (inside of a block element)](/images/inline-vs-block-elements-44860e.png)
 
-For instance, `<p>` is a block-level element, while `<em>` is an inline element that affects a span of text _inside_ of a paragraph. It stands for “emphasis”, and it’s typically displayed as italicized text. Try adding a new section demonstrating emphasized text to our example web page:
+例如 `<p>` 是块级元素,  `<em>` 是行内元素，并且会让字体变斜体。
 
 ```html
 <h2>Inline Elements</h2>
@@ -222,57 +223,57 @@ For instance, `<p>` is a block-level element, while `<em>` is an inline element 
 phrase.</p>
 ```
 
-The part wrapped in `<em>` tags should render as italics, as shown below. Notice how only part of a line has been affected, which is characteristic of inline elements. In the [CSS Box Model](https://internetingishard.com//html-and-css/css-box-model/) chapter, we’ll discover how inline and block elements can have a dramatic impact on the layout of a page.
+`<em>` 显示斜体， 在 [CSS Box Model](./Chapter-05.md) 章节, 我们将深入讲解行内及块级元素如何影响网页布局的。
 
 ![Web page highlighting the italic text created with an <em> element](/images/html-emphasis-element-87be03.png)
 
-Just in case it hasn’t sunk in yet, it’s _really_ important that you properly nest your HTML elements. It’s easier to mess up the order of tags when you’re using multiple inline elements, so make sure to double-check that your markup never looks like this:
+注意元素间的嵌套规则：
 
 ```html
 <!-- (Again, don't ever do this) -->
 <p>This is some <em>emphasized text</p></em>
 ```
 
-## Strong (Bold) Elements
+## 加粗
 
-If you want to be more emphatic than an `<em>` tag, you can use `<strong>`. It’s an inline element just like `<em>`, and looks like this:
+比 `<em>` 权重更高的是 `<strong>` 元素
 
 ```html
 <p>Other times you need to <strong>strong</strong>ly emphasize the importance
 of a word or phrase.</p>
 ```
 
-It should be rendered in bold text, like so:
+显示如下
 
 ![Web page highlighting the bold text created with a <strong> element](/images/html-strong-element-d3135f.png)
 
-To draw even more attention your a span of text, you can nest a `<strong>` element in an `<em>` element (or vice versa). This will give you text that is both strong and emphasized:
+`<strong>` 、`<em>` 嵌套使用，样式会叠加：
 
 ```html
 <p><em><strong>And sometimes you need to shout!</strong></em></p>
 ```
 
-As the example text suggests, this is effectively the typographic equivalent of shouting. Have a read through the [Web Typography](https://internetingishard.com//html-and-css/web-typography/) chapter before going too crazy with the bold and italic fonts.
+更多文本内容请参考 [Web Typography](./Chapter-14.md) 章节
 
 ![Web page highlighting the bold italic text created with a <strong> element wrapped in an <em> element](/images/html-strong-emphasis-element-5b0eb2.png)
 
-## Structure Versus Presentation
+## 结构化
 
-You might be wondering why we’re using the terms “emphasis” and “strong” instead of “italic” and “bold”. That brings us to an important distinction between HTML and CSS. HTML markup should provide _semantic_ information about your content—not _presentational_ information. In other words, HTML should define the structure of your document, leaving its appearance to CSS.
+在没有css 的情况下，我们应该让网页具备一定的结构，称之为语义化。
 
 ![Diagram: HTML as an abstract tree of nodes compared to CSS as various types of rendered text](/images/structure-vs-presentation-05c228.png)
 
-The pseudo-obsolete `<b>` and `<i>` elements are classic examples of this. They used to stand for “bold” and “italic”, respectively, but HTML5 attempted to create a clear separation between a document’s structure and its presentation. Thus, `<i>` was replaced with `<em>`, since emphasized text can be displayed in all sorts of ways aside from being italicized (e.g., in a different font, a different color, or a bigger size). Same for `<b>` and `<strong>`.
+每个标签都扮演了各自的角色，我们应该使用正确元素来表达网页内容
 
-As we’ll discover in [Hello, CSS](https://internetingishard.com//html-and-css/hello-css/#font-weight-and-style), we can alter the browser’s default rendering of the `<strong>` and `<em>` elements. This furthers the point that we shouldn’t call it out as italicized or bold text in the HTML—that’s something for CSS to decide.
+在 [Hello, CSS](./Chapter-04.md)中，会介绍如何用 css 修改标签默认样式。 
 
-## Empty HTML Elements
+## 自闭合元素
 
-The HTML tags we’ve encountered so far either wrap text content (e.g., `<p>`) or other HTML elements (e.g., `<ol>`). That’s not the case for all HTML elements. Some of them can be “empty“ or “self-closing”. Line breaks and horizontal rules are the most common empty elements you’ll find.
+有类元素，不同于`<p>`等，可以自闭合，如`</br>`
 
-### Line Breaks
+### 换行
 
-HTML condenses consecutive spaces, tabs, or newlines (together known as “whitespace”) into a single space. To see what we’re talking about, add the following section to our `basics.html` file:
+在 `basics.html` 文件中，我们可以看到代码具备缩进，换行等格式:
 
 ```html
 <h2>Empty Elements</h2>
@@ -283,24 +284,22 @@ HTML condenses consecutive spaces, tabs, or newlines (together known as “white
 The Authors</p>
 ```
 
-The newline after `Regards` in the above snippet will be transformed into a space instead of displaying as a line break:
+在代码片段后，一般会采用换行。
 
 ![Web page showing a plaintext line break collapsing into a space in the rendered page](/images/html-collapsing-whitespace-c4012d.png)
 
-This behavior may seem counter intuitive, but web developers often set their text editor to limit line length to around 80 characters. As a programmer, it’s easier to manage code this way, but having each of the newlines show up in the rendered page would severely mess up the intended page layout.
-
-To tell the browser that we want a hard line break, we need to use an explicit `<br/>` element, like this:
+一般编辑器会设置80个字符为换行界定，代码格式化可以增强代码可读性。另外可以使用`<br/>` 元素强制浏览器换行, 如：
 
 ```html
 <p>Regards,<br/>
 The Authors</p>
 ```
 
-The `<br/>` element is useful anywhere text formatting matters. Haiku, music lyrics, and signatures are just a few examples where it might come in handy.
+`<br/>` 有助于格式化文本，增强可读性。
 
 ![Web page highlighting an actual line break with the <br/> element](/images/html-line-break-element-f40443.png)
 
-However, be very careful not to abuse the `<br/>` tag. Each one you use should still convey _meaning_—you shouldn’t use it to, say, add a bunch of space between paragraphs:
+仅仅是为了 添加段落间距，不应该滥用`<br/>` 标签，如：
 
 ```html
 <!-- (You will be shunned for this) -->
@@ -309,11 +308,11 @@ However, be very careful not to abuse the `<br/>` tag. Each one you use should s
 <p>So, I added some hard line breaks.</p>
 ```
 
-As discussed in the previous section, this kind of presentational information should be defined in your CSS instead of your HTML.
+这种情况应该用 css 实现间距
 
-### Horizontal Rules
+### 水平线
 
-The `<hr/>` element is a “horizontal rule”, which represents a thematic break. The transition from one scene of a story into the next or between the end of a letter and a postscript are good examples of when a horizontal rule may be appropriate. For instance:
+`<hr/>` 元素一般用于水平区分不同内容，如:
 
 ```html
 <h2>Empty Elements</h2>
@@ -329,17 +328,15 @@ The Authors</p>
 soon.</p>
 ```
 
-One of the themes for this chapter has been the separation of content (HTML) from presentation (CSS), and `<hr/>` is no different. Like `<em>` and `<strong>`, it has a default appearance (a horizontal line), but once we start working with CSS, we’ll be able to render it as more space between sections, a decorative accent character, or pretty much anything else we want.
+本章节的另一个主题是内容与样式分离，一些元素具有默认样式，在使用 css 之前，我们应该知道这些元素的特性。如 `</hr> <strong>` 等
 
 ![Web page demonstrating an <hr/> element](/images/html-horizontal-rule-element-49f526.png)
 
-Like `<br/>`, `<hr/>` should carry meaning—don’t use it when you just want to display a line for the sake of aesthetics. For that, you’ll want to use the CSS `border` property, which we’ll discuss in a few chapters.
+不能为了实现某些特定的样式，而滥用标签，在接下来的章节我们会告诉你为什么以及如何用 css 实现这些效果
 
-Another way to think about the `<hr/>` element is that it carries _less_ significance than the separation created by a new heading element, but _more_ significance than a new paragraph.
+### 备选项
 
-### Optional Trailing Slash
-
-The trailing slash (`/`) in all empty HTML elements is entirely optional. The above snippet could also be marked up like this (note the lack of `/` in the `<br>` and `<hr>` tags):
+`/` 在所有自闭合标签中，可有可无：
 
 ```html
 <p>Regards,<br>
@@ -348,16 +345,12 @@ The Authors</p>
 <hr>
 ```
 
-It doesn’t really make a difference which convention you choose, but pick one and stick to it for the sake of consistency. In this tutorial, we’ll be including the trailing `/` character because it clearly shows that it’s a self-closing element. This will help prevent your eyes from searching for the closing tag elsewhere in the document.
+规范是必须使用 `/`, 本教程遵守该规范。
 
-## Summary
+## 总结
 
-This chapter may have seemed like an endless list of HTML elements, and, well, it basically was. HTML is pretty simple when it comes right down to it. Web pages are made up of HTML elements, each element adds a different meaning to the text it contains, and elements can be nested inside of each other.
-
-What we did in this chapter is always the first step in the web development process—you need to define _what_ you want to say (HTML) before defining _how_ you want to say it (CSS). Hopefully, the `basics.html` file we created in this chapter will serve as a useful quick-reference of core HTML elements. If you ever happen to misplace it, here’s what it should look like:
+本章讲解了一些常用的元素，网页有元素组成，每个元素有各自的作用，元素相互嵌套后组合成网页。
 
 ![Web page showing <title>, <p>, <h1>, <ol>, and other basic HTML elements](/images/basic-web-pages-f786d5.png)
 
-We talked about how writing HTML is sort of like manipulating content in a WYSIWYG document editor. HTML is obviously a much more manual process, but the trade off is its incredible flexibility. You can display it in a web page, a mobile device, a tablet, or a printed piece of paper, each with different layouts. You can even re-style multiple documents just by changing a single line of CSS. Microsoft Word doesn’t come close to the potential of HTML and CSS as a content medium.
-
-In the next chapter, we’ll round out our HTML education with the remaining elements that you’ll encounter on a daily basis: links and images. For the more obscure elements, we’ll leave you to explore MDN’s [HTML Element Reference](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element) on your own.
+每个网页都是按照有一定的标准来编码及展现的，在下一个章节，我们将围绕网页元素讲。在这之前，可以先了解下MDN’s [HTML Element Reference](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element) 
