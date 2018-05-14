@@ -2,23 +2,23 @@
 layout: SpecialLayout
 ---
 
-# hello-css
+# 你好，css
 
-The first few chapters of this tutorial focused exclusively on HTML. Now, it’s time to make things pretty (sort of) with Cascading Style Sheets (CSS). You can think of CSS as defining the “design” of a web page. It determines things like font size, margins, and colors using a language entirely separate from HTML.
+本教程前几章主要讲解 HTML，接下来让我们了解级联样式表，你可以认为它是在用字体大小、颜色，间距设计网页，且与 HTML 分离。
 
-Why is it a separate language? Well, it serves a completely different purpose. HTML represents the content of your web page, while CSS defines how that content is presented to the user. This is a fundamental distinction central to modern web development.
+为什么要样式分离，职责分离是网页设计的基本准则。HTML 展现内容，css 展现样式。
 
 ![Diagram: designer’s mockup turning into CSS and raw content turning into HTML markup. Both CSS and HTML markup turn into a rendered web page](/images/css-vs-html-f4fdfa.png)
 
-CSS provides the vocabulary to tell a web browser things like, “I want my headings to be really big and my sidebar to appear on the left of the main article.” HTML doesn’t have the terminology to make those kinds of layout decisions—all it can say is, “that’s a heading and that’s a sidebar.”
+css 提供了网页展示对照表，"我想让头部大点，侧边栏展示主要文章"，仅用 HTML 无法表达哪个是头，哪个是侧边栏
 
-In this chapter, we’ll explore the basic syntax of CSS, as well as how to connect it to our HTML documents. The goal isn’t so much to become a CSS expert or memorize all the available styles, but rather to understand how CSS and HTML interact. CSS typically lives in its own file, so as in the [previous chapter](https://internetingishard.com//html-and-css/links-and-images/), good file organization will be paramount.
+在这章，将介绍 css 的基础语法以及如何作用到 HTML 文档。并不是讲解所有的 css 属性，更多是它与 HTML 如何协同。另外如[previous chapter](./Chapter-03.md), 重要的是组织好文件
 
-## Setup
+## 安装
 
-To keep things simple, we’ll store the example for each chapter of this tutorial in a separate folder. [Using Atom](https://internetingishard.com//html-and-css/introduction/#atom-text-editor), create a new project called `hello-css`. We’re going to be styling an existing page called `hello-css.html`, so go ahead and create that, then add the following markup:
+简单起见，每个例子用不同的目录[Using Atom](./Chapter-01.md), 创建新的项目 `hello-css`。再建 `hello-css.html`, 添加如下代码：
 
-```html
+```css
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -55,9 +55,9 @@ To keep things simple, we’ll store the example for each chapter of this tutori
 </html>
 ```
 
-In addition, we’ll need a small dummy page to learn how CSS styles can be applied to multiple web pages. Create `dummy.html` and add the following:
+另外，新建一个叫 `dummy.html` 的界面测试多文件中 css 如何工作
 
-```html
+```css
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -76,29 +76,29 @@ In addition, we’ll need a small dummy page to learn how CSS styles can be appl
 </html>
 ```
 
-## CSS Stylesheets
+## Css
 
-CSS stylesheets reside in plaintext files with a `.css` extension. Create a new file called `styles.css` in our `hello-css` folder. This will house all our example snippets for this chapter. Let’s add one CSS rule so that we can tell if our stylesheet is hooked up to our HTML pages properly.
+css 级联样式表是以 `.css` 为后缀的文件。在 `hello-css` 目录新建 `styles.css` 文件用来保存这章所有例子的代码。添加样式与 HTML 关联起来
 
-```html
+```css
 body {
-  color: #FF0000;
+  color: #ff0000;
 }
 ```
 
-A CSS “rule” always start with a “selector” that defines which HTML elements it applies to. In this case, we’re trying to style the `<body>` element. After the selector, we have the “declarations block” inside of some curly braces. Any “properties” we set in here will affect the `<body>` element.
+css 规则是以 由 HTML 中定义的选择器开始，首先给`<body>`元素添加样式。选择器空格后面有"中括号"，所有添加的属性都将作用于`<body>`
 
 ![Diagram: CSS rule composed of a selector and a series of property-value pairs](/images/css-rule-terminology-1a7961.png)
 
-`color` is a built-in property defined by the CSS specification that determines the text color of whatever HTML elements have been selected. It accepts a hexadecimal value representing a color. `#FF0000` means bright red.
+`color` 是 HTML 文本 css 颜色属性，它接受一个 HAX 值表示变色值，比如"#F00"表示红色
 
-CSS properties are kind of like [HTML attributes](https://internetingishard.com//html-and-css/links-and-images/#links) in that they both deal with key-value pairs. Except, here we’re defining _presentational_ information instead of contributing to the _semantic_ meaning of the underlying content.
+css 属性跟 [HTML attributes](./Chapter-03.md) 都是 key-value 的形式。 另外, 建议设置为直观的信息而不是抽象的
 
-## Linking a CSS Stylesheet
+## 引入 css
 
-If you try loading either of the HTML pages in a browser, you won’t see our stylesheet in action. That’s because we didn’t link them together yet. This is what the HTML `<link/>` element is for. In `hello-css.html`, change `<head>` to the following:
+打开网页你看不到有任何样式，因为我们还没有引入样式。可以在`hello-css.html`通过以下方式引入样式表：
 
-```html
+```css
 <head>
   <meta charset='UTF-8'/>
   <title>Hello, CSS</title>
@@ -106,53 +106,53 @@ If you try loading either of the HTML pages in a browser, you won’t see our st
 </head>
 ```
 
-This `<link/>` element is how browsers know they need to load `styles.css` when they try to render our `hello-css.html` page. We should now see blindingly red text everywhere:
+`<link/>`在渲染`hello-css.html`界面前告诉浏览器加载`styles.css`，接着我们会看到如下效果：
 
 ![Web page with a lot of bright red text due to body selector](/images/linking-a-css-stylesheet-572fd1.png)
 
-The `<link/>` element is just like the `<a>` element, but it’s only meant to be used inside of `<head>`. Since it’s in the head of the document, `<link/>` connects to _metadata_ that’s defined outside of the current document. Also notice that it’s an [empty element](https://internetingishard.com//html-and-css/basic-web-pages/#empty-html-elements), so it doesn’t need a closing tag.
+`<link/>`元素虽然跟`<a>`元素很像，但它只能写在文档头部的`<head>`里面，`<link/>`关联外部文件的元数据，可以看到它是自闭合元素[empty element](./Chapter-01.md), 所以不需要闭合标签。
 
-The `rel` attribute defines the relationship between the resource and the HTML document. By far the most common value is `stylesheet`, but there are a [few other options](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types). The `href` attribute works the same as in the previous chapter, only it should point to a `.css` file instead of another web page. The value for `href` can be an [absolute, relative, or root-relative link](https://internetingishard.com//html-and-css/links-and-images/#absolute-relative-and-root-relative-links).
+`rel`属性定义了源文件和 HTML 文档的关系。默认值为 `stylesheet`，还可以为别的值 [few other options](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types). 跟上节的`href`类似 ，引用地址可以为[absolute, relative, or root-relative link](./Chapter-03.md).
 
 ![Diagram: HTML <link> element directing the browser to a CSS stylesheet](/images/link-element-1beb38.png)
 
-Note that there’s no _direct_ connection between the browser and our stylesheet. It’s only through the HTML markup that the browser can find it. CSS, images, and even JavaScript all rely on an HTML page to glue everything together, making HTML the heart of most websites.
+注意浏览器和我们的样式没有直接联系，只是在 HTML 可以包含 css，图片和 js。这些就是网页的核心部分
 
-## CSS Comments
+## CSS 注释
 
-Now that our stylesheet is hooked up, let’s play with it a little bit. That red is horrible. Let’s tone it down to a nice gray:
+样式表已经起作用了，现在让我们用灰色替换红色：
 
-```html
+```css
 body {
-  color: #414141;    /* Dark gray */
+  color: #414141; /* Dark gray */
 }
 ```
 
-Notice that comments in CSS are a little different than their HTML counterparts. Instead of the `<!-- -->` syntax, CSS ignores everything between `/*` and `*/` characters.
+注意 css 注释的语法与 HTML`<!-- -->` 不同。css 是在`/*` 和 `*/`之间添加注释
 
-## Setting Multiple Properties
+## 设置多属性
 
-You can stick as many properties as you want in the declarations block of a CSS rule. Try setting the background color of the entire web page by changing our rule to the following:
+在中括号里面你可以设置任意多的 css 规则属性，如：
 
-```html
+```css
 body {
-  color: #414141;               /* Dark gray */
-  background-color: #EEEEEE;    /* Light gray */
+  color: #414141; /* Dark gray */
+  background-color: #eeeeee; /* Light gray */
 }
 ```
 
-The `background-color` property is very similar to the `color` property, but it defines the background color of whatever element you selected. Take a second to admire those semicolons at the end of each declaration. Removing them will break the CSS rule, so _always mind your semicolons!_
+`background-color` 和 `color` 属性类似，但它作用于背景颜色。注意末尾的分号，少了它，css 将无法工作。所以 _always mind your semicolons!_
 
-Why did we pick shades of grays instead of black and white? Using a `#000000` background with a `#FFFFFF` text color is too high of a contrast. It makes it look like the page is vibrating, which can be very distracting for readers.
+我们用灰色替换白和黑?用黑色背景和白色字体会让网页变得突兀，容易让读者分心
 
-## Selecting Different Elements
+## 选择不同的元素
 
-Of course, you’ll want to apply styles to elements other than `<body>`. For that, simply add more CSS rules with different selectors. We can change the font size of our `<h1>` headings like so:
+当然，我们可以给其他元素添加样式。比如`<h1>`：
 
-```html
+```css
 body {
-  color: #414141;               /* Dark gray */
-  background-color: #EEEEEE;    /* Light gray */
+  color: #414141; /* Dark gray */
+  background-color: #eeeeee; /* Light gray */
 }
 
 h1 {
@@ -160,26 +160,26 @@ h1 {
 }
 ```
 
-And, if you want to alter `h2` headings, add another rule:
+`h2`：
 
-```html
+```css
 h2 {
   font-size: 28px;
 }
 ```
 
-## Units of Measurement
+## 尺寸单位
 
-Many CSS properties require a unit of measurement. There’s [a lot of units](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/length) available, but the most common ones you’ll encounter are `px` (pixel) and `em` (pronounced like the letter _m_). The former is what you would intuitively call a pixel, regardless of whether the user has a retina display or not, and the latter is the current font size of the element in question.
+很多 css 属性都可以设置尺寸单位，比如 [a lot of units](https://developer.mozilla.org/en-US/docs/Web/CSS/length) , 常用的是 `px` (pixel) 和 `em` (有点像字母 _m_)。前者是真实像素值，不管用户用得是否是 Retina 设备，后者跟元素的字体大小有关
 
 ![Diagram: 1em, 1.6em, and 2em sizes for base font size of 12px, 16px, and 20px. Em sizes get bigger as base font sizes increase.](/images/em-units-dad09a.png)
 
-The `em` unit is very useful for defining sizes relative to some base font. In the above diagram, you can see `em` units scaling to match a base font size of `12px`, `16px`, and `20px`. For a concrete example, consider the following alternative to the previous code snippet:
+`em` 比较适合定义依赖于基础字体大小的尺寸，在上个图表，可以看 `em` 对应 字体尺寸 `12px`, `16px`, 和 `20px` ，跑下下面代码：
 
-```html
+```css
 body {
-  color: #414141;               /* Dark gray */
-  background-color: #EEEEEE;    /* Light gray */
+  color: #414141; /* Dark gray */
+  background-color: #eeeeee; /* Light gray */
   font-size: 18px;
 }
 
@@ -192,53 +192,58 @@ h2 {
 }
 ```
 
-This sets our base font size for the document to `18px`, then says that our `<h1>` elements should be twice that size and our `<h2>`’s should be 1.6 times bigger. If we (or the user) ever wanted to make the base font bigger or smaller, `em` units would allow our entire page to scale accordingly.
+比如文档的字体大小为 `18px`，那么`<h1>` 将是两倍，`<h2>`为 1.6 倍。如果我们设置根字体大小，则整个使用`em`的值都会相应变化。
 
-## Selecting Multiple Elements
+## 多选择器
 
-What if we want to add some styles to _all_ our headings? We don’t want to have redundant rules, since that would eventually become a nightmare to maintain:
+如果我们想要给所有标头设置样式，我们不想像下面一样冗余：
 
-```html
+```css
 /* (You'll regret creating redundant styles like this) */
 h1 {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 h2 {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 h3 {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 /* (etc) */
 ```
 
-Instead, we can select multiple HTML elements in the same CSS rule by separating them with commas. Add this to our `styles.css` file:
+我们可以这么做：
 
-```html
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica", "Arial", sans-serif;
+```css
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 ```
 
-This defines the font to use for all of our headings with a single rule. That’s great, ’cause if we ever want to change it, we only have to do so in one place. Copying and pasting code is usually a bad idea for web developers, and multiple selectors can help reduce that kind of behavior quite a bit.
+这样我们就可以用一条 css 来给所有标头添加字体设置，如果我们想改变它，只需要在一个地方修改就可以了。多选择器可以提高开发体验。
 
 ![Web page showing <h1> and <h2> headings in a different font](/images/heading-font-families-68964e.png)
 
-### Defining Fonts
+### 字体定义
 
-`font-family` is another built-in CSS property that defines the typeface for whatever element you selected. It accepts multiple values because not all users will have the same fonts installed. With the above snippet, the browser tries to load the left-most one first (`Helvetica`), falls back to `Arial` if the user doesn’t have it, and finally chooses the system’s default sans serif font.
+`font-family` 是设置字体的 css 内置属性，它可以为多种值，因为每个用户安装的字体不一样。如代码所示，浏览器首先选用 `Helvetica` 然后是 `Arial`，都没有则选用系统默认字体 sans serif
 
 ![Diagram: Helvetica falling back to Arial falling back to any sans serif font](/images/system-fonts-6a5c38.png)
 
-Relying on the user’s built-in fonts has historically been incredibly limiting for web designers. Nowadays, system fonts have been largely superseded by web fonts. You can read more about this in the [Web Typography](https://internetingishard.com//html-and-css/web-typography/) chapter of this tutorial.
+由于用户自定义字体的局限性，现在更多使用的是网络字体。可以在 [Web Typography](./Chapter-14.md) 章节了解详情。
 
-## List Styles
+## 列表样式
 
-The `list-style-type` property lets you alter the bullet icon used for `<li>` elements. You’ll typically want to define it on the parent `<ul>` or `<ol>` element:
+`list-style-type` 可以让你设置 `<li>` 元素的列表图标，直接在 `<ul>` 或 `<ol>` 元素定义:
 
-```html
+```css
 ul {
   list-style-type: circle;
 }
@@ -248,78 +253,83 @@ ol {
 }
 ```
 
-You can find other common values in the `hello-css.html` example page. Of particular interest is `none`, which is commonly used when marking up menu navigation with a `<ul>` list. The `none` value allows the menu’s list items to be styled more like buttons. In the [Advanced Positioning](https://internetingishard.com//html-and-css/advanced-positioning/) chapter, we’ll actually use this technique to create the navigation menu shown below.
+在`hello-css.html`例子中，你会看到列表样式为`none`的，像按钮一样。在[Advanced Positioning](./Chapter-09.md) 章节我们将进一步了解
 
 ![Web page showing <ul> and <li> elements without list item bullets](/images/list-items-for-menus-70abb2.png)
 
-This is good example of the separation of content from presentation. A navigation menu _is_ an unordered list, but it also makes sense to display them as buttons instead of a typical bulleted list. Intelligently designed HTML allows search engines to infer the structure of our content, while CSS lets us display it to humans in beautiful ways.
+内容样式分离总是好的，比如菜单栏是无序列表，建议用按钮替换点列表展示，让网页保持 SEO 的同时，采用 css 让网页更漂亮
 
-You can even create custom bullets for `<li>` elements with the `list-style-image` property (see MDN [for details](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image)).
+也可以给`<li>` 元素添加 `list-style-image` 属性 (see MDN [for details](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image)).
 
-Defining the color of your text and the appearance of your bullets might seem trivial, and it kind of is. But, look at the bigger picture: this is about gaining _complete_ control over the appearance of an HTML document. Alone, a single CSS property is silly. Put them all together, and you’re able to create a totally customized web page.
+设置字体样色，列表样式看起来非常繁琐，组织好 css 会让你网页开发更加简单
 
-## Reusable Stylesheets
+## 样式复用
 
-So, we just defined some basic styles for one of our web pages. It would be really convenient if we could reuse them on our other page, too. For this, all we need to do is add the same `<link/>` element to any other pages we want to style. Try adding the following line to the `<head>` of `dummy.html`:
+至此，我们只是给网页添加了一些简单的样式。如果我们在别的界面能复用这些代码，将非常方便。首先，我们得在 `dummy.html` 的`<head>`中添加 `<link/>` ：
 
-```html
+```css
 <link rel='stylesheet' href='styles.css'/>
 ```
 
-Now, our `dummy.html` pages should match our `hello-css.html` styles. Whenever we change a style in `styles.css`, those changes will automatically be reflected in both of our web pages. This is how you get a consistent look and feel across an entire website.
+现在 `dummy.html` 和 `hello-css.html` 有相同的样式。只需在一个文件修改，就可以同时作用于多个界面。
 
 ![Diagram: Three HTML files pointing to the same global CSS stylesheet](/images/reusable-css-stylesheets-43a99a.png)
 
-You’ll almost always have at least one stylesheet that’s applied to the entire site. It’s usually a good idea to use [root-relative paths](https://internetingishard.com//html-and-css/links-and-images/#root-relative-links) when linking global stylesheets to avoid problems in nested pages. For example, `some-folder/page.html` would need to use `../styles.css` to reference our `styles.css` file, and this can get real confusing real quick.
+css 好的引用方式可以参考 [root-relative paths](./Chapter-03.md) ，可以解决一些嵌套问题
 
-## More Text Styles
+## 文本样式
 
-There’s a whole bunch of different CSS properties that we’ll be introducing over the course of this tutorial, but for now, let’s finish up with some of the most common ways to format text.
+我们会陆续介绍不同的 css 属性，首先来看如何给字体添加样式
 
 ### Underlines
 
-The `text-decoration` property determines whether text is underlined or not. By setting it to `none`, we can remove the default underline from all of our links. We’ll discuss link styles in-depth [later on](https://internetingishard.com//html-and-css/css-selectors#pseudo-classes-for-links).
+`text-decoration`用于添加下划线样式，设置为 `none` 可以移除链接的默认下划线样式更多内容在 [later on](./Chapter-06.md).
 
-```html
+```css
 a {
   text-decoration: none;
 }
 ```
 
-The other common value for `text-decoration` is `line-through` to strike out “deleted” text. But, remember that _meaning_ should always be conveyed through HTML—not CSS. It’s better to use the [`<ins>`](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins) and [`<del>`](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del) elements instead of adding a `line-through` style to, say, an ordinary `<p>` element.
+`text-decoration`另外一个值是 `line-through`，表示"删除文本"。但是尽量用 html 标签替换 css，如[`<ins>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins) 和 [`<del>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del) 元素替换 `line-through`
 
-### Text Alignment
+### 文本对齐
 
-The aptly named `text-align` property defines the alignment of the text in an HTML element.
+`text-align` 属性表示 HTML 文本元素对齐方式
 
-```html
+```css
 p {
   text-align: left;
 }
 ```
 
-Other accepted values are `right`, `center`, or `justify`, but notice how it always aligns to the entire page:
+有这些值 `right`, `center`, 或 `justify`，注意会影响整个网页
 
 ![Web page with right-aligned text](/images/css-text-align-right-3c6a95.png)
 
-This isn’t what you want for most websites. We’ll learn why this is the case in the [next chapter](https://internetingishard.com//html-and-css/css-box-model/) when we start talking about CSS boxes.
+在下一章节 css 盒模型中 将详细讲解这一现象的原因 [next chapter](./Chapter-05.md)
 
-### Font Weight and Styles
+### 字体粗细、风格
 
-The `font-weight` property defines the “boldness” of the text in an element, and the `font-style` property indicates whether it’s italicized or not.
+`font-weight`设置字体粗细程度，`font-style`可以设置是否为斜体
 
-Let’s say we don’t want our headings to be bold. Update our heading font rule in `styles.css` to match the following:
+比如可以让标头不要加粗效果：
 
-```html
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica", "Arial", sans-serif;
-  font-weight: normal;                              /* Add this */
+```css
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: normal; /* Add this */
 }
 ```
 
-These properties clearly demonstrate the separation of content (HTML) from presentation (CSS). The following rules swap the appearance of the `<em>` and `<strong>` elements:
+这些属性清楚地说明了要内容与样式分离，不应该这么做：
 
-```html
+```css
 /* (You probably shouldn't do this) */
 em {
   font-weight: bold;
@@ -332,33 +342,33 @@ strong {
 }
 ```
 
-We don’t suggest doing this for real websites though. Font weights and styles will, however, become a lot more important once we start playing with custom fonts in the [Web Typography](https://internetingishard.com//html-and-css/web-typography/) chapter.
+我不建议这么修改字体，更多内容 [Web Typography](./Chapter-14) 章节.
 
-## The Cascade
+## 层叠
 
-The “cascading” part of CSS is due to the fact that rules cascade down from multiple sources. So far, we’ve only seen one place where CSS can be defined: external `.css` files. However, external stylesheets are just one of many places you can put your CSS code.
+理解样式层叠优先级对于 css 来说很重要
 
-The CSS hierarchy for every web page looks like this:
+网页 css 优先级：
 
-* The browser’s default stylesheet
-* User-defined stylesheets
-* External stylesheets (that’s us)
-* Page-specific styles (that’s also us)
-* Inline styles (that could be us, but it never should be)
+* 浏览器默认样式
+* 用户定义的样式
+* 外部样式
+* 界面特殊样式
+* 内链样式(不建议这么做)
 
-This is ordered from least to most precedence, which means styles defined in each subsequent step _override_ previous ones. For example, inline styles will always make the browser ignore its default styles. The next few sections focus on the last two options because that’s what we have control over as web developers (in addition to the external styles we’ve already been working with).
+上面优先级是递增的，意味着优先级高的会覆盖优先级低的样式。例如，行内样式会取代浏览器默认样式。接下来重点讲解最后两种
 
 ![Diagram: external stylesheets pointing to page-specific styles pointing to inline styles](/images/css-cascade-0755f2.png)
 
-We made an effort to get you started down the right path with external stylesheets. It’s important to understand page-specific and inline styles because you’ll most definitely encounter them in the wild, but external stylesheets are by far the best place to define the appearance of your website.
+接下来对比 `<style>` 的形式跟行内样式，虽然这两者都不太优雅，非得用的话建议优先使用`<style>`
 
-### Page-Specific Styles
+### 内联样式
 
-The `<style>` element is used to add page-specific CSS rules to individual HTML documents. The `<style>` element always lives in the `<head>` of a web page, which makes sense because it’s metadata, not actual content.
+`<style>` 元素 一般添加在 `<head>` 里面，因为它是元数据，而不是具体内容。
 
-As an example, let’s apply some styles to our `dummy.html` page by updating its `<head>` element to this:
+在 `dummy.html` 文件添加如下代码：
 
-```html
+```css
 <head>
   <meta charset='UTF-8'/>
   <title>Dummy</title>
@@ -371,23 +381,23 @@ As an example, let’s apply some styles to our `dummy.html` page by updating it
 </head>
 ```
 
-These apply _only_ to `dummy.html`. Our `hello-css.html` page won’t be affected. If you did it right, you should see bright blue text when you load `dummy.html` in a browser.
+这些样式值作用于 `dummy.html`，`hello-css.html`界面不受影响，无误情况下，你会在浏览器看到相应效果
 
 ![Web page with all blue text due to page-specific styles overriding global CSS stylesheet](/images/page-specific-css-styles-example-99d6c8.png)
 
-Anything you would put in our `styles.css` file can live in this `<style>` element. It uses the exact same CSS syntax as an external stylesheet, but everything here will override rules in our `styles.css` file. In this case, we’re telling the browser to ignore the `color` property we defined for `<body>` in our external stylesheet and use `#0000FF` instead.
+所有在 `styles.css` 文件定义的样式都可以 移植到 `<style>` 元素内。同样的语法，只是 `<style>` 会重写 `styles.css` 的内容。在这个例子中。你会看到 `<body>` 的字体颜色被修改为 蓝色
 
 ![Diagram: three page-specific CSS rules attached to three individual HTML documents](/images/page-specific-css-styles-c6b688.png)
 
-The problem with page-specific styles is that they’re incredibly difficult to maintain. As shown in the above diagram, when you want to apply these styles to another page, you have to copy-and-paste them into _that_ document’s `<head>`. Trying to track down redundant CSS rules in multiple `.html` files is much harder than editing a single `.css` file.
+内联样式的缺点是难以维护。如上图所示，当你想服用样式代码的时候。你只能复制黏贴，最好的复用方式，还是使用外部引用 `.css` 文件。
 
 ![Diagram: three web pages referring to a single global CSS stylesheet](/images/external-css-styles-b073ea.png)
 
-Page-specific styles occasionally come in handy when you’re in a rush, but it’s almost always better to store all your CSS in external stylesheets opposed to `<style>` elements.
+虽然有时候内联样式很方便，但建议还是使用外部引入的方式添加样式。
 
-### Inline Styles
+### 行内样式
 
-You can also stick CSS rules in the `style` attribute of an HTML element. In `dummy.html`, we have a link that doesn’t actually go anywhere. Let’s make it red via an inline style so we remember it’s a dead link:
+同样，你可以在元素的 `style` 属性中添加样式。如：
 
 ```html
 <p>Want to try crossing out an <a href='nowhere.html'
@@ -395,19 +405,19 @@ You can also stick CSS rules in the `style` attribute of an HTML element. In `du
    This is your chance!</p>
 ```
 
-Like page-specific styles, this is the same CSS syntax we’ve been working with. However, since it’s in an attribute, it needs to be condensed to a single line. Inline styles are the most specific way to define CSS. The `color` and `text-decoration` properties we defined here trump _everything_. Even if we went back and added a `text-decoration: none` to our `<style>` element, it wouldn’t have any effect.
+行内样式优先级最高，与内联样式语法一样，但不能换行。
 
 ![Diagram: 10 CSS rules attached directly to 10 different HTML elements via inline styles](/images/inline-css-styles-are-bad-73261b.png)
 
-Inline styles should be avoided at all costs because they make it impossible to alter styles from an external stylesheet. If you ever wanted to re-style your website down the road, you can’t just change a few rules in your global `styles.css` file—you’d have to go through every single page and update every single HTML element that has a `style` attribute. It’s horrifying.
+如果你不想在全局 `styles.css` 给多个界面修改样式的话，你只能在每个界面的 `style` 属性里面修改。界面多的话，将会变得非常可怕。
 
-That said, there will be many times when you need to apply styles to only a specific HTML element. For this, you should always use CSS classes instead of inline styles. We’ll explore classes in the [CSS Selectors](https://internetingishard.com//html-and-css/css-selectors/) chapter.
+所以，我们应该用 css classes 替换行内样式。我们将在 [CSS Selectors](./Chapter-06.md) 章节详解.
 
-### Multiple Stylesheets
+### 多样式
 
-CSS rules can be spread across several external stylesheets by adding multiple `<link/>` elements to the same page. A common use case is to separate out styles for different sections of your site. This lets you selectively apply consistent styles to distinct categories of web pages.
+可用 `<link/>` 在同个界面引入多个样式，最佳实践是为你的网站区分样式，明确地给网站样式分类。
 
-For instance, if we had a bunch of product pages that looked entirely different than our blog, we could use the following. (We don’t actually have these stylesheets defined, so don’t bother adding them to our example project.)
+比如我们有个产品界面跟博客不一样，可以这么做：
 
 ```html
 <!-- All product pages have this -->
@@ -425,14 +435,16 @@ For instance, if we had a bunch of product pages that looked entirely different 
 </head>
 ```
 
-The order of the `<link/>` elements matters. Stylesheets that come later will override styles in earlier ones. Typically, you’ll put your “base” or “default” styles in a global stylesheet (`styles.css`) and supplement them with section-specific stylesheets (`product.css` and `blog.css`). This allows you to organize CSS rules into manageable files while avoiding the perils of page-specific and inline styles.
+后面的`<link/>`样式会覆盖前者，建议将默认和全局样式写在 `styles.css`文件中，再按分类写特定的样式。(`product.css` 和 `blog.css`) 这样可以让你更好地管理文件和避免行内样式
 
-## Summary
+## 总结
 
-We talked a lot about separating content from presentation in this chapter. This not only allows us to reuse the same CSS stylesheet in multiple HTML documents, but also lets us conditionally apply _different_ CSS rules to the _same_ HTML content, depending on whether the user is on a mobile phone, tablet, or desktop computer. This latter part is called [Responsive Design](https://internetingishard.com//html-and-css/responsive-design/).
+这章我们讲了很多内容样式分离，这不仅可以让我们复用样式，同时可以让我们为同个界面在不同情况引入不同样式。比如用户使用的是 手机、平板、或 PC ，更多内容参考[Responsive Design](./Chapter-10.md).
 
 ![Diagram: single HTML file rendered with separate mobile and desktop CSS styles](/images/responsive-css-b7a057.png)
 
-As a web developer, you’ll (hopefully) be given a polished design to work off of. Your job is to turn that mockup into a real web page leveraging your knowledge of CSS. As we mentioned earlier, setting individual CSS properties is actually quite simple. The hard part is combining the overwhelming number of built-in properties to create exactly what your web designer asked for—and do it quickly.
+作为网页开发者，我们都想用 css 完美还原原型。单独写样式很简单，但如果要快速准确地还原设计还是得下点功夫。
 
-This chapter focused mostly on text formatting, but the Cascading Style Sheet language can do a whole lot more. In the next chapter, we’ll start exploring how CSS defines the layout of our web pages. On a final note, remember that you can always refer to [MDN’s CSS Reference](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) when you’re not sure how a particular property works.
+这章主要讲解了美化字体，但是 css 能做的还有更多。下个章节讲解怎么用 css 布局。
+
+css 属性参考： [MDN’s CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
