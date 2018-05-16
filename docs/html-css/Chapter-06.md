@@ -2,19 +2,19 @@
 layout: SpecialLayout
 ---
 
-# css-selectors
+# 选择器
 
-Way back in the [Links and Images](https://internetingishard.com//html-and-css/links-and-images/) chapter, we learned how to connect an HTML document to other files in our project. “CSS selectors” are similar, except instead of navigating between whole files, they let us map a single CSS rule to a specific HTML element. This makes it possible to _selectively_ style individual elements while ignoring others.
+在[Links and Images](./Chapter-04.md)章节中，我们学习了如何引用其他文件。有点类似，选择器可以单独选中某个元素而不用选取全部元素。
 
 ![Diagram: CSS selector connecting a CSS rule to an HTML element](/images/css-selectors-1f0064.png)
 
-Unless you want every section of your website to look exactly the same, this is a crucial bit of functionality for us. It’s how we say things like “I want this paragraph to be blue and that other paragraph to be yellow.” Until now, we’ve only been able to turn _all_ our paragraphs blue (or yellow).
+如果不想让网页看起来很单调，那就用选择器。打比方说，我想让这个段落变蓝色，另一个段落变黄色。目前我们学到的只能让整个段落变蓝(或者黄)。
 
-The only CSS selector we’ve seen so far is called the “type selector”, which targets all the matching elements on a page. In this chapter, we’ll explore more granular ways to style a web page with class selectors, descendant selectors, pseudo-classes, and ID selectors.
+到目前为止，我们用到的只有 "类型选择器" ，它会匹配网页的某类元素。在这一章节，我们将介绍更多的方法，如类选择器，子孙选择器，伪类选择器，和 Id 选择器。
 
-## Setup
+## 安装
 
-We’ll only need one HTML file and a CSS stylesheet for our example this chapter. Create a new folder called `css-selectors` and new web page called `selectors.html` with the following markup:
+这章例子中，我们只需要一个 HTML 文件和一个样式表，新建一个`css-selectors` 目录和 `selectors.html` 文件，添加代码：
 
 ```html
 <!DOCTYPE html>
@@ -43,83 +43,82 @@ We’ll only need one HTML file and a CSS stylesheet for our example this chapte
 </html>
 ```
 
-Go ahead and create that `styles.css` stylesheet in the same folder, too. This gives us everything we need to explore CSS selectors.
+继续创建一个 `style.css` 样式文件，用它来学习选择器。
 
-If you’re just diving into this tutorial series, be sure to have a quick read through the [Introduction](https://internetingishard.com//html-and-css/introduction/#atom-text-editor) to get set up with the Atom text editor.
+如果你只是刚好看到这篇教程，可以快速阅读 [Introduction](./Chapter-01.md) 章节学习如何使用 Atom 编辑器。
 
-## Class Selectors
+## 类选择器
 
-“Class selectors” let you apply CSS styles to a specific HTML element. They let you differentiate between HTML elements of the same type, like when we had two `<div>` elements in the [previous chapter](https://internetingishard.com//html-and-css/css-box-model/#generic-boxes), but only wanted to style one of them. Class selectors require two things:
+"类选择器" 可以让你只对某类 HTML 元素起作用，它可以让你区分同类型的元素。比如在上一章节[previous chapter](./Chapter-05.md)我们有两个 `<div>`元素，但我们只想给其中一个天津样式。类选择器需要做两件事：
 
-* A `class` attribute on the HTML element in question.
-* A matching CSS class selector in your stylesheet.
+* 给 HTML 元素添加 `class` 属性
+* 在样式表中匹配类选择器
 
 ![Diagram: CSS class selector connecting a CSS rule to a class attribute on an HTML element](/images/class-selector-ce3fd0.png)
 
-We can use a class selector to style the first paragraph of our example page differently than the rest of them. This could be, for instance, the synopsis of a newspaper article. First, let’s add a `class` attribute to the desired paragraph:
+在例子中，我们可以给第一个段落添加样式与之区分其他段落，就像新闻的的概要。首先，给它添加`class`属性。
 
 ```html
 <p class='synopsis'>CSS selectors let you <em>select</em> individual HTML
    elements in an HTML document. This is <strong>super</strong> useful.</p>
 ```
 
-Now, we can pluck out that `<p class='synopsis'>` element in our CSS with the following (add this to `styles.css`):
+接着我们就可以在 css 中这么选取 `<p class='synopsis'>` 的类：
 
-```html
+```css
 .synopsis {
-  color: #7E8184;        /* Light gray */
+  color: #7e8184; /* Light gray */
   font-style: italic;
 }
 ```
 
-This rule is _only_ applied to elements with the corresponding `class` attribute. Notice the dot (`.`) prefixing the class name. This distinguishes class selectors from the type selectors that we’ve been working with before this chapter.
+规则将作用于具备相同 `class` 属性的元素。注意类名前面的 `.` ，这是用来跟之前用到的元素选择器区分。
 
 ![Web page highlighting an italicized <p> element styled via a class selector](/images/selecting-a-paragraph-with-class-selector-05f491.png)
 
-### Class Naming Conventions
+### 类命名规范
 
-The value of the HTML `class` attribute can be (almost) anything you want as long as it matches the selector in your CSS. The standard naming convention for classes is to use all lowercase and hyphens for spaces, just like file and folder names.
+虽然 `class` 可以随便命名，但标准命名规范是所有的类都用小写，用连字符代替空格，就像目录的命名方式。
 
-Adding a `class` attribute doesn’t alter the semantic meaning of your HTML document at all—it’s purely for hooking into your CSS stylesheet. However, it’s still usually a good idea to avoid naming classes based on their appearance. If we chose to name our class `.italic`, we wouldn’t be able to do much besides make it italic in our CSS without leading to a confusing situation. Using something semantic like `.synopsis` gives us more freedom for our CSS to customize how that synopsis is displayed.
+添加 `class` 属性并不能改变元素的语义，仅仅是给样式表调用罢了。应该避免仅凭外观来命名类，比如用 `.italic` 类，在复杂情况下将很难区分。相反，用 `.synopsis` 可以很好地定义概述的样式。
 
-## More Useful Divs
+## 好用的 DIV
 
-The `class` attribute isn’t limited to `<p>` elements—it can be defined on _any_ HTML element. So, armed with CSS class selectors, our generic `<div>` and `<span>` boxes from the previous chapter become much, much more useful. We can use them to style both individual elements as well as arbitrary sections of our web page.
+可以给所有元素添加类，而不仅限于 `<p>`元素。你会发现在上一章节接触的 `<div>` 和 `<span>` 非常适合用类来添加样式以美化我们的网页。
 
 ![Web page highlighting a button <div> element styled via a class selector](/images/selecting-button-with-class-selector-a32bd4.png)
 
-Let’s start with individual elements by recreating our button from the previous chapter. This time, we’ll use a class instead of a `div` selector. Add the following to `styles.css`:
+我们来用类选择器替换上一章节中按钮的 `div` 选择器，如：
 
-```html
+```css
 .button {
-  color: #FFF;
-  background-color: #5995DA;    /* Blue */
+  color: #fff;
+  background-color: #5995da; /* Blue */
   font-weight: bold;
   padding: 20px;
   text-align: center;
-  border: 2px solid #5D6063;    /* Dark gray */
+  border: 2px solid #5d6063; /* Dark gray */
   border-radius: 5px;
-
   width: 200px;
   margin: 20px auto;
 }
 ```
 
-Of course, we need a corresponding `class` attribute for this to work. Change the `<div>` in `selectors.html` to match the following:
+同样我们需要给 `selectors.html` 中的 `<div>` 添加一致的类名：
 
 ```html
 <div class='button'>Button One</div>
 ```
 
-Unlike the previous chapter that styled _all_ the `<div>` elements, this lets us use it for other things besides buttons.
+现在，样式仅对有该类名的 `div` 有效了，而非全部 div 元素。
 
-## Container Divs
+## DIV 容器
 
-Remember that `<div>` doesn’t alter the semantic structure of a page. This makes it a great tool for defining the _presentational_ structure of a web page. By wrapping other HTML elements in `<div>` tags, we can organize our site into larger layout-oriented chunks without messing up how search engines view our content.
+`div` 并没有语义，非常适合网页展示部分。用 `<div>` 包裹其标签可以在实现大型布局的同时兼顾 SEO。
 
 ![Diagram: people see <div> element with margins, robots do not see it](/images/container-divs-7d53f6.png)
 
-For example, let’s try to create a fixed-width layout using the [auto-margin technique](https://internetingishard.com//html-and-css/css-box-model/#aligning-boxes) that we learned in the previous chapter. First, wrap our entire document in a generic `<div>` and give it a unique class:
+例如，我们可以用上一节[auto-margin technique](./Chapter-05.md)的知识创建固定布局。首先，用 `<div>` 包裹其他内容，然后取个特别的类名：
 
 ```html
 <body>
@@ -141,65 +140,63 @@ For example, let’s try to create a fixed-width layout using the [auto-margin t
 </body>
 ```
 
-Then, add the following to `styles.css`:
+接着，在 `styles.css` 中添加样式：
 
-```html
+```css
 .page {
   width: 600px;
   margin: 0 auto;
 }
 ```
 
-No matter how you resize the browser window, our web page will always be 600 pixels wide and centered in the available space. Note that this was the exact same way we centered our button, but now we’re doing it to multiple elements at the same time by nesting them in a generic container.
+现在无论你如何改变窗口大小，网页都将保持 600 像素宽，我们可以用同样的方式处理 `button`，但现在我们先把所有元素都嵌套在容器中。
 
 ![Web page highlighting wrapper <div> around entire document](/images/centering-page-with-div-container-e3c8aa.png)
 
-This is how layouts are defined in more complex web pages. For instance, if our page had a sidebar, we would nest all the sidebar elements in _another_ `<div>` with a `.sidebar` class. We’ll see this in action in the [next chapter](https://internetingishard.com//html-and-css/floats/). For now, the key takeaway is that without class selectors to differentiate our `<div>` elements, none of this would be possible.
+这样我们就可以实现不同的布局，比如，我们有个侧边栏。可以把所有的元素都放在另一个类名为`.sidebar` 的 `div` 中。如何实现可以看[next chapter](./Chapter-07.md)。现在先学习给元素添加不同选择器。
 
-## Reusing Class Styles
+## 样式复用
 
-The same class can be applied to multiple elements in a single HTML document. This means that we can now reuse arbitrary CSS declarations wherever we want. To create another button, all we have to do is add another HTML element with the same class:
+可以给多个元素添加相同的类名，意味着我们可以复用任何定义过的样式。比如我们只需要给另一个按钮添加相同的类名：
 
 ```html
 <div class='button'>Button One</div>
 <div class='button'>Button Two</div>
 ```
 
-This gives us a second button that looks just like the first one—without writing a single line of CSS! Organizing similar graphical elements into reusable CSS rules like this makes life much easier as a web developer. If we ever wanted to, say, change the button color, we would only have to do it in one place and all our buttons would automatically update.
+我们将看到两个相同样式的按钮，复用让开发变得更便捷，但我们要修改 button 的样式时，只需要修改一个地方。
 
 ![Diagram: Two arrows coming from one CSS rule to two different HTML elements](/images/reusing-css-styles-9e43c5.png)
 
-## Modifying Class Styles
+## 多个类名
 
-What if we want to alter our second button a little bit? Fortunately, we can apply multiple classes to the _same_ HTML element, too. The styles from each class will be applied to the element, giving us the opportunity to both reuse styles from `.button` and override some of them with a new class.
+我们可以给同个元素添加多个类名，比如想给第二个按钮添加不同的样式，我们可以添加另一个类名。后面的样式会覆盖之前定义的样式。
 
 ![Diagram: Two arrows coming from two CSS rules to one HTML element](/images/modifying-classes-48bd19.png)
 
-Go ahead and add another class to our second button with the following markup. Notice how multiple classes live in the same `class` attribute, separated by spaces:
+接下来，这么做：
 
 ```html
 <div class='button call-to-action'>Button Two</div>
 ```
 
-This element now has two separate classes, and we can use either of them to style it. This opens up some options. Styles shared by both buttons can live in the `.button` class (as they already do), and styles specific to the second button reside in the `.call-to-action` class (be sure to add this _after_ the `.button` rule):
+接下来我们就可以定义不同的样式了：
 
-```html
+```css
 .call-to-action {
   font-style: italic;
-  background-color: #EEB75A;    /* Yellow */
+  background-color: #eeb75a; /* Yellow */
 }
 ```
 
-### Order Matters
+### 样式顺序
 
-There’s a couple of important things going on with our second button now:
+现在我们会遇到两件事：
 
-* It’s adding a _new_ `font-style` declaration to the original `.button` rule.
-* It’s _overriding_ an existing `background-color` style from `.button`.
+* 新增样式，如 `font-style`
+* 样式覆盖，如 `background-color`
 
-Overriding occurs because of the order of `.call-to-action` and `.button` in our stylesheet. When there’s two conflicting properties in a CSS file, the last one is always the one that gets applied. So, if you moved `.call-to-action` to the top of `styles.css`, `.button` would have the final word on the value of `background-color`, and it would remain blue.
-
-This means that the order of the `class` attribute in our HTML element has no effect on override behavior. Multiple classes on a single element are applied “equally” (for lack of a better term), so the precedence is determined solely by the order of the rules in `styles.css`. In other words, the following elements are effectively equivalent:
+可以通过样式出现的先后顺序决定样式覆盖是否要覆盖，比如 `.call-to-action` 在 `.button` 后定义，则 `.call-to-action` 将覆盖与 `.button` 重复的样式。仅是在样式表中的顺序，而与 `class` 属性中顺序无关：
 
 ```html
 <!-- These result in the same rendered page -->
@@ -207,50 +204,48 @@ This means that the order of the `class` attribute in our HTML element has no ef
 <div class='call-to-action button'>Button Two</div>
 ```
 
-This does, however, get more complicated when CSS specificity is involved, which we’ll discuss at the end of this chapter.
+后面将讨论更为复杂的情况。
 
-## Descendant Selectors
+## 子选择器
 
-You may have noticed that the `<em>` in our first paragraph is no longer distinguishable from its surround text, since our `.synopsis` rule made everything italic.
-
-To alter that `<em>` element, we could add another class directly to it, but that won’t result in very maintainable code. We want to treat `.synopsis` as its own independent component that we can style entirely from CSS (i.e., without requiring alterations to our HTML just for the sake of styling something.)
+你会发现当添加 `.synopsis` 给元素字体添加斜体效果后，就无法区分 `<em>` 元素作用的文本了。我们虽然可以给 `<em>` 添加类名来新增样式，但这通常会变得难以维护。我们希望 `.synopsis` 作为一个拥有独立样式的组件。( 不需要为了修改某些样式而改变 HTML )
 
 ![Web page with span of text inside another element styled via a descendant selector](/images/selecting-em-with-descendant-selector-8050a5.png)
 
-This is what “descendant selectors” are for. They let you target only those elements that are _inside_ of another element. For example, we can pull out that `<em>` in the `.synopsis` paragraph with the following:
+这时，"子选择器" 就派上用场了。它可以所用于所选元素下的所有指定元素。比如：
 
-```html
+```css
 .synopsis em {
   font-style: normal;
 }
 ```
 
-Adding this rule to `styles.css` will make the `<em>` display as upright (roman) characters, thus differentiating it from the italics we put on the entire `<p>` text. The rest of the `<em>` elements on the page will be unaffected.
+添加完样式后，`<em>` 字体会变成普通字体。之前的斜体效果将对 `<em>` 无效。
 
 ![Diagram: single arrow coming from a compound CSS rule to an HTML element inside another HTML element](/images/descendant-selectors-f52d49.png)
 
-Descendant selectors aren’t limited to class selectors—you can combine any other group of selectors this way. For instance, if we wanted to select only `<em>` elements inside of headings, we might use something like this:
+子选择器不仅限于类选择器，我们可以使用任意组合的选择器。例如，我们想选中所有标头下的 `<em>` 元素：
 
-```html
+```css
 h1 em {
   /* Some other styles */
 }
 ```
 
-Again, the goal of this chapter is to let you apply styles to exactly the element you want. Descendant selectors are a great tool towards this end. You may also want to check out the related “child selector” [over at MDN](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/Child_selectors) if you’ve still got room in your toolbox.
+这章的目的是让你可以准确地给你选中的元素添加样式。详情参阅[over at MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Child_selectors)
 
-### Don’t Overdo It
+### 过度嵌套问题
 
-You can nest descendant selectors as deep as you want, but don’t get carried away. Life gets confusing and terrible when you start writing rules that look like this:
+后代选择器虽然可以任意嵌套，但建议不要做：
 
-```html
+```css
 /* Try to avoid this */
 .article h2 .subheading em {
   /* Special styles */
 }
 ```
 
-This isn’t the least bit reusable because it matches _only_ the following HTML structure:
+这样的做的话，遇到 html 结构时，样式无法复用。
 
 ```html
 <div class='article'>
@@ -260,30 +255,28 @@ This isn’t the least bit reusable because it matches _only_ the following HTML
 </div>
 ```
 
-If you ever wanted to apply these styles to an `<h2>` heading that’s not wrapped in `<div class='article'>` tags, you’re kind of screwed. Same deal if you want to apply them to an `<h3>` heading anywhere on the page. This kind of CSS also leads to a [specificity](https://internetingishard.com/#css-specificity) nightmare.
+当你使用了后代选择器后，很多样式就限死了。如 `<div class='article'>` 中的 `<h2>`，由于嵌套关系，不在后代选择器中的 `<h2>` 得另外添加样式。
 
-## Pseudo-Classes for Links
+## 链接的伪类
 
-So far, all the CSS selectors we’ve seen map directly to a piece of HTML markup that we wrote. However, there’s more going on in a rendered web page than just our HTML content. There’s “stateful” information about what the user is doing (opposed to the content we’ve authored).
-
-The classic example is a link. As a web developer, you create an `<a href>` element. After the browser renders it, the user can interact with that link. They can hover over it, click it, and visit the URL.
+至此，我们接触的都是静态样式。在网页开发中，有些样式属于交互型的。比如 `<a href></a>` 标签。用户可能触发点击，悬浮，访问等行为。
 
 ![Diagram: pseudo-class selector connecting a CSS rule to a user’s hover state over a particular HTML element](/images/pseudo-classes-99188b.png)
 
-CSS “pseudo-classes” provide a mechanism for hooking into this kind of temporary user information. At any given time, an `<a href>` element can be in a number of different states, and you can use pseudo-classes to style each one of them individually. Think of them as class selectors that you don’t have to write on your own because they’re built into the browser.
+你可以用 "伪类" 解决该类问题。
 
-### Basic Link Styles
+### 链接默认样式
 
-Pseudo-classes begin with a colon followed by the name of the desired class. The most common link pseudo-classes are as follows:
+链接的伪类有：
 
-* `:link` – A link the user has never visited.
-* `:visited` – A link the user has visited before.
-* `:hover` – A link with the user’s mouse over it.
-* `:active` – A link that’s being pressed down by a mouse (or finger).
+* `:link` – 为访问的链接
+* `:visited` – 访问过得链接
+* `:hover` – 悬浮的时候
+* `:active` – 鼠标或手指按住不放的时候
 
-Let’s take a look at all of these by adding the following rules to our CSS stylesheet (also note our use of [keyword colors](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) instead of our usual hex codes):
+效果参阅[keyword colors](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
 
-```html
+```css
 a:link {
   color: blue;
   text-decoration: none;
@@ -300,67 +293,68 @@ a:active {
 }
 ```
 
-If you’ve never been to the [InternetingIsHard.com](https://internetingishard.com//) home page, you should see a blue link. Otherwise, you’ll see a purple link. When you hover over the link, it will turn aqua, and when you push down on it, it’ll turn red.
+如果你没有访问过这个界面，将会看到蓝色的链接，访问过后将变成紫色，悬浮会变成绿色，点击变红。
 
-### Visited Hover State
+### 已访问的悬浮状态
 
-The above snippet is just fine for most websites, but take a closer look at the `a:visited` behavior by changing the `href` attribute to a URL that you’ve been to before. Our `a:hover` style is applied to both visited and unvisited links. We can refine our links even more by stringing pseudo-classes together. Add this below the previous snippet:
+悬浮效果可以同时作用于访问过及未访问的链接，如果访问过的跟悬浮是相同的样式，可以这么做：
 
-```html
+```css
 a:visited:hover {
   color: orange;
 }
 ```
 
-This creates a dedicated hover style for visited links. Hovering over an unvisited link changes it to aqua, while hovering over a visited link will turn it orange. Fantastic! Except for the fact that this breaks our `a:active` style due to some complicated CSS internals that you’ll never want to read about. When you click down, our link won’t turn red anymore.
+这将会给访问和悬浮添加特定的样式，奇怪的是 `a:active` 由于一些复杂的 css 内部原因，当你点击的时候，链接并不会变红。
 
-### Visited Active State
+### 访问及点击状态
 
-We can fix that with `a:visited:active`. Add the following to the end of our stylesheet. Note that, as with our `.call-to-action` class, the order in which these are defined in `styles.css` matters:
+同样我们可以这么做：
 
-```html
+```css
 a:visited:active {
   color: red;
 }
 ```
 
-These last two sections let you style visited links entirely separately from unvisited ones. It’s a nice option to have, but again, you’re welcome to stop at basic link styles if that’s all you need.
+现在，你可以修改链接的默认样式了。
 
-## Pseudo-Classes for Buttons
+## 按钮的伪类
 
-Pseudo-classes aren’t just for styling text links—they can be applied to any kind of selector (not just type selectors). Instead of styling `a:link` and friends, we’ll be modifying our `.button` class with pseudo-classes in this section. This will let us create buttons that actually go somewhere.
+伪类不仅可以用于元素选择器，还可以是类选择器，我们将从实现一个按钮来深入讲解：
 
-### Link Elements, Not Div Elements
+### a 标签替换 div
 
-First, we need change our buttons to be `<a href>` elements instead of generic `<div>` elements, as shown below:
+首先，我们需要用 `<a href` 替换 `<div>`元素：
 
 ```html
 <a class='button' href='nowhere.html'>Button One</a>
 <a class='button call-to-action' href='nowhere.html'>Button Two</a>
 ```
 
-If you reload this in your browser, you’ll see that we lost some of our styles even though we’re using the same classes. This is because `<a>` is an [inline element](https://internetingishard.com//html-and-css/css-box-model/#block-elements-and-inline-elements) by default and also has a default `color` value.
+会看到如下效果：
 
 ![Web page showing buttons with broken CSS styles](/images/broken-button-styles-0d05d0.png)
 
-We need to change it to a block element and remove some of the default link styling.
+跟之前不太一样，因为 a 标签是行内元素，所以我们需要把它转换为块级元素，并且移除一些链接的默认样式。
 
-### Button Styles
+### 按钮样式
 
-Let’s start with `:link` and `:visited` variants. We’re using a similar pattern as in the previous section, but since these are buttons, we want to keep both the unvisited and visited color the same. Change the existing `.button` rules to match the following:
+让我们从`:link` 和 `:visited` 开始，虽然跟上一部分有点类似，但考虑到我们这个是按钮。所以让未访问和访问的颜色一致：
 
-```html
+```css
 .button:link,                 /* Change this */
-.button:visited {             /* Change this */
-  display: block;             /* Add this */
-  text-decoration: none;      /* Add this */
+.button:visited {
+  /* Change this */
+  display: block; /* Add this */
+  text-decoration: none; /* Add this */
 
-  color: #FFF;                /* The rest is the same */
-  background-color: #5995DA;
+  color: #fff; /* The rest is the same */
+  background-color: #5995da;
   font-weight: bold;
   padding: 20px;
   text-align: center;
-  border: 2px solid #5D6063;
+  border: 2px solid #5d6063;
   border-radius: 5px;
 
   width: 200px;
@@ -368,86 +362,84 @@ Let’s start with `:link` and `:visited` variants. We’re using a similar patt
 }
 ```
 
-Notice the new `:link` and `:visited` pseudo-classes in the selector. Without it, our `color` would not override the browser’s default `a:link` style. [CSS specificity](https://internetingishard.com/#css-specificity) explains why this is the case in greater detail. Next, let’s do the hover states:
+注意 `:link` 和 `:visited` 这两个伪类。没有它们将无法修改 `a:link` 默认样式。接下来处理悬浮样式：
 
-```html
+```css
 .button:hover,
 .button:visited:hover {
-  color: #FFF;
-  background-color: #76AEED;  /* Light blue */
+  color: #fff;
+  background-color: #76aeed; /* Light blue */
 }
 ```
 
-Both our buttons will be a lighter blue on hover. Finally, let’s make it a little darker when the user presses the mouse down with the `:active` pseudo-class:
+按钮悬浮时是淡蓝色，那我们让按住时变深色，可以通过 `:active` 修改：
 
-```html
+```css
 .button:active,
 .button:visited:active {
-  color: #FFF;
-  background-color: #5995DA;  /* Blue */
+  color: #fff;
+  background-color: #5995da; /* Blue */
 }
 ```
 
-The great part about this is that all the styles we just defined are entirely reusable. Stick a `.button` class on _any_ HTML element, and you’ll turn it into an interactive button.
+好了，现在我们可以复用 `.button` 作用于任何想具备按钮样式的 html 元素。
 
-### The Other Button
+### 另一个按钮
 
-Now, what about that second button? It’s supposed to have a yellow background, but we broke it with the code from the previous section. Our `.button:link` selector was more “specific” than our current `.call-to-action` rule, so it took precedence. Again, we’ll explore this further at the end of the chapter.
+让我们修改另一个按钮，它看起来是黄色背景。可以这做：
 
-For now, let’s fix it by applying some pseudo-classes to our `.call-to-action` rule. Replace the existing rule with the following (make sure this appears _after_ the new `.button` styles from the previous section):
-
-```html
+```css
 .call-to-action:link,
 .call-to-action:visited {
   font-style: italic;
-  background-color: #EEB75A;     /* Yellow */
+  background-color: #eeb75a; /* Yellow */
 }
 
 .call-to-action:hover,
 .call-to-action:visited:hover {
-  background-color: #F5CF8E;     /* Light yellow */
+  background-color: #f5cf8e; /* Light yellow */
 }
 
 .call-to-action:active,
 .call-to-action:visited:active {
-  background-color: #EEB75A;     /* Yellow */
+  background-color: #eeb75a; /* Yellow */
 }
 ```
 
-Since we only added the `.call-to-action` class to our second button, that’s the only one that’ll turn yellow. Of course, we still need the `.button` class on both `<a>` elements because it defines shared styles like the padding, border radius, and font weight.
+特殊样式我们可以用 `.call-to-action` ，但我们仍然需要 `.button`提供的公共按钮样式。(如 padding,border radius 和 font weight)
 
-## Pseudo-Classes For Structure
+## 其他伪类
 
-Link states are just one aspect of pseudo-classes. There’s also a [bunch of other pseudo-classes](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) that provide extra information about an element’s surroundings. For example, the `:last-of-type` pseudo-class selects the final element of a particular type in its parent element. This gives us an alternative to class selectors for selecting specific elements.
+链接状态只是伪类的一种，更多参阅[bunch of other pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) 例如 `:last-of-type` 用于选择最后一个元素
 
-For instance, we could use `:last-of-type` to add some space after the last paragraph of our example page:
+例如，选择最后一个段落：
 
-```html
+```css
 p:last-of-type {
   margin-bottom: 50px;
 }
 ```
 
-This avoids selecting the first two `<p>` elements _without_ requiring a new `class` attribute on the last paragraph:
+不许要添加 `class` 属性就可以选中最后一个段落：
 
 ![Web page showing bottom margin of the last paragraph on the page, styled via a :last-of-type pseudo-class selector](/images/last-of-type-pseudo-class-8232e6.png)
 
-We could even use a `:first-of-type` pseudo-class in place of our `.synopsis` class. Replacing the existing `.synopsis` rule with the following snippet should result in the exact same page.
+同样我们可以用 `:first-of-type` 代替 `.synopsis` 来给第一个段落添加样式：
 
-```html
+```css
 p:first-of-type {
-  color: #7E8184;
+  color: #7e8184;
   font-style: italic;
 }
 ```
 
-There’s pros and cons to using this method over plain old classes. For instance, this _only_ works if our synopsis is a `<p>` element. If we ever wanted to create a multi-paragraph synopsis by wrapping a bunch of `<p>` elements in a `<div class='synopsis'>`, we’d have to rewrite our CSS accordingly. On the other hand, the pseudo-class method lets us style specific elements without having to alter the HTML at all. This gives us a very clean separation of content from presentation.
+建议用这个方法替代之前的旧方法，例如，如果我们的概要用的是 `<p>` 元素，如果这些 `<p>` 包裹在 `<div class='synopsis'>` 那么我们就得相应地修改 css。 另一方面，伪类让我们可以添加样式不用更改 html，这会让我们的代码看起来非常简洁。
 
-### Caveats
+### 警告
 
-Ok, so actually the pseudo-class method is a little more complicated. They’re still a useful tool—as long as you know their ins-and-outs. The `:first-of-type` and `:last-of-type` selectors only operate inside their parent element. That is to say, `p:first-of-type` selects the first `<p>` in _every_ container element.
+伪类方法看似有些复杂，但我们还是经常会用到。要注意的是 `:first-of-type` 和 `:last-of-type` 都是操作父元素的。比如 `p:first-of-type` 是选中每个容器元素里面第一个 `<p>`。
 
-We have a single generic `<div>` wrapping our content (`.page`), so this isn’t a problem for us. However, consider what happens when we add this to the bottom of our `.page` element:
+如果我们把元素加到带有 `.page` 类的 `<div>` 中，思考下会发生什么：
 
 ```html
 <div class='sidebar'>
@@ -456,56 +448,56 @@ We have a single generic `<div>` wrapping our content (`.page`), so this isn’t
 </div>
 ```
 
-We won’t be able to make a real sidebar until the [next chapter](https://internetingishard.com//html-and-css/floats/), but this does highlight the complications of pseudo-classes for structure. The first `<p>` element here will also match `p:first-of-type` because the pseudo-class’s scope is limited to the parent element.
+因为伪类 `p:first-of-type` 是选中父元素下的 `<p>` ，所以样式还是有效果。但只有通过学习 [next chapter](./Chapter-07.md)我们才可以获得正确的侧边栏。 imited to the parent element.
 
-If you wanted to avoid the sidebar paragraphs and select only the first `<p>` in our `<div class='page'>`, you would need to limit its scope using a [child selector](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/Child_selectors), like so:
+如果你只想选中 `<div class='page'>` 里面的 `<p>`, 你应该用 [child selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Child_selectors) 这么处理：
 
-```html
+```css
 .page > p:first-of-type {
-  color: #7E8184;
+  color: #7e8184;
   font-style: italic;
 }
 ```
 
-All of this is yet another example of how there are many ways to do the same thing in the wonderful world of HTML and CSS. Different developers adhere to different schools of thought. Some like the semantic nature of pseudo-classes, while others go to the far extreme with explicit `class` attributes on _every_ HTML element.
+html 和 css 的实现方式非常多。有用伪类的，也有直接在 html 中加 class 属性的，这完全取决于你。
 
-## ID Selectors
+## ID 选择器
 
-“ID selectors” are a more stringent alternative to class selectors. They work pretty much the same way, except you can only have _one_ element with the same ID per page, which means you can’t reuse styles at all. Instead of a `class` attribute, they require an `id` attribute on whatever HTML element you’re trying to select. Try adding one to our second button:
+ID 选择器跟 类选择器不一样，在一个界面里 ID 只能有一个，意味着不能复用。ID 选择器用的是 ID 属性：
 
 ```html
 <a id='button-2' class='button' href='nowhere.html'>Button Two</a>
 ```
 
-The corresponding CSS selector must begin with a hash sign (`#`) opposed to a dot. Adding the following to `styles.css` will change the text color of our yellow button:
+在 `style.css` 使用 `#` 来选择
 
-```html
+```css
 #button-2 {
-  color: #5D6063;  /* Dark gray */
+  color: #5d6063; /* Dark gray */
 }
 ```
 
-The problem is, if we wanted to share this style with another button, we’d have to give it another unique `id` attribute. Pretty soon, our CSS would start to look pretty gnarly:
+可惜只能通过下面的方式复用：
 
-```html
+```css
 /* (This is painful to maintain) */
 #button-2,
 #button-3,
 #checkout-button,
 #menu-bar-call-to-action {
-  color: #5D6063;
+  color: #5d6063;
 }
 ```
 
-For this reason, ID selectors are generally frowned upon. Use class selectors instead.
+所以，基本上不用 ID 选择器来写样式，更多的使用类选择器
 
-### URL Fragments
+### 锚点
 
-`id` attributes need to be unique because they serve as the target for “URL fragments”, which we sort of glossed over in our [discussion of URLs](https://internetingishard.com//html-and-css/links-and-images/#absolute-relative-and-root-relative-links). Fragments are how you point the user to a specific part of a web page. They look like an ID selector stuck on the end of a URL.
+`id` 属性之所以不一样是因为有种 "URL" 看起来非常像 ID 选择器：
 
 ![Diagram: syntax of a URL: scheme (https://), domain (example.com), path (/selectors.html), fragment (#button-2)](/images/fragment-url-syntax-d310e8.png)
 
-For example, if we wanted to point the user to our second button, we could use the following. Note that we can omit the URL entirely if we’re linking to a different section on the same page:
+例如，你想跳到某个锚点，可以这么做：
 
 ```html
 <!-- From the same page -->
@@ -515,42 +507,42 @@ For example, if we wanted to point the user to our second button, we could use t
 <a href='selectors.html#button-2'>Go to Button Two</a>
 ```
 
-If you add the first option to our `selectors.html` page and click it, you’ll see the URL in the browser change. To actually see it jump down to the second button, you’ll need to add some more dummy content to the page or make the window height very short, as the browser will limit scrolling to the visible page.
+当你点击第二个 a 标签时，你会看到浏览器变化了，并且跳转到了对应的位置。( 前提是你的浏览器内容足够多到出现滚动条，你才会明细地感觉到跳转 )
 
 ![Diagram: two arrows from URL fragments to two HTML elements and two arrows from CSS rules to those same elements](/images/dependency-between-fragments-and-css-4e4425.png)
 
-This overlapping functionality is more reason to avoid ID selectors. They create a dependency between your website’s URLs and your CSS styles. Imagine using a bunch of `id` attributes on your headings as both URL fragments and ID selectors. If you forgot to update your stylesheet every time you edited the URL of a section, you would actually break your website.
+这也是避免使用 ID 选择器的原因，设想一下，如果你在标头同时用了 URL 和 ID 选择器，在编辑网址时忘记更新样式表，会非常糟糕 (ps:译者没看懂!)
 
 ## CSS Specificity
 
-Earlier in this chapter, we talked about how [order matters](https://internetingishard.com/#modifying-class-styles) when it comes to CSS rules in an external stylesheet. All else being equal, rules are applied from top-to-bottom. This allowed us to override rules in a predictable manner.
+在这章的前半部分，我们讨论了样式覆盖问题。 [order matters](#modifying-class-styles) 规则定义样式从上至下，后者覆盖前者。
 
 ![Diagram: Four CSS rules with same specificity applied in order](/images/css-rule-order-3edc42.png)
 
-Unfortunately, not all CSS selectors are created equal. “CSS specificity” is the weight given to different categories of selectors. This means that certain selectors will _always_ override other ones, regardless of where they appear in the stylesheet.
+但并非所有的样式都会被后者覆盖，css 存在优先级问题，也就是说不同的选择器权重不一样。这意味着，优先级搞的会覆盖优先级低的样式。
 
-Let’s start by seeing where this _doesn’t_ break. If you add the following after our existing `.call-to-action` rules, it will override the previous `background-color`. If you stick it at the top of the file, it’ll get overridden later on, so our button won’t turn red. This is expected behavior.
+测试一下：
 
-```html
+```css
 .call-to-action:link,
 .call-to-action:visited {
-  background-color: #D55C5F;    /* Red */
+  background-color: #d55c5f; /* Red */
 }
 ```
 
-Now, watch what happens when we try to do the same thing with an ID selector. First, be sure to delete the previous snippet, then try adding this _before_ our existing `.call-to-action` rules:
+如果我们添加 ID 选择器会发生什么：
 
-```html
+```css
 #button-2 {
-  background-color: #D55C5F;    /* Red */
+  background-color: #d55c5f; /* Red */
 }
 ```
 
-ID selectors have higher specificity than class selectors, so this _will_ turn our second button red even though we try to set the `background-color` with `.call-to-action:link` later in our stylesheet. The whole “order matters” concept only works when all your rules have the same specificity.
+ID 选择器的优先级比 类选择器高。所以它会覆盖之前的样式，无论它在代码里的书写顺序如何。
 
 ![Diagram: Four CSS rules. Third one has higher specificity, so fourth one is ignored.](/images/css-specificity-and-rule-order-ec25f3.png)
 
-The specificity of selectors we’ve seen in this chapter are show below, from greatest to least:
+我们之前用到的选择器优先级如下：( 从高到低 )
 
 * `#button-2`
 * `.button:link`
@@ -558,16 +550,16 @@ The specificity of selectors we’ve seen in this chapter are show below, from g
 * `.button`
 * `a`
 
-This can get very confusing. It’s such a big problem that an entire methodology called “[BEM](https://internetingishard.com/http://getbem.com/introduction/)” has evolved. BEM attempts to make CSS rules more reusable by making _everything_ a class selector. This completely eliminates the potential for specificity issues.
+可以了解一下 [BEM](http://getbem.com/introduction/)， BEM 是一套类选择器的命名规则，它可以解决部分优先级问题。
 
-BEM is outside the scope of this tutorial. The takeaway here is that CSS rules are not necessarily applied in sequential order, but you should try to make the browser do so by writing CSS that uses the same specificity.
+BEM 超出了本教程的讨论范围，我们可以保持一种类名编写习惯，让优先级保持平级。
 
-## Summary
+## 总结
 
-In this chapter, we got some hands-on experience with class selectors, descendant selectors, pseudo-classes, link styling, and ID selectors. The goal of all this was to be able to target a specific HTML element from your CSS. Class selectors are by far the most versatile and come with the least amount of drawbacks. As a result, they’ll become part of your daily life as a web developer.
+本章我们亲自体验了类选择器，后代选择器，伪类选择器，ID 选择器以及如何修改修改链接默认样式。最常用的还是类选择器，换句话说，在你的网页开发生涯中你将经常用到它。
 
-Like it or not, things got a lot more complicated this chapter. We’re now able to make our CSS interact with an HTML document in half a dozen different ways. Furthermore, over the next few chapters, we’ll begin to see a dependency between our HTML’s structure and the layout of a web page. With all this interplay between CSS and HTML, it can be hard to know where to start building a new web page.
+从现在开始，要学习的东西越来越多了。用 HTML 和 css 实现网页布局的方式非常多，在接下来的章节要更加用心了。
 
-The [separation of content from presentation](https://internetingishard.com//html-and-css/basic-web-pages/#structure-versus-presentation) helps guide this process. You need content before you can present it, so your first step is usually to mark up your raw content with HTML tags. Once that’s prepared, you’re ready to add `class` attributes to your elements and style them one-by-one. When you discover a need for some extra structure to create a desired layout (e.g., turn a group of elements into a sidebar), that’s when you start wrapping your content in container `<div>`’s.
+根据[separation of content from presentation](./Chapter-02.md) 介绍的关注点分离，可以总结出，开发一个网页应该是从添加 HTML 内容到添加 `class` 属性，最后编写样式。
 
-This chapter covered almost all the CSS selectors that power real websites. We’ve got the tools we need to dive much deeper into complex CSS layouts. In the next installment of [_HTML and CSS Is Hard_](https://internetingishard.com//html-and-css/), we’ll learn how to create columns and sidebars using CSS floats.
+本章介绍了很多 css 选择器，下章我们将介绍如何使用 [float](./Chapter-07.md) 实现网页布局。
