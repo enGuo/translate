@@ -2,21 +2,21 @@
 layout: SpecialLayout
 ---
 
-# advanced-positioning
+# 高级定位
 
-“Static positioning” refers to the normal flow of the page that we’ve been working with up ’til this point. The [CSS Box Model](https://internetingishard.com//html-and-css/css-box-model/), [floats](https://internetingishard.com//html-and-css/floats/), and [flexbox](https://internetingishard.com//html-and-css/flexbox/) layout schemes all operate in this “static” flow, but that’s not the only positioning scheme available in CSS.
+"静态定位" 是一种网页的正常流布局，像之前的 [CSS Box Model](./Chapter-05.md), [floats](./Chapter-07.md), 和 [flexbox](./Chapter-08.md) 布局方案都是在操作 "静态" 流，但这在 css 中不是唯一的定位方法。
 
 ![Diagram: comparison of static, relative, absolute, and fixed positioning schemes](/images/css-positioning-schemes-790d5b.png)
 
-The other three types of positioning are “relative”, “absolute”, and “fixed”. Each of them let you manually position elements using specific coordinates, opposed to the more semantic options in flexbox and floats. Instead of saying “Stick this box in the center of its container,” advanced positioning lets you say things like “Put that box 20 pixels above and 50 pixels to the right of its parent’s origin.”
+另外三类定位类型有 "relative"，"absolute"，和 "fixed"。每一个都可以让你设置跟 flexbox 和 floats 不一样的特殊坐标系统。跟之前说 "让这个 box 在 container 里居中显示" 不同，高级定位是 "让盒子位于父元素源点的上 20 像素，右 50 像素。"
 
-The vast majority of elements on a web page should be laid out according to the static flow of the page. These other positioning schemes come into play when you want to do more advanced things like tweak the position of a particular element or animate a UI component without messing up the surrounding elements.
+网页里的多数元素用的是正常文档流，别的定位方式适合于不想打破周围元素布局的情况下的特殊定位方式。
 
-This chapter is split into two parts. We’ll start by examining relative, absolute, and fixed positioning in isolation, then we’ll apply everything we learned to a fancy dropdown menu.
+这一章分为两部分，前半部分介绍 relative，absolute 和 fixed 的用法，后半部分实现一个下拉菜单。
 
-## Setup
+## 安装
 
-Start by creating a new [Atom project](https://internetingishard.com//html-and-css/introduction/#atom-text-editor) called `advanced-positioning` and a new file called `schemes.html` with the following markup:
+新建 `advanced-positioning` 目录和 `schemes.html` 文件：
 
 ```html
 <!DOCTYPE html>
@@ -56,11 +56,11 @@ Start by creating a new [Atom project](https://internetingishard.com//html-and-c
 </html>
 ```
 
-We’ve got three examples to work with, all with the exact same HTML structure. Changing the positioning behavior inside each one will have dramatically different effects.
+三个例子都有相同的 HTML 结构，每个都有不同的布局效果。
 
 ![Screenshot: files in the example project](/images/project-files-714b6b.png)
 
-This page relies on some [images](https://internetingishard.com//html-and-css/advanced-positioning/images-89bc45.zip) to make our example a little bit clearer. Keep the parent `images` folder when unzipping the files into your project, as show above. Be sure to create `styles.css` and populate it with the necessary base styles, as well:
+例子的图片可以从[images](https://internetingishard.com/html-and-css/advanced-positioning/images-89bc45.zip)下载。添加如下样式：
 
 ```css
 * {
@@ -92,27 +92,27 @@ body {
 }
 ```
 
-Nothing new here, just some familiar [flexbox](https://internetingishard.com//html-and-css/flexbox/) techniques to create a grid of items. The only weird thing is the explicit `height` on the `<body>` element, which will let us scroll up and down the page to demonstration different positioning behaviors.
+这里只是采用了 flexbox 技术创建了栅格布局，唯一不同的是给 body 设置了固定高度。为的是出现滚动条来演示不同的定位效果。
 
 ![Web page with static, relative, absolute, and fixed boxes in different colors](/images/initial-project-screenshot-8ebe66.png)
 
-## Positioned Elements
+## 定位中的元素
 
-The CSS `position` property lets you alter the positioning scheme of a particular element. Its default value, as you might imagine, is `static`. When an element’s `position` property _doesn’t_ have a value of `static`, it’s called a “positioned element”. Positioned elements are what this entire chapter is about.
+css `position` 属性可以改变元素定位方式。默认值是 `static` 。当元素的 `position` 属性的值不是 `static` 时，它叫做 "定位中的元素"。接下来通篇都会关于它。
 
 ![Diagram: relative, absolute, and fixed elements denoted as positioned elements](/images/positioned-elements-terminology-861fca.png)
 
-It’s possible to mix-and-match different positioning schemes. Again, most of your web page should be statically positioned, but it’s common to find relatively and absolutely positioned elements inside of other elements that are part of the normal flow of the page.
+可以混合搭配不同的布局方式，大多数网页都是静态布局，但是也有一些 relatively 和 absolutely 的定位元素。
 
-## Relative Positioning
+## Relative
 
-“Relative positioning” moves elements around _relative_ to where they would normally appear in the static flow of the page. This is useful for nudging boxes around when the default flow is just a little bit off.
+"relative 定位" 适合于在正常文档流中需要微调的元素
 
 ![Diagram: relatively positioned box offset from the upper left corner of its static position](/images/css-relative-positioning-26842e.png)
 
-Let’s turn the `.item-relative` element in `schemes.html` into a relatively positioned element. Add the following rule to `styles.css`:
+在 `style.css` 添加如下代码：
 
-```html
+```css
 .item-relative {
   position: relative;
   top: 30px;
@@ -120,19 +120,19 @@ Let’s turn the `.item-relative` element in `schemes.html` into a relatively po
 }
 ```
 
-The `position: relative;` line makes it a positioned element, and the `top` and `left` properties let you define how far it’s offset from its static position. This is sort of like setting an (_x_, _y_) coordinate for the element.
+`position:relative` 的作用是确定定位元素，`top` 和 `left` 属性可以让元素相对于静态定位发生偏移。就像给元素设置 `x,y` 坐标。
 
 ![Web page with a relatively positioned element](/images/relative-positioning-screenshot-4c23c2.png)
 
-Relative positioning works similarly to margins, with one very important difference: neither the surrounding elements or parent element are affected by the `top` and `left` values. Everything else renders as if `.item-relative` was in its original position. Think of the offsets as being applied _after_ the browser finishes laying out the page.
+相对定位有点像 `margins`，不同的是：不管是环绕的元素还是父元素都会受 `top` 和 `left`。其他元素也像 `.item-relative` 一样在它定位的源点。思考一下网页渲染完成后的偏移量。
 
-The `top` and `left` properties measure from the original box’s top and left edges, respectively. We can offset relative to the other edges with the `bottom` and `right` properties.
+默认 `top` 和 `left` 属性是计算距离盒子的上左边界的源点，同样也可以相对于其他的边界 `bottom` 和 `right` 属性。
 
 ![Diagram: top, left, bottom, and right offsets of a relatively positioned element](/images/relative-positioning-offsets-494268.png)
 
-For example, the following will nudge the box in the opposite direction:
+例如，下面可以让盒子相反定位：
 
-```html
+```css
 .item-relative {
   position: relative;
   bottom: 30px;
@@ -140,17 +140,17 @@ For example, the following will nudge the box in the opposite direction:
 }
 ```
 
-Note that these properties accept negative values, which means there’s two ways to specify the same offset. We could just as easily used `top: -30px;` in place of the `bottom: 30px;` declaration above.
+注意这些属性是可以接受负值的，意味着同一偏移可以有两种方式。比如可以用 `top:-30px` 代替 `bottom:30px`。
 
-## Absolute Positioning
+## Absolute
 
-“Absolute positioning” is just like relative positioning, but the offset is relative to the entire browser window instead of the original position of the element. Since there’s no longer any relationship with the static flow of the page, consider this the most manual way to lay out an element.
+绝对定位跟绝对定位有点像，但是它的偏移量是相对于整个浏览器窗口的而不是某个元素的定位源点。前提是没有任何手动设置定位的元素。
 
 ![Diagram: absolutely positioned element offset from the top-left of the browser window](/images/css-absolute-positioning-228ce0.png)
 
-Let’s take a look by adding the following rule to our stylesheet:
+添加如下样式：
 
-```html
+```css
 .item-absolute {
   position: absolute;
   top: 10px;
@@ -158,55 +158,55 @@ Let’s take a look by adding the following rule to our stylesheet:
 }
 ```
 
-Our HTML structure is the exact same as the previous example, but this will stick the purple image in the top-left corner of the browser window. You can also try setting a `bottom` or `right` value to get a clearer idea of what’s going on.
+HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗口的左上角。当然你也可以试一下设置 `bottom` 和 `right` 是什么效果。
 
 ![Web page with an absolutely positioned element](/images/absolute-positioning-screenshot-641ad7.png)
 
-The other interesting effect of `absolute` is that it completely removes an element from the normal flow of the page. This is easier to see with left-aligned elements, so let’s temporarily change the `justify-content` property in our `.example` rule:
+另一个有趣的效果是 `absolute` 可以让元素完全脱离正常文档流。在左对齐元素更容易观察，所以让我们临时添加一些样式：
 
-```html
+```css
 .example {
   display: flex;
-  justify-content: flex-start;  /* Update this */
+  justify-content: flex-start; /* Update this */
   /* ... */
 }
 ```
 
-In our relative positioning example (the first row), there’s still a space where the positioned element used to be, but with absolute positioning, that space has vanished. It’s as if `.item-absolute` doesn’t even exist to its parent and surrounding elements. Be sure to change the `justify-content` back to `space-around` before moving on.
+在上个例子中，元素还存在间隙。但绝对定位没有间隙，就好像在父元素和周围元素中消失了一样。测试完成，记得把 `justify-content` 改回 `space-around` 。
 
 ![Web page highlighting the empty space left by an absolutely positioned element](/images/absolute-positioning-flex-start-screenshot-d4b627.png)
 
-This behavior isn’t really all that useful most of the time because it would mean _everything_ on your page needs to be absolutely positioned—otherwise we’d get unpredictable overlaps of static elements with absolute elements. So, why does `absolute` even exist?
+这个效果看起来好像并没什么用，让所有元素都采用绝对定位，元素会出现重叠。那 `absoulte` 为什么还存在?
 
-### (Relatively) Absolute Positioning
+### 相对/绝对定位
 
-Absolute positioning becomes much more practical when it’s relative to some other element that _is_ in the static flow of the page. Fortunately, there’s a way to change the coordinate system of an absolutely positioned element.
+如果可以相对与文档流中的某个元素采用绝对定位，那将会非常有用。幸运的是，我们可以改变绝对定位中元素的坐标系统。
 
 ![Diagram: absolute element positioned relative to a parent positioned element](/images/css-relatively-absolute-positioning-1ba963.png)
 
-Coordinates for absolute elements are always relative to the closest container that is a positioned element. It only falls back to being relative to the browser when none of its ancestors are positioned. So, if we change `.item-absolute`’s parent element to be relatively positioned, it should appear in the top-left corner of _that_ element instead of the browser window.
+绝对定位元素的坐标系统总是相对于最近设置了定位的容器元素。只有当没有任何一个祖先元素设置过定位才会相对于浏览器来定位，所我们可以改变 `.item-absolute` 的父元素为相对定位。这样就可以相对改元素来定位而不是浏览器窗口了。
 
-```html
+```css
 .absolute {
   position: relative;
 }
 ```
 
-The `.absolute` div is laid out with the normal flow of the page, and we can manually move around our `.item-absolute` wherever we need to. This is great, because if we want to alter the normal flow of the container, say, for a mobile layout, any absolutely positioned elements will automatically move with it.
+`.absolute` div 在正常文档流中，我们可以手动任意移动 `.item-absolute` 。非常棒，我们可以改变容器内的正常文档流。也就是说，对于手机布局，任何采用绝对定位的元素都可以用过这个方式自动移动。
 
 ![Web page with an absolutely positioned element inside another element that is relatively positioned](/images/relatively-absolute-positioning-screenshot-98bcce.png)
 
-Notice how we didn’t specify any offset coordinates for `.absolute`. We’re using relative positioning for the sole purpose of letting our absolute element hook back into the normal flow of the page. This is how we safely combine absolute positioning with static positioning.
+注意，我们没有为 `.absoulte` 指定任何偏移量。我们使用相对定位是为了让绝对定位元素回归正常文档流。这就是如何准确地将绝对定位和静态定位相结合。
 
-## Fixed Positioning
+## Fixed
 
-“Fixed positioning” has a lot in common with absolute positioning: it’s very manual, the element is removed from the normal flow of the page, and the coordinate system is relative to the entire browser window. The key difference is that fixed elements don’t scroll with the rest of the page.
+"固定定位"与绝对定位有很多相同之处，元素都脱离了文档流，坐标系统都是相对于整个浏览器窗口。关键的区别在于，固定元素不会与界面的其他部分一起滚动。
 
 ![Diagram: fixed element positioned relative to the browser window, but with scrolling disabled](/images/css-fixed-positioning-342eff.png)
 
-Go ahead and update our third example to use fixed positioning:
+使用固定定位来更新我们第三个例子：
 
-```html
+```css
 .item-fixed {
   position: fixed;
   bottom: 0;
@@ -214,15 +214,13 @@ Go ahead and update our third example to use fixed positioning:
 }
 ```
 
-This will place the red image in the bottom-right corner of the screen. Try scrolling the page, and you’ll discover that it doesn’t move with the rest of the elements on the page, while the absolutely positioned purple image does.
+这将把红色的图像放在屏幕的右下角。尝试滚动页面，您会发现它跟绝对定位的紫色图片不一样，它与页面上的其他元素不同步。
 
-This lets you create navigation bars that always stay on the screen, as well as those annoying pop-up banners that never go away.
+## 定位元素的动画
 
-## Positioned Elements for Animation
+这有点草畜范围，因为本教程介绍的是 HTML 和 CSS 而不是 JavaScript。但是，动画是使用相对和绝对定位的应用场景之一。所以让我们通过给元素添加动画来演示一下。
 
-This is a little out of scope, since this tutorial is about HTML and CSS, not JavaScript. However, animation is one of the primary use cases for relative and absolute positioning, so let’s take a little peek into the future by animating one of our elements.
-
-These advanced positioning schemes allow JavaScript to move elements around while avoiding any kind of interaction with surrounding elements. For instance, try copying-and-pasting the following into `schemes.html` after the third `.container` element. The `<script>` element should be the last thing inside of `<body>`.
+这些先进的定位方案使得 JavaScript 可以移动元素，同时避免影响周边元素。例如，尝试将以下内容复制黏贴到 `schemes.html` 中。
 
 ```html
 <script>
@@ -241,21 +239,21 @@ These advanced positioning schemes allow JavaScript to move elements around whil
 </script>
 ```
 
-This JavaScript code creates a simple animation that continually updates the `left` property of the `.item-relative`. When you reload the page, you should see the blue image float to the right edge of its container.
+这个 JavaScript 代码创建了一个简单的动画，它不断更新 `.item-relative` 的 `left` 属性。当你刷新界面时，你应该考到蓝色的图像浮动到了容器的右边缘。
 
 ![Web page showing simple animation of a relatively positioned element](/images/animated-relative-positioning-193400.png)
 
-This is a pretty rudimentary example, but you can hopefully see how it’s applicable to fancy UI animations. If you were to try to achieve the same effect by manipulating the `margin` or `padding` properties, you would inadvertently move the statically positioned boxes and/or the containing `.example` element, too.
+这是一个很简单的例子，但你可以看到它如何适用于花哨的 UI 动画。如果你试图通过操作 `margin` 或 `padding` 属性来达到同样的小姑，你将会不经意地移动静态定位的元素。
 
-## Positioned Elements for Menus
+## 定位元素的菜单
 
-So, those are all the techniques. Let’s do something _advanced_ with them! The rest of this chapter applies our newfound skills towards a fancy navigation menu with an interactive dropdown for one of its links. We’ll be building [this page](https://internetingishard.com/example/menu.html) entirely from scratch.
+让我们用这些技术做些事吧。本章剩余部分将用之前学到的技能来实现导航菜单中的一个带有交互式的下拉菜单。我们将从头开始构建这个界面：
 
 ![Web page with a dropdown menu](/images/submenu-with-z-index-f458d3.png)
 
-Fixed positioning will let us make the menu stick to the top of the page, and relative positioning will give us an anchor for the absolutely positioned dropdown. We’ll also get a chance to talk about navigation menu best practices and see some practical applications of the [pseudo-classes](https://internetingishard.com//html-and-css/css-selectors/#pseudo-classes-for-links) we talked about in _CSS Selectors_.
+固定定位跨域让菜单贴在界面的顶部，相对定位会给我们一个固定的下拉菜单。我们将介绍导航菜单最佳实践，并看到我们在 css 选择器章节中学到的伪类选择器的应用场景。
 
-For starters, we need a new web page called `menu.html` that has a header and a simple top-level menu:
+首先，我们新建 `menu.html` 界面，它有头部和一个简单的顶级菜单：
 
 ```html
 <!DOCTYPE html>
@@ -281,11 +279,11 @@ For starters, we need a new web page called `menu.html` that has a header and a 
 </html>
 ```
 
-Navigation menus should almost always be marked up as a `<ul>` list instead of a bunch of `<div>` elements. These semantics make your site’s navigation much more accessible to search engines. Also notice how we’re preparing for our dropdown menu by adding a `class` attribute to the first `<li>` in the list. That `<span>` will allow us to differentiate the label from the submenu it reveals.
+导航栏最好用 `<ul>` 元素取代 `<div>` 元素。这样有利于 SEO。另外我们给第一个 `<li>` 元素添加 `class` 属性。`<span></span>` 用于区别子菜单。
 
-Next, we need a new stylesheet called `menu.css` that makes our `.header` look a little bit more like a header, among other things:
+接下来，我们添加如下样式：
 
-```html
+```css
 * {
   margin: 0;
   padding: 0;
@@ -296,12 +294,12 @@ body {
   height: 1200px;
   font-size: 18px;
   font-family: sans-serif;
-  color: #5D6063;
+  color: #5d6063;
 }
 
 a:link,
 a:visited {
-  color: #5D6063;
+  color: #5d6063;
   text-decoration: none;
 }
 a:hover {
@@ -315,19 +313,19 @@ a:hover {
 
   width: 100%;
   padding: 50px;
-  background: #D6E9FE;
+  background: #d6e9fe;
 }
 ```
 
-This should all be familiar, but note the `fixed` position of the `.header`, which keeps our navigation menu on top of any content that would go into the page.
+一切都很熟悉，注意 `.header` 的 `fixed` 定位，它让导航栏固定在了界面的顶部。
 
 ![Web page with a menu made out of block <li> elements (no positioning)](/images/menu-block-list-items-c1ac6a.png)
 
-## Inline Menu Items
+## 内联菜单项
 
-Despite being marked up as unordered lists, the navigation menus for most websites don’t actually look like a list. We can fix this by making the list items [inline boxes](https://internetingishard.com//html-and-css/css-box-model/#block-elements-and-inline-elements) instead of block boxes via the `display` property. Add the following to `menu.css`:
+尽管被标记为无序列表，但大多数网站的导航栏菜单实际上并不像列表。我们可以通过将列表项来替代`display`熟悉，在`menu.css`添加样式：
 
-```html
+```css
 .menu {
   margin-top: 15px;
 }
@@ -342,13 +340,13 @@ Despite being marked up as unordered lists, the navigation menus for most websit
 }
 ```
 
-We have to use [child selectors](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/Child_selectors) here instead of [descendant selectors](https://internetingishard.com//html-and-css/css-selectors/#descendant-selectors) because we only want to select `<li>` elements that are directly inside the `.menu`. This will become important once we add our submenu, which has its own `<li>` elements that we don’t want to style with this rule. This snippet also adds margins to all the list items, but removes it from the final `<li>` using the `:last-of-type` pseudo-class. This is a pretty common technique for creating margins _between_ items.
+我们必须使用子选择器来代替后代选择器，因为我们只需要选择在 `.menu` 下的元素。这段代码还增加了所有列表项的外边距，可以通过 `:last-of-type` 伪类去掉最后一个列表项的外边距。这个技巧很常用。
 
 ![Web page with a menu made out of inline <li> elements (no positioning)](/images/menu-inline-list-items-1e8d70.png)
 
-## Submenus
+## 子菜单
 
-Our submenu is going to look just like the top-level menu, except the whole thing will be nested inside a list item. Change the `.menu` element to match the following, ensuring that the entire `.features-menu` list is wrapped in the first `<li>` of the `.menu` element.
+除了整个东西是嵌套在一个列表项中，子菜单看起来跟顶级菜单没两样。修改如下代码：
 
 ```html
 <ul class='menu'>
@@ -366,22 +364,22 @@ Our submenu is going to look just like the top-level menu, except the whole thin
 </ul>
 ```
 
-This provides a lot of crucial information for search engines. It allows Google to see that all these new items are associated with the **Features** label and that they form an isolated section of our website. You should always mark up complex navigation menus with this kind of structure.
+这位搜索引擎提供了许多关键信息。它允许谷歌标记 `Features` 标签为网页的独立部分。建议用这种结构来标记复杂的导航菜单。
 
-As for the CSS, we’ll deal with the interactive dropdown part later. Right now, let’s just get our submenu looking the way we want it to. Add some simple styles so we can see the box we’re trying to position:
+为了让子菜单达到预期样子，添加如下样式：
 
-```html
+```css
 .features-menu {
   display: flex;
   flex-direction: column;
-  background: #B2D6FF;
+  background: #b2d6ff;
   border-radius: 5px;
   padding-top: 60px;
 }
 
 .features-menu li {
   list-style: none;
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid #fff;
 
   padding: 0 40px 10px 20px;
   margin: 10px;
@@ -392,58 +390,58 @@ As for the CSS, we’ll deal with the interactive dropdown part later. Right now
 }
 ```
 
-The submenu itself is styled correctly, but it’s showing up in the wrong place and severely messing up the rest of our top-level menu items. This should be expected because it’s still statically positioned, which means it still interacts with its parent and surrounding elements.
+子菜单样式是正确的，但它的位置错了，并且严重破坏了其他顶级菜单项。其实能猜到这样的结果，因为它仍然是静态定位，所以它还是会影响周边元素。
 
 ![Web page with an unstyled submenu (HTML-only)](/images/submenu-no-css-positioning-04280e.png)
 
-To create our desired layout, we need to call on our new CSS positioning skills.
+得用心的定位技巧才能达到我们想要的布局。
 
-## (Relatively) Absolute Submenus
+## (相对) 绝对的子菜单
 
-We want our other top-level menu items to display just like they did before we added the submenu, as if the submenu wasn’t even there. Wait a second…that’s the exact behavior of absolutely positioned elements. Let’s give it a shot. Add a few lines to the `.features-menu` rule:
+我们希望顶级菜单就像没加子菜单时那样显示，这不正是绝对定位元素的效果，让我们试一试，添加几行规则到 `.features-menu`：
 
-```html
+```css
 .features-menu {
   display: flex;
   flex-direction: column;
-  background: #B2D6FF;
+  background: #b2d6ff;
   border-radius: 5px;
   padding-top: 60px;
 
-  position: absolute;      /* Add these */
+  position: absolute; /* Add these */
   top: -25px;
   left: -30px;
 }
 ```
 
-Great! The submenu is no longer part of the static flow of the page, so our top-level menu items are back to normal. However, the submenu should appear underneath the **Features** label—not in the corner of the browser window. What a coincidence…we just learned how do that!
+666!子菜单不再是界面静态流的一部分了，因此我们的顶级菜单项恢复正常。然而，子菜单应该在 `features` 标签下面，而不在浏览器窗口的角落。就像我们学过的!
 
-The submenu resides in `<li class='dropdown'>`. Turning that into a positioned element should change the coordinate system used by our absolutely positioned `.features-menu`:
+子菜单位于 `<li class='dropdown'>` 。将其转为为定位元素，将会改变 `.features-menu` 的坐标系统：
 
-```html
+```css
 .dropdown {
   position: relative;
 }
 ```
 
-Ok, next problem. Our submenu is in the right spot, but now it’s covering up the **Features** label.
+子菜单在正确的位置上了，但是它把 `Features` 标签盖住了。
 
 ![Web page with a absolutely positioned submenu inside a relative element](/images/submenu-relative-and-absolute-positioning-9fe8a5.png)
 
 ## Z-Index
 
-We’ve never had to deal with “depth” issues before. Until now, all our HTML elements rendered above or below one another in an intuitive way. But, since we’re doing advanced stuff, relying on the browser to determine which elements appear on top of other ones isn’t going to cut it.
+我们至今为处理过 "深度" 问题，所有的 HTML 元素都以一种直观的方式呈现在彼此之上或下面。让浏览器来决定这些是不可能的。
 
-The `z-index` property lets you control the depth of elements on the page. If you think of your screen as 3D space, negative `z-index` values go farther into the page, and positive ones come out of the page.
+`z-index` 属性可以设置元素的深度。你可以想象网页是一个三维空间，那么负值会进入页面的更深处。而正值会跳出界面。
 
 ![Diagram: positive z-index coming out of the page and negative z-index going into the page](/images/css-z-index-c87ef0.png)
 
-In other words, the `.features-menu` element needs to have a lower `z-index` than the **Features** label. The default `z-index` value is `0`, so let’s make both of them higher than that. We conveniently wrapped the **Features** label in a `<span>`, allowing us to style it via a child selector, like so:
+换句话说，`.features-menu` 元素比 `features` 标签需要更低层次的 `z-index`。默认值是 0。让我们这么处理：
 
-```html
+```css
 .dropdown > span {
   z-index: 2;
-  position: relative;  /* This is important! */
+  position: relative; /* This is important! */
   cursor: pointer;
 }
 
@@ -453,52 +451,54 @@ In other words, the `.features-menu` element needs to have a lower `z-index` tha
 }
 ```
 
-The **Features** label should now appear on top of the submenu. Take note of that `position: relative;` line. It’s _required_ because only positioned elements pay attention to their `z-index` property. This is easy to forget, so make a mental note for the next time you’re having depth issues and your CSS rules don’t seem to have any effect.
+**Features** 标签出现在子菜单的上面了。注意 `position:relative` 是必须的，因为只有定位元素设置 `z-index` 才有效果。所以记住，下次遇到没效果的情况，有可能就是忘了加定位属性。
 
 ![Web page showing submenu after adding a positive z-index](/images/submenu-with-z-index-f458d3.png)
 
-We threw in an example of the `cursor` property to make it look like a link when the user hovers over the label. You can read more about it at [Mozilla Developer Network](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
+我们设置 `cursor` 属性来修改指针的样式，看起来就像链接。[Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
 
-## Pseudo-Classes for Dropdown Menus
+## 伪类的下拉菜单
 
-Alright! Submenu done! Our final task is to hide it until the user hovers over it. Remember that [`:hover` pseudo-class](https://internetingishard.com//html-and-css/css-selectors/#pseudo-classes-for-links) from the _CSS Selectors_ chapter? We can use that to turn our submenu into an interactive dropdown.
+子菜单完成了!我们最后的任务是隐藏它，直到用户鼠标悬浮在上面。enu into an interactive dropdown.
 
-First, we need to change our existing `.features-menu` rule to only show the submenu when the user hovers over it by adding a `:hover` descendant selector. Update the `.features-menu` selector to match the following:
+首先，我们用 `:hover` 后代选择器，修改如下代码：
 
-```html
-.dropdown:hover .features-menu {    /* This used to be `.features-menu` */
-  display: flex;                    /* Leave everything else alone */
+```css
+.dropdown:hover .features-menu {
+  /* This used to be `.features-menu` */
+  display: flex; /* Leave everything else alone */
   flex-direction: column;
-  background: #B2D6FF;
+  background: #b2d6ff;
   /* ... */
 }
 ```
 
-Then, we need to initially hide the submenu using the `display` property. Add a new rule to `menu.css`:
+然后，用 `display` 把子菜单隐藏起来：
 
-```html
-.features-menu {                    /* Add this as a new rule */
+```css
+.features-menu {
+  /* Add this as a new rule */
   display: none;
 }
 ```
 
-Setting `display` to `none` makes an element completely disappear. By overriding that value with `flex` in the `:hover` rule, we’re effectively telling the browser to show the `.features-menu` again. This clever combination of descendant selectors and pseudo-classes enables us to conditionally hide or show an element.
+将 `display` 设置为 `none` 使元素完全消失。在鼠标悬停后用 `flex` 覆盖 `none`。就相当于告诉浏览器重新显示子菜单。这种使用派生选择器和伪类的巧妙组合使我们可以隐藏或显示一个元素。
 
-## Summary
+## 总结
 
-In this chapter, we took a look at four new CSS layout schemes:
+本章，学习了四种新的 css 布局方式：
 
 * Relative
 * Absolute
 * Relatively absolute
 * Fixed
 
-Relative positioning was for tweaking the position of an element without affecting its surrounding boxes. Absolute positioning took elements out of the static flow of the page and placed them relative to the browser window, while relatively absolute positioning allowed us to hook back into the static flow of the page. Finally, fixed positioning let us make elements that didn't scroll with the rest of the page.
+相对定位可以调整一个元素的位置而不影响周边元素。绝对定位从页面的静态流中提取元素，并将其相对于浏览器窗口放置，相对包裹绝对会让元素重新回归正常文档流。最后，固定定位可以让元素固定而不随其他元素滚动。
 
 ![Diagram: comparison of relative, absolute, relatively absolute, and fixed positioning schemes](/images/css-positioning-schemes-summary-d7f831.png)
 
-We used these new positioning techniques to create a rather sophisticated navigation menu. If it felt complicated, that’s cause it was. But don’t worry, you shouldn’t feel pressure to _memorize_ the HTML and CSS behind our menu. Your goal should be to have the ability to reference this example three months from now and understand what all those `position: relative;` and `position: absolute;` declarations are doing.
+我们用这些新技术实现了一个相对复杂的导航菜单。如果觉得复杂，不要担心。你并不需要记住这些 HTML 和 CSS，我们的目的是让你理解这些定位的作用，做到学以致用。
 
-This menu was also a pretty good example of how starting with the HTML markup makes life a lot easier. First, we created the semantic structure we wanted. _Then_, we wrote some fancy CSS to position the boxes right where we wanted them. Whenever you’re looking at a complicated mockup and not sure where to start, this is good way to approach the problem.
+这个菜单同样说明了，HTML 结构的重要性。好的 HTML 结构可以节省很多事，首先我们要创建语义结构，接着写一些 css 把盒子放到我们想要的地方。多复杂的模型都可以轻松实现。
 
-There’s still one big issue with our menu: it’s not built for mobile devices. Smartphones and tablets don’t have a way to hover, and our layout doesn’t display well when the browser is narrower than 960 pixels. The former requires a little bit of JavaScript magic (or some _really_ advanced CSS), so we’ll leave that for another tutorial. But, we will be able to tackle the latter problem with some responsive design in the next chapter.
+遗留另一个问题就是，我们的菜单在手机下会有很大的问题。我们将在下一章响应式布局中讲解如何解决。
