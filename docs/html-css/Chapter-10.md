@@ -2,21 +2,21 @@
 layout: SpecialLayout
 ---
 
-# responsive-design
+# 响应式设计
 
-“Responsive design” refers to the idea that your website should display equally well in everything from widescreen monitors to mobile phones. It’s an approach to web design and development that eliminates the distinction between the mobile-friendly version of your website and its desktop counterpart. With responsive design, they’re the same thing.
+响应式设计指的是你的网站在从宽屏显示器到手机的各个方面都应该表现得很好。它是 web 设计和开发的方法，解决了桌面版本和移动友好版本之间的区别，有了响应式设计，它们是一样的。
 
-Responsive design is accomplished through CSS “media queries”. Think of media queries as a way to conditionally apply CSS rules. They tell the browser that it should ignore or apply certain rules depending on the user’s device.
+响应式设计是通过 css"媒体查询"完成的。将媒体查询看作是有在某种情况下使用某种样式的方法。它告诉浏览器根据用户的设备来忽略或者应用某些规则。
 
 ![Diagram: HTML content pointing to media queries, which point to mobile, tablet, and desktop devices](/images/how-responsive-websites-work-5f0a33.png)
 
-Media queries let us present the same HTML content as distinct CSS layouts. So, instead of maintaining one website for smartphones and an entirely unrelated site for laptops/desktops, we can use the same HTML markup (and web server) for both of them. This means that whenever we add a new article or edit a typo in our HTML, those changes are automatically reflected in both mobile and widescreen layouts. _This_ is the reason why we [separate content from presentation](https://internetingishard.com//html-and-css/basic-web-pages/#structure-versus-presentation).
+媒体查询将相同的 HTML 内容呈现为不同的 css 布局。因此，我们可以使用相同的 HTML 标记(和 web 服务器)来代替智能手机的一个网站和一个完全不相干的笔记本/台式机网站。这意味着我们只需要维护一份内容，这也是为什么要关注点分离的原因。
 
-In this chapter, we’ll learn how media queries are really just a thin wrapper around the plain old CSS that we’ve been working with up ’til this point. As we’ll soon discover, it’s actually pretty easy to implement a responsive layout. ([Responsive Images](https://internetingishard.com//html-and-css/responsive-images/), on the other hand, are an entirely different story).
+本章，我们将了解媒体查询实际上只是对之前一直使用的旧 css 的简单包装。我们会发现实现响应式布局非常简单。
 
-## Setup
+## 安装
 
-Create a [new project](https://internetingishard.com//html-and-css/introduction/#atom-text-editor) called `responsive-design` and a new file called `responsive.html`. It’s the emptiest web page that we’ve seen in awhile, but it’ll help us demonstrate something very important in the next section:
+新建 `responsive-design` 目录和 `responsive.html` 文件：
 
 ```html
 <!DOCTYPE html>
@@ -32,19 +32,19 @@ Create a [new project](https://internetingishard.com//html-and-css/introduction/
 </html>
 ```
 
-You’ll also need to [download some images](https://internetingishard.com//html-and-css/responsive-design/images-e9877a.zip) for later in the chapter. Unzip everything into the same folder as `responsive.html`, keeping the parent `images` folder. Your project should look like this before moving on:
+然后下载图片 [download some images](https://internetingishard.com/html-and-css/responsive-design/images-e9877a.zip) 解压在项目目录。
 
 ![Screenshot: Atom’s file browser with project files in it](/images/project-files-76223b.png)
 
-## CSS Media Queries
+## CSS 媒体查询
 
-We’ll start small by simply updating the background color on the `<body>` element based on the device width. This is a good way to make sure our media queries are actually working before getting into complicated layouts.
+我们先设置背景色，在布局变复杂前先确保媒体查询能否工作。
 
 ![Diagram: mobile device with red background, tablet with yellow background, desktop with blue background. Background colors set with media queries.](/images/simple-responsive-media-queries-703f8b.png)
 
-Let’s differentiate between narrow, medium, and wide layouts by creating a new `styles.css` stylesheet and adding the following:
+让我们通过创建一个新的样式来区分窄、中、宽的布局。添加如下样式：
 
-```html
+```css
 * {
   margin: 0;
   padding: 0;
@@ -54,65 +54,65 @@ Let’s differentiate between narrow, medium, and wide layouts by creating a new
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
   body {
-    background-color: #F09A9D; /* Red */
+    background-color: #f09a9d; /* Red */
   }
 }
 
 /* Tablet Styles */
 @media only screen and (min-width: 401px) and (max-width: 960px) {
   body {
-    background-color: #F5CF8E; /* Yellow */
+    background-color: #f5cf8e; /* Yellow */
   }
 }
 
 /* Desktop Styles */
 @media only screen and (min-width: 961px) {
   body {
-    background-color: #B2D6FF; /* Blue */
+    background-color: #b2d6ff; /* Blue */
   }
 }
 ```
 
-When you resize your browser, you should see three different background colors: blue when it’s greater than `960px` wide, yellow when it’s between `401px` and `960px`, and red when it’s less than `400px`.
+当你调整浏览器的大小时，你应该会看到三种不同的背景颜色。大于 `960px` 时蓝色，介于 `401px` 和 `960px` 时黄色，小于 `400px` 时红色。
 
-Media queries always begin with the `@media` “at-rule” followed by some kind of conditional statement, and then some curly braces. Inside the curly braces, you put a bunch of ordinary CSS rules. The browser only pays attention to those rules if the condition is met.
+媒体查询由 `@media` 开始，然后是某种条件语句，然后是一些花括号。在大括号里面，你放了一些普通的 css 规则。浏览器在条件满足时采用这些规则。
 
 ![Diagram: media query composed of the @media at-rule, a media type, a media feature, then a bunch of ordinary CSS](/images/media-query-terms-137d06.png)
 
-The `only screen` “media type” means that the contained styles should only be applied to devices with screens (opposed to printed documents, like when you hit **Cmd+P** in a browser). The `min-width` and `max-width` parts are called “media features”, and they specify the device dimensions you’re targeting.
+"only-screen" 媒体类型意味着所包含的样式只能应用于带有屏幕的设备 (与 文档相反，比如在浏览器中按下 "cmd+p") "min-width" 和 "max-width" 部分被称为 "媒体特性"，它们指定了你说描述的设备尺寸。
 
-The above media queries are by far the most common ones you’ll encounter, but there are a lot of [other conditions](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/@media) you can check for, including whether the device is in portrait or landscape mode, the resolution of its screen, and whether it has a mouse or not.
+上面的媒体查询是你将遇到的最常见的查询，更多参阅 [other conditions](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) 包括该设备是否处于图像或横向模式，屏幕分辨率，以及是否有鼠标。
 
-## A Few Notes on Design
+## 设计知识点
 
-Ok, so `@media` is how we define different layouts for specific device widths, but what layouts are we actually trying to implement? The example web page for this chapter is going to look something like this:
+"@media" 是我们为特定设备宽度定义不同布局的方式，但是我们实际想要实现的是什么布局呢?本章的示例 web 界面将如下所示：
 
 ![Mockups of mobile, tablet, and desktop web pages](/images/mobile-first-design-be30e4.png)
 
-In the real world, it’s up to your web designer to supply you with these kinds of mockups. Your job as a developer is to implement the individual layouts using media queries to separate out the various CSS rules that apply to each one.
+实际上，设计人员提供响应式设计模型。开发人员的工作是用媒体查询和 css 来实现各个布局。
 
-There’s a few [well defined patterns](https://internetingishard.com/https://developers.google.com/web/fundamentals/design-and-ui/responsive/patterns/?hl=en) for how a desktop layout collapses into a mobile layout (we’re using “layout shifter”). A lot of these decisions are in the realm of design, which is outside the scope of this code-oriented tutorial; however, there are two concepts that you must understand as a developer:
+有几个 [well defined patterns](https://developers.google.com/web/fundamentals/design-and-ui/responsive/patterns/?hl=en) 介绍桌面布局如何适应移动布局。这其实是设计的范畴，但作为开发人员必须了解两个概念：
 
-* A “fluid” layout is one that stretches and shrinks to fill the width of the screen, just like the [flexible boxes](https://internetingishard.com//html-and-css/flexbox/#flexible-items) we covered a few chapters ago.
-* A “fixed-width” layout is the opposite: it has the same width regardless of the screen dimensions (we created one of these in the [CSS Selectors](https://internetingishard.com//html-and-css/css-selectors#container-divs) chapter).
+* 流布局是用拉伸或收缩来填充屏幕宽度的布局。
+* 固定布局则相反，它的宽度与屏幕尺寸相同。
 
 ![Diagram: fluid layout expanding to fill entire width of the browser, fixed-width layout staying the same even if browser gets wider](/images/fixed-width-vs-fluid-layouts-258df9.png)
 
-In our example web page, the mobile and tablet versions are fluid, and the desktop version is fixed-width.
+在我们的例子中，手机的表格是流式布局，桌面版的是固定宽度。
 
-### Choosing Breakpoints
+### 断点
 
-Most of those [responsive design patterns](https://internetingishard.com/https://developers.google.com/web/fundamentals/design-and-ui/responsive/patterns/?hl=en) have similar behavior, using fluid layouts for mobile/tablet devices and fixed-width layouts for wider screens. There’s a reason for this.
+多数 [responsive design patterns](https://developers.google.com/web/fundamentals/design-and-ui/responsive/patterns/?hl=en) 都是在移动端采用流式布局，桌面端采用固定布局。
 
-Fluid layouts let us target a _range_ of screen widths instead of specific mobile devices. This is very important for web designers. When they set out to create a mobile layout, they aren’t trying to make something that looks good on an iPhone 6s, Galaxy S7, or iPad mini—they’re designing a fluid layout that looks good _anywhere_ between 300 pixels and 500 pixels (or whatever).
+流式布局的关注点是屏幕宽度，而不是特定的移动设备。这对于 web 设计人员来说非常重要。他们并没有试图在 IPhone 6s、Galaxy S7 或 Ipad mini 上做一些看起来不错的东西。他们正在设计一种看起来很好的流体布局，比如在 300 像素到 500 像素 看起来很好。
 
-In other words, the exact pixel values for the `min-width` and `max-width` parameters in a media query (collectively known as the “breakpoints” for a responsive website) don’t actually matter. Our website doesn’t care about the specific device the user is on. All it needs to know is that it should display a layout that looks pretty at 400 pixels wide (or whatever).
+换句话说，在媒体查询中，"min-width" 和 "max-width" 参数的精确像素值 ( 统称为响应式网站的 "断点" )实际上并不重要。我们的网站并不关心用户的具体设备。它需要知道的是，它应该显示一个看起来漂亮的布局，宽度为 400 像素 ( 或其他 ) 。
 
-## Mobile-First Development
+## 移动优先
 
-Let’s dive right into implementing the above screenshots. It’s always a good idea to start with the mobile layout and work your way up to the desktop version. Desktop layouts are typically more complex than their mobile counterparts, and this “mobile-first” approach maximizes the amount of CSS that you can reuse across your layouts.
+让我们开始吧，建议从移动布局开始，到桌面版本。桌面端布局比移动端要复杂的多，"移动优先" 可以让我们最大化了布局中可重用的 css 数量。
 
-First, we need to fill in `responsive.html`’s `<body>` element with some empty boxes. Each box has an image in it so we can tell them apart a little bit easier.
+添加如下代码：
 
 ```html
 <div class='page'>
@@ -138,9 +138,9 @@ First, we need to fill in `responsive.html`’s `<body>` element with some empty
 </div>
 ```
 
-And here’s our base styles, which should apply to _all_ layouts (mobile, tablet, and desktop). Make sure to add these above the `@media` rules we created earlier and below the [universal selector](https://internetingishard.com//html-and-css/css-box-model/#resetting-styles) rule that resets our margins and padding:
+添加基础样式，确保正确使用媒体查询以适用于所有布局 (移动，平板和桌面)：
 
-```html
+```css
 .page {
   display: flex;
   flex-wrap: wrap;
@@ -155,49 +155,49 @@ And here’s our base styles, which should apply to _all_ layouts (mobile, table
 }
 
 .menu {
-  background-color: #5995DA;
+  background-color: #5995da;
   height: 80px;
 }
 
 .header {
-  background-color: #B2D6FF;
+  background-color: #b2d6ff;
 }
 
 .content {
-  background-color: #EAEDF0;
+  background-color: #eaedf0;
   height: 600px;
 }
 
 .sign-up {
-  background-color: #D6E9FE;
+  background-color: #d6e9fe;
 }
 
 .feature-1 {
-  background-color: #F5CF8E;
+  background-color: #f5cf8e;
 }
 
 .feature-2 {
-  background-color: #F09A9D;
+  background-color: #f09a9d;
 }
 
 .feature-3 {
-  background-color: #C8C6FA;
+  background-color: #c8c6fa;
 }
 ```
 
-If you make the browser window narrow, you'll see that this gives us our entire mobile layout. Pretty easy, huh? No media queries required. That’s why it’s called “mobile-first”—the mobile version doesn’t require any special handling. Also notice that [`flex-wrap` property](https://internetingishard.com//html-and-css/flexbox/#wrapping-flex-items) in the containing `.page` div. This will make it very easy to implement our tablet and desktop layouts.
+缩小浏览器窗口，你会看到这就是移动布局。都不需要媒体查询，这就是为什么它被称为 "移动优先" 移动版本不需要特殊处理。
 
 ![Web page showing layout created with mobile-first CSS (no media queries)](/images/mobile-layout-55fdad.png)
 
-By keeping these base styles outside of the media queries, we’re able to override and add on to them as we implement our specific layouts. This is really convenient when, for instance, your designer wants to tweak the color scheme for the entire website. Instead of tracking down redundant `background-color` declarations in several `@media` rules, you only have to update it here. That change automatically applies to the mobile, tablet, and desktop layouts.
+在媒体查询外面写这些基本样式，在需要实现特定布局时再覆盖它们。例如，你需要改变整个网站的颜色方案。你只需要在这里修改它，而不是在几个 "@media" 规则中冗余地定义。
 
-## Tablet Layout
+## 平板布局
 
-On to the tablet layout. The only difference between the mobile and tablet mockups is that the **Sign Up** and **Feature** sections form a 2×2 grid instead of a single column.
+平板和移动不一样的地方在于，"Sign Up" 和 "Feature" 部分由 2\*2 栅格替换单列。
 
-Flexbox makes this real easy. Simply adjust the widths of the flex items to be half the screen and `flex-wrap` will take care of the rest. Of course, we only want this behavior to apply to tablet-sized screens, so it needs to go into an `@media` rule. Replace the existing `/* Tablet Styles */` media query with the following:
+用 Flexbox 实现非常简：
 
-```html
+```css
 /* Tablet Styles */
 @media only screen and (min-width: 401px) and (max-width: 960px) {
   .sign-up,
@@ -209,17 +209,17 @@ Flexbox makes this real easy. Simply adjust the widths of the flex items to be h
 }
 ```
 
-To see these changes, make sure your browser window is between 400 pixels and 960 pixels wide, then scroll down to the bottom of the page. You should see a colorful grid:
+首先确保浏览器窗口的宽度在 400 像素 到 960 像素之间，接着滚动到底部，你将会看到一个彩色的网格：
 
 ![Web page showing the grid created from tablet media query](/images/tablet-layout-081d9e.png)
 
-Again, it doesn’t matter what the exact width of the screen is: this layout will fluidly respond to any width in the media query’s range. Our mobile layout is also fluid, so we now have a website that looks beautiful (if a bit empty) in every device smaller than `960px` wide.
+同样，屏幕的切确宽度并不重要。这个布局在媒体查询范围内适配任何宽度。移动端也如此，在小于 `960px` 宽下，都可以适配。
 
-## Desktop Layout
+## 桌面布局
 
-And that’s where our desktop layout comes in. We don’t want our web page to expand endlessly, so we’re going to give it a fixed width and [center it with auto-margins](https://internetingishard.com//html-and-css/css-box-model/#aligning-boxes). As with tablet styles, this needs to go into a media query. Replace the existing `/* Desktop Styles */` media query with the following:
+这就是我们的桌面布局，我们不希望它无休止地扩展，所以我们要设置了一个固定宽度：
 
-```html
+```css
 /* Desktop Styles */
 @media only screen and (min-width: 961px) {
   .page {
@@ -237,13 +237,13 @@ And that’s where our desktop layout comes in. We don’t want our web page to 
 }
 ```
 
-This gives us the correct widths for everything, and we have more real estate to play with, so we made the header a little taller, too. Almost there, but our desktop layout calls for some reordering: the **Sign Up** and **Content** boxes should appear _underneath_ all the **Feature** sections.
+如下效果：
 
 ![Desktop layout of web page before and after flexbox re-ordering](/images/desktop-layout-8479d0.png)
 
-This is where flexbox really shines. Trying to create this combination of mobile and desktop layouts would be very difficult with [floats](https://internetingishard.com//html-and-css/floats/). With flexbox’s [`order` property](https://internetingishard.com//html-and-css/flexbox/#flex-item-order), it’s just a few lines of CSS. Append these rules to the desktop media query:
+flexbox 真的很棒，如果用浮动布局将会变得非常困难。而 flexbox 只是几行 css，将这些规则附加到桌面媒体查询：
 
-```html
+```css
 .sign-up {
   height: 200px;
   order: 1;
@@ -253,39 +253,37 @@ This is where flexbox really shines. Trying to create this combination of mobile
 }
 ```
 
-Ta da! A responsive website! Not bad for less than a hundred lines of CSS. More importantly, we didn’t have to alter a single line of HTML to accommodate our mobile, tablet, and desktop layouts.
+完美!只用少数 css，而且在不修改 html 结构的情况下，实现了移动，平板，桌面端的布局。
 
-This was just one example of laying out a responsive site. You can use these exact same techniques to implement all sorts of other designs. Start with the base styles that apply to your entire site, then tweak them for various device widths by selectively applying CSS rules with `@media`. You could even add another media query to, say, create a dedicated layout for ultra-widescreen monitors.
+这只是响应式布局的一个简单的例子。完美还可以通过这个技术实现更多复杂的响应式布局。原理都一样，在基础样式的基础上，通过媒体查询来实现不同设备宽度下的特定布局。
 
-## Disabling Viewport Zooming
+## 禁用窗口缩放
 
-We’ve got one final task for making a responsive web page. Before responsive design was a thing, mobile devices only had a desktop layout to work with. To cope with this, they zoomed out to fit the entire desktop layout into the width of the screen, letting the user interact with it by zooming in when necessary.
+在美柚响应式设计之前，移动设备只有一个桌面布局，用户经常需要通过缩放来与之交互。
 
 ![Diagram: zoom enabled (desktop layout rendered in a tablet device) versus zoom disabled (tablet layout rendered in a tablet device)](/images/html-viewport-zooming-5c4be6.png)
 
-This default behavior will prevent mobile devices from using our mobile layout, which is obviously very terrible. To disable it, add the following element to the `<head>` of our document. Just like [`<meta charset='UTF-8'/>`](https://internetingishard.com//html-and-css/links-and-images/#more-html-attributes), this is a critical element that should be on every single web page you create:
+如果使用移动布局，这种默认行为下的用户体验会非常糟糕。所以我们要通过下面的方式禁用它：
 
 ```html
 <meta name='viewport'
       content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 ```
 
-To see this in action, we’ll need to _simulate_ a mobile device in our desktop browser. This is a little advanced for where we’re at right now, but we can give it a shot. Open up `responsive.html` in Google Chrome, then hit **View > Developer > Developer Tools** in the menu bar. Then, to simulate a mobile device, click the **Toggle Device Toolbar** icon, highlighted below.
+要看效果需要在浏览器中模拟一个移动设备，用谷歌 **View > Developer > Developer Tools** 按钮，然后选择 **Toggle Device Toolbar** 来模拟设备。
 
 ![Screenshot: responsive icon in Chrome’s developer toolbar](/images/chrome-device-toolbar-bb030a.png)
 
-You should see the zoom-disabled version of the above diagram in your browser, since it’s now pretending to be a mobile device. (We’ll save the in-depth discussion of Chrome dev tools for a future tutorial.)
+在浏览器模拟设备中，你应该可以看到上述图片的 `zoom-disable` 版本。( 后续章节会深入介绍谷歌开发工具 )
 
-Alternatively, if you’re reading this chapter on a smartphone, you can navigate to the live [before](https://internetingishard.com//html-and-css/responsive-design/example/default-viewport-zoom/responsive.html) and [after](https://internetingishard.com//html-and-css/responsive-design/example/disabled-viewport-zoom/responsive.html) versions of our example project to experience the effect of our `viewport` changes.
+## 总结
 
-## Summary
+创建响应式网站这些知识点就够了，我们重点关心下面三件事：
 
-Believe it or not, that’s actually all you need to know to create responsive websites. If we boil it down, we’re really only concerned with three things:
+* 每个响应式设计的原型
+* 用于实现这些布局的 css 规则
+* 有条件地应用这些 css 规则的媒体查询
 
-* The responsive _design_ (the mockups for each layout)
-* CSS rules for implementing each of those layouts
-* Media queries for conditionally applying those CSS rules
+本章我们首先从比较流式布局跟固定布局的区别，接着创建了移动优先基础样式，然后在复用样式的前提下通过媒体查询实现了平板，桌面布局。最后我们禁止了移动端的缩放功能。
 
-We started this chapter by learning about the difference between fluid layouts and fixed-width layouts. Then, we went on to create a mobile-first stylesheet that used media queries to build tablet and desktop layouts on top of a shared set of base styles. Finally, we disabled the default viewport zoom behavior of mobile browsers.
-
-So, that was the easy part of responsive design. In the next chapter, we’ll discover the hard part: images. Presenting different CSS to specific devices isn’t too bad, but optimizing images for those devices requires a bit more planning.
+本章相对简单，下个章节的图片响应式就比较难了。
