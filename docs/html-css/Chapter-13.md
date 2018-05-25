@@ -2,27 +2,27 @@
 layout: SpecialLayout
 ---
 
-# forms
+# 表单
 
-HTML form elements let you collect input from your website’s visitors. Mailing lists, contact forms, and blog post comments are common examples for small websites, but in organizations that rely on their website for revenue, forms are sacred and revered.
+HTML 表单元素允许从网站访问者中收集输入，比如，邮件列表，联系表单和博客评论等。对于从网站获利的机构来说，表单不可或缺。
 
 ![Examples of text inputs, textareas, radio buttons, checkboxes, and other HTML form elements](/images/html-form-elements-939709.png)
 
-Forms are the “money pages.” They’re how e-commerce sites sell their products, how SaaS companies collect payment for their service, and how non-profit groups raise money online. Many companies measure the success of their website by the effectiveness of its forms because they answer questions like “how many leads did our website send to our sales team?” and “how many people signed up for our product last week?” This often means that forms are subjected to endless A/B tests and optimizations.
+表单意味着钱，电商通过它销售产品，saas 公司通过它收取服务费用，以及非营利组织通过它筹集资金。很多公司都是通过表单数据来衡量网站质量的，因为很多数据来源都来自表单。这意味着，表单需要持续 A/B 测试和优化。
 
 ![Diagram: frontend form elements sending input to backend server for processing](/images/form-frontend-and-backend-2a0f80.png)
 
-There are two aspects of a functional HTML form: the frontend user interface and the backend server. The former is the _appearance_ of the form (as defined by HTML and CSS), while the latter is the code that processes it (storing data in a database, sending an email, etc). We’ll be focusing entirely on the frontend this chapter, leaving backend form processing for a future tutorial.
+表单包含：前端和服务端。前者处理表达外观（由 HTML 和 css 定义），后者处理逻辑。（数据库中数据，电子邮件等。）本章主要讲前端，后端在以后的教程会涉及。
 
-## Setup
+## 安装
 
-Unfortunately, there’s really no getting around that fact that styling forms is _hard_. It’s always a good idea to have a mockup representing the exact page you want to build before you start coding it up, but this is particularly true for forms. So, here’s the example we’ll be creating in this chapter:
+表达美化比较难。在码字前最好有个模型来表示你想要构建的界面。比如：
 
 ![Mobile and desktop web page mockups with several form elements](/images/responsive-form-mockup-963e65.png)
 
-As you can see, this is a speaker submission form for a fake conference. It hosts a pretty good selection of HTML forms elements: various types of text fields, a group of radio buttons, a dropdown menu, a checkbox, and a submit button.
+如你所见，这是一个模拟的会议发言表单。包含了几乎所有的表单元素：文本，单选按钮，下来菜单，复选框，提交按钮。
 
-Create a new [Atom project](https://internetingishard.com//html-and-css/introduction/#atom-text-editor) called `forms` and stick a new HTML file in it called `speaker-submission.html`. For starters, let’s add the markup for the header. (Hey look! It has [some semantic HTML](https://internetingishard.com//html-and-css/semantic-html/#headers)!)
+创建 `form` 目录，在创建 `speaker-submission.htm`文件：
 
 ```html
 <!DOCTYPE html>
@@ -42,9 +42,9 @@ Create a new [Atom project](https://internetingishard.com//html-and-css/introduc
 </html>
 ```
 
-Next, create a `styles.css` file and add the following CSS. It uses a simple [flexbox](https://internetingishard.com//html-and-css/flexbox/) technique to center the header (and form) no matter how wide the browser window is:
+接着创建 `styles.css` ：
 
-```html
+```css
 * {
   margin: 0;
   padding: 0;
@@ -52,9 +52,9 @@ Next, create a `styles.css` file and add the following CSS. It uses a simple [fl
 }
 
 body {
-  color: #5D6063;
-  background-color: #EAEDF0;
-  font-family: "Helvetica", "Arial", sans-serif;
+  color: #5d6063;
+  background-color: #eaedf0;
+  font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 16px;
   line-height: 1.3;
 
@@ -65,8 +65,8 @@ body {
 
 .speaker-form-header {
   text-align: center;
-  background-color: #F6F7F8;
-  border: 1px solid #D6D9DC;
+  background-color: #f6f7f8;
+  border: 1px solid #d6d9dc;
   border-radius: 3px;
 
   width: 80%;
@@ -80,33 +80,33 @@ body {
 }
 ```
 
-Notice that we’re adhering to the [mobile-first development](https://internetingishard.com//html-and-css/responsive-design/#mobile-first-development) approach that we discussed in the _Responsive Design_ chapter. These base CSS rules give us our mobile layout and provide a foundation for the desktop layout, too. We’ll create the media query for a fixed-width desktop layout later in the chapter.
+本着移动优先，这些基础样式实现了移动布局，并给桌面布局提供了基础。后续用媒体查询实现固定宽度。
 
-## HTML Forms
+## HTML 表单
 
-On to forms! Every HTML form begins with the aptly named `<form>` element. It accepts a [number of attributes](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form), but the most important ones are `action` and `method`. Go ahead and add an empty form to our HTML document, right under the `<header>`:
+表单 `<from>` 接受多个属性，比较重要的有：`action` 和 `method` 比如：
 
 ```html
 <form action='' method='get' class='speaker-form'>
 </form>
 ```
 
-The `action` attribute defines the URL that processes the form. It’s where the input collected by the form is sent when the user clicks the **Submit** button. This is typically a special URL defined by your web server that knows how to process the data. Common backend technologies for processing forms include [Node.js](https://internetingishard.com/https://nodejs.org/en/), [PHP](https://internetingishard.com/http://php.net/), and [Ruby on Rails](https://internetingishard.com/http://rubyonrails.org/), but again, we’ll be focusing on the frontend in this chapter.
+`action` 属性添加表单发送的 URL。当用户按 submit 按钮后，表单内容就会被发送到这里。由服务器定义 ULR 并处理数据，常用后端技术包括：[Node.js](https://nodejs.org/en/), [PHP](http://php.net/), 和 [Ruby on Rails](http://rubyonrails.org/)
 
 ![Diagram: <form> action and method attributes sent to backend server](/images/form-action-attribute-68258a.png)
 
-The `method` attribute can be either [`post`](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) or [`get`](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET), both of which define how the form is submitted to the backend server. This is largely dependent on how your web server wants to handle the form, but the general rule of thumb is to use `post` when you’re _changing_ data on the server, reserving `get` for when you’re only _getting_ data.
+`method` 接受 [`post`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) 或 [`get`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法。用于定义表单如何发送给后端服务，一般是由服务器决定，但常规是修改数据时使用 `post` 获取时使用 `get`。
 
-By leaving the `action` attribute blank, we’re telling the form to submit to the same URL. Combined with the `get` method, this will let us inspect the contents of the form.
+`action` 为空提交到当前 URL。结合 get 方法，可以让我们检查表单的内容。
 
-### Styling Forms
+### 美化表单
 
-Of course, we’re looking at an empty form right now, but that doesn’t mean we can’t add some styles to it like we would a container `<div>`. This will turn it into a box that matches our `<header>` element:
+没内容不代表不可以嵌套 DIV 容器并添加样式：
 
-```html
+```css
 .speaker-form {
-  background-color: #F6F7F8;
-  border: 1px solid #D6D9DC;
+  background-color: #f6f7f8;
+  border: 1px solid #d6d9dc;
   border-radius: 3px;
 
   width: 80%;
@@ -115,9 +115,9 @@ Of course, we’re looking at an empty form right now, but that doesn’t mean w
 }
 ```
 
-## Text Input Fields
+## 文本输入字段
 
-To actually collect user input, we need a new tool: the `<input/>` element. Insert the following into our `<form>` to create a text field:
+`<input/>` 通常用于收集用户输入：
 
 ```html
 <div class='form-row'>
@@ -126,21 +126,21 @@ To actually collect user input, we need a new tool: the `<input/>` element. Inse
 </div>
 ```
 
-First, we have a container `<div>` to help with styling. This is pretty common for separating input elements. Second, we have a `<label>`, which you can think of as another [semantic HTML element](https://internetingishard.com//html-and-css/semantic-html/), like `<article>` or `<figcaption>`, but for form labels. A label’s `for` attribute must match the `id` attribute of its associated `<input/>` element.
+首先，div 容器用于添加样式，常用于分离 input 元素。接着，添加 `<label>` 用于语义化，它的 `for` 属性跟 `input` 的 `id` 相对应。
 
 ![Diagram: for attribute of <label> pointing to id attribute of <input> element](/images/label-element-for-attribute-313489.png)
 
-Third, the `<input/>` element creates a text field. It’s a little different from other elements we’ve encountered because it can dramatically change appearance depending on its `type` attribute, but it always creates some kind of interactive user input. We’ll see other values besides `text` throughout the chapter. Remember that [ID selectors are bad](https://internetingishard.com//html-and-css/css-selectors/#id-selectors)—the `id` attribute here is _only_ for connecting it to a `<label>` element.
+可以修改 `type` 来改变 input 的外观，用于交互式用户输入。后续会介绍其他类型的 input。记住不能滥用 `Id` 选择器，这里它只用于连接 `label` 元素。
 
 ![Diagram: name attribute of <input> element sending variable to server](/images/sending-input-variable-to-server-653369.png)
 
-Conceptually, an `<input/>` element represents a “variable” that gets sent to the backend server. The `name` attribute defines the name of this variable, and the value is whatever the user entered into the text field. Note that you can pre-populate this value by adding a `value` attribute to an `<input/>` element.
+`name` 定义名称。`value` 用于记录用户输入，它可以预先设置值。
 
-### Styling Text Input Fields
+### 美化文本输入框
 
-An `<input/>` element can be styled like any other HTML element. Let’s add some CSS to `styles.css` to pretty it up a bit. This makes use of all the concepts from the [Hello, CSS](https://internetingishard.com//html-and-css/hello-css/), [Box Model](https://internetingishard.com//html-and-css/css-box-model), [CSS Selectors](https://internetingishard.com//html-and-css/css-selectors/), and [Flexbox](https://internetingishard.com//html-and-css/flexbox/) chapters:
+`input` 同样可以美化。添加如下样式：
 
-```html
+```css
 .form-row {
   margin-bottom: 40px;
   display: flex;
@@ -150,8 +150,8 @@ An `<input/>` element can be styled like any other HTML element. Let’s add som
 }
 
 .form-row input[type='text'] {
-  background-color: #FFFFFF;
-  border: 1px solid #D6D9DC;
+  background-color: #ffffff;
+  border: 1px solid #d6d9dc;
   border-radius: 3px;
   width: 100%;
   padding: 7px;
@@ -163,13 +163,13 @@ An `<input/>` element can be styled like any other HTML element. Let’s add som
 }
 ```
 
-The `input[type='text']` part is a new type of CSS selector called an “attribute selector”. It only matches `<input/>` elements that have a `type` attribute equal to `text`. This lets us specifically target text fields opposed to radio buttons, which are defined by the same HTML element (`<input type='radio'/>`). You can read more about attribute selectors at [Mozilla Developer Network](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors).
+`input[type='text']` 是 css 选择器的一种，称为属性选择器。它只会匹配 `type` 属性为 `text` 的 input。这样我们只会给文本输入框添加样式，会忽略 `<input type='radio'/>` 。详情参阅[Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)
 
-All of our styles are “namespaced” in a `.form-row` [descendant selector](https://internetingishard.com//html-and-css/css-selectors/#descendant-selectors). Isolating `<input/>` and `<label>` styles like this makes it easier to create different kinds of forms. We’ll see why it’s convenient to avoid global `input[type='text']` and `label` selectors once we get to [radio buttons](https://internetingishard.com/#radio-buttons).
+所有样式都在 `.form-row` 命名空间下，隔离 input 和 label 的样式使得创建不同类型的表单更加容易。下面讲到单选按钮是，我们就会知道为什么不在全局下添加 `input[type='text']` 和 `label` 选择器了。
 
-Finally, let’s tweak these base styles to create our desktop layout. Add the following [media query](https://internetingishard.com//html-and-css/responsive-design/#css-media-queries) to the end of our stylesheet.
+自后基于基础样式给桌面布局添加媒体查询相关样式：
 
-```html
+```css
 @media only screen and (min-width: 700px) {
   .speaker-form-header,
   .speaker-form {
@@ -193,13 +193,13 @@ Finally, let’s tweak these base styles to create our desktop layout. Add the f
 }
 ```
 
-Check out that awesome use of the [`flex-direction` property](https://internetingishard.com//html-and-css/flexbox/#flex-container-direction) to make the `<label>` appear on top of its `<input/>` element in the mobile layout, but to the left of it in the desktop layout.
+不知道 flex 的魅力的同学，可以看之前的章节
 
 ![Web page showing single text field styled with CSS](/images/styling-text-input-field-6e4ed3.png)
 
-## Email Input Fields
+## 电子邮件输入框
 
-The `<input/>` element’s `type` attribute also lets you do basic input validation. For example, let’s try adding another input element that _only_ accepts email addresses instead of arbitrary text values:
+不同类型的输入框可能有不同的输入验证，比如电子邮件输入框只接受电子邮件地址：
 
 ```html
 <div class='form-row'>
@@ -211,46 +211,47 @@ The `<input/>` element’s `type` attribute also lets you do basic input validat
 </div>
 ```
 
-This works exactly like the `type='text'` input, except it automatically checks that user entered an email address. In Firefox, you can try typing something that’s not an email address, then clicking outside of the field to make it lose focus and validate its input. It should turn red to show the user that it’s an incorrect value. Chrome and Safari don’t attempt to validate until user tries to submit the form, so we’ll see this in action later in this chapter.
+电子邮件输入框除了会自动检查用户输入外，其他表现与文本输入框差不多。在火狐浏览器中，您可要输入非电子邮件地址，然点击输入以外的部分，使其失去焦点。它应该会变成红色来告知用户输入错误。谷歌和 safari 只会在提交表单的时候验证，后续操作会演示。
 
 ![Web page showing invalid email field value highlighted with red border](/images/firefox-invalid-email-input-f98cc1.png)
 
-This is more than just validation though. By telling browsers that we’re looking for an email address, they can provide a more intuitive user experience. For instance, when a smartphone browser sees this `type='email'` attribute, it gives the user a special email-specific keyboard with an easily-accessible `@` character.
+不仅仅是验证，它会告知浏览器我们需要的电子邮件地址，浏览器会相应提升用户体验。比如，智能手机浏览器中的电子邮件输入框会提供一个电子邮件专用键盘，并且有 `@` 字符。
 
-Also notice the new `placeholder` attribute that lets you display some default text when the `<input/>` element is empty. This is a nice little UX technique to prompt the user to input their own value.
+`placeholder` 属性用于在表单值为空时候的文本占位符。
 
-There’s a bunch of other built-in validation options besides email addresses, which you can read about on MDN’s [`<input/>` reference](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). Of particular interest are the `required`, `minlength`, `maxlength`, and `pattern` attributes.
+还有别的验证规则如：`required`, `minlength`, `maxlength`, 和 `pattern` 属性，详情参阅[`<input/>` reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)。
 
-### Styling Email Input Fields
+### 美化电子邮件输入框
 
-We want our email field to match our text field from the previous section, so let’s add another attribute selector to the existing `input[type='text']` rule, like so:
+可以这么做：
 
-```html
+```css
 /* Change this rule */
 .form-row input[type='text'] {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   /* ... */
 }
 
 /* To have another selector */
 .form-row input[type='text'],
 .form-row input[type='email'] {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   /* ... */
 }
 ```
 
-Again, we don’t want to use a plain old `input` type selector here because that would style _all_ of our `<input/>` elements, including our upcoming radio buttons and checkbox. This is part of what makes styling forms tricky. Understanding the CSS to pluck out exactly the elements you want is a crucial skill.
+同样我们不会用 `input` 选择器来匹配，因为它会给所有的 input 元素都添加样式。比如单选框和复选框，这让维护变得非常棘手。正确使用 css 选择器给元素添加样式也是必备技能。
 
-Let’s not forget about our desktop styles. Update the corresponding `input[type='text']` rule in our media query to match the following (note that we’re preparing for the next few sections with the `select`, and `textarea` selectors):
+别忘了 PC 端的样式，添加媒体查询样式 （注意，我们先给后面可能用到的 select 和 textarea 也添加样式）
 
-```html
+```css
 @media only screen and (min-width: 700px) {
   /* ... */
   .form-row input[type='text'],
   .form-row input[type='email'],    /* Add */
   .form-row select,                 /* These */
-  .form-row textarea {              /* Selectors */
+  .form-row textarea {
+    /* Selectors */
     width: 250px;
     height: initial;
   }
@@ -258,33 +259,33 @@ Let’s not forget about our desktop styles. Update the corresponding `input[typ
 }
 ```
 
-Since we can now have a “right” and a “wrong” input value, we should probably convey that to users. The `:invalid` and `:valid` [pseudo-classes](https://internetingishard.com//html-and-css/css-selectors/#pseudo-classes-for-links) let us style these states independently. For example, maybe we want to render both the border and the text with a custom shade of red when the user entered an unacceptable value. Add the following rule to our stylesheet, outside of the media query:
+在来添加媒体查询外的基础样式，输入框验证结果样式：通过伪类 `:valid`（验证通过）和 `:invalid`（验证失败）来实现：
 
-```html
+```css
 .form-row input[type='text']:invalid,
 .form-row input[type='email']:invalid {
-  border: 1px solid #D55C5F;
-  color: #D55C5F;
+  border: 1px solid #d55c5f;
+  color: #d55c5f;
   box-shadow: none; /* Remove default red glow in Firefox */
 }
 ```
 
-Until we include a submit button, you’ll only be able to see this in Firefox, but you get the idea. There’s a similar pseudo-class called `:focus` that selects the element the user is currently filling out. This gives you a lot of control over the appearance of your forms.
+伪类 `:focus` 用于给聚焦的 input 元素添加样式，这使得我们的表单样式更加多样化。
 
-## Radio Buttons
+## 单选按钮
 
-Changing the `type` property of the `<input/>` element to `radio` transforms it into a radio button. Radio buttons are a little more complex to work with than text fields because they always operate in groups, allowing the user to choose one out of many predefined options.
+把 input 的 type 修改为 radio，可以让它变成单选按钮。稍微复杂一点，单选按钮一般是组合，允许用户选择其中一项。
 
 ![Diagram: <fieldset> wrapping a <legend> and a series of radio buttons with associated <label> elements](/images/radio-label-fieldset-legend-elements-0affe5.png)
 
-This means that we not only need a label for each `<input/>` element, but also a way to group radio buttons and label the entire group. This is what the `<fieldset>` and `<legend>` elements are for. Every radio button group you create should:
+意味着每个 input 元素都需要 label，还得用`<fieldset>` 和 `<legend>` 去组合，同时需要遵循：
 
-* Be wrapped in a `<fieldset>`, which is labeled with a `<legend>`.
-* Associate a `<label>` element with each radio button.
-* Use the same `name` attribute for each radio button in the group.
-* Use different `value` attributes for each radio button.
+* 用 `<fieldset>`包裹, 用 `<legend>` 添加标签。
+* 每个按钮都需要 label 关联起来。
+* 组内的每个单选按钮的 name 属性都一样。
+* 每个单选按钮的 `value`属性都不一样。
 
-Our radio button example has all of these components. Add the following to our `<form>` element underneath the email field:
+如下：
 
 ```html
 <fieldset class='legacy-form-row'>
@@ -303,21 +304,21 @@ Our radio button example has all of these components. Add the following to our `
 </fieldset>
 ```
 
-Unlike text fields, the user can’t enter custom values into a radio button, which is why each one of them needs an explicit `value` attribute. This is the value that will get sent to the server when the user submits the form. It’s also very important that each radio button has the same `name` attribute, otherwise the form wouldn’t know they were part of the same group.
+跟文本输入框不一样，单选按钮不会接受用户的输入。所以每个单选按钮都有一个固定的 value 属性值，这个值用于选中某个单选按钮后发送给服务端。另外，每个单选按钮都有一样的 name 值，因为这样才知道哪些是一组的。
 
-We also introduced a new attribute called `checked`. This is a “boolean attribute”, meaning that it never takes a value—it either exists or doesn’t exist on an `<input/>` element. If it does exist on either a radio button or a checkbox element, that element will be selected/checked by default.
+还有个新的属性 `checked`，是一个布尔值属性。在 input 元素中，要么有这个值，要么没有。有意味着默认选中。
 
-### Styling Radio Buttons
+### 美化单选按钮
 
-We have a few things working against us with when it comes to styling radio buttons. First, there’s simply more elements to worry about. Second, the `<fieldset>` and `<legend>` elements have rather ugly default styles, and there’s not a whole lot of consistency in these defaults across browsers. Third, at the time of this writing, `<fieldset>` doesn’t support flexbox.
+美化单选按钮相对难些：`<fieldset>` 和 `<legend>` 默认样式比较丑，而且在浏览器中的缺省设置也不一致。另外 `<fieldset>` 不支持 flexbox。
 
-But don’t fret! This is a good example of [floats](https://internetingishard.com//html-and-css/floats/) being a useful fallback for legacy/troublesome elements. You’ll notice that we didn’t wrap the radio buttons in our existing `.form-row` class, opting instead for a new `.legacy-form-row` class. This is because it’s going to be completely separate from our other elements, using floats instead of flexbox.
+别怕!还有 float 呢!细心的你可能发现了，我们用 `.fegacy-form-row`类名代替了之前的 `.form-row` 。因为它将于其他元素完全分离，使用 float 而不是 flexbox。
 
 ![Diagram: mobile layout created with block box <label> versus desktop layout with label as floated left](/images/radio-button-float-layout-df003b.png)
 
-Start with the mobile and tablet styles by adding the following rules outside of our media query. We want to get rid of the default `<fieldset>` and `<legend>` styles, then float the radio buttons and labels so they appear in one line underneath the `<legend>`:
+添加基础样式：
 
-```html
+```css
 .legacy-form-row {
   border: none;
   margin-bottom: 40px;
@@ -343,9 +344,9 @@ Start with the mobile and tablet styles by adding the following rules outside of
 }
 ```
 
-For the desktop layout, we need to make the `<legend>` line up with the `<label>` elements in the previous section (hence the `width: 120px` line), and we need to float _everything_ to the left so they appear on the same line. Update our media query to include the following:
+针对桌面端添加媒体查询相关样式：
 
-```html
+```css
 @media only screen and (min-width: 700px) {
   /* ... */
   .legacy-form-row {
@@ -362,13 +363,11 @@ For the desktop layout, we need to make the `<legend>` line up with the `<label>
 }
 ```
 
-As far as layouts go, this is a pretty good cross-browser solution. However, customizing the appearance of the actual button is another story. It’s possible by taking advantage of the `checked` attribute, but it’s a little bit complicated. We’ll leave you to Google “custom radio button CSS” and explore that rabbit hole on your own.
+就布局而言，这是一个好的跨浏览器的解决方案。定制按钮的外观是篇外话了，可以用 checked 属性，但是有点复杂。读者可自行谷歌 custom radio button CSS。
 
-## Select Elements
+## 下拉框
 
-(Dropdown Menus)
-
-Dropdown menus offer an alternative to radio buttons, as they let the user select one out of many options. The `<select>` element represents the dropdown menu, and it contains a bunch of `<option>` elements that represent each item.
+下拉菜单是单选按钮的另一种形式，它允许用户从多个选项中选择一个。
 
 ```html
 <div class='form-row'>
@@ -382,42 +381,42 @@ Dropdown menus offer an alternative to radio buttons, as they let the user selec
 </div>
 ```
 
-Just like our radio button `<input/>` elements, we have `name` and `value` attributes that get passed to the backend server. But, instead of being defined on a single element, they’re spread across the `<select>` and `<option>` elements.
+和单选按钮一样也有 `name` 和 `value` 属性用于传递到后端服务器。但它们不是在单个元素上定义，而是通过 `select` 和 `option` 元素。
 
-### Styling Select Elements
+### 美化下拉框
 
-And, also just like our radio buttons, `<select>` elements are notoriously hard to style. However, there’s a reason for this. Dropdowns are a complex piece of interactivity, and their behavior changes significantly across devices. For instance, on an iPhone, clicking a `<select>` element brings up a native scrolling UI component that makes it much easier to navigate the menu.
+下拉框也是很难美化的，原因在于它复杂的交互型，在设备间会发现显著变化。比如，在 Iphone 上，点击下拉框会弹出一个本地可滚动的 UI 组件用于快速导航。
 
 ![Screenshot showing three <option> elements in the scrolling <select> menu at the bottom of an iPhone screen](/images/select-dropdown-in-iphone-a9968d.png)
 
-It’s usually a good idea to let the browser/device determine the best way to preset a `<select>` element, so we’ll be keeping our CSS pretty simple. Unfortunately, even the simplest things are surprisingly hard. For instance, try changing the font size of our `<select>` element:
+建议尽量让浏览器/设备去预设下拉框，不过就算只用简单的样式也非常难，比如你要修改下拉框的字体。
 
-```html
+```css
 .form-row select {
   width: 100%;
   padding: 5px;
-  font-size: 14px;            /* This won't work in Chrome or Safari */
+  font-size: 14px; /* This won't work in Chrome or Safari */
 }
 ```
 
-This will work in Firefox, but not in Chrome or Safari! To sort of fix this, we can use a vendor-specific prefix for the `appearance` property:
+在火狐上可行，但是谷歌和 safari 就挂了。此时就得用 `appearance` 浏览器前缀来解决了：
 
-```html
+```css
 .form-row select {
   width: 100%;
   padding: 5px;
-  font-size: 14px;            /* This won't work in Chrome or Safari */
-  -webkit-appearance: none;   /* This will make it work */
+  font-size: 14px; /* This won't work in Chrome or Safari */
+  -webkit-appearance: none; /* This will make it work */
 }
 ```
 
-The `-webkit` prefix will _only_ apply to Chrome and Safari (which are powered by the WebKit rendering engine), while Firefox will remain unaffected. This is effectively a hack, and even MDN says [not to use this CSS property](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/-moz-appearance).
+`-webkit` 只对谷歌和 safari 生效（webkit 渲染引擎），而火狐则不受影响。这其实是个黑魔法，甚至 MDN 都不建议使用这个 css 属性。[not to use this CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/-moz-appearance)
 
-Style difficulties like this are a serious consideration when building a form. If you need custom styles, you may be better off using radio buttons or JavaScript UI widgets. [Bootstrap Dropdowns](https://internetingishard.com/http://getbootstrap.com/javascript/#dropdowns) and [jQuery Selectmenu’s](https://internetingishard.com/https://jqueryui.com/selectmenu/#default) are common JavaScript solutions for customizing select menus. In any case, at least you now understand the problem. You can read more about `<select>` issues [here](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms#Dealing_with_the_select_nightmare).
+创建表单难免会遇此类样式问题，如果你需要定制化样式，建议用单选框或者 JavaScript UI 控件。如[Bootstrap Dropdowns](http://getbootstrap.com/javascript/#dropdowns) and [jQuery Selectmenu’s](https://jqueryui.com/selectmenu/#default)，至少你已经知道了问题所在，接下来你可以从下拉框 issues [here](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Advanced_styling_for_HTML_forms#Dealing_with_the_select_nightmare)查看更多问题。
 
 ## Textareas
 
-The `<textarea>` element creates a multi-line text field designed to collect large amounts of text from the user. They’re suitable for things like biographies, essays, and comments. Go ahead and add a `<textarea>` to our form, along with a little piece of instructional text:
+`<textarea>` 允许输入多行文本，用于收集用户提供的大量文本。适用于传记，散文，评论等。接着在表单中添加 `<textarea>` 和一段描述。
 
 ```html
 <div class='form-row'>
@@ -427,18 +426,18 @@ The `<textarea>` element creates a multi-line text field designed to collect lar
 </div>
 ```
 
-Note that this isn’t self-closing like the `<input/>` element, so you always need a closing `</textarea>` tag. If you want to add any default text, it needs to go _inside_ the tags opposed to a `value` attribute.
+它不像 `<input/>` 自闭合标签，需要用 `</textarea>` 闭合。可以用 `value` 属性添加默认文本。
 
-### Styling Textareas
+### 美化文本框
 
-Fortunately, styling textareas is pretty straightforward. Add the following to our `styles.css` file (before the media query):
+可以给文本框添加如下样式：
 
-```html
+```css
 .form-row textarea {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 14px;
 
-  border: 1px solid #D6D9DC;
+  border: 1px solid #d6d9dc;
   border-radius: 3px;
 
   min-height: 200px;
@@ -454,11 +453,11 @@ Fortunately, styling textareas is pretty straightforward. Add the following to o
 }
 ```
 
-By default, many browsers let the user resize `<textarea>` elements to whatever dimensions they want. We disabled this here with the `resize` property.
+浏览器默认可以把 `textarea` 修改为任意大小，当然我们也可以通过 `resize` 属性禁用。
 
-We also need a little tweak in our desktop layout. The `.instructions` `<div>` needs to be underneath the `<textarea>`, so let’s nudge it left by the width of the `<label>` column. Add the following rule to the end of our media query:
+针对桌面端，可以这么处理：
 
-```html
+```css
 @media only screen and (min-width: 700px) {
   /* ... */
   .form-row .instructions {
@@ -467,9 +466,9 @@ We also need a little tweak in our desktop layout. The `.instructions` `<div>` n
 }
 ```
 
-## Checkboxes
+## 复选框
 
-Checkboxes are sort of like radio buttons, but instead of selecting only one option, they let the user pick as many as they want. This simplifies things, since the browser doesn’t need to know which checkboxes are part of the same group. In other words, we don’t need a `<fieldset>` wrapper or shared `name` attributes. Add the following to the end of our form:
+复选框有点像单选框，但可以多选。这就简单了，因为浏览器不需要针对哪个复选框是同一组的。也就是说不用 `<fieldset>` 包裹或者用 `name` 属性：
 
 ```html
 <div class='form-row'>
@@ -483,21 +482,21 @@ Checkboxes are sort of like radio buttons, but instead of selecting only one opt
 </div>
 ```
 
-The way we used `<label>` here was a little different than previous sections. Instead of being a separate element, the `<label>` wraps its corresponding `<input/>` element. This is perfectly legal, and it’ll make it easier to match our desired layout. It’s still a best practice to use the `for` attribute.
+这里的 `label` 和之前的不太一样。`label` 包裹了 `input` 元素。这是合法的，而去更容易实现布局，另外仍然建议使用 `for` 属性。
 
-### Styling Checkboxes
+### 美化复选框
 
-For the mobile layout, all we need to do is override the `margin-bottom` that we put on the rest the `<label>` elements. Add the following to `styles.css`, outside of the media query:
+手机端不需要 `margin-bottom` ：
 
-```html
+```css
 .form-row .checkbox-label {
   margin-bottom: 0;
 }
 ```
 
-And inside the media query, we have to take that 120-pixel label column into account:
+针对媒体查询处理如下：
 
-```html
+```css
 @media only screen and (min-width: 700px) {
   /* ... */
   .form-row .checkbox-label {
@@ -507,13 +506,13 @@ And inside the media query, we have to take that 120-pixel label column into acc
 }
 ```
 
-By wrapping both the checkbox and the label text, we’re able to use a `width: auto` to make the entire form field be on a single line (remember that the `auto` width makes the box match the size of its contents).
+宽度自适应可以使用 `width:auto`
 
 ![Web page with several HTML form elements, including a checkbox](/images/adding-a-checkbox-8a0541.png)
 
-## Submit Buttons
+## 提交按钮
 
-Finally, let’s finish off our form with a submit button. The `<button>` element represents a button that will submit its containing `<form>`:
+最后，添加提交按钮：
 
 ```html
 <div class='form-row'>
@@ -521,33 +520,33 @@ Finally, let’s finish off our form with a submit button. The `<button>` elemen
 </div>
 ```
 
-Clicking the button tells the browser to validate all of the `<input/>` elements in the form and submit it to the `action` URL if there aren’t any validation problems. So, you should now be able to type in something that’s not an email address into our email field, click the `<button>`, and see an error message.
+单击按钮可以让浏览器验证表单所有 input 元素，如果没有任何验证问题，则会提交到 `action` URL。如果你输入错误的邮件地址，应该会看到一条错误信息。
 
 ![Screenshot showing invalid input error message for email field](/images/chrome-invalid-email-input-3ae531.png)
 
-This also gives us a chance to see how the user’s input gets sent to the server. First, enter some values into all the `<input/>` fields, making sure the email address validates correctly. Then, click the button and inspect the resulting URL in your browser. You should see something like this:
+这就是用户输入发送到服务器的过程。首先，将一些值输入到 input ，验证邮件地址，然后，单击按钮并在浏览器中检查生成的 URL，你应该可以看到：
 
-```html
+```
 speaker-submission.html?full-name=Rick&email=rick%40internetingishard.com&talk-type=workshop&t-shirt=l&abstract=Derp.&available=is-available
 ```
 
-Everything after the `?` represents the variables in our form. Each `<input/>`’s `name` attribute is followed by an equal sign, then its value, and each variable is separated by an `&` character. If we had a backend server, it’d be pretty easy for it to pull out all this information, query a database (or whatever), and let us know whether the form submission was successful or not.
+`?` 后面的东西表示了表单的变量。每个 input 的 name 属性后面跟着一个等号。变量间用 `&` 分割。如果我们有一个后端服务器，它将非常容易地提取出所有这些信息。查询数据库，并通知表单是否提交成功。
 
-### Styling Buttons
+### 美化提交按钮
 
-We had some experience styling buttons in the [pseudo-classes section](https://internetingishard.com//html-and-css/css-selectors/#pseudo-classes-for-links) of the _CSS Selectors_ chapter. Back then, we were applying these styles to an `<a>` element, but we can use the same techniques on a `<button>`.
+之前有学过如何通过伪类美化按钮。之前是给 a 标签添加样式，同样也可以给 button 添加样式。
 
 ![Web page showing the form’s submit button](/images/styling-a-submit-button-7e80de.png)
 
-Clean up that ugly default `<button>` styling by adding the following to our stylesheet:
+添加厦门样式美化按钮：
 
-```html
+```css
 .form-row button {
   font-size: 16px;
   font-weight: bold;
 
-  color: #FFFFFF;
-  background-color: #5995DA;
+  color: #ffffff;
+  background-color: #5995da;
 
   border: none;
   border-radius: 3px;
@@ -557,17 +556,17 @@ Clean up that ugly default `<button>` styling by adding the following to our sty
 }
 
 .form-row button:hover {
-  background-color: #76AEED;
+  background-color: #76aeed;
 }
 
 .form-row button:active {
-  background-color: #407FC7;
+  background-color: #407fc7;
 }
 ```
 
-As with our checkbox, we need to take that `120px` label column into account, so include one more rule inside our media query:
+更复选框一样，需要 `120px` 的左偏移量。
 
-```html
+```css
 @media only screen and (min-width: 700px) {
   /* ... */
   .form-row button {
@@ -576,23 +575,23 @@ As with our checkbox, we need to take that `120px` label column into account, so
 }
 ```
 
-## Summary
+## 总结
 
-In this chapter, we introduced the most common HTML form elements. We now have all these tools for collecting input from our website visitors:
+本章介绍了场景的 HTML 表单元素，现在我们可以用它们来手机用户数据了。
 
 * `<input type='text'/>`
 * `<input type='email'/>`
 * `<input type='radio'/>`
-* `<select>` and `<option>`
+* `<select>` 和 `<option>`
 * `<textarea>`
 * `<input type='checkbox'/>`
 * `<button>`
 
-You should be pretty comfortable with the HTML and CSS required to build beautiful forms, but actually making these forms functional requires some skills we don’t have yet. That stuff is out of scope for this tutorial, but it might help to have some context. Generally speaking, there are two ways to process forms:
+要构造更完美的表单需要学习额外的内容，它超出了本教程的范围。另外，一般有两种处理表单的方法：
 
-* Use the `action` attribute to send the form data to a backend URL, which then redirects to a success or error page. We got a little glimpse of this in the previous section, and it doesn’t require any JavaScript.
-* Use AJAX queries to submit the form without leaving the page. Success or error messages are displayed on the same page by manipulating the HTML with JavaScript.
+* 用 `action` 属性，重定向到成功或失败的界面。不需要任何 JavaScript
+* 利用 AJax 技术，在不离开界面的情况下提交表单。直接用 JavaScript 将成功或失败信息显示在同一界面。
 
-Depending on how your organization is structured, form processing may not be part of your job role as a frontend web developer. If that’s the case, you’ll need to coordinate closely with a backend developer on your team to make sure the `<form>` submits the correct name-value pairs. Otherwise, it’ll be up to you to make sure the frontend and backend of your forms fit neatly together.
+根据组织架构的不同，有些前端可能不需要处理这一部分的工作。如果是的话，建议跟后端人员多沟通。确保正确的键值对。
 
-Next, we have our final chapter in [_HTML & CSS Is Hard_](https://internetingishard.com//html-and-css/). We’ll round out our frontend skills with a thorough discussion of web fonts and practical typographic principles that every web developer should know about.
+最后一章将讨论 web 字体和每个 web 开发人员应该知道的实用的排版原则。
