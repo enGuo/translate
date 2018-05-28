@@ -2,167 +2,137 @@
 layout: SpecialLayout
 ---
 
-# web-typography
+# 网页字体排版
 
-“Web typography” refers to the appearance of all the text on your website. It includes [basic CSS text properties](https://internetingishard.com//html-and-css/hello-css/#more-text-styles) like what font to use and whether it should be italic or not, but typography is much more than that. It’s about the space between and around letters, words, and lines. It’s the size of different runs of text in relation to one another, and the history behind each font family.
+网页字体是定义网页所有字体。包括[basic CSS text properties](./Chapter-04.md)决定用什么字体，要不要斜体。但网页字体做的更多，比如字符，单词，行的间隙，它让文本不同，以及设置每个字体的`font-family`。
 
 ![Diagram: examples of font families, relative font sizes, indent styles, text alignment, vertical spacing, and line length](/images/web-typography-terminology-e06b82.png)
 
-A lot of your typography decisions will come from a designer. The only problem is that typography is an invisible art. To actually understand what your designer is asking for, you need to be able to _see_ typography the same way they do.
+字体排版一般由设计师决定。问题是字体排版是一种无形的艺术。要想真正了解你的设计师想要的是什么。你需要像他们一样，用同样的方式进行排版。
 
-This chapter isn’t just about the mechanics of adding web fonts to your site or the CSS properties to move your text around. We’ll also explain how to properly leverage all these tools to make beautiful, professional websites. By the end of the chapter, you should not only know what your designer is talking about when they say something like, “Can we increase the leading of that paragraph?”, but also understand _why_ they want you to increase it.
+本章不仅仅是关于如何为网站添加字体或用 css 属性来修改文本样式。我们还将讲解如何用这些工具来制作漂亮的专业网站。学完本章，你可以知道设计师在谈论什么，比如当他们说能把这段开头的文字变大点吗。这时你应该能明白为什么要把字体变大。
 
-You may forget the specific CSS properties, but the typographic concepts we’re going to cover will stay with you for the rest of your life because they aren’t arbitrary rules—they’re grounded in function. They make your content more readable and help you communicate your message more effectively.
+你可能忘了特定 css 的属性。但排版的概念将一直围绕着你。它们不是任意的规则，它们是基于函数的。可以让内容更具可读性，并能有效传达你的信息。
 
-## A Brief History of Web Fonts
+## web 字体简史
 
-We’re going to start this chapter by learning how to display your web pages in a custom font because that’s the most exciting aspect of modern web typography. However, web fonts have changed a lot over the last few years, so before we can start building out our example, we need a little primer on the various font formats floating around the Internet.
+本章将开始学习如何定制网站字体。这是现代网页排版中最令人兴奋的部分。然而，在过去几年里，web 字体发生了很大的变化，所以我们需要一些字体格式的入门知识。
 
-### Web Safe Fonts
+### 互联网安全字体
 
-Long, long ago, web developers only had “web safe fonts” at their disposal. These were a collection of a dozen or so fonts that were pre-installed on most computers. There was no such thing as a custom font file that you could send to browsers to use on your website.
+过去，web 开发者只能用 web 安全字体。是在计算机预装的十几个字体集。不可以发送定制字体文件到浏览器在网站上使用。
 
 ![Diagram: web server asking user’s computer to display text in Georgia font, user’s computer checking its system for that font](/images/web-safe-fonts-eaa8b0.png)
 
-If you _needed_ a special font, your only option was to export an image of the text you wanted to display and include it in your web page with an `<img/>` element. This was ridiculously limiting for web designers and resulted in some pretty hacky situations for developers. Honestly, we don’t know how everybody survived through that era of HTML and CSS.
+如果想要展示特殊字体只能用图片。这种限制真的非常糟糕，我都无法想象之前的开发者是如何活下来的。
 
-### Custom Web Fonts
+### 自定义 web 字体
 
-Around 2010, browsers began supporting custom web fonts, which was great, except for the fact that each browser and device required a different file format. Accordingly, most websites provided 4 different web font files:
-
-File Format
-
-Browser/Device
+浏览器在 2010 年开始支持自定义 web 字体。但是每个浏览器和设备都需要不同的文件格式。因此，大多数网站提供了四种不同的 web 字体文件：
 
 `.svg`
 
-Very old Safari (iOS and Desktop)
+旧 Safari (iOS and Desktop)
 
 `.eot`
 
-Internet Explorer
+IE
 
 `.ttf`
 
-Everything except Internet Explorer
+除了 IE
 
 `.woff`
 
-Newer browsers
+新版浏览器
 
-This resulted in the [“Bulletproof `@font-face` syntax”](https://internetingishard.com/https://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/), which you’ll likely encounter at some point in your web development career.
+在接下来的开发生涯中，你可能会遇到这种情况： [“Bulletproof `@font-face` syntax”](https://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/)
 
 ![Diagram: web server providing .svg, .eot, .ttf, and .woff fonts for the browser to use](/images/bulletproof-font-face-d18a22.png)
 
-### WOFF Fonts
+### WOFF 字体
 
-Recently, the industry has standardized on the Web Open Font Format (WOFF), so things have gotten a little bit simpler for us. [Over 90%](https://internetingishard.com/http://caniuse.com/#search=woff) of modern browsers support `.woff` fonts, and support for its next evolution, `.woff2`, is growing. WOFF2 is similar to the original WOFF format, but offers a significant reduction in file size (which means better performance).
+由于 web 开发字体格式（woff），开发更简单了点。[超过 90%](http://caniuse.com/#search=woff) 的现代浏览器支持。`.woff` 字体向后兼容, `.woff2`比它更小（意味着更好的性能）。
 
 ![Diagram: web server providing only .woff and .woff2 fonts for the browser to use](/images/woff-and-woff-2-fonts-0cced1.png)
 
-Eventually, you’ll only need to support WOFF2, but right now, we suggest providing both WOFF and WOFF2 web fonts to get decent coverage for older browsers and improved performance on modern ones. Unless legacy browsers make up a large chunk of your target audience, `.ttf`, `.svg`, and `.eot` fonts are a thing of the past.
+最终，只需要支持 WOFF2，但目前还是建议提供 WOFF 和 WOFF2 web 字体，以获得较老的浏览器的良好覆盖率，并提高现代浏览器的性能。除非传统浏览器占了你受众目标群体的很大一部分，不建议使用已经过时的, `.ttf`, `.svg`, 和 `.eot` 字体。
 
-## Where to Find Web Fonts
+## 在哪可以找到 web 字体
 
-There’s a ton of places on the web where you can download both free and premium web fonts, but our three favorites are listed below. Again, which font to use is usually up to your designer (and their budget), but as a developer, it’s still good to know the trade-offs between these options.
+网上很多地方可以下载免费和高级的网络字体，下面列举三个最好用的。另外，使用哪种字体一般由设计人员决定（以及预算）。但作为开发人员最好也能权衡这些选项。
 
-Website
+[Font Squirrel](https://www.fontsquirrel.com/)
 
-Price
+[Google Fonts](https://fonts.google.com/)
 
-Quality
+[Fontspring](https://www.fontspring.com/)
 
-Selection
+注意，Squirrel 和 Fontspring 都提供了 web 字体和桌面字体就（`.otf` 和 `.ttf` 文件）。WOFF 用于现代浏览器，而桌面字体则包含额外的功能，用于图像编辑程序，如 AI。所以一定要下载或购买你想要使用的字体的网络字体版本，而不单是桌面版。
 
-[Font Squirrel](https://internetingishard.com/https://www.fontsquirrel.com/)
+## 安装
 
-Free
-
-Hit-or-Miss
-
-Huge
-
-[Google Fonts](https://internetingishard.com/https://fonts.google.com/)
-
-Free
-
-Good
-
-Decent
-
-[Fontspring](https://internetingishard.com/https://www.fontspring.com/)
-
-Expensive
-
-Excellent
-
-Huge
-
-Note that Font Squirrel and Fontspring offer both web fonts and desktop fonts (`.otf` and `.ttf` files). WOFF is designed specifically for the needs of the modern web, while desktop fonts contain extra functionality useful for graphics editing programs like Adobe Illustrator. Be sure to download or purchase the web font version of the fonts you want to use—not just the desktop version.
-
-## Setup
-
-Ok! We’re ready to experiment with web fonts. We’re going to be building this [example website](https://internetingishard.com//html-and-css/web-typography/example/final/web-fonts.html). We figured you probably don’t want to start this one from scratch, so go ahead and [download the initial project](https://internetingishard.com//html-and-css/web-typography/web-typography-338d1d.zip). Unzip it and open up the `web-typography` folder with your favorite text editor. If you don’t have a favorite text editor, you might want to check out [Atom](https://internetingishard.com//html-and-css/introduction/#atom-text-editor).
+开始我们的网页字体探索， [example website](https://internetingishard.com/html-and-css/web-typography/example/final/web-fonts.html). 下载 [download the initial project](https://internetingishard.com//html-and-css/web-typography/web-typography-338d1d.zip)并解压。
 
 ![Screenshot: Atom’s file browser after unzipping the example project](/images/project-files-af1f60.png)
 
-We’ve got 6 HTML documents all using the same `typo.css` stylesheet. We’ll be demonstrating various typographic principles by adding some [page-specific styles](https://internetingishard.com//html-and-css/hello-css/#the-cascade) to each of these HTML files.
+有 6 个 HTML 文档，引用同一个`typo.css`样式。通过给每个文件添加样式来演示
 
 ![Web page with web fonts versus system fonts example (before adding web fonts)](/images/web-typography-screenshot-669f41.png)
 
-Open up one of the HTML files with a web browser, and you’ll find that our initial project is pretty close to the final example, minus all the web fonts and other CSS typography properties.
+用浏览器打开文件，会发现初始化项目和最终示例很像，只是少了 web 字体和其他 css 排版属性。
 
-## Locally Hosted Web Fonts
+## 本地托管字体
 
-There are two distinct methods of adding web fonts to your website: locally hosted or externally hosted. We’ll take a look at both in this chapter. First, we’ll be adding a locally hosted web font to our example project. This is a three-step process:
+添加 web 字体有两种不同的方法，本地或外部托管。本章进行讨论。首先，分三步给示例项目添加本地托管的 web 字体：
 
-1.  Download a web font and add it to your project.
-2.  Embed the web font in your stylesheet.
-3.  Use the font elsewhere in your stylesheet.
+1.  下载字体并放在项目里。
+2.  在样式表中嵌入 web 字体。
+3.  引用样式表其他地方的字体。
 
-We’ll be experimenting in the `web-fonts.html` and `typo.css` files. Go ahead and open those up in your text editor if you haven’t already.
+现在开始在 `web-fonts.html` 和 `typo.css` 文件里试验这些。
 
-### Hosting a WOFF File
+### 托管 WOFF 文件
 
-So, we need to get our hands on a web font. Our example uses the free Roboto font, which you should [download from Font Squirrel](https://internetingishard.com/https://www.fontsquirrel.com/fonts/roboto). Make sure to click the **Webfont Kit** tab, not the **Download TTF** button. Unclick all the formats except **WOFF**, since that’s the only one we’ll be using, then click the **Download @font-face Kit** button.
+我们需要使用 web 字体，例子中使用的是免费的 Roboto 字体，[此处下载](https://www.fontsquirrel.com/fonts/roboto) 。点击 **Webfont Kit** 选项, 而不是 **Download TTF** 按钮。 只需要下载 **WOFF**, 最后点 **Download @font-face Kit** 按钮。
 
 ![Screenshot: downloading the Roboto font family from Font Squirrel](/images/download-roboto-screenshot-348421.png)
 
-This will give you a ZIP file with a license, some instructions, and a `web fonts` folder containing a ton of subdirectories. The Roboto font comes in a bunch of different [font faces](https://internetingishard.com/#font-families-and-font-faces) like light, regular, bold, italic, and condensed. Each of those folders contains a different face. The one we want is called `roboto_light_macroman`. Open up that folder and copy the `Roboto-Light-webfont.woff` file into our `web-typography` project.
+有个带许可证的 ZIP 文件，还有一些说明，以及一个包含大量子目录的 web 字体文件夹。Roboto 字体有一组不同的字体。我们需要的是 `roboto_light_macroman`。 打开目录然后复制 `Roboto-Light-webfont.woff` 文件到 `web-typography` 项目。
 
-### Embedding a Web Font
+### 嵌入 web 字体
 
-Sweet. We’ve got a WOFF file. To actually use it in our web page, we need to embed it into our stylesheet with the `@font-face` “at-rule”. Web fonts must always be included at the _top_ of a stylesheet, so add the following to the very beginning of `typo.css`:
+现在有 WOFF 文件了，接着只需要用 `@font-face` at-rule 来嵌入即可。web 字体一般在样式文件的顶部：
 
-```html
+```css
 @font-face {
   font-family: 'Roboto';
   src: url('Roboto-Light-webfont.woff') format('woff');
 }
 ```
 
-The `font-family` property defines how we’ll refer to this font later on. This operates as an internal label, so it can be anything you want. It doesn’t _need_ to relate to the official name of the font, but it’s usually more intuitive if it does. As we’ll see in a moment, it’s a good idea to keep the name as generic as possible (e.g., `Roboto` instead of `Roboto Light`).
+`font-family` 属性定义了字体引用，这是一个 internal 标签，可以设置为任何你想要的。可以不用与字体正式名称一样，但建议保持一致。（比如，一般用 `Roboto` 而不是 `Roboto Light`）。
 
-Next, we have the `src` property, which defines the path to the `.woff` file via the `url()` notation. The path can be [absolute, relative, or root-relative](https://internetingishard.com//html-and-css/links-and-images/#absolute-relative-and-root-relative-links). If you use a relative path like we did here, it will always be relative to the `.css` file—not the HTML document. The `format()` notation lets browsers know which web font file format it is.
+接着，有一个 `src` 属性用于定义文件引用地址。可以是绝对，相对和根路径。当使用相对地址，注意是相对于 css 文件而不是 html 文件。`format()` 用于告诉浏览器用哪个字体文件去格式化。
 
-If you reload `web-fonts.html` page, you won’t see any change because `@font-face` only gave us _access_ to our `.woff` file. We still need to _use_ it somewhere else in our stylesheet.
+刷新 `web-fonts.html` 网页并不会看到什么变化，因为我们只是引入了字体文件，还没有使用它们。
 
-### Using a Web Font
+### 使用 web 字体
 
-Remember from [Defining Fonts](https://internetingishard.com//html-and-css/hello-css/#defining-fonts) that the CSS `font-family` property defines which font a particular HTML element uses. After adding our `@font-face` at-rule, we can use `Roboto` as a valid value for `font-family` anywhere else in our stylesheet.
+记得 css `font-family` 属性只是定义了要用哪个字体。 `@font-face` 中 `font-family` 定义了 `Roboto` 字体，这样我们就可以站在样式表中使用它了。
 
-Let’s make Roboto Light the default font for our entire example project by changing the `font-family` in the `body` selector of `typo.css`:
+接着就可以在整个示例项目中定义字体了：
 
-```html
+```css
 body {
-  font-family: 'Roboto', sans-serif;   /* Add 'Roboto' here */
+  font-family: 'Roboto', sans-serif; /* Add 'Roboto' here */
   font-size: 18px;
   line-height: 1.8em;
-  color: #5D6063;
+  color: #5d6063;
 }
 ```
 
-_Everything_ should now render as Roboto Light, which means we lost our comparison with the sans-serif system font in `web-fonts.html`. Fix this by adding a [page-specific style](https://internetingishard.com//html-and-css/hello-css/#page-specific-styles) to the `<head>` of our `web-fonts.html` file:
+现在所有字体都是 Roboto Light 了。意味着我们不能使用 `sans-serif` 系统字体了。可以这么解决这个问题：
 
 ```html
 <style>
@@ -172,31 +142,31 @@ _Everything_ should now render as Roboto Light, which means we lost our comparis
 </style>
 ```
 
-The `.system-fonts` class is applied to the second box in `web-fonts.html`. The above rule takes precedence over the `body` rule in `typo.css`, so when you open up `web-fonts.html` in a browser, you should see our Roboto Light web font on the top and the default system font on the bottom:
+`.system-fonts` 提供系统字体，打开浏览器，可以看到头部使用的是 Roboto Light 字体，底部用的是系统默认字体。
 
 ![Web page with web fonts versus system fonts example (after adding web fonts)](/images/custom-web-font-vs-system-font-0aa7bc.png)
 
 ## Font Families and Font Faces
 
-A single font “family” is made up of multiple font “faces”. Each font face is a different weight or style in the family. “Weight” refers to the boldness of a particular face, and “style” refers to whether it’s roman (upright), italic, condensed, extended, or some other variant in the family.
+“family” 是由多个 “faces” 组合而成。每个字体具备不同的粗细和风格，粗细指的是特定的 face，风格指的是是否属于罗马人（直力）、斜体、冷凝、延展，或家族中的其他变体。
 
-In our example, Roboto Light is one font face in the Roboto family. The other 17 faces in the ZIP file we downloaded earlier can be visualized like so:
+例如，Roboto Light 是 Roboto 中的一种。我们之前下载的其余 17 种风格如下：
 
 ![Chart of Roboto fonts: font weights (100-900) on x-axis, font styles (roman, italic, condensed) on y-axis](/images/font-weights-and-styles-9bf7f0.png)
 
-In CSS, font weights are expressed as numeric values between 100 and 900. Fortunately, there are relatively standardized, human-friendly terms for each of these numeric values. “Black” usually means 900, “bold” is 700, “regular” is 400, etc. As you can see above, most families don’t supply a face for every single weight. Roboto is missing “extra light” (200), “semi bold” (600), and “extra bold” (800).
+在 css 中，字体粗细值表示为 100 到 900 之间的数值。每个数值，都有相对标准化的，人性化的术语。 Black 对应 900，bold 对应 700。regular 对应 400 等等。如你所见，大多数 face 并没有指定粗细值，比如 Roboto 的 “extra light” (200), “semi bold” (600), 和 “extra bold” (800).
 
-It’s worth noting that each style and weight combination is designed as an entirely distinct face. In a high-quality font family, the condensed styles aren’t simply squashed versions of the roman faces, nor is the bold face merely a thicker version. Each letter in every face is hand-crafted to ensure it provides a uniform flow to its text.
+值得注意的是，每种风格和粗细代表一个 face。在高质量的字体家族中，浓缩的风格并不是简单地把罗马字体压扁，粗的版本也不代表字体更厚。face 中每个字母其实都是精心设计的，以确保它能提供文本的细致体验。
 
 ![Roman letter a versus italic letter a](/images/roman-versus-italic-a-fe7025.png)
 
-This is particularly apparent in the italic and roman faces of many serif fonts. For instance, the lowercase “a” in Century Schoolbook FS (the font you’re reading right now) takes on a completely different shape when it’s _italicized_.
+这在许多衬线字体的斜体和罗马字体中尤为明显。比如你正在阅读的字体，当它是斜体的时候，完全是一个不同的形状。
 
 ### Fakin’ It
 
-Why does this weight and style stuff matter to us? The design of most websites utilizes multiple faces in the same family, so we need to know how to embed several `.woff` files that represent related faces.
+我们粗细和风格这么重要?大多数网页都会在同个 family 中使用多个 faces 。所以我们必须要知道如何嵌入多个 `.woff` 文件来表示关联的 faces。
 
-But first, let’s take a look at what happens when we _don’t_ offer multiple faces. Update the left-hand paragraph in `web-fonts.html` to include an `<em>` and a `<strong>` element:
+但先来看下，如果不提供多个 faces 会发生什么：
 
 ```html
 <section class='section section--gray'>
@@ -208,31 +178,32 @@ But first, let’s take a look at what happens when we _don’t_ offer multiple 
 </section>
 ```
 
-When you reload the page, you’ll notice that the bold text isn’t really all that bold. This is because it’s being _synthesized_. We didn’t supply a bold font face for the `<strong>` element to use, so the browser is trying to fake it by auto-converting Roboto Light into a thicker face. The same thing is going on with the italics in the `<em>` element, but it’s a little bit harder to tell. This auto-conversion almost always results in low-quality typography.
+刷新界面，加粗字体并没有很粗。因为它是合成的。`<strong>` 元素并没有粗体字体，所以浏览器试图通过伪装它。斜体也一样，但它有点难分辨。这种自动转换通常导致低质量的排版。
 
 ![Screenshot: synthesized bold as slightly bolder text versus genuine bold as much bolder text](/images/synthesized-bold-vs-genuine-bold-363a2f.png)
 
-To verify that the bold and italic faces really are being synthesized, try adding the following rule to `typo.css`. The `font-synthesis` property determines if a browser is allowed to fake it or not. At the time of this writing, only Firefox actually pays attention to `font-synthesis`, so this won’t work in Chrome or Safari:
+为了验证粗体和斜体是否是真的合成的，可以试着将以下规则添加到 css 或在哪个。`font-synthesis` 属性决定了浏览器是否允许伪造。目前只有火狐支持，chrome 和 safari 暂不支持：
 
-```html
+```css
 /* This will only work in Firefox */
-em, strong {
+em,
+strong {
   font-synthesis: none;
 }
 ```
 
-Open up `web-fonts.html` in Firefox, and the `<em>` and `<strong>` elements will no longer be italic or bold—the entire paragraph will be in roman Roboto Light.
+用火狐打开 `web-fonts.html`，会发现 `<em>` 和 `<strong>` 都替换为了 roman Roboto Light。
 
-### Multiple Font Faces (The Wrong Way)
+### Multiple Font Faces (错误示范)
 
-Let’s try adding Roboto Light Italic and Roboto Bold faces to our example project. Copy over the following files from the Roboto ZIP file we downloaded earlier into our `web-typography` folder:
+试着给实例项目添加 Roboto Light Italic 和 Roboto Bold faces。复制以下文件到 `web-typography` 目录：
 
 * `roboto_bold_macroman/Roboto-Bold-webfont.woff`
 * `roboto_lightitalic_macroman/Roboto-LightItalic-webfont.woff`
 
-A `.woff` file represents a single face in a particular font family, and `@font-face` lets us embed that face in our stylesheet. The naive way to embed these new WOFF files would be to simply add more `@font-face` declarations and change the `font-family` and `src` properties as necessary. Try adding the following to the top of `typo.css`:
+添加如下样式：
 
-```html
+```css
 /* DON'T NAME FONT FAMILIES LIKE THIS */
 @font-face {
   font-family: 'Roboto Light Italic';
@@ -245,9 +216,9 @@ A `.woff` file represents a single face in a particular font family, and `@font-
 }
 ```
 
-Then, to use these faces in our `<em>` and `<strong>` elements, we need the following rules:
+然后给 `<em>` 和 `<strong>` 元素添加如下样式：
 
-```html
+```css
 /* THIS IS A LITTLE AWKWARD */
 em {
   font-family: 'Roboto Light Italic', serif;
@@ -258,19 +229,19 @@ strong {
 }
 ```
 
-This _will_ work, and you should now see proper italic and bold fonts when you reload `web-fonts.html` in your browser. The problem is that manually specifying the `font-family` every time we want to use an italic or bold font is a little weird. We should be using the CSS `font-style` and `font-weight` properties for this.
+刷新 `web-fonts.html` 后可以看到想要的结果，但问题是每次想加粗或斜体都要指定 `font-family` 特别奇怪。建议用 `font-style` 和 `font-weight`。
 
 ![Diagram: Mapping three related .woff files to three unrelated @font-face declarations](/images/at-font-face-multiple-faces-wrong-way-68feb0.png)
 
-We ended up in this awkward situation because of the way we embedded our new `.woff` files. Using separate `font-family` values in `@font-face` makes them look like entirely unrelated font faces. It doesn’t reflect the fact that they are all actually part of the Roboto family.
+最终我们陷入了很尴尬的境地，在 `@font-face` 中使用独立的 `font-family`并没有隐射出他们实际上是 Roboto family 的一部分。
 
-For this reason, you should **never use the above technique to embed multiple faces that are in the same font family**. Go ahead and delete both of the above snippets before moving on.
+出于这个原因，你应该始终坚持 **never use the above technique to embed multiple faces that are in the same font family** 。好吧，把之前的代码删了。
 
-### Multiple Font Faces (The Right Way)
+### Multiple Font Faces (正确的方式)
 
-To maintain the familial relationship between our three font faces, they all need to use a shared `Roboto` value for their `font-family` property. To distinguish between our light, italic, and bold faces, we’ll add `font-style` and `font-weight` properties to the at-rule. Replace all the `@font-face` declarations in `typo.css` with the following:
+为了保持三种字体间的关系。建议用 `font-style` 和 `font-weight`，css 定义如下：
 
-```html
+```css
 @font-face {
   font-family: 'Roboto';
   src: url('Roboto-Light-webfont.woff') format('woff');
@@ -293,13 +264,13 @@ To maintain the familial relationship between our three font faces, they all nee
 }
 ```
 
-Think of each `@font-face` at-rule as a description of the underlying `.woff` file. The first `@font-face` is saying it’s a Roboto font that’s roman (`normal`) and has a font weight of 300 (aka “light”). The second says it’s also in the Roboto family and has a weight of 300, but it’s italic. Finally, the third at-rule lets our the browser know that `Roboto-Bold-webfont.woff` contains the 700-weight (aka “bold”) roman face.
+来逐个说明下， 第一个定义了 300 粗的 normal Roboto 字体。第二个定义了 300 粗的斜体 Roboto 字体。最后一个是 700 粗的。
 
 ![Diagram: Mapping three related .woff files to three related @font-face declarations by specifying font-style and font-weight](/images/at-font-face-multiple-faces-8198c0.png)
 
-Letting the browser know that our font faces are related makes our CSS much more intuitive. We can set the default font family and weight in our `body` selector. Then, when we want to use italics or bold for a particular element, we can simply specify a `font-style` or `font-weight` and the browser will pull the corresponding `.woff` file:
+这样就可以让浏览器知道我们的字体是相关的，接下来就可以简单地用 `font-style` 和 `font-weight` 设置样式和粗细，同时浏览器会自动加载对应 `.woff` 文件：
 
-```html
+```css
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -311,31 +282,31 @@ em {
 }
 
 strong {
-  font-weight: bold;  /* Or 700 */
+  font-weight: bold; /* Or 700 */
 }
 ```
 
-These happen to be the default `font-style` and `font-weight` values for `<em>` and `<strong>` elements, so we don’t _really_ need to include the last two rules here. Note that the only human-friendly keywords available for `font-weight` are `normal` (400) and `bold` (700). Any other boldness levels need to set numerically.
+对于 `em` 和 `strong` 来说，这些都是默认值。所以我们并不需要在这里包含最后两个规则。请注意，`font-weight` 中唯一可读的是 `normal(400)` 和 `bold(700)` ，其余都用数字。
 
-## Externally Hosted Web Fonts
+## 外部托管的 web 字体
 
-Ok! That was complicated. Next, we’re going to explore the easier method of using web fonts: externally hosted via [Google Fonts](https://internetingishard.com/https://fonts.google.com/). This lets us skip the first two steps of locally hosted fonts. Instead of adding `.woff` files to our project and embedding them with `@font-face`, we can let Google Fonts do this part for us.
+好吧!有点难，接下来，我们将讨论一种更为简单的方法：[Google Fonts](https://fonts.google.com/)。这让我们可以跳过本地托管的前两个步骤。谷歌字体将帮我们处理 `.woff` 文件和 `@font-face`。
 
 ![Diagram: serving web fonts from our own web server versus serving them from Google Fonts’ servers](/images/locally-vs-externally-hosted-fonts-7bba77.png)
 
-In this section, we’re going to be working on `history.html`, so open up that file in both your text editor and a web browser. If you want a brief history of typography going all the way back to the first printing press, take a quick read through the example text. Right now, each section in `history.html` is using Roboto Light, but we’re going to change all of them to be representative of the period they’re talking about.
+这一部分，我们将在 `History.html` 文件敲代码。如果你想知道排版的历史，可以阅读示例文本。每个文件都在使用 Roboto Light，但我们接下来会用上面聊到的方法来对应修改。
 
 ![Screenshot: copying web fonts <link> from Google Fonts](/images/selecting-a-google-font-3a5534.png)
 
-Let’s begin by changing the font for the _Gothic/Blackletter_ section. In [Google Fonts](https://internetingishard.com/https://www.google.com/fonts), search for **UnifrakturMaguntia**. It should look like something a monk wrote in the middle ages. Click **Select this font**. In the pop-up menu, you’ll see a `<link/>` element. Copy this into the `<head>` of `history.html`, above the `<link/>` element that includes our `typo.css` stylesheet.
+让我们来改变 _Gothic/Blackletter_ 部分的字体。在 [Google Fonts](https://www.google.com/fonts) 中搜索 **UnifrakturMaguntia** 。点击 **Select this font** 做如下处理：
 
 ```html
 <link href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia" rel="stylesheet">
 ```
 
-Remember that `<link/>` is how we [include an external stylesheet](https://internetingishard.com//html-and-css/hello-css/#linking-a-css-stylesheet), and that’s exactly what the above HTML is doing. However, instead of linking to a local CSS file, it’s including some CSS defined by Google Fonts. If you paste the `href` value into your browser, you’ll find the same `@font-face` declaration that we used in the previous section—except we didn’t actually have to write it this time. Yay!
+之前有介绍过 `<link/>`，我们引用的是谷歌字体而不是本地文件。你会看到它帮我们添加了同样的 `@font-face` 描述。
 
-Now that we’ve embedded our `UnifrakturMaguntia` web font, we should be able to use it to style any HTML element we want. Add the following to the `<head>` of `history.html`:
+现在我们嵌入了 `UnifrakturMaguntia` web 字体，接着我们就可以使用它了：
 
 ```html
 <style>
@@ -345,23 +316,23 @@ Now that we’ve embedded our `UnifrakturMaguntia` web font, we should be able t
 </style>
 ```
 
-That first section has a `class='blackletter'` attribute, so it should now be printed in gothic letters:
+有 `class='blackletter'` 属性的部分，会显示如下效果：
 
 ![Screenshot: text rendered in a blackletter font](/images/adding-a-google-font-e4afca.png)
 
-Google Fonts are a quick and easy solution, but professional sites should typically use locally hosted web fonts. This gives you a lot more flexibility (you’re not limited to Google’s font offering) and can have performance/reliability gains if you’ve optimized the rest of your site correctly.
+Google Fonts 简单粗暴，但是对于专业的网站来说还是建议用本地托管的 web 字体。这样有更多地可能性，只要处理得到。可以很大提升网站的性能。
 
-### Too Many Font Files
+### 字体文件过多
 
-Speaking of performance, let’s do something awful. There’s another 10 sections on our `history.html` page, and we want to give each one its own web font. We can embed multiple fonts in a single `<link/>` element, so change our Google Fonts stylesheet to include the rest of them:
+说到性能，我们可以测试下，另外 10 个部分都用不同的字体。处理如下：
 
 ```html
 <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Droid+Sans+Mono|Lato|Libre+Baskerville|Lobster|Questrial|Rokkitt|Rufina|Sorts+Mill+Goudy|UnifrakturMaguntia" rel="stylesheet">
 ```
 
-Note that you can generate this in Google Fonts by selecting multiple fonts before copying the `<link/>` element. Next, add all these new fonts to the `<style>` element of `history.html`:
+接着给所有元素添加不同字体：
 
-```html
+```css
 .old-style {
   font-family: 'Sorts Mill Goudy', serif;
 }
@@ -394,19 +365,19 @@ Note that you can generate this in Google Fonts by selecting multiple fonts befo
 }
 ```
 
-Now, each section of `history.html` is rendered in a font from the era it’s describing. This serves as a nice introduction to the historic significant of different fonts, but you should **never, ever include this many web fonts on a real web page**.
+现在，每个部分都有不同的字体，虽然很好地介绍了字体的历史。但是你应该 **never, ever include this many web fonts on a real web page**
 
-Don’t forget that each web font is actually a `.woff` or `.woff2` file that your browser needs to load before it can render the page. More fonts means longer load times. The key to using web fonts effectively is to find a balance between performance (fewer web fonts) and a beautifully typeset document (more web fonts).
+不要忘记在浏览器中每个字体都要加载对应的 `.woff` 或 `.woff2` 文件。字体越多，加载时间越长。建议衡量性能和漂亮的文档排版之间的利弊。
 
-And that’s more than you could ever want to know about web fonts. The rest of this chapter shifts gears into basic typographic principles. These are simple guidelines (with simple CSS implementations) that often make the difference between a professional web page and an amateur one.
+剩余章节主要讲基本的排版原则。这些虽然是简单的指导原则（简单 css 实现），但它通常是 专业与非专业的区别。
 
-## Paragraph Indents
+## 段落缩进
 
-Separating paragraphs from one another is one of the most fundamental functions of typography. There’s two generally accepted solutions: either use a first-line indent _or_ a margin between the paragraphs. Your readers (hopefully) aren’t stupid—they don’t need two signs that a new paragraph is happening, so never use _both_ an indent and a margin. That would be redundant.
+段落间的分离是排版最基本的功能之一。有两种普遍接受的解决方案：要么首行缩进，要门段落之间留白。你的读者(但愿如此) 并不傻，他们不需要特别强调新段落，所以不要同时使用缩进和留白。
 
 ![Diagram: indenting first line of new paragraphs (ok), adding margins between paragraphs (ok), both (not ok)](/images/paragraph-indents-vs-margins-943b17.png)
 
-The CSS `text-indent` property defines the size of the first-line indent of a particular element (usually a `<p>`). We can explore this in our `indents.html` page. Go ahead and change the existing bottom margin styles in the first section to an indent by adding the following rules to the `<style>` element:
+`text-indent` 属性用来定义第一行的缩进，修改如下：
 
 ```html
 <style>
@@ -420,11 +391,11 @@ The CSS `text-indent` property defines the size of the first-line indent of a pa
 </style>
 ```
 
-Note that the first paragraph after a heading should never be indented because, well, it’s usually pretty obvious that it’s a new paragraph. This is a pretty good use case for the [`:first-of-type` pseudo-class](https://internetingishard.com//html-and-css/css-selectors/#pseudo-classes-for-structure).
+注意，标题下的第一个段落其实可以不用缩进，可以用伪类来处理：
 
-And here’s a negative example so we remember what _not_ to do. Add this to the page-specific styles in `indents.html`:
+反例，修改如下：
 
-```html
+```css
 /* DESIGNERS WILL JUDGE YOU FOR THIS */
 .never-both p {
   text-indent: 1em;
@@ -432,25 +403,25 @@ And here’s a negative example so we remember what _not_ to do. Add this to the
 }
 ```
 
-It might seem silly, but we’re not kidding when we say that good designers _will_ judge you for this.
+看起来有点傻，但是好的设计师会建议你这么做。
 
-## Text Alignment
+## 文本对齐
 
-The alignment of text has a subconscious impact on how you read it. You’ve probably never noticed it before, but your eyes don’t move in a smooth motion as they read over a paragraph—they jump from word to word and from line to line. Your eyes fixate on certain spots and skip over other ones.
+字体的对齐方式会对阅读参数潜移默化的影响。之前可能没注意过，但阅读一段文字时，眼睛其实不会移动地很流畅。相反，它会从一个单词跳到另一个单词，一行跳到另一行。不断地切换盯着的地方。
 
 ![Diagram: text with several dots on it (you read like this) versus gradients over lines of text (you don’t read like this)](/images/fixation-reading-vs-smooth-eye-motions-9c0886.png)
 
-In a well-designed HTML document, text alignment is never an arbitrary decision. It takes into account this little bit of human physiology. Good text alignment actually makes it easier for users to read your content by giving their eyes an anchor to jump to when they move from line to line.
+文本对齐对于一个精心设计的 HTML 文档来说从来都不会马虎。它需要考虑到人类生理学，好的对齐方式实际上可以让用户更好地阅读你的内容。从一行跳到另一行时，他们的眼睛会跳转到一个锚点。
 
-The next few sections explain the proper times to use left, center, right, and justified text alignment. All of these examples rely on the [`text-align` property](https://internetingishard.com//html-and-css/hello-css/#more-text-styles), which controls the text alignment of a particular HTML element. We set up the `alignment.html` page in our example project with some convenient scenarios.
+接下来的部分解释了使用左、中心、右对齐和文本对齐的正确时间。所有的例子都依赖于 `text-align` 属性。它控制 HTML 元素的对齐方式。
 
-### Left Alignment
+### 左对齐
 
-Most of your text should be left-aligned because it gives the reader a vertical anchor to jump back to on every line. Long runs of text, in particular, should almost always be left-aligned. Short runs of text and headings have a little bit more leeway.
+大部分文本是左对齐的，因为它给读者一个垂直的锚点，可以跳回每一行。
 
 ![Diagram: vertically aligned dots on left side of left-aligned text serving as an anchor for your eyes](/images/left-text-alignment-26dbc5.png)
 
-Left alignment is the default value for `text-align`, but if we wanted to be explicit, we could add the following rule to the `<style>` element of our `alignment.html` file:
+左对齐是 `text-align` 的默认值，如果要显示，可以这么处理：
 
 ```html
 <style>
@@ -460,33 +431,33 @@ Left alignment is the default value for `text-align`, but if we wanted to be exp
 </style>
 ```
 
-Of course, if you’re working on a website that’s in a language that’s written right-to-left instead of left-to-right (like Arabic), you can go ahead and swap all this advice with the _Right Alignment_ section below.
+如果你使用的语言是从右到左的(比如阿拉伯语)，你可以用下面右对齐的方式。
 
-### Center Alignment
+### 居中对齐
 
-Center-aligned text doesn’t have that anchor, so it’s easier for the eye to get lost when it tries to jump to the next line. It’s best suited for short line lengths (more on that later) and for special kinds of content like poems, lyrics, and headings.
+居中对齐没有锚点，非常不适合跳到下一行，比较适合短线长度，比如诗歌，歌词和标题。
 
 ![Diagram: uneven dots on center-aligned text](/images/center-text-alignment-29e1d3.png)
 
-Go ahead and center-align the second paragraph in `alignment.html` with another page-specific style:
+解析添加如下代码：
 
-```html
+```css
 .center {
   text-align: center;
 }
 ```
 
-Notice how the page now feels a little disjointed. The center-aligned second paragraph breaks the flow of the left-aligned first paragraph. Generally speaking, text alignment should be consistent throughout a web page. If you’re going to center a heading, center _all_ of your headings.
+注意界面现在有脱节的感觉，中间偏右的第二段打破了左对齐。一般来说，文本对齐应该贯穿于整个网页。如果你要居中一个标题。那么所有标题都应该居中。
 
 ### Right Alignment
 
-Another consideration when choosing text alignment is the relationship it creates with the surrounding elements. For instance, take a look at that third section in `alignment.html`. We want to move the image’s caption to the left of the image and right-align it to make it look like it’s attached to the image:
+在选择文本对齐时，另一个考虑因素是它与周围元素的关系。例如，看一下 `alignment.html` 的第三部分。我们想要将图像的标题移动到图像的左边并将其右对齐，使它看起来像是附加在图像上：
 
 ![Diagram: image with right-aligned text caption to the left of it](/images/right-aligning-a-caption-cb645b.png)
 
-Our example image is wrapped in a `<figure>` and the caption text is in a `<figcaption>`, so adding the following to the `<style>` element of `alignment.html` should result in the above layout.
+添加如下样式：
 
-```html
+```css
 figcaption {
   display: none;
 }
@@ -499,7 +470,7 @@ figcaption {
 
     font-style: italic;
     text-align: right;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 
     position: absolute;
     left: -220px;
@@ -508,42 +479,42 @@ figcaption {
 }
 ```
 
-This also happens to be a good example of [advanced positioning](https://internetingishard.com//html-and-css/advanced-positioning/). The `relative` position of the `<figure>` sets the coordinate system for the `<figcaption>`’s `absolute` positioning. By nudging the caption left by `220px` and giving it an explicit width of `200px`, we get a nice 20-pixel margin between the image and its caption.
+之前学习的高级布局中也有一个很好的例子。`<figure>` 设置为 relative ，`<figcaption>`设置为 `absolute`。通过设置 200px 的标题，并赋予 200px 的明确宽度，我们可以从图片和标题间找到 20px 的边缘。
 
-Like centered text, right alignment should usually be reserved for these kinds of special design scenarios because its jagged left edge makes it harder for the reader to find the next line.
+与中心文本一样，右对齐通常应该保留在一些特殊的设计场景汇总。因为其锯齿状的左边缘使得读者很难找到下一行。
 
 ### Justified Text
 
-Justified text is created by subtly adjusting the space between words/letters and splitting long words with hyphens until each line is the same width. Without a high-quality hyphenation engine, justified text results in awkwardly large spaces between words. These uneven spaces make it harder for the eye to move horizontally across the text.
+通过巧妙地调整单词/字母之间的间距，并将长单词与连字符分隔开，直到每一行都是相同的宽度，就可以创建合理的文本。没有高质量的断字引擎会导致单词之间出现巨大的空白。这些凹凸不平的空间使得眼睛在文本中横向移动变得更加困难。
 
 ![Diagram: paragraph with bad hyphenation (uneven spaces between letters and words) versus paragraph with good hyphenation (even spaces between letters and words)](/images/good-vs-bad-hyphenation-engine-ba40e3.png)
 
-Unfortunately, most browsers don’t have _any_ kind of built-in hyphenation engine, so you’re better off avoiding justified text in HTML documents. We can take a look by adding one more `text-align` rule to our `alignment.html` file:
+可惜大多数浏览器没有断字引擎，所以最好避免文本在 HTML 文档中调整。我们可以这么处理：
 
-```html
+```css
 .justify {
   text-align: justify;
 }
 ```
 
-Compare this with the left-aligned paragraph. It’s subtle, but the left-aligned paragraph is more uniform and inviting.
+它跟左对齐的段落对比有细微的变化，左对齐的段落更均匀，更吸引人。
 
-## Vertical Text Spacing
+## 垂直文本间距
 
-Just as alignment isn’t an arbitrary decision, neither is the space between text. In this section, we’re concerned with the responsible use of three CSS properties:
+文本空间跟文本对齐一样不能马虎，本节将介绍三种 css 属性的使用：
 
 * `margin-top` (or `padding-top`)
 * `margin-bottom` (or `padding-bottom`)
 * `line-height`
 
-The first two should be pretty familiar by now, and they define the vertical space between separate paragraphs. The new `line-height` property determines the amount of space between lines _in the same paragraph_. In traditional typography, `line-height` is called “leading” because printers used little strips of lead to increase the space between lines of text.
+前两个应该很熟悉了，它们定义了不同段落之间的垂直空间。`line-height` 属性决定了在相同段落之间的行间距。在传统字体排版中，`line-height` 称为高科技。因为打印机使用了小条带，增加了文本行间距。
 
-Together, these properties control the “vertical rhythm” of a web page. There’s all sorts of techniques to figure out the “optimal” vertical rhythm for a given layout, but the general principles are:
+这些属性用来控制网页的垂直距离。有各种技术可以用来计算给定布局的最佳垂直距离，一般原则是：
 
-* Give things enough space to breath.
-* Use _consistent_ spacing throughout the page.
+* 给足空间
+* 整个网页使用一致的间距
 
-To demonstrate this, we’re going to destroy the vertical rhythm in the second half of our `spacing.html` page. Go ahead and add the following page-specific styles to `spacing.html`
+为了证明这一点，我们添加如下样式：
 
 ```html
 <style>
@@ -566,27 +537,27 @@ To demonstrate this, we’re going to destroy the vertical rhythm in the second 
 </style>
 ```
 
-A few small changes to line height, paddings, and margins can have a dramatic impact on the quality of a page:
+行高，内边距，外边距发生一点细微变化都会对整个网页质量产生巨大的影响。
 
 ![Web page with large, consistent spacing versus web page with cramped, uneven spacing](/images/vertical-text-spacing-a9d71f.png)
 
-There’s a surprising amount of math and psychology that goes into calculating the vertical rhythm of a page, but that’s a job for your designer. As a developer, you need to know the CSS properties to implement what they’re asking for. More importantly, you have to understand that your designer really cares about this kind of stuff, so you should be paying very careful attention to your `margin`, `padding`, and `line-height` properties.
+计算垂直间距需要数学和心理学，但这一般都是设计师的工作。作为开发者需要知道的是用什么 css 属性，更重要的是，你必须明白你的设计师的用意。所以你需要注意 `margin`，`padding`，和 `line-height` 属性。
 
 ## Line Length
 
-If the vertical spacing of your text isn’t arbitrary, it should be no surprise that the horizontal spacing isn’t, either. “Line length” or “measure” refers to the horizontal length of your text. You can think of it as the number of characters or words that fit into a single line. Measure has everything to do with the following CSS properties:
+如果文本垂直间距不是任意的，水平肯定也不是。行长度或度量是指文本的水平长度。可以把它当做是单行中字符或单词的数量。与之相关的属性有：
 
 * `width`
 * `margin-left` (or `padding-left`)
 * `margin-right` (or `padding-right`)
 
-A good rule-of-thumb is to limit the number of characters on a single line to around 80. Like alignment, this subtly affects the readability of your content. It takes energy for your eye to move from the left edge of a paragraph to the right, and the farther it has to scan, the faster it gets tired. Longer lines also make it easier to get lost when you finish a line and need to jump back to the beginning of the next line.
+最好是把一行字符的数量控制在 80 个左右，和对齐方式一样，这样会微妙地影响内容的可读性。字符越多，眼睛越累。长度过长还会导致跳转到下一行的时候迷失掉。
 
 ![Diagram: line length as the width of a paragraph](/images/line-length-measure-ce052b.png)
 
-These are the reasons why so many websites (including this one) use [fixed-width layouts](https://internetingishard.com//html-and-css/responsive-design/#a-few-notes-on-design) or split content into multiple columns on wider screens. Without constraining the width of the page or dividing it into manageable columns, line length becomes unacceptably long.
+这就是为什么这么多网站(包括本站)使用固定宽度布局，或在大屏的情况拆分为多列。如果不划分列，那么长度会变得难以接受。
 
-In our example project, the `line-length.html` file has decent measure. Let’s see what happens when we break the bottom half of the page by adding the following to its `<head>`:
+示例 `line-length.html` 中，有很好的度量标准。看下添加如下代码会发生什么：
 
 ```html
 <style>
@@ -600,35 +571,35 @@ In our example project, the `line-length.html` file has decent measure. Let’s 
 </style>
 ```
 
-Now, the second section stretches to fill the full width of the browser window. It feels a little bit more unapproachable due to the long line length. Again, the goal of good web typography is to make it as easy as possible for visitors to digest your content.
+现在，第二部分宽度已经填充浏览器窗口的宽度了。由于长度太长，根本无法阅读。所以，良好的网页排版的目的是让访问者尽可能地接受你的内容。
 
-## Other Basic
+## 其他
 
-Typography Guidelines
+字体设计指南
 
-That should be enough to get you on your way towards quality web typography. Typography is a whole industry, and we’ve barely scratched the surface. However, getting any deeper into it would be more design than web development, so we’ll just leave you with a few final guidelines:
+可以让你踏上高质量网页排版。印刷术是一个完整的行业，我们接触的只是冰山一角。如果深入研究，它将比 web 开发更难，所以我们只提供一些指南：
 
-* Use a `font-size` between `14px` and `20px` for the `body` element.
-* Use “curly quotes” and apostrophes with the `&rsquo;`, `&lsquo;`, `&rdquo;`, and `&ldquo;` HTML [entities](https://internetingishard.com//html-and-css/links-and-images/#html-entities).
-* Use proper dashes (`&ndash;`, `&mdash;`) and other symbols (`&copy;`).
-* Don’t use `text-decoration: underline` except for hover states.
-* Use _real_ italic fonts over synthesized ones if not it’s too much of a performance burden.
+* `body` 元素的字体大小设置为 `14px` 到 `20px`。
+* `&rsquo;`, `&lsquo;`, `&rdquo;`, and `&ldquo;` 使用引号。
+* 正确使用破折号 (`&ndash;`, `&mdash;`) 和一些符号 (`&copy;`)。
+* 除非悬浮状态，否则不要使用 `text-decoration: underline`。
+* 使用自带的斜体相关，否则会导致性能问题
 
-If you find this stuff fascinating, [Practical Typography](https://internetingishard.com/http://practicaltypography.com/summary-of-key-rules.html) has a fantastic list of general rules to follow when typesetting a document.
+[Practical Typography](http://practicaltypography.com/summary-of-key-rules.html) 用于排版非常使用，而且有一个非常棒的规则列表。
 
 ## Summary
 
-The goal of this chapter was twofold:
+本章目的有两方面：
 
-* Learn the mechanics of web fonts and basic CSS typography properties.
-* Understand how designers think about typography.
+* 学习 web 字体的机制和基本的 css 排版属性
+* 理解设计师如何思考排版
 
-You might not be able to create a beautifully typeset web page from scratch after reading this chapter, but that wasn’t the point. It was to make you _aware_ of the invisible art of typography. You should now have the vocabulary to talk about things like font families, faces, weights, and styles, as well as leading, measure, and vertical rhythm.
+读完本章你可能还是没办法搞出一个漂亮排版的 web 界面，重点是让你知道排版的魅力。而且你现在可以用 font family，face ，weight 和 styles ，leading，measure 和 vertical rhythm 去吹牛逼了。
 
-The most important thing you should take away from this chapter is the fact that nothing is arbitrary in a well-designed web page. The font sizes, indent style, text alignment, line height, margins, and every other tiny facet of the page was carefully considered. There was a _purpose_ behind all of these decisions.
+本章的重点是说明精心设计的网页，没有任何东西是随便设计的。字体大小，缩进样式，文本对齐，行高，页边距以及界面的其他细节都值得仔细思考，所有设计都出自内心。
 
-All of the CSS properties we’ve covered throughout this tutorial are actually kind of simple. When it comes down to it, we’ve really just been moving a bunch of boxes around, changing some colors, and altering the appearance of our text. The _meaning_ behind these things comes from the underlying design and the business goals of the website you’re implementing.
+本章介绍的 css 属性其实都很简单，无非是移动盒子，改变颜色，改变文本外观。这些东西的意义来自于你正在实施的网站的基础设计和业务目标。
 
-But, that’s for another tutorial. Believe it or not, you’ve reached the end of [_HTML & CSS is Hard_](https://internetingishard.com//html-and-css/). We’ve covered all the HTML elements and CSS properties you need to build professional web pages. The only thing missing is _experience_. Your next step is to practice all these new skills by building a bunch of web pages from scratch.
+目前为此，你已经学完了所有章节。现在你已经具备了构建专业 web 界面所需的 HTML 和 css 只是。唯一少的就是 实践。下一步，就是学以致用。
 
-Stay tuned for more tutorials!
+请继续关注更多的教程!
