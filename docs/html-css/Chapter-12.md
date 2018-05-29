@@ -6,11 +6,11 @@ layout: SpecialLayout
 
 语义化就是所有的 HTML 标签都应该传达展示内容的含义。之前也有写过语义化 HTML(比如用 strong 代替 b)，也有一整套元素用于网页布局语义化，称之为 "分割元素"，它们看起来是这样的：
 
-![Diagram: <header>, <nav>, <article>, <aside>, <figure>, and <footer> elements in a typical web page](/images/html-sectioning-elements-00c3fd.png)
+![Diagram: <header>, <nav>, <article>, <aside>, <figure>, and <footer> elements in a typical web page](/images/html-css/html-sectioning-elements-00c3fd.png)
 
 使用这些作为 `<div>` 元素的替代品是现代 web 开发的一个重要方面，因为它让搜索引擎、屏幕阅读器和其他机器更容易识别网站的不同部分。还可以帮你组织代码，易于维护。
 
-![Diagram: div soup (several gray <div> elements) compared to semantic markup (<header>, <article>, <figure>, and <footer> in different colors)](/images/semantic-html-ffab7c.png)
+![Diagram: div soup (several gray <div> elements) compared to semantic markup (<header>, <article>, <figure>, and <footer> in different colors)](/images/html-css/semantic-html-ffab7c.png)
 
 本章我们重新讨论 HTML，你仍然可以使用诸如 [box model](./Chapter-05.md), [flexbox](./Chapter-08.md), 或者 [positioning schemes](./Chapter-09.md)给新元素添加 css 规则。你可以把这些分割元素当做有具体含义的 `<div>`。
 
@@ -73,13 +73,13 @@ layout: SpecialLayout
 
 [HTML5 Outliner](https://gsnedders.html5.org/outliner/) 是检查页面文档大纲的便捷工具。把 `article.html` 的内容复制黏贴到文本框。可以看到我们示例的概要，结构如下，感觉有点像学校里学过的研究论文的大纲：
 
-![Outline of web page heading structure](/images/document-outline-heading-elements-576433.png)
+![Outline of web page heading structure](/images/html-css/document-outline-heading-elements-576433.png)
 
 每个 `<h1>` 元素在文档大纲中创建了一个新的部分，其余不要重要的则认为是该顶级标题下的子节。语义化 HTML 有两个子内容：文档大纲和内联语义化 HTML。一直到 `<h6>` 都是同样的道理。
 
 注意，标题级别的实际值并不重要，重要的是它是否大于或小于当前部分的标题。例如将 `<h3>` 改为 `<h4>` 然后在通过刚刚的工具测试一下。由于 `h4` 仍然小于 `h2` 所以对文档大纲并不会有任何影响。
 
-![Flow chart of rules for when headings create new sections in the document outline](/images/document-outline-section-creation-45ee48.png)
+![Flow chart of rules for when headings create new sections in the document outline](/images/html-css/document-outline-section-creation-45ee48.png)
 
 文档大纲与语义化 HTML 有什么关系?标题是网页中最具语义的东西。它在搜索引擎划分重要内容中扮演了重要的角色。此外，我们说的语义化 HTML 元素有更多的含义，甚至会颠覆这里对大纲的定义。
 
@@ -87,7 +87,7 @@ layout: SpecialLayout
 
 `<article>` 元素用于展示网页文章。它应该只包含从网页提取的不同于上下文分布的内容。例如像[Flipboard](https://flipboard.com/)程序可以从网站中抓取`<article>`元素，放在自己的站点，并提升阅读体验。
 
-![Diagram: <article> element plucked out of page and sent to Flipboard, search engines, and other websites](/images/html-article-element-82490e.png)
+![Diagram: <article> element plucked out of page and sent to Flipboard, search engines, and other websites](/images/html-css/html-article-element-82490e.png)
 
 示例中，可以用 `<article>` 将页面的内容标记为一个独立的单元，比如：
 
@@ -135,7 +135,7 @@ layout: SpecialLayout
 
 section 元素跟 article 有点像，但它在文档中并没有实际的语义，也就是说在 Flipboard 程序中，它并不会抓取 section 的内容。
 
-![Diagram: <section> element unable to be plucked out of page](/images/html-section-element-92a4d1.png)
+![Diagram: <section> element unable to be plucked out of page](/images/html-css/html-section-element-92a4d1.png)
 
 将 section 看做是定义文档大纲的一种区块化。为什么我们不直接用 h 标签呢，有时，我们只是想用一个容器出于布局目的包裹内容，此时用 section 比 用 div 更有意义。
 
@@ -178,7 +178,7 @@ section 元素跟 article 有点像，但它在文档中并没有实际的语义
 
 h6 比 h3 的权重低，你可能希望它成为 footer 的一部分。但是，文档大纲并没有变化。
 
-![Expected and actual outlines created by the HTML5 document outline scheme versus real-world web browsers](/images/sections-and-document-outline-614f12.png)
+![Expected and actual outlines created by the HTML5 document outline scheme versus real-world web browsers](/images/html-css/sections-and-document-outline-614f12.png)
 
 添加 section 元素目的是用嵌套内容替换标题级别。意味着每个 section 都有自己的一组 h1 到 h6 的标题级别。
 
@@ -197,7 +197,7 @@ h6 比 h3 的权重低，你可能希望它成为 footer 的一部分。但是�
 
 这将创建一个新的部分，但是由于没有与之相光的标题，导致文档大纲根本不知道它是什么。因此，在使用 section 时应该尽量避免这种情况。
 
-![Outline with an untitled section after adding a new <section> element](/images/untitled-section-in-document-outline-b511bc.png)
+![Outline with an untitled section after adding a new <section> element](/images/html-css/untitled-section-in-document-outline-b511bc.png)
 
 正如 HTML5 规范定义的，section 是一个非常通用的元素。此外，浏览器和屏幕阅读器并不清除它在文档大纲中的作用，使得我们不知道如何以及如何使用它。建议把它作为一个更具有描述性的包装器使用，用于界面的隐式定义部分。不要将它用于文章部分(用`<article>`)。
 
@@ -219,13 +219,13 @@ h6 比 h3 的权重低，你可能希望它成为 footer 的一部分。但是�
 
 这是搜索引擎的一个重要语义信息。有助于快速识别网站结构，从而更容易发现其他界面。有多个不同的链接组合时，界面可以包含多个 `<nav>` 元素。
 
-![Diagram: <nav> elements grouping navigation links in the header, sidebar, and footer of a web page](/images/html-nav-element-d1e716.png)
+![Diagram: <nav> elements grouping navigation links in the header, sidebar, and footer of a web page](/images/html-css/html-nav-element-d1e716.png)
 
 ## Headers
 
 `<header>` 元素是一种新的语义标记，不要和标题(h1-h6)混淆。它表示某个部分，文章或整个 web 界面的介绍性内容。介绍性内容可以是 logo，导航设备或者作者信息等。
 
-![Diagram: separate <header> elements for whole web page versus just the <article> element](/images/html-header-element-7b4e01.png)
+![Diagram: separate <header> elements for whole web page versus just the <article> element](/images/html-css/html-header-element-7b4e01.png)
 
 最好的做法是在 `header` 中添加网站名称/logo 和主导航，如下：
 
@@ -262,7 +262,7 @@ h6 比 h3 的权重低，你可能希望它成为 footer 的一部分。但是�
 
 headers 和 footers 从概念上讲是一样的，只不过他们通常是在文章/网站的末尾，而不是开头。常见的用例包括版权声明，页脚导航和博客文章结尾的相关推荐。
 
-![Diagram: <footer> element for the whole web page and for the <article> element](/images/html-footer-element-0c927a.png)
+![Diagram: <footer> element for the whole web page and for the <article> element](/images/html-css/html-footer-element-0c927a.png)
 
 同样，footers 也可以用其他元素嵌套。所以我们可以添加多个 footer，比如在文章的末尾添加作者信息：
 
@@ -298,7 +298,7 @@ headers 和 footers 从概念上讲是一样的，只不过他们通常是在文
 
 headers 和 footers 是给文章添加额外的信息，不过有时我们可能需要用 `<aside>` 元素从文章中删除某些如赞助商广告的信息，因为我们并不想让它成为文章的一部分。
 
-![Diagram: <aside> element for the site-wide sidebar and inside an <article> element](/images/html-aside-element-ce120b.png)
+![Diagram: <aside> element for the site-wide sidebar and inside an <article> element](/images/html-css/html-aside-element-ce120b.png)
 
 修改如下：
 
@@ -384,7 +384,7 @@ headers 和 footers 是给文章添加额外的信息，不过有时我们可能
 
 `<time>` 元素表示某个时间或日期，这种机器可读的日期使得浏览器可以自动识别到用户的日历上，并帮助搜索引擎锁定具体日期。比如谷歌搜索：
 
-![Screenshot: Google search results with publish date highlighted](/images/time-element-in-google-search-results-5bba38.png)
+![Screenshot: Google search results with publish date highlighted](/images/html-css/time-element-in-google-search-results-5bba38.png)
 
 让我们用 `<time>` 标签来标准文章的发表时间：
 
@@ -400,7 +400,7 @@ headers 和 footers 是给文章添加额外的信息，不过有时我们可能
 
 在 `datetime` 属性上定义日期。格式为年月日。虽然年没有包含在人类可读的文本中，但它高数了搜索引擎我们的文章是在 2017 年发表的。
 
-![Diagram: year, month, date, time, and timezone format of the <time> element](/images/datetime-format-d0c825.png)
+![Diagram: year, month, date, time, and timezone format of the <time> element](/images/html-css/datetime-format-d0c825.png)
 
 还可以添加时间区间：
 
@@ -475,7 +475,7 @@ nav {
 
 css 是让网页更适合人类阅读，而语义化标签是为了让机器更容易阅读。
 
-![Diagram: ambiguous structure (gray <div> elements) versus identifiable sections (<header>, <article>, <figure>, and <footer>)](/images/semantic-html-ffab7c.png)
+![Diagram: ambiguous structure (gray <div> elements) versus identifiable sections (<header>, <article>, <figure>, and <footer>)](/images/html-css/semantic-html-ffab7c.png)
 
 理解这一点很重要，首先我们要理解机器阅读的方式。在语义化 HTML 出现前，开发者都是用 div 加类属性来区分网页内容的。比如：
 

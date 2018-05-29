@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 网页字体是定义网页所有字体。包括[basic CSS text properties](./Chapter-04.md)决定用什么字体，要不要斜体。但网页字体做的更多，比如字符，单词，行的间隙，它让文本不同，以及设置每个字体的`font-family`。
 
-![Diagram: examples of font families, relative font sizes, indent styles, text alignment, vertical spacing, and line length](/images/web-typography-terminology-e06b82.png)
+![Diagram: examples of font families, relative font sizes, indent styles, text alignment, vertical spacing, and line length](/images/html-css/web-typography-terminology-e06b82.png)
 
 字体排版一般由设计师决定。问题是字体排版是一种无形的艺术。要想真正了解你的设计师想要的是什么。你需要像他们一样，用同样的方式进行排版。
 
@@ -22,7 +22,7 @@ layout: SpecialLayout
 
 过去，web 开发者只能用 web 安全字体。是在计算机预装的十几个字体集。不可以发送定制字体文件到浏览器在网站上使用。
 
-![Diagram: web server asking user’s computer to display text in Georgia font, user’s computer checking its system for that font](/images/web-safe-fonts-eaa8b0.png)
+![Diagram: web server asking user’s computer to display text in Georgia font, user’s computer checking its system for that font](/images/html-css/web-safe-fonts-eaa8b0.png)
 
 如果想要展示特殊字体只能用图片。这种限制真的非常糟糕，我都无法想象之前的开发者是如何活下来的。
 
@@ -48,13 +48,13 @@ IE
 
 在接下来的开发生涯中，你可能会遇到这种情况： [“Bulletproof `@font-face` syntax”](https://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/)
 
-![Diagram: web server providing .svg, .eot, .ttf, and .woff fonts for the browser to use](/images/bulletproof-font-face-d18a22.png)
+![Diagram: web server providing .svg, .eot, .ttf, and .woff fonts for the browser to use](/images/html-css/bulletproof-font-face-d18a22.png)
 
 ### WOFF 字体
 
 由于 web 开发字体格式（woff），开发更简单了点。[超过 90%](http://caniuse.com/#search=woff) 的现代浏览器支持。`.woff` 字体向后兼容, `.woff2`比它更小（意味着更好的性能）。
 
-![Diagram: web server providing only .woff and .woff2 fonts for the browser to use](/images/woff-and-woff-2-fonts-0cced1.png)
+![Diagram: web server providing only .woff and .woff2 fonts for the browser to use](/images/html-css/woff-and-woff-2-fonts-0cced1.png)
 
 最终，只需要支持 WOFF2，但目前还是建议提供 WOFF 和 WOFF2 web 字体，以获得较老的浏览器的良好覆盖率，并提高现代浏览器的性能。除非传统浏览器占了你受众目标群体的很大一部分，不建议使用已经过时的, `.ttf`, `.svg`, 和 `.eot` 字体。
 
@@ -74,11 +74,11 @@ IE
 
 开始我们的网页字体探索， [example website](https://internetingishard.com/html-and-css/web-typography/example/final/web-fonts.html). 下载 [download the initial project](https://internetingishard.com//html-and-css/web-typography/web-typography-338d1d.zip)并解压。
 
-![Screenshot: Atom’s file browser after unzipping the example project](/images/project-files-af1f60.png)
+![Screenshot: Atom’s file browser after unzipping the example project](/images/html-css/project-files-af1f60.png)
 
 有 6 个 HTML 文档，引用同一个`typo.css`样式。通过给每个文件添加样式来演示
 
-![Web page with web fonts versus system fonts example (before adding web fonts)](/images/web-typography-screenshot-669f41.png)
+![Web page with web fonts versus system fonts example (before adding web fonts)](/images/html-css/web-typography-screenshot-669f41.png)
 
 用浏览器打开文件，会发现初始化项目和最终示例很像，只是少了 web 字体和其他 css 排版属性。
 
@@ -96,7 +96,7 @@ IE
 
 我们需要使用 web 字体，例子中使用的是免费的 Roboto 字体，[此处下载](https://www.fontsquirrel.com/fonts/roboto) 。点击 **Webfont Kit** 选项, 而不是 **Download TTF** 按钮。 只需要下载 **WOFF**, 最后点 **Download @font-face Kit** 按钮。
 
-![Screenshot: downloading the Roboto font family from Font Squirrel](/images/download-roboto-screenshot-348421.png)
+![Screenshot: downloading the Roboto font family from Font Squirrel](/images/html-css/download-roboto-screenshot-348421.png)
 
 有个带许可证的 ZIP 文件，还有一些说明，以及一个包含大量子目录的 web 字体文件夹。Roboto 字体有一组不同的字体。我们需要的是 `roboto_light_macroman`。 打开目录然后复制 `Roboto-Light-webfont.woff` 文件到 `web-typography` 项目。
 
@@ -144,7 +144,7 @@ body {
 
 `.system-fonts` 提供系统字体，打开浏览器，可以看到头部使用的是 Roboto Light 字体，底部用的是系统默认字体。
 
-![Web page with web fonts versus system fonts example (after adding web fonts)](/images/custom-web-font-vs-system-font-0aa7bc.png)
+![Web page with web fonts versus system fonts example (after adding web fonts)](/images/html-css/custom-web-font-vs-system-font-0aa7bc.png)
 
 ## Font Families and Font Faces
 
@@ -152,13 +152,13 @@ body {
 
 例如，Roboto Light 是 Roboto 中的一种。我们之前下载的其余 17 种风格如下：
 
-![Chart of Roboto fonts: font weights (100-900) on x-axis, font styles (roman, italic, condensed) on y-axis](/images/font-weights-and-styles-9bf7f0.png)
+![Chart of Roboto fonts: font weights (100-900) on x-axis, font styles (roman, italic, condensed) on y-axis](/images/html-css/font-weights-and-styles-9bf7f0.png)
 
 在 css 中，字体粗细值表示为 100 到 900 之间的数值。每个数值，都有相对标准化的，人性化的术语。 Black 对应 900，bold 对应 700。regular 对应 400 等等。如你所见，大多数 face 并没有指定粗细值，比如 Roboto 的 “extra light” (200), “semi bold” (600), 和 “extra bold” (800).
 
 值得注意的是，每种风格和粗细代表一个 face。在高质量的字体家族中，浓缩的风格并不是简单地把罗马字体压扁，粗的版本也不代表字体更厚。face 中每个字母其实都是精心设计的，以确保它能提供文本的细致体验。
 
-![Roman letter a versus italic letter a](/images/roman-versus-italic-a-fe7025.png)
+![Roman letter a versus italic letter a](/images/html-css/roman-versus-italic-a-fe7025.png)
 
 这在许多衬线字体的斜体和罗马字体中尤为明显。比如你正在阅读的字体，当它是斜体的时候，完全是一个不同的形状。
 
@@ -180,7 +180,7 @@ body {
 
 刷新界面，加粗字体并没有很粗。因为它是合成的。`<strong>` 元素并没有粗体字体，所以浏览器试图通过伪装它。斜体也一样，但它有点难分辨。这种自动转换通常导致低质量的排版。
 
-![Screenshot: synthesized bold as slightly bolder text versus genuine bold as much bolder text](/images/synthesized-bold-vs-genuine-bold-363a2f.png)
+![Screenshot: synthesized bold as slightly bolder text versus genuine bold as much bolder text](/images/html-css/synthesized-bold-vs-genuine-bold-363a2f.png)
 
 为了验证粗体和斜体是否是真的合成的，可以试着将以下规则添加到 css 或在哪个。`font-synthesis` 属性决定了浏览器是否允许伪造。目前只有火狐支持，chrome 和 safari 暂不支持：
 
@@ -231,7 +231,7 @@ strong {
 
 刷新 `web-fonts.html` 后可以看到想要的结果，但问题是每次想加粗或斜体都要指定 `font-family` 特别奇怪。建议用 `font-style` 和 `font-weight`。
 
-![Diagram: Mapping three related .woff files to three unrelated @font-face declarations](/images/at-font-face-multiple-faces-wrong-way-68feb0.png)
+![Diagram: Mapping three related .woff files to three unrelated @font-face declarations](/images/html-css/at-font-face-multiple-faces-wrong-way-68feb0.png)
 
 最终我们陷入了很尴尬的境地，在 `@font-face` 中使用独立的 `font-family`并没有隐射出他们实际上是 Roboto family 的一部分。
 
@@ -266,7 +266,7 @@ strong {
 
 来逐个说明下， 第一个定义了 300 粗的 normal Roboto 字体。第二个定义了 300 粗的斜体 Roboto 字体。最后一个是 700 粗的。
 
-![Diagram: Mapping three related .woff files to three related @font-face declarations by specifying font-style and font-weight](/images/at-font-face-multiple-faces-8198c0.png)
+![Diagram: Mapping three related .woff files to three related @font-face declarations by specifying font-style and font-weight](/images/html-css/at-font-face-multiple-faces-8198c0.png)
 
 这样就可以让浏览器知道我们的字体是相关的，接下来就可以简单地用 `font-style` 和 `font-weight` 设置样式和粗细，同时浏览器会自动加载对应 `.woff` 文件：
 
@@ -292,11 +292,11 @@ strong {
 
 好吧!有点难，接下来，我们将讨论一种更为简单的方法：[Google Fonts](https://fonts.google.com/)。这让我们可以跳过本地托管的前两个步骤。谷歌字体将帮我们处理 `.woff` 文件和 `@font-face`。
 
-![Diagram: serving web fonts from our own web server versus serving them from Google Fonts’ servers](/images/locally-vs-externally-hosted-fonts-7bba77.png)
+![Diagram: serving web fonts from our own web server versus serving them from Google Fonts’ servers](/images/html-css/locally-vs-externally-hosted-fonts-7bba77.png)
 
 这一部分，我们将在 `History.html` 文件敲代码。如果你想知道排版的历史，可以阅读示例文本。每个文件都在使用 Roboto Light，但我们接下来会用上面聊到的方法来对应修改。
 
-![Screenshot: copying web fonts <link> from Google Fonts](/images/selecting-a-google-font-3a5534.png)
+![Screenshot: copying web fonts <link> from Google Fonts](/images/html-css/selecting-a-google-font-3a5534.png)
 
 让我们来改变 _Gothic/Blackletter_ 部分的字体。在 [Google Fonts](https://www.google.com/fonts) 中搜索 **UnifrakturMaguntia** 。点击 **Select this font** 做如下处理：
 
@@ -318,7 +318,7 @@ strong {
 
 有 `class='blackletter'` 属性的部分，会显示如下效果：
 
-![Screenshot: text rendered in a blackletter font](/images/adding-a-google-font-e4afca.png)
+![Screenshot: text rendered in a blackletter font](/images/html-css/adding-a-google-font-e4afca.png)
 
 Google Fonts 简单粗暴，但是对于专业的网站来说还是建议用本地托管的 web 字体。这样有更多地可能性，只要处理得到。可以很大提升网站的性能。
 
@@ -375,7 +375,7 @@ Google Fonts 简单粗暴，但是对于专业的网站来说还是建议用本�
 
 段落间的分离是排版最基本的功能之一。有两种普遍接受的解决方案：要么首行缩进，要门段落之间留白。你的读者(但愿如此) 并不傻，他们不需要特别强调新段落，所以不要同时使用缩进和留白。
 
-![Diagram: indenting first line of new paragraphs (ok), adding margins between paragraphs (ok), both (not ok)](/images/paragraph-indents-vs-margins-943b17.png)
+![Diagram: indenting first line of new paragraphs (ok), adding margins between paragraphs (ok), both (not ok)](/images/html-css/paragraph-indents-vs-margins-943b17.png)
 
 `text-indent` 属性用来定义第一行的缩进，修改如下：
 
@@ -409,7 +409,7 @@ Google Fonts 简单粗暴，但是对于专业的网站来说还是建议用本�
 
 字体的对齐方式会对阅读参数潜移默化的影响。之前可能没注意过，但阅读一段文字时，眼睛其实不会移动地很流畅。相反，它会从一个单词跳到另一个单词，一行跳到另一行。不断地切换盯着的地方。
 
-![Diagram: text with several dots on it (you read like this) versus gradients over lines of text (you don’t read like this)](/images/fixation-reading-vs-smooth-eye-motions-9c0886.png)
+![Diagram: text with several dots on it (you read like this) versus gradients over lines of text (you don’t read like this)](/images/html-css/fixation-reading-vs-smooth-eye-motions-9c0886.png)
 
 文本对齐对于一个精心设计的 HTML 文档来说从来都不会马虎。它需要考虑到人类生理学，好的对齐方式实际上可以让用户更好地阅读你的内容。从一行跳到另一行时，他们的眼睛会跳转到一个锚点。
 
@@ -419,7 +419,7 @@ Google Fonts 简单粗暴，但是对于专业的网站来说还是建议用本�
 
 大部分文本是左对齐的，因为它给读者一个垂直的锚点，可以跳回每一行。
 
-![Diagram: vertically aligned dots on left side of left-aligned text serving as an anchor for your eyes](/images/left-text-alignment-26dbc5.png)
+![Diagram: vertically aligned dots on left side of left-aligned text serving as an anchor for your eyes](/images/html-css/left-text-alignment-26dbc5.png)
 
 左对齐是 `text-align` 的默认值，如果要显示，可以这么处理：
 
@@ -437,7 +437,7 @@ Google Fonts 简单粗暴，但是对于专业的网站来说还是建议用本�
 
 居中对齐没有锚点，非常不适合跳到下一行，比较适合短线长度，比如诗歌，歌词和标题。
 
-![Diagram: uneven dots on center-aligned text](/images/center-text-alignment-29e1d3.png)
+![Diagram: uneven dots on center-aligned text](/images/html-css/center-text-alignment-29e1d3.png)
 
 解析添加如下代码：
 
@@ -453,7 +453,7 @@ Google Fonts 简单粗暴，但是对于专业的网站来说还是建议用本�
 
 在选择文本对齐时，另一个考虑因素是它与周围元素的关系。例如，看一下 `alignment.html` 的第三部分。我们想要将图像的标题移动到图像的左边并将其右对齐，使它看起来像是附加在图像上：
 
-![Diagram: image with right-aligned text caption to the left of it](/images/right-aligning-a-caption-cb645b.png)
+![Diagram: image with right-aligned text caption to the left of it](/images/html-css/right-aligning-a-caption-cb645b.png)
 
 添加如下样式：
 
@@ -487,7 +487,7 @@ figcaption {
 
 通过巧妙地调整单词/字母之间的间距，并将长单词与连字符分隔开，直到每一行都是相同的宽度，就可以创建合理的文本。没有高质量的断字引擎会导致单词之间出现巨大的空白。这些凹凸不平的空间使得眼睛在文本中横向移动变得更加困难。
 
-![Diagram: paragraph with bad hyphenation (uneven spaces between letters and words) versus paragraph with good hyphenation (even spaces between letters and words)](/images/good-vs-bad-hyphenation-engine-ba40e3.png)
+![Diagram: paragraph with bad hyphenation (uneven spaces between letters and words) versus paragraph with good hyphenation (even spaces between letters and words)](/images/html-css/good-vs-bad-hyphenation-engine-ba40e3.png)
 
 可惜大多数浏览器没有断字引擎，所以最好避免文本在 HTML 文档中调整。我们可以这么处理：
 
@@ -539,7 +539,7 @@ figcaption {
 
 行高，内边距，外边距发生一点细微变化都会对整个网页质量产生巨大的影响。
 
-![Web page with large, consistent spacing versus web page with cramped, uneven spacing](/images/vertical-text-spacing-a9d71f.png)
+![Web page with large, consistent spacing versus web page with cramped, uneven spacing](/images/html-css/vertical-text-spacing-a9d71f.png)
 
 计算垂直间距需要数学和心理学，但这一般都是设计师的工作。作为开发者需要知道的是用什么 css 属性，更重要的是，你必须明白你的设计师的用意。所以你需要注意 `margin`，`padding`，和 `line-height` 属性。
 
@@ -553,7 +553,7 @@ figcaption {
 
 最好是把一行字符的数量控制在 80 个左右，和对齐方式一样，这样会微妙地影响内容的可读性。字符越多，眼睛越累。长度过长还会导致跳转到下一行的时候迷失掉。
 
-![Diagram: line length as the width of a paragraph](/images/line-length-measure-ce052b.png)
+![Diagram: line length as the width of a paragraph](/images/html-css/line-length-measure-ce052b.png)
 
 这就是为什么这么多网站(包括本站)使用固定宽度布局，或在大屏的情况拆分为多列。如果不划分列，那么长度会变得难以接受。
 

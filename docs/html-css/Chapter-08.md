@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 有别于 [Floats](./Chapter-07.md)，Flexbox 布局不仅可以水平定位，还可以处理对齐，方向，顺序以及元素的大小。
 
-![Diagram: comparison of flexbox alignment, direction, order, and size properties](/images/flexbox-layouts-7abd58.png)
+![Diagram: comparison of flexbox alignment, direction, order, and size properties](/images/html-css/flexbox-layouts-7abd58.png)
 
 网页开发发生了巨大的变化，所以有必要了解下历史。在过去十几年里，floats 在处理复杂网页布局中起到了重要的作用，它可用于低版本浏览器。开发者们用它创建了非常多的界面。这意味着我们难免会碰到使用 float 的网页。( 所以上一章节还是有必要学习的 )
 
@@ -14,7 +14,7 @@ layout: SpecialLayout
 
 我们会发现越来越多的开发者开始用 flexbox 来开发网站。我们建议尽可能使用 flexbox ，除了你需要用 floats 让文本围绕一个盒子( 就像杂志布局 )或者你需要兼容老浏览器。
 
-![Diagram: CSS floats for text wrapping around a box versus flexbox for the rest of the page layout](/images/flexbox-vs-floats-418bf3.png)
+![Diagram: CSS floats for text wrapping around a box versus flexbox for the rest of the page layout](/images/html-css/flexbox-vs-floats-418bf3.png)
 
 本章，我们将一步步探索 flexbox 布局原理。你将会用它愉快地实现布局。
 
@@ -22,7 +22,7 @@ layout: SpecialLayout
 
 本章例子比较简单，会介绍 flexbox 的所有属性，最终网页看起来像这样：
 
-![Web page with flexbox-based layout](/images/footer-flexible-items-static-widths-af0a32.png)
+![Web page with flexbox-based layout](/images/html-css/footer-flexible-items-static-widths-af0a32.png)
 
 新建 `flexbox` 目录，再创建`flexbox.html`文件：
 
@@ -69,13 +69,13 @@ layout: SpecialLayout
 
 最后下载 [download some images](https://internetingishard.com/html-and-css/flexbox/flexbox-images-449705.zip) 图片后，解压到 `flexbox` 目录，会有一个 images 目录。看起来像这样：
 
-![Screenshot of project files](/images/project-files-5cb6e0.png)
+![Screenshot of project files](/images/html-css/project-files-5cb6e0.png)
 
 ## Flexbox 概览
 
 Flexbox 有两种类型的盒子："flex container" 和 "flex items"。flex 容器用于将 flex items 组合起来一起定义位置。
 
-![Diagram: flex container as a highlighted container wrapping grayed out elements versus flex items as highlighted boxes inside the container](/images/flex-container-and-flex-items-6234bb.png)
+![Diagram: flex container as a highlighted container wrapping grayed out elements versus flex items as highlighted boxes inside the container](/images/html-css/flex-container-and-flex-items-6234bb.png)
 
 flex 容器下的子元素就成为 flex 子项目。每个 flex 子项目可以被单独处理，不过这取决于容器如何定义他们的布局方式。flex 子项目的目的是让容器知道有多少元素需要定位。
 
@@ -96,7 +96,7 @@ flex 容器下的子元素就成为 flex 子项目。每个 flex 子项目可以
 
 用了这个就可以使用，flex 相关的属性了。明确定义 flex 容器意味着你可以讲 flexbox 跟其他盒模型混合着用。(e.g., 在 [Advanced Positioning](./Chapter-09.md) 会介绍).
 
-![Diagram: Mixing and matching flexbox layout with block boxes and floats](/images/enabling-flexbox-dd3b59.png)
+![Diagram: Mixing and matching flexbox layout with block boxes and floats](/images/html-css/enabling-flexbox-dd3b59.png)
 
 现在就可以处理 flex 子项目了。
 
@@ -114,7 +114,7 @@ flex 容器下的子元素就成为 flex 子项目。每个 flex 子项目可以
 
 效果跟给 `.menu` 元素添加 `margin:0 auto`是一样的，但我们是跟元素添加属性(flex 容器)而不是 flex 子项目。跟处理其他布局稍有不同。
 
-![Diagram: flex-start (3 left-aligned boxes), center (3 center-aligned boxes), flex-end (3 right-aligned boxes)](/images/flex-justify-content-alignment-ea129c.png)
+![Diagram: flex-start (3 left-aligned boxes), center (3 center-aligned boxes), flex-end (3 right-aligned boxes)](/images/html-css/flex-justify-content-alignment-ea129c.png)
 
 `justify-content` 的其他值：
 
@@ -130,7 +130,7 @@ flex 容器下的子元素就成为 flex 子项目。每个 flex 子项目可以
 
 你可能会说，我用 float 也可以实现左右对齐，居中对齐。确实，现在你还不能感受 flexbox 的强大。但是如果容器中有多个子项目的时候，`justify-content` 属性还能让容器内的元素等分布局。
 
-![Diagram: space-around (3 boxes with equal space between them and their container), space-between (3 boxes with spaces between them, but not between their container)](/images/flex-justify-content-distribution-b0ee9c.png)
+![Diagram: space-around (3 boxes with equal space between them and their container), space-between (3 boxes with spaces between them, but not between their container)](/images/html-css/flex-justify-content-distribution-b0ee9c.png)
 
 像这样：
 
@@ -145,7 +145,7 @@ flex 容器下的子元素就成为 flex 子项目。每个 flex 子项目可以
 
 效果是这样的：
 
-![Web page showing menu bar <li> elements laid out with space-between](/images/menu-bar-flex-space-around-e4b5a5.png)
+![Web page showing menu bar <li> elements laid out with space-between](/images/html-css/menu-bar-flex-space-around-e4b5a5.png)
 
 `space-between` 值有点类似，但子项目会有特殊的间距。赶紧试一下：
 
@@ -159,7 +159,7 @@ justify-content: space-between;
 
 flex 容器只能影响一级子元素。所以必要时，我们需要组合子元素来实现 flex 布局。比如把需要作用的元素添加`<div>`。
 
-![Diagram: wrapping two flex items in a <div> to eliminate one of the flex items](/images/grouping-flex-items-1bb642.png)
+![Diagram: wrapping two flex items in a <div> to eliminate one of the flex items](/images/html-css/grouping-flex-items-1bb642.png)
 
 让我们测试一下：
 
@@ -175,7 +175,7 @@ flex 容器只能影响一级子元素。所以必要时，我们需要组合子
 
 这时 `.menu` 作为 flex 容器只能影响 `.date` 和 `.links` 两个元素。可以看到这两个元素分别在界面左和右边。
 
-![Web page showing two menu bar <li> items wrapped in a container <div>](/images/menu-bar-grouped-items-1-31c157.png)
+![Web page showing two menu bar <li> items wrapped in a container <div>](/images/html-css/menu-bar-grouped-items-1-31c157.png)
 
 可以用同样的方法处理 `.links`：
 
@@ -193,7 +193,7 @@ flex 容器只能影响一级子元素。所以必要时，我们需要组合子
 
 links 此时出现在右边，注意外边距同样起作用 [CSS Box Model](./Chapter-05.md)。相对于常规盒模型来说，外边距居中对于 flexbox 来说有别的意义，稍后介绍。
 
-![Web page <li> elements laid out with nested flexbox containers](/images/menu-bar-grouped-items-2-50cec0.png)
+![Web page <li> elements laid out with nested flexbox containers](/images/html-css/menu-bar-grouped-items-2-50cec0.png)
 
 白色边框我们是不需要的，所以你可以删掉它。
 
@@ -201,7 +201,7 @@ links 此时出现在右边，注意外边距同样起作用 [CSS Box Model](./C
 
 处理完水平对齐，让我们来处理浮动布局做不到垂直对齐。
 
-![Diagram: justify-content (left and right), align-items (top and bottom)](/images/align-items-vs-justify-content-4d380e.png)
+![Diagram: justify-content (left and right), align-items (top and bottom)](/images/html-css/align-items-vs-justify-content-4d380e.png)
 
 添加如下 html：
 
@@ -235,7 +235,7 @@ links 此时出现在右边，注意外边距同样起作用 [CSS Box Model](./C
 
 `.header`有固定高度，它的子元素将垂直对齐。官方称之为 "cross-axis" 对齐 ( 稍后会说明为什么 )，我们暂且叫它垂直对齐。
 
-![Web page showing heading and icons vertically centered in a header container via the align-items property](/images/header-align-items-c53758.png)
+![Web page showing heading and icons vertically centered in a header container via the align-items property](/images/html-css/header-align-items-c53758.png)
 
 垂直对齐通过给 flex 容器添加 `align-items` 属性：
 
@@ -254,7 +254,7 @@ links 此时出现在右边，注意外边距同样起作用 [CSS Box Model](./C
 * `stretch`
 * `baseline`
 
-![Diagram: flex-start (boxes at top of container), center (boxes in center of container), flex-end (boxes at bottom of container, stretch (boxes filling height of container)](/images/flex-align-items-26abfd.png)
+![Diagram: flex-start (boxes at top of container), center (boxes in center of container), flex-end (boxes at bottom of container, stretch (boxes filling height of container)](/images/html-css/flex-align-items-26abfd.png)
 
 这些值都直观明了，让我们深入了解 `stretch` ：
 
@@ -279,7 +279,7 @@ links 此时出现在右边，注意外边距同样起作用 [CSS Box Model](./C
 
 Flexbox 比 [float-based grids](./Chapter-07.md)更强大。它不仅可以实现栅格布局，还能改变布局方向，顺序等，我们将用到 `flex-wrap` 属性。
 
-![Diagram: no wrapping (boxes flowing outside of container), with wrapping (boxes wrapping to next line in container)](/images/flex-wrap-b960c1.png)
+![Diagram: no wrapping (boxes flowing outside of container), with wrapping (boxes wrapping to next line in container)](/images/html-css/flex-wrap-b960c1.png)
 
 修改 html：
 
@@ -333,7 +333,7 @@ Flexbox 比 [float-based grids](./Chapter-07.md)更强大。它不仅可以实�
 
 会这样：
 
-![Web page with messed up layout due to no flexbox wrapping](/images/grid-no-flex-wrap-66c396.png)
+![Web page with messed up layout due to no flexbox wrapping](/images/html-css/grid-no-flex-wrap-66c396.png)
 
 可以用`flex-wrap`强制换行：
 
@@ -357,13 +357,13 @@ Flexbox 比 [float-based grids](./Chapter-07.md)更强大。它不仅可以实�
 
 用浮动来实现这个可能会稍微复杂一点。
 
-![Web page showing grid created from correct flexbox wrapping](/images/grid-with-flex-wrap-1da4da.png)
+![Web page showing grid created from correct flexbox wrapping](/images/html-css/grid-with-flex-wrap-1da4da.png)
 
 ## 容器方向
 
 容器可以设置子项目的水平或垂直方向。之前都是采用默认方向。
 
-![Diagram: row (3 horizontal boxes), column (3 vertical boxes)](/images/flex-direction-9acadf.png)
+![Diagram: row (3 horizontal boxes), column (3 vertical boxes)](/images/html-css/flex-direction-9acadf.png)
 
 flexbox 可以改变方向确实非常不错，比如：
 
@@ -376,7 +376,7 @@ flexbox 可以改变方向确实非常不错，比如：
 
 这时替换了默认的 `row` 值，方向变成了列。
 
-![Web page with grid turned into a vertical column of boxes](/images/flex-direction-column-1bb8a0.png)
+![Web page with grid turned into a vertical column of boxes](/images/html-css/flex-direction-column-1bb8a0.png)
 
 响应式设计的意义是让 PC 跟 mobile 用户体验一致。对于手机布局有个比较重要的问题是，它是单列的。而 PC 是可以水平。这时你会发现`flex-direction`在创建[响应式布局](./Chapter-11.md)时多么有用。
 
@@ -384,7 +384,7 @@ flexbox 可以改变方向确实非常不错，比如：
 
 注意列布局时，内容还是在左对齐。尽管我们使用了 `justify-content:center;`。当你改变了容器的方向，`justify-content` 属性也跟着一起变了。现在是垂直对齐而不是水平对齐了。
 
-![Diagram: axes flipped when flex-direction is equal to column](/images/flex-direction-axes-b30e85.png)
+![Diagram: axes flipped when flex-direction is equal to column](/images/html-css/flex-direction-axes-b30e85.png)
 
 可以用 `align-items` 属性事项列情况下的居中：
 
@@ -400,7 +400,7 @@ flexbox 可以改变方向确实非常不错，比如：
 
 目前我们的浏览器盒子的顺序跟元素在文档中的顺序一直，那怎么打破这种模式呢。
 
-![Diagram: row (left to right), row-reverse (right to left), column (top to bottom), column-reverse (bottom to top)](/images/flex-direction-reverse-532d8f.png)
+![Diagram: row (left to right), row-reverse (right to left), column (top to bottom), column-reverse (bottom to top)](/images/html-css/flex-direction-reverse-532d8f.png)
 
 `flex-direction` 属性有两个值 `row-reverse` 和 `column-reverse` 属性。试一下：
 
@@ -417,7 +417,7 @@ flexbox 可以改变方向确实非常不错，比如：
 
 现在行排列从左到右变成了右到左。注意，行不是从 5 开始而是 3。这有很多应用场景 ( `column-reverse` 很适合手机布局 )，稍后介绍。
 
-![Web page with grid rows displayed backwards (3, 2, 1 in first row and 5, 4 in second row)](/images/grid-direction-row-reverse-78cc12.png)
+![Web page with grid rows displayed backwards (3, 2, 1 in first row and 5, 4 in second row)](/images/html-css/grid-direction-row-reverse-78cc12.png)
 
 flexbox 出现前，用 css 实现排序相对于用 JavaScript 来说可能不太容易，但是我们之前有说过职责分离的问题，所以尽量用 css 实现布局。
 
@@ -425,7 +425,7 @@ flexbox 出现前，用 css 实现排序相对于用 JavaScript 来说可能不�
 
 本章通篇讲解如何处理父容器下的所有一级子元素布局，但有时还是需要处理个别子项目，剩下的章节将介绍。
 
-![Diagram: setting the order of a flex item individual with the order property](/images/flex-direction-vs-order-021cee.png)
+![Diagram: setting the order of a flex item individual with the order property](/images/html-css/flex-direction-vs-order-021cee.png)
 
 给某个子项目单独添加 `order` 属性可以定义他们的顺序，默认值是 0，修改它会改变排序。
 
@@ -463,7 +463,7 @@ flexbox 出现前，用 css 实现排序相对于用 JavaScript 来说可能不�
 
 可以看到他们被移到了 `.header` 的底部，注意 margin 还是生效的。
 
-![Web page showing bottom-aligned icons via the align-self property](/images/grid-align-self-4302c2.png)
+![Web page showing bottom-aligned icons via the align-self property](/images/html-css/grid-align-self-4302c2.png)
 
 跟`align-items`属性一样，`align-self` 可以设置这些值：
 
@@ -479,7 +479,7 @@ flexbox 出现前，用 css 实现排序相对于用 JavaScript 来说可能不�
 
 `flex` 属性用于定义个别子项目的宽，准确地说，它是子项目在父容器中所占间距的权重。例如 `flex` 值为 2 的项目是值为 1 的两倍大。
 
-![Diagram: no flex (3 square boxes), equal flex (3 rectangle boxes), unequal flex (2 smaller boxes, one stretched out box)](/images/flexible-items-cfe7a3.png)
+![Diagram: no flex (3 square boxes), equal flex (3 rectangle boxes), unequal flex (2 smaller boxes, one stretched out box)](/images/html-css/flexible-items-cfe7a3.png)
 
 添加如下代码：
 
@@ -509,7 +509,7 @@ flexbox 出现前，用 css 实现排序相对于用 JavaScript 来说可能不�
 
 `flex: 1;`为让该项目的宽度扩大为 `.footer` 的宽度，如果这些项目权重用于，则等宽。
 
-![Web page with three equal boxes that stretch to fill the footer](/images/footer-flexible-items-220ac8.png)
+![Web page with three equal boxes that stretch to fill the footer](/images/html-css/footer-flexible-items-220ac8.png)
 
 我们让第三个元素权重为 2：
 
@@ -525,7 +525,7 @@ flexbox 出现前，用 css 实现排序相对于用 JavaScript 来说可能不�
 
 我们也可以切换 flexible 的固定宽度。`flex:initial` 可以让子项目重新使用固定宽度 `width` 属性。这让我们可以混合使用静态和灵活两种模式。
 
-![Diagram: fixed-width box (flex: initial), flexible box (flex: 1)](/images/combining-flexible-and-static-items-52aacb.png)
+![Diagram: fixed-width box (flex: initial), flexible box (flex: 1)](/images/html-css/combining-flexible-and-static-items-52aacb.png)
 
 添加如下代码，让 footer 看起来像上面展示的一样：
 
@@ -540,7 +540,7 @@ flexbox 出现前，用 css 实现排序相对于用 JavaScript 来说可能不�
 
 如果没有使用 `flex:initial` 而是使用 `flexx:1` 会让 `.footer-item` 忽略 `width` 属性。通过 `initial` 我们可以再获得自由布局的同时包含固定宽度。当你修改浏览器窗口时，你会发现只有中间的元素改变了。
 
-![Web page with two static-width boxes on either side of a flexible box stretching to fill the footer](/images/footer-flexible-items-static-widths-af0a32.png)
+![Web page with two static-width boxes on either side of a flexible box stretching to fill the footer](/images/html-css/footer-flexible-items-static-widths-af0a32.png)
 
 这种固定宽度布局非常常见，不仅是在 footer，还有如侧边栏 (或者多个侧边栏) 和网页的响应式内容。
 

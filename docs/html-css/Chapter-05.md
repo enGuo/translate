@@ -8,7 +8,7 @@ layout: SpecialLayout
 
 盒模型是决定网页布局的一套规则，在网页中每个 HTML 元素都被视为带有特定属性的盒子。网页元素挨着渲染，盒模型的作用就是定制化这套默认布局机制。
 
-![Diagram: CSS stylesheet broken down into two parts (text formatting and the box model)](/images/css-html-and-the-box-model-9d82a2.png)
+![Diagram: CSS stylesheet broken down into two parts (text formatting and the box model)](/images/html-css/css-html-and-the-box-model-9d82a2.png)
 
 网页开发者很大一部分工作就是根据盒模型的规则将设计稿还原成网页。学完这章你就会知道，为什么要采用布局而不是直接用图片。
 
@@ -48,7 +48,7 @@ layout: SpecialLayout
 
 在基础网页章节 [how CSS uses “boxes”](./Chapter-02.md) 了解了网页布局。 每个元素都作为盒子在渲染，分为块级和行内
 
-![Diagram: comparison of block boxes with inline boxes](/images/inline-vs-block-boxes-f3e662.png)
+![Diagram: comparison of block boxes with inline boxes](/images/html-css/inline-vs-block-boxes-f3e662.png)
 
 每个 HTML 元素都有默认盒子类型。比如，`<h1>` 和 `<p>` 属于块级元素，`<em>` 和 `<strong>` 属于行内元素，让我们在 `box-styles.css` 中添加如下代码来更好地理解盒子：
 
@@ -66,7 +66,7 @@ strong {
 
 `background-color` 属性作用于所选元素，我们可以看到标头和段落背景变成了灰色，而 em 和 strong 变成了淡蓝。
 
-![Web page highlighting block boxes in gray and inline boxes in blue](/images/block-boxes-and-inline-boxes-7cfa0a.png)
+![Web page highlighting block boxes in gray and inline boxes in blue](/images/html-css/block-boxes-and-inline-boxes-7cfa0a.png)
 
 这给我们展示了块级和行内非常重要的区别：
 
@@ -94,7 +94,7 @@ strong {
 
 现在这些元素就跟标头和段落一样独占一行了，对 `<a>` 和 `<img>` 同样有效。( 这两个元素默认为行内元素 )
 
-![Web page showing what happens when you turn inline boxes into block boxes with the CSS display property](/images/turning-inline-into-block-boxes-772f4c.png)
+![Web page showing what happens when you turn inline boxes into block boxes with the CSS display property](/images/html-css/turning-inline-into-block-boxes-772f4c.png)
 
 然而我们并不建议将 `<em>` 和 `<strong>` 改为块级元素，所以让我们改回来：
 
@@ -117,7 +117,7 @@ strong {
 
 每个元素在浏览器中都按这些 css 规则来渲染
 
-![Diagram: content, padding, border, and margins making up the CSS box model](/images/css-box-model-73a525.png)
+![Diagram: content, padding, border, and margins making up the CSS box model](/images/html-css/css-box-model-73a525.png)
 
 ## Padding
 
@@ -131,7 +131,7 @@ h1 {
 
 给每个 `<h1>` 标头，填充 50 像素，注意背景色是如何填充的，所有在边框里面的内容都将被填充。
 
-![Web page showing increase in <h1> padding (background size increases)](/images/increasing-heading-padding-5a289d.png)
+![Web page showing increase in <h1> padding (background size increases)](/images/html-css/increasing-heading-padding-5a289d.png)
 
 如果你想为不同方向设置不同值，可以这么做：
 
@@ -150,7 +150,7 @@ p {
 
 把所有的属性都这么写确实很烦人，css 提供了一种缩写形式可以简写 top/bottom 和 left/right，只用一行就可以表示所有 padding 的值。
 
-![Diagram: CSS padding property with vertical and horizontal values highlighted](/images/padding-shortform-two-values-a7ed4c.png)
+![Diagram: CSS padding property with vertical and horizontal values highlighted](/images/html-css/padding-shortform-two-values-a7ed4c.png)
 
 就像：
 
@@ -162,7 +162,7 @@ p {
 
 这个四值还有其他不同的情况
 
-![Diagram: CSS padding property with top, right, bottom, and left values highlighted](/images/padding-shortform-four-values-93c021.png)
+![Diagram: CSS padding property with top, right, bottom, and left values highlighted](/images/html-css/padding-shortform-four-values-93c021.png)
 
 比如
 
@@ -178,7 +178,7 @@ p {
 
 继续我们的讲解，边框是原生内容和填充外的一条线，它的语法之前都没碰到过。首先定义线条的粗细再者是它的风格最后是颜色。
 
-![Diagram: CSS border property showing size, style, and color syntax](/images/css-border-syntax-d8ba17.png)
+![Diagram: CSS border property showing size, style, and color syntax](/images/html-css/css-border-syntax-d8ba17.png)
 
 试着给 `<h1>` 添加边框，在 `box-styles.css` 中编写：
 
@@ -232,11 +232,11 @@ strong {
 
 水平方向的 margin 正常工作，但垂直方向就没效果了。
 
-![Web page demonstrating lack of vertical margins on inline boxes](/images/margins-on-inline-elements-4c569c.png)
+![Web page demonstrating lack of vertical margins on inline boxes](/images/html-css/margins-on-inline-elements-4c569c.png)
 
 如果我们用 `padding` 替换 `margin`，会发现 padding 垂直方向并不能正常工作。
 
-![Web page demonstrating vertical padding on inline boxes](/images/paddings-on-inline-elements-fb52d0.png)
+![Web page demonstrating vertical padding on inline boxes](/images/html-css/paddings-on-inline-elements-fb52d0.png)
 
 这个原因归咎于行内元素中的文本属于流式布局，如果你希望垂直距离，可以用使用块级元素( [change an element’s box type](#改变盒模型的表现形式) )
 
@@ -259,7 +259,7 @@ p {
 
 每个段落都有 50 像素的下外边距，期望是 75 像素，但结果是只有 50 像素，因为较小的上外边距与较大的下外边距合并了。
 
-![Diagram: comparison of an uncollapsed vertical margin with a collapsed vertical margin](/images/vertical-margin-collapse-bba78e.png)
+![Diagram: comparison of an uncollapsed vertical margin with a collapsed vertical margin](/images/html-css/vertical-margin-collapse-bba78e.png)
 
 这种情况对于你要添加最小外边距时非常有用
 
@@ -279,7 +279,7 @@ do not.</p>
 
 下部分再讲解 `<div>`，现在重点是每个连续的元素才会出现塌陷，给每个段落间添加零高度(padding-top)，这样它就可以阻止塌陷。
 
-![Diagram: inserting an empty <div> to force vertical margins to uncollapsed](/images/preventing-margin-collapse-4b96ca.png)
+![Diagram: inserting an empty <div> to force vertical margins to uncollapsed](/images/html-css/preventing-margin-collapse-4b96ca.png)
 
 padding 不会塌陷，所以另外一个解决方式是用 `padding` 替换 `margin`，然而这只适用于你不需要用到 margin 的其他特性。( 目前，我们就采用 `div`的方式解决 )
 
@@ -315,7 +315,7 @@ div {
 
 在浏览器里可以看到一个大的蓝色按钮
 
-![Web page using <div> elements for buttons](/images/generic-div-for-button-70dc27.png)
+![Web page using <div> elements for buttons](/images/html-css/generic-div-for-button-70dc27.png)
 
 当然，`div` 也可以用这些样式，正如之前我们用它来阻止外边距塌陷问题。但其实我们应该选取特定的 div，而不是所有。这就是下一章节[class selectors](./Chapter-06.md)所要介绍的。
 
@@ -325,7 +325,7 @@ div 和 span 的唯一区别是 div 是块级，span 是行内
 
 至此，我们都是让 html 元素自适应。如果你给`<em>`添加更多的文本，padding,border,margin 都会往外扩展。
 
-![Web page showing an <em> element expanding as more content is added](/images/auto-content-width-for-em-element-85d5d2.png)
+![Web page showing an <em> element expanding as more content is added](/images/html-css/auto-content-width-for-em-element-85d5d2.png)
 
 大多数时候我们是希望明确大小的，比如指定 250 像素的侧边栏，css 提供了 `width` 和 `height` 属性。它会取代默认大小：
 
@@ -338,7 +338,7 @@ div {
 
 不管浏览器窗口多大，按钮就只有 200 像素宽且在界面的最左边
 
-![Web page showing an explicit CSS width property on a button](/images/explicit-width-on-generic-div-78d595.png)
+![Web page showing an explicit CSS width property on a button](/images/html-css/explicit-width-on-generic-div-78d595.png)
 
 注意如果你加长按钮文本内容，文本会自动换行，且垂直高度会自动撑大。你可以用[`white-space`](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space) 和 [`overflow`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) 属性改变默认表现形式。
 
@@ -346,7 +346,7 @@ div {
 
 `width` 和 `height` 只是设置盒子内容的大小。padding 和 border 在明确大小后依然会叠加。例子中，你会看到 244 像素的按钮，即便它明确设置了 `width: 200px`。
 
-![Diagram: content-box measurements adding padding and border to width of the element](/images/box-sizing-content-box-09f48a.png)
+![Diagram: content-box measurements adding padding and border to width of the element](/images/html-css/box-sizing-content-box-09f48a.png)
 
 可以说这是反常规的，比如一个 `600px` 的容器里面有是三个 `width:200px` 的盒子，当它们穿不下，因为他们都有 1 像素的边框(所以实际宽度为 202 像素)
 
@@ -369,7 +369,7 @@ div {
 
 现在盒子的实际宽度就变成 `200px`了包括 padding 和 border，这也意味着内容的宽度变成了自适应：
 
-![Diagram: border-box measurements including padding and border with the width of the element](/images/box-sizing-border-box-ace2be.png)
+![Diagram: border-box measurements including padding and border with the width of the element](/images/html-css/box-sizing-border-box-ace2be.png)
 
 这样就比较直观，所以 `border-box` 在现代网页开发很常见。
 
@@ -413,7 +413,7 @@ div {
 
 你应该有注意到网页有白边，那是因为浏览器有默认的 margin/padding，每个浏览器的 html 元素默认样式不一样，这非常不利于样式统一。
 
-![One web page showing white border due to default margin/padding and another web page without the white border after a universal reset](/images/resetting-box-sizing-and-margins-72ff64.png)
+![One web page showing white border due to default margin/padding and another web page without the white border after a universal reset](/images/html-css/resetting-box-sizing-and-margins-72ff64.png)
 
 可以尝试用 `*` 选择器给所有元素重写 样式如：
 

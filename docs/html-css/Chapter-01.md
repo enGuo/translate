@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 学习 HTML 、 CSS 很难，但接下来的 14 个章节将带领你选择一个好的编辑器 ( 很重要 ) 快速打造一个成熟、高性能的网页。
 
-![Diagram: a person creating web pages](/images/becoming-a-web-developer-0530f1.png)
+![Diagram: a person creating web pages](/images/html-css/becoming-a-web-developer-0530f1.png)
 
 如果你认真读完每个章节，敲完每个代码片段，那么 [_HTML & CSS Is Hard_](/html-css/) 将是你了解 HTML、CSS 唯一需要的，它比市面上很多在线教程和练习都实用。
 
@@ -23,7 +23,7 @@ HyperText Markup Language (HTML), Cascading Style Sheets (CSS), and JavaScript �
 可以想象 HTML 就是网页上的 文本或图片，css 用于排版，JavaScript 给网页添加行为，可操作 css 和 HTML
 :::
 
-![Diagram: HTML as a tree of nodes, CSS as a rendered web page, JavaScript as an interactive web page with fancy behaviors](/images/html-css-javascript-905348.png)
+![Diagram: HTML as a tree of nodes, CSS as a rendered web page, JavaScript as an interactive web page with fancy behaviors](/images/html-css/html-css-javascript-905348.png)
 
 例如，你可以用下面的代码表示一个段落
 
@@ -63,7 +63,7 @@ p.addEventListener('click', function(event) {
 
 安装各种环境，管理你的文件，打包发布到你的网站。这个系列教程专注于讲解 HTML 和 css而非环境搭建
 
-![Diagram: HTML, CSS, and JavaScript pointing to web development (build tools, domain name, web server), turning into a website](/images/languages-vs-web-dev-b849db.png)
+![Diagram: HTML, CSS, and JavaScript pointing to web development (build tools, domain name, web server), turning into a website](/images/html-css/languages-vs-web-dev-b849db.png)
 
 别急，学好 HTML 和 css 是成为 web 开发者很重要的一步。学完本教程后你就可以自己搭建一个网站。
 
@@ -73,7 +73,7 @@ p.addEventListener('click', function(event) {
 
 开发也如此，编写 html、css，选择字体，大小，行间距等。
 
-![Diagram: metal type turning into HTML and CSS, printed page turning into web page, book turning into website](/images/web-publishing-cd96b2.png)
+![Diagram: metal type turning into HTML and CSS, printed page turning into web page, book turning into website](/images/html-css/web-publishing-cd96b2.png)
 
 印刷者把文字打印到书中，我们把 html 文件关联到网页中。学习 HTML 和 css 重要的一条是理解他们是如何在浏览器中工作的。
 
@@ -95,7 +95,7 @@ web常用的框架 ([Bootstrap](https://internetingishard.com/http://getbootstra
 
 编辑器和浏览器是开发网页必备的
 
-![Diagram: text editor (code here) versus web browser (view here)](/images/tools-of-the-trade-649a9a.png)
+![Diagram: text editor (code here) versus web browser (view here)](/images/html-css/tools-of-the-trade-649a9a.png)
 
 好的编辑器是成功的一半，浏览器推荐使用[Chrome](https://internetingishard.com/https://www.google.com/chrome/browser/desktop/) and [Firefox](https://internetingishard.com/https://www.mozilla.org/en-US/firefox/new/) OS X下，可以用  Safari ，强烈建议 不要用 IE。浏览器兼容性也很重要。
 
@@ -105,13 +105,13 @@ web常用的框架 ([Bootstrap](https://internetingishard.com/http://getbootstra
 
  [download it now](https://internetingishard.com/https://atom.io/)接下来我们都用它来开发。
 
-![Screenshot: the welcome screen of the Atom text editor](/images/atom-welcome-screen-a59275.png)
+![Screenshot: the welcome screen of the Atom text editor](/images/html-css/atom-welcome-screen-a59275.png)
 
 ## 新建项目
 
 点击 **File > Open** 按钮打开文件对话框, 选择 **New Folder** 新节目录. 命名为 `hello-atom`, 如何点击 **Open**.
 
-![Screenshot: file browser in the left sidebar of the Atom text editor interface, editor area on the right](/images/file-browser-051ac0.png)
+![Screenshot: file browser in the left sidebar of the Atom text editor interface, editor area on the right](/images/html-css/file-browser-051ac0.png)
 
 ## 新建文件
 
@@ -123,17 +123,17 @@ web常用的框架 ([Bootstrap](https://internetingishard.com/http://getbootstra
 
 编辑器另一个重要的概念是项目文件管理，Atom 侧边栏用于管理文件。**Ctrl+Tab** 用于切换打开的标签页.
 
-![Screenshot: Atom’s file browser after creating a few HTML files](/images/creating-html-files-7489ae.png)
+![Screenshot: Atom’s file browser after creating a few HTML files](/images/html-css/creating-html-files-7489ae.png)
 
 搜索可以帮你快速打开想要的文件
 
-![Screenshot: results in Atom’s fuzzy search bar](/images/atom-command-t-2fbe5e.png)
+![Screenshot: results in Atom’s fuzzy search bar](/images/html-css/atom-command-t-2fbe5e.png)
 
 ## 窗口分隔
 
 Atom 允许分隔窗口，只需右键 **Split Right**.
 
-![Screenshot: two side-by-side panes in the Atom text editor](/images/atom-split-panes-515aba.png)
+![Screenshot: two side-by-side panes in the Atom text editor](/images/html-css/atom-split-panes-515aba.png)
 
 多窗口在同时编写 HTML、css 时特别有用。
 
@@ -143,7 +143,7 @@ Atom 允许分隔窗口，只需右键 **Split Right**.
 
 选择 **Open With > Chrome/Firefox/Safari**. 可以用默认浏览器打开文件。
 
-![Diagram: Editing in a text editor, looking at changes in a web browser](/images/web-dev-workflow-1faddb.png)
+![Diagram: Editing in a text editor, looking at changes in a web browser](/images/html-css/web-dev-workflow-1faddb.png)
 
 现在你可以编辑 `page-one.html` 保存，用 **Cmd+R** (Mac) or **Ctrl+R** (Windows, Linux)刷新界面。
 

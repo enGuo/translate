@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 HTML defines the content of every web page on the Internet. By “marking up” your raw content with HTML tags, you’re able to tell web browsers how you want different parts of your content to be displayed. Creating an HTML document with properly marked up content is the first step of developing a web page.
 
-![Diagram: raw content turning into HTML markup turning into a web page](/images/html-markup-0761f7.png)
+![Diagram: raw content turning into HTML markup turning into a web page](/images/html-css/html-markup-0761f7.png)
 
 In this chapter, we’ll build our first web page. It’ll look like crap because it won’t have any CSS attached to it, but it will serve as a thorough introduction to the HTML elements that web developers work with on a daily basis.
 
@@ -16,7 +16,7 @@ As you work your way through the examples, try to approach them as a more hands-
 
 Let’s get started by creating a new project with Atom called `basic-web-pages`. Then, make a new file called `basics.html` in that folder. This HTML file represents a single web page, and it’s where we’ll put all our code for this chapter. If you’re not already set up with Atom, be sure to read the [Introduction](https://internetingishard.com//html-and-css/introduction/) for this tutorial series.
 
-![Diagram: editing HTML code in a text editor and viewing changes in a web browser](/images/web-dev-workflow-1faddb.png)
+![Diagram: editing HTML code in a text editor and viewing changes in a web browser](/images/html-css/web-dev-workflow-1faddb.png)
 
 Remember that the basic workflow for web developers is to edit HTML in their text editor and view those changes in a web browser, so this is exactly what you should be doing for each section of this chapter.
 
@@ -40,11 +40,11 @@ First, we need to tell browsers that this is an HTML5 web page with the `<!DOCTY
 
 Then, our entire web page needs to be wrapped in `<html>` tags. The actual `<html>` text is called an “opening tag”, while `</html>` is called a “closing tag”. Everything inside of these tags are considered part of the `<html>` “element”, which is this ethereal thing that gets created when a web browser parses your HTML tags.
 
-![Diagram: an HTML element composed of an opening tag and a closing tag](/images/html-tags-elements-72813b.png)
+![Diagram: an HTML element composed of an opening tag and a closing tag](/images/html-css/html-tags-elements-72813b.png)
 
 Inside of the `<html>` element, we have two more elements called `<head>` and `<body>`. A web page’s head contains all of its metadata, like the page title, any CSS stylesheets, and other things that are required to render the page but you don’t necessarily want the user to see. The bulk of our HTML markup will live in the `<body>` element, which represents the visible content of the page. Note that opening up our page in a web browser won’t display anything, since it has an empty `<body>`.
 
-![Diagram: web page split into <head> and <body> elements](/images/html-head-body-7c2a73.png)
+![Diagram: web page split into <head> and <body> elements](/images/html-css/html-head-body-7c2a73.png)
 
 The purpose of this `<head>`/`<body>` split will become clearer in a few chapters after we start working with CSS.
 
@@ -70,7 +70,7 @@ Try updating our `basic.html` file’s `<head>` to match the following:
 
 When you reload the page in your browser, you should still see an empty page, but you’ll also see **Interneting Is Easy!** in the browser tab:
 
-![Web page showing <title> element displayed in a browser tab](/images/html-title-element-f4eb85.png)
+![Web page showing <title> element displayed in a browser tab](/images/html-css/html-title-element-f4eb85.png)
 
 Notice how all the HTML tags in our web page are neatly nested. It’s very important to ensure that there are no overlapping elements. For instance, the `<title>` element is supposed to be inside of the `<head>`, so you’d never want to add the closing `</head>` tag before the closing `</title>` tag:
 
@@ -99,7 +99,7 @@ Titles are all well and good, but let’s do something we can actually see. The 
 
 You should now be able to see some content on the page. Again, since this is content we want to display, it needs to go in the `<body>` element, not `<head>`.
 
-![Web page showing a <p> element with some content in it](/images/html-paragraph-element-842f23.png)
+![Web page showing a <p> element with some content in it](/images/html-css/html-paragraph-element-842f23.png)
 
 Also note how the `<p>` and `<title>` elements are indented twice, while `<body>` and `<head>` are indented once. Indenting nested elements like this is an important best practice that makes your HTML easier to read for other developers (or for yourself if you come back 5 months from now and want to change some stuff).
 
@@ -139,7 +139,7 @@ By default, browsers render less important headings in smaller fonts. For exampl
 
 This should result in a web page that looks something like this:
 
-![Web page showing a big <h1> element and a smaller <h2> element](/images/html-heading-elements-f7fe6a.png)
+![Web page showing a big <h1> element and a smaller <h2> element](/images/html-css/html-heading-elements-f7fe6a.png)
 
 Headings are the primary way you mark up different sections of your content. They define the outline of your web page as both humans and search engines see it, which makes selecting relevant headings essential for a high-quality web page.
 
@@ -161,7 +161,7 @@ Whenever you surround a piece of text with HTML tags, you’re adding new meanin
 
 After adding this markup to the `<body>` element (underneath the existing content), you should see a bulleted list with a dedicated bullet for each `<li>` element:
 
-![Web page showing a <ul> with <li> elements inside of it](/images/html-unordered-lists-f45526.png)
+![Web page showing a <ul> with <li> elements inside of it](/images/html-css/html-unordered-lists-f45526.png)
 
 The HTML specification defines strict rules about what elements can go inside other elements. In this case, `<ul>` elements should only contain `<li>` elements, which means you should never ever write something like this:
 
@@ -201,7 +201,7 @@ With an unordered list, rearranging the `<li>` elements shouldn’t change the m
 
 When you reload the page in your browser, you’ll notice that the browser automatically incremented the count for each `<li>` element. In [Hello, CSS](https://internetingishard.com//html-and-css/hello-css/), we’ll learn how to change what type of numbers get displayed.
 
-![Web page showing a <ol> with <li> elements inside of it](/images/html-ordered-lists-120411.png)
+![Web page showing a <ol> with <li> elements inside of it](/images/html-css/html-ordered-lists-120411.png)
 
 The difference between an unordered list and an ordered list might seem silly, but it really does have significance to web browsers, search engines, and, of course, human readers. It’s also easier than manually numbering each list item.
 
@@ -211,7 +211,7 @@ Step-by-step procedures like recipes, instructions, and even tables of contents 
 
 So far, we’ve only been working with “block-level elements” (also called “flow content”). The other major type of content is “inline elements” or “phrasing content”, which are treated a little bit differently. Block-level elements are always drawn on a new line, while inline elements can affect sections of text anywhere within a line.
 
-![Diagram: comparison of block elements (wrapping several inline elements) with inline elements (inside of a block element)](/images/inline-vs-block-elements-44860e.png)
+![Diagram: comparison of block elements (wrapping several inline elements) with inline elements (inside of a block element)](/images/html-css/inline-vs-block-elements-44860e.png)
 
 For instance, `<p>` is a block-level element, while `<em>` is an inline element that affects a span of text _inside_ of a paragraph. It stands for “emphasis”, and it’s typically displayed as italicized text. Try adding a new section demonstrating emphasized text to our example web page:
 
@@ -224,7 +224,7 @@ phrase.</p>
 
 The part wrapped in `<em>` tags should render as italics, as shown below. Notice how only part of a line has been affected, which is characteristic of inline elements. In the [CSS Box Model](https://internetingishard.com//html-and-css/css-box-model/) chapter, we’ll discover how inline and block elements can have a dramatic impact on the layout of a page.
 
-![Web page highlighting the italic text created with an <em> element](/images/html-emphasis-element-87be03.png)
+![Web page highlighting the italic text created with an <em> element](/images/html-css/html-emphasis-element-87be03.png)
 
 Just in case it hasn’t sunk in yet, it’s _really_ important that you properly nest your HTML elements. It’s easier to mess up the order of tags when you’re using multiple inline elements, so make sure to double-check that your markup never looks like this:
 
@@ -244,7 +244,7 @@ of a word or phrase.</p>
 
 It should be rendered in bold text, like so:
 
-![Web page highlighting the bold text created with a <strong> element](/images/html-strong-element-d3135f.png)
+![Web page highlighting the bold text created with a <strong> element](/images/html-css/html-strong-element-d3135f.png)
 
 To draw even more attention your a span of text, you can nest a `<strong>` element in an `<em>` element (or vice versa). This will give you text that is both strong and emphasized:
 
@@ -254,13 +254,13 @@ To draw even more attention your a span of text, you can nest a `<strong>` eleme
 
 As the example text suggests, this is effectively the typographic equivalent of shouting. Have a read through the [Web Typography](https://internetingishard.com//html-and-css/web-typography/) chapter before going too crazy with the bold and italic fonts.
 
-![Web page highlighting the bold italic text created with a <strong> element wrapped in an <em> element](/images/html-strong-emphasis-element-5b0eb2.png)
+![Web page highlighting the bold italic text created with a <strong> element wrapped in an <em> element](/images/html-css/html-strong-emphasis-element-5b0eb2.png)
 
 ## Structure Versus Presentation
 
 You might be wondering why we’re using the terms “emphasis” and “strong” instead of “italic” and “bold”. That brings us to an important distinction between HTML and CSS. HTML markup should provide _semantic_ information about your content—not _presentational_ information. In other words, HTML should define the structure of your document, leaving its appearance to CSS.
 
-![Diagram: HTML as an abstract tree of nodes compared to CSS as various types of rendered text](/images/structure-vs-presentation-05c228.png)
+![Diagram: HTML as an abstract tree of nodes compared to CSS as various types of rendered text](/images/html-css/structure-vs-presentation-05c228.png)
 
 The pseudo-obsolete `<b>` and `<i>` elements are classic examples of this. They used to stand for “bold” and “italic”, respectively, but HTML5 attempted to create a clear separation between a document’s structure and its presentation. Thus, `<i>` was replaced with `<em>`, since emphasized text can be displayed in all sorts of ways aside from being italicized (e.g., in a different font, a different color, or a bigger size). Same for `<b>` and `<strong>`.
 
@@ -285,7 +285,7 @@ The Authors</p>
 
 The newline after `Regards` in the above snippet will be transformed into a space instead of displaying as a line break:
 
-![Web page showing a plaintext line break collapsing into a space in the rendered page](/images/html-collapsing-whitespace-c4012d.png)
+![Web page showing a plaintext line break collapsing into a space in the rendered page](/images/html-css/html-collapsing-whitespace-c4012d.png)
 
 This behavior may seem counter intuitive, but web developers often set their text editor to limit line length to around 80 characters. As a programmer, it’s easier to manage code this way, but having each of the newlines show up in the rendered page would severely mess up the intended page layout.
 
@@ -298,7 +298,7 @@ The Authors</p>
 
 The `<br/>` element is useful anywhere text formatting matters. Haiku, music lyrics, and signatures are just a few examples where it might come in handy.
 
-![Web page highlighting an actual line break with the <br/> element](/images/html-line-break-element-f40443.png)
+![Web page highlighting an actual line break with the <br/> element](/images/html-css/html-line-break-element-f40443.png)
 
 However, be very careful not to abuse the `<br/>` tag. Each one you use should still convey _meaning_—you shouldn’t use it to, say, add a bunch of space between paragraphs:
 
@@ -331,7 +331,7 @@ soon.</p>
 
 One of the themes for this chapter has been the separation of content (HTML) from presentation (CSS), and `<hr/>` is no different. Like `<em>` and `<strong>`, it has a default appearance (a horizontal line), but once we start working with CSS, we’ll be able to render it as more space between sections, a decorative accent character, or pretty much anything else we want.
 
-![Web page demonstrating an <hr/> element](/images/html-horizontal-rule-element-49f526.png)
+![Web page demonstrating an <hr/> element](/images/html-css/html-horizontal-rule-element-49f526.png)
 
 Like `<br/>`, `<hr/>` should carry meaning—don’t use it when you just want to display a line for the sake of aesthetics. For that, you’ll want to use the CSS `border` property, which we’ll discuss in a few chapters.
 
@@ -356,7 +356,7 @@ This chapter may have seemed like an endless list of HTML elements, and, well, i
 
 What we did in this chapter is always the first step in the web development process—you need to define _what_ you want to say (HTML) before defining _how_ you want to say it (CSS). Hopefully, the `basics.html` file we created in this chapter will serve as a useful quick-reference of core HTML elements. If you ever happen to misplace it, here’s what it should look like:
 
-![Web page showing <title>, <p>, <h1>, <ol>, and other basic HTML elements](/images/basic-web-pages-f786d5.png)
+![Web page showing <title>, <p>, <h1>, <ol>, and other basic HTML elements](/images/html-css/basic-web-pages-f786d5.png)
 
 We talked about how writing HTML is sort of like manipulating content in a WYSIWYG document editor. HTML is obviously a much more manual process, but the trade off is its incredible flexibility. You can display it in a web page, a mobile device, a tablet, or a printed piece of paper, each with different layouts. You can even re-style multiple documents just by changing a single line of CSS. Microsoft Word doesn’t come close to the potential of HTML and CSS as a content medium.
 

@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 "静态定位" 是一种网页的正常流布局，像之前的 [CSS Box Model](./Chapter-05.md), [floats](./Chapter-07.md), 和 [flexbox](./Chapter-08.md) 布局方案都是在操作 "静态" 流，但这在 css 中不是唯一的定位方法。
 
-![Diagram: comparison of static, relative, absolute, and fixed positioning schemes](/images/css-positioning-schemes-790d5b.png)
+![Diagram: comparison of static, relative, absolute, and fixed positioning schemes](/images/html-css/css-positioning-schemes-790d5b.png)
 
 另外三类定位类型有 "relative"，"absolute"，和 "fixed"。每一个都可以让你设置跟 flexbox 和 floats 不一样的特殊坐标系统。跟之前说 "让这个 box 在 container 里居中显示" 不同，高级定位是 "让盒子位于父元素源点的上 20 像素，右 50 像素。"
 
@@ -58,7 +58,7 @@ layout: SpecialLayout
 
 三个例子都有相同的 HTML 结构，每个都有不同的布局效果。
 
-![Screenshot: files in the example project](/images/project-files-714b6b.png)
+![Screenshot: files in the example project](/images/html-css/project-files-714b6b.png)
 
 例子的图片可以从[images](https://internetingishard.com/html-and-css/advanced-positioning/images-89bc45.zip)下载。添加如下样式：
 
@@ -94,13 +94,13 @@ body {
 
 这里只是采用了 flexbox 技术创建了栅格布局，唯一不同的是给 body 设置了固定高度。为的是出现滚动条来演示不同的定位效果。
 
-![Web page with static, relative, absolute, and fixed boxes in different colors](/images/initial-project-screenshot-8ebe66.png)
+![Web page with static, relative, absolute, and fixed boxes in different colors](/images/html-css/initial-project-screenshot-8ebe66.png)
 
 ## 定位中的元素
 
 css `position` 属性可以改变元素定位方式。默认值是 `static` 。当元素的 `position` 属性的值不是 `static` 时，它叫做 "定位中的元素"。接下来通篇都会关于它。
 
-![Diagram: relative, absolute, and fixed elements denoted as positioned elements](/images/positioned-elements-terminology-861fca.png)
+![Diagram: relative, absolute, and fixed elements denoted as positioned elements](/images/html-css/positioned-elements-terminology-861fca.png)
 
 可以混合搭配不同的布局方式，大多数网页都是静态布局，但是也有一些 relatively 和 absolutely 的定位元素。
 
@@ -108,7 +108,7 @@ css `position` 属性可以改变元素定位方式。默认值是 `static` 。�
 
 "relative 定位" 适合于在正常文档流中需要微调的元素
 
-![Diagram: relatively positioned box offset from the upper left corner of its static position](/images/css-relative-positioning-26842e.png)
+![Diagram: relatively positioned box offset from the upper left corner of its static position](/images/html-css/css-relative-positioning-26842e.png)
 
 在 `style.css` 添加如下代码：
 
@@ -122,13 +122,13 @@ css `position` 属性可以改变元素定位方式。默认值是 `static` 。�
 
 `position:relative` 的作用是确定定位元素，`top` 和 `left` 属性可以让元素相对于静态定位发生偏移。就像给元素设置 `x,y` 坐标。
 
-![Web page with a relatively positioned element](/images/relative-positioning-screenshot-4c23c2.png)
+![Web page with a relatively positioned element](/images/html-css/relative-positioning-screenshot-4c23c2.png)
 
 相对定位有点像 `margins`，不同的是：不管是环绕的元素还是父元素都会受 `top` 和 `left`。其他元素也像 `.item-relative` 一样在它定位的源点。思考一下网页渲染完成后的偏移量。
 
 默认 `top` 和 `left` 属性是计算距离盒子的上左边界的源点，同样也可以相对于其他的边界 `bottom` 和 `right` 属性。
 
-![Diagram: top, left, bottom, and right offsets of a relatively positioned element](/images/relative-positioning-offsets-494268.png)
+![Diagram: top, left, bottom, and right offsets of a relatively positioned element](/images/html-css/relative-positioning-offsets-494268.png)
 
 例如，下面可以让盒子相反定位：
 
@@ -146,7 +146,7 @@ css `position` 属性可以改变元素定位方式。默认值是 `static` 。�
 
 绝对定位跟绝对定位有点像，但是它的偏移量是相对于整个浏览器窗口的而不是某个元素的定位源点。前提是没有任何手动设置定位的元素。
 
-![Diagram: absolutely positioned element offset from the top-left of the browser window](/images/css-absolute-positioning-228ce0.png)
+![Diagram: absolutely positioned element offset from the top-left of the browser window](/images/html-css/css-absolute-positioning-228ce0.png)
 
 添加如下样式：
 
@@ -160,7 +160,7 @@ css `position` 属性可以改变元素定位方式。默认值是 `static` 。�
 
 HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗口的左上角。当然你也可以试一下设置 `bottom` 和 `right` 是什么效果。
 
-![Web page with an absolutely positioned element](/images/absolute-positioning-screenshot-641ad7.png)
+![Web page with an absolutely positioned element](/images/html-css/absolute-positioning-screenshot-641ad7.png)
 
 另一个有趣的效果是 `absolute` 可以让元素完全脱离正常文档流。在左对齐元素更容易观察，所以让我们临时添加一些样式：
 
@@ -174,7 +174,7 @@ HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗
 
 在上个例子中，元素还存在间隙。但绝对定位没有间隙，就好像在父元素和周围元素中消失了一样。测试完成，记得把 `justify-content` 改回 `space-around` 。
 
-![Web page highlighting the empty space left by an absolutely positioned element](/images/absolute-positioning-flex-start-screenshot-d4b627.png)
+![Web page highlighting the empty space left by an absolutely positioned element](/images/html-css/absolute-positioning-flex-start-screenshot-d4b627.png)
 
 这个效果看起来好像并没什么用，让所有元素都采用绝对定位，元素会出现重叠。那 `absoulte` 为什么还存在?
 
@@ -182,7 +182,7 @@ HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗
 
 如果可以相对与文档流中的某个元素采用绝对定位，那将会非常有用。幸运的是，我们可以改变绝对定位中元素的坐标系统。
 
-![Diagram: absolute element positioned relative to a parent positioned element](/images/css-relatively-absolute-positioning-1ba963.png)
+![Diagram: absolute element positioned relative to a parent positioned element](/images/html-css/css-relatively-absolute-positioning-1ba963.png)
 
 绝对定位元素的坐标系统总是相对于最近设置了定位的容器元素。只有当没有任何一个祖先元素设置过定位才会相对于浏览器来定位，所我们可以改变 `.item-absolute` 的父元素为相对定位。这样就可以相对改元素来定位而不是浏览器窗口了。
 
@@ -194,7 +194,7 @@ HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗
 
 `.absolute` div 在正常文档流中，我们可以手动任意移动 `.item-absolute` 。非常棒，我们可以改变容器内的正常文档流。也就是说，对于手机布局，任何采用绝对定位的元素都可以用过这个方式自动移动。
 
-![Web page with an absolutely positioned element inside another element that is relatively positioned](/images/relatively-absolute-positioning-screenshot-98bcce.png)
+![Web page with an absolutely positioned element inside another element that is relatively positioned](/images/html-css/relatively-absolute-positioning-screenshot-98bcce.png)
 
 注意，我们没有为 `.absoulte` 指定任何偏移量。我们使用相对定位是为了让绝对定位元素回归正常文档流。这就是如何准确地将绝对定位和静态定位相结合。
 
@@ -202,7 +202,7 @@ HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗
 
 "固定定位"与绝对定位有很多相同之处，元素都脱离了文档流，坐标系统都是相对于整个浏览器窗口。关键的区别在于，固定元素不会与界面的其他部分一起滚动。
 
-![Diagram: fixed element positioned relative to the browser window, but with scrolling disabled](/images/css-fixed-positioning-342eff.png)
+![Diagram: fixed element positioned relative to the browser window, but with scrolling disabled](/images/html-css/css-fixed-positioning-342eff.png)
 
 使用固定定位来更新我们第三个例子：
 
@@ -241,7 +241,7 @@ HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗
 
 这个 JavaScript 代码创建了一个简单的动画，它不断更新 `.item-relative` 的 `left` 属性。当你刷新界面时，你应该考到蓝色的图像浮动到了容器的右边缘。
 
-![Web page showing simple animation of a relatively positioned element](/images/animated-relative-positioning-193400.png)
+![Web page showing simple animation of a relatively positioned element](/images/html-css/animated-relative-positioning-193400.png)
 
 这是一个很简单的例子，但你可以看到它如何适用于花哨的 UI 动画。如果你试图通过操作 `margin` 或 `padding` 属性来达到同样的小姑，你将会不经意地移动静态定位的元素。
 
@@ -249,7 +249,7 @@ HTML 结构跟上一个例子一样。不同的是图片出现在了浏览器窗
 
 让我们用这些技术做些事吧。本章剩余部分将用之前学到的技能来实现导航菜单中的一个带有交互式的下拉菜单。我们将从头开始构建这个界面：
 
-![Web page with a dropdown menu](/images/submenu-with-z-index-f458d3.png)
+![Web page with a dropdown menu](/images/html-css/submenu-with-z-index-f458d3.png)
 
 固定定位跨域让菜单贴在界面的顶部，相对定位会给我们一个固定的下拉菜单。我们将介绍导航菜单最佳实践，并看到我们在 css 选择器章节中学到的伪类选择器的应用场景。
 
@@ -319,7 +319,7 @@ a:hover {
 
 一切都很熟悉，注意 `.header` 的 `fixed` 定位，它让导航栏固定在了界面的顶部。
 
-![Web page with a menu made out of block <li> elements (no positioning)](/images/menu-block-list-items-c1ac6a.png)
+![Web page with a menu made out of block <li> elements (no positioning)](/images/html-css/menu-block-list-items-c1ac6a.png)
 
 ## 内联菜单项
 
@@ -342,7 +342,7 @@ a:hover {
 
 我们必须使用子选择器来代替后代选择器，因为我们只需要选择在 `.menu` 下的元素。这段代码还增加了所有列表项的外边距，可以通过 `:last-of-type` 伪类去掉最后一个列表项的外边距。这个技巧很常用。
 
-![Web page with a menu made out of inline <li> elements (no positioning)](/images/menu-inline-list-items-1e8d70.png)
+![Web page with a menu made out of inline <li> elements (no positioning)](/images/html-css/menu-inline-list-items-1e8d70.png)
 
 ## 子菜单
 
@@ -392,7 +392,7 @@ a:hover {
 
 子菜单样式是正确的，但它的位置错了，并且严重破坏了其他顶级菜单项。其实能猜到这样的结果，因为它仍然是静态定位，所以它还是会影响周边元素。
 
-![Web page with an unstyled submenu (HTML-only)](/images/submenu-no-css-positioning-04280e.png)
+![Web page with an unstyled submenu (HTML-only)](/images/html-css/submenu-no-css-positioning-04280e.png)
 
 得用心的定位技巧才能达到我们想要的布局。
 
@@ -426,7 +426,7 @@ a:hover {
 
 子菜单在正确的位置上了，但是它把 `Features` 标签盖住了。
 
-![Web page with a absolutely positioned submenu inside a relative element](/images/submenu-relative-and-absolute-positioning-9fe8a5.png)
+![Web page with a absolutely positioned submenu inside a relative element](/images/html-css/submenu-relative-and-absolute-positioning-9fe8a5.png)
 
 ## Z-Index
 
@@ -434,7 +434,7 @@ a:hover {
 
 `z-index` 属性可以设置元素的深度。你可以想象网页是一个三维空间，那么负值会进入页面的更深处。而正值会跳出界面。
 
-![Diagram: positive z-index coming out of the page and negative z-index going into the page](/images/css-z-index-c87ef0.png)
+![Diagram: positive z-index coming out of the page and negative z-index going into the page](/images/html-css/css-z-index-c87ef0.png)
 
 换句话说，`.features-menu` 元素比 `features` 标签需要更低层次的 `z-index`。默认值是 0。让我们这么处理：
 
@@ -453,7 +453,7 @@ a:hover {
 
 **Features** 标签出现在子菜单的上面了。注意 `position:relative` 是必须的，因为只有定位元素设置 `z-index` 才有效果。所以记住，下次遇到没效果的情况，有可能就是忘了加定位属性。
 
-![Web page showing submenu after adding a positive z-index](/images/submenu-with-z-index-f458d3.png)
+![Web page showing submenu after adding a positive z-index](/images/html-css/submenu-with-z-index-f458d3.png)
 
 我们设置 `cursor` 属性来修改指针的样式，看起来就像链接。[Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
 
@@ -495,7 +495,7 @@ a:hover {
 
 相对定位可以调整一个元素的位置而不影响周边元素。绝对定位从页面的静态流中提取元素，并将其相对于浏览器窗口放置，相对包裹绝对会让元素重新回归正常文档流。最后，固定定位可以让元素固定而不随其他元素滚动。
 
-![Diagram: comparison of relative, absolute, relatively absolute, and fixed positioning schemes](/images/css-positioning-schemes-summary-d7f831.png)
+![Diagram: comparison of relative, absolute, relatively absolute, and fixed positioning schemes](/images/html-css/css-positioning-schemes-summary-d7f831.png)
 
 我们用这些新技术实现了一个相对复杂的导航菜单。如果觉得复杂，不要担心。你并不需要记住这些 HTML 和 CSS，我们的目的是让你理解这些定位的作用，做到学以致用。
 

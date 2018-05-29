@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 在[Links and Images](./Chapter-04.md)章节中，我们学习了如何引用其他文件。有点类似，选择器可以单独选中某个元素而不用选取全部元素。
 
-![Diagram: CSS selector connecting a CSS rule to an HTML element](/images/css-selectors-1f0064.png)
+![Diagram: CSS selector connecting a CSS rule to an HTML element](/images/html-css/css-selectors-1f0064.png)
 
 如果不想让网页看起来很单调，那就用选择器。打比方说，我想让这个段落变蓝色，另一个段落变黄色。目前我们学到的只能让整个段落变蓝(或者黄)。
 
@@ -54,7 +54,7 @@ layout: SpecialLayout
 * 给 HTML 元素添加 `class` 属性
 * 在样式表中匹配类选择器
 
-![Diagram: CSS class selector connecting a CSS rule to a class attribute on an HTML element](/images/class-selector-ce3fd0.png)
+![Diagram: CSS class selector connecting a CSS rule to a class attribute on an HTML element](/images/html-css/class-selector-ce3fd0.png)
 
 在例子中，我们可以给第一个段落添加样式与之区分其他段落，就像新闻的的概要。首先，给它添加`class`属性。
 
@@ -74,7 +74,7 @@ layout: SpecialLayout
 
 规则将作用于具备相同 `class` 属性的元素。注意类名前面的 `.` ，这是用来跟之前用到的元素选择器区分。
 
-![Web page highlighting an italicized <p> element styled via a class selector](/images/selecting-a-paragraph-with-class-selector-05f491.png)
+![Web page highlighting an italicized <p> element styled via a class selector](/images/html-css/selecting-a-paragraph-with-class-selector-05f491.png)
 
 ### 类命名规范
 
@@ -86,7 +86,7 @@ layout: SpecialLayout
 
 可以给所有元素添加类，而不仅限于 `<p>`元素。你会发现在上一章节接触的 `<div>` 和 `<span>` 非常适合用类来添加样式以美化我们的网页。
 
-![Web page highlighting a button <div> element styled via a class selector](/images/selecting-button-with-class-selector-a32bd4.png)
+![Web page highlighting a button <div> element styled via a class selector](/images/html-css/selecting-button-with-class-selector-a32bd4.png)
 
 我们来用类选择器替换上一章节中按钮的 `div` 选择器，如：
 
@@ -116,7 +116,7 @@ layout: SpecialLayout
 
 `div` 并没有语义，非常适合网页展示部分。用 `<div>` 包裹其标签可以在实现大型布局的同时兼顾 SEO。
 
-![Diagram: people see <div> element with margins, robots do not see it](/images/container-divs-7d53f6.png)
+![Diagram: people see <div> element with margins, robots do not see it](/images/html-css/container-divs-7d53f6.png)
 
 例如，我们可以用上一节[auto-margin technique](./Chapter-05.md)的知识创建固定布局。首先，用 `<div>` 包裹其他内容，然后取个特别的类名：
 
@@ -151,7 +151,7 @@ layout: SpecialLayout
 
 现在无论你如何改变窗口大小，网页都将保持 600 像素宽，我们可以用同样的方式处理 `button`，但现在我们先把所有元素都嵌套在容器中。
 
-![Web page highlighting wrapper <div> around entire document](/images/centering-page-with-div-container-e3c8aa.png)
+![Web page highlighting wrapper <div> around entire document](/images/html-css/centering-page-with-div-container-e3c8aa.png)
 
 这样我们就可以实现不同的布局，比如，我们有个侧边栏。可以把所有的元素都放在另一个类名为`.sidebar` 的 `div` 中。如何实现可以看[next chapter](./Chapter-07.md)。现在先学习给元素添加不同选择器。
 
@@ -166,13 +166,13 @@ layout: SpecialLayout
 
 我们将看到两个相同样式的按钮，复用让开发变得更便捷，但我们要修改 button 的样式时，只需要修改一个地方。
 
-![Diagram: Two arrows coming from one CSS rule to two different HTML elements](/images/reusing-css-styles-9e43c5.png)
+![Diagram: Two arrows coming from one CSS rule to two different HTML elements](/images/html-css/reusing-css-styles-9e43c5.png)
 
 ## 多个类名
 
 我们可以给同个元素添加多个类名，比如想给第二个按钮添加不同的样式，我们可以添加另一个类名。后面的样式会覆盖之前定义的样式。
 
-![Diagram: Two arrows coming from two CSS rules to one HTML element](/images/modifying-classes-48bd19.png)
+![Diagram: Two arrows coming from two CSS rules to one HTML element](/images/html-css/modifying-classes-48bd19.png)
 
 接下来，这么做：
 
@@ -210,7 +210,7 @@ layout: SpecialLayout
 
 你会发现当添加 `.synopsis` 给元素字体添加斜体效果后，就无法区分 `<em>` 元素作用的文本了。我们虽然可以给 `<em>` 添加类名来新增样式，但这通常会变得难以维护。我们希望 `.synopsis` 作为一个拥有独立样式的组件。( 不需要为了修改某些样式而改变 HTML )
 
-![Web page with span of text inside another element styled via a descendant selector](/images/selecting-em-with-descendant-selector-8050a5.png)
+![Web page with span of text inside another element styled via a descendant selector](/images/html-css/selecting-em-with-descendant-selector-8050a5.png)
 
 这时，"子选择器" 就派上用场了。它可以所用于所选元素下的所有指定元素。比如：
 
@@ -222,7 +222,7 @@ layout: SpecialLayout
 
 添加完样式后，`<em>` 字体会变成普通字体。之前的斜体效果将对 `<em>` 无效。
 
-![Diagram: single arrow coming from a compound CSS rule to an HTML element inside another HTML element](/images/descendant-selectors-f52d49.png)
+![Diagram: single arrow coming from a compound CSS rule to an HTML element inside another HTML element](/images/html-css/descendant-selectors-f52d49.png)
 
 子选择器不仅限于类选择器，我们可以使用任意组合的选择器。例如，我们想选中所有标头下的 `<em>` 元素：
 
@@ -261,7 +261,7 @@ h1 em {
 
 至此，我们接触的都是静态样式。在网页开发中，有些样式属于交互型的。比如 `<a href></a>` 标签。用户可能触发点击，悬浮，访问等行为。
 
-![Diagram: pseudo-class selector connecting a CSS rule to a user’s hover state over a particular HTML element](/images/pseudo-classes-99188b.png)
+![Diagram: pseudo-class selector connecting a CSS rule to a user’s hover state over a particular HTML element](/images/html-css/pseudo-classes-99188b.png)
 
 你可以用 "伪类" 解决该类问题。
 
@@ -334,7 +334,7 @@ a:visited:active {
 
 会看到如下效果：
 
-![Web page showing buttons with broken CSS styles](/images/broken-button-styles-0d05d0.png)
+![Web page showing buttons with broken CSS styles](/images/html-css/broken-button-styles-0d05d0.png)
 
 跟之前不太一样，因为 a 标签是行内元素，所以我们需要把它转换为块级元素，并且移除一些链接的默认样式。
 
@@ -422,7 +422,7 @@ p:last-of-type {
 
 不许要添加 `class` 属性就可以选中最后一个段落：
 
-![Web page showing bottom margin of the last paragraph on the page, styled via a :last-of-type pseudo-class selector](/images/last-of-type-pseudo-class-8232e6.png)
+![Web page showing bottom margin of the last paragraph on the page, styled via a :last-of-type pseudo-class selector](/images/html-css/last-of-type-pseudo-class-8232e6.png)
 
 同样我们可以用 `:first-of-type` 代替 `.synopsis` 来给第一个段落添加样式：
 
@@ -495,7 +495,7 @@ ID 选择器跟 类选择器不一样，在一个界面里 ID 只能有一个，
 
 `id` 属性之所以不一样是因为有种 "URL" 看起来非常像 ID 选择器：
 
-![Diagram: syntax of a URL: scheme (https://), domain (example.com), path (/selectors.html), fragment (#button-2)](/images/fragment-url-syntax-d310e8.png)
+![Diagram: syntax of a URL: scheme (https://), domain (example.com), path (/selectors.html), fragment (#button-2)](/images/html-css/fragment-url-syntax-d310e8.png)
 
 例如，你想跳到某个锚点，可以这么做：
 
@@ -509,7 +509,7 @@ ID 选择器跟 类选择器不一样，在一个界面里 ID 只能有一个，
 
 当你点击第二个 a 标签时，你会看到浏览器变化了，并且跳转到了对应的位置。( 前提是你的浏览器内容足够多到出现滚动条，你才会明细地感觉到跳转 )
 
-![Diagram: two arrows from URL fragments to two HTML elements and two arrows from CSS rules to those same elements](/images/dependency-between-fragments-and-css-4e4425.png)
+![Diagram: two arrows from URL fragments to two HTML elements and two arrows from CSS rules to those same elements](/images/html-css/dependency-between-fragments-and-css-4e4425.png)
 
 这也是避免使用 ID 选择器的原因，设想一下，如果你在标头同时用了 URL 和 ID 选择器，在编辑网址时忘记更新样式表，会非常糟糕 (ps:译者没看懂!)
 
@@ -517,7 +517,7 @@ ID 选择器跟 类选择器不一样，在一个界面里 ID 只能有一个，
 
 在这章的前半部分，我们讨论了样式覆盖问题。 [order matters](#modifying-class-styles) 规则定义样式从上至下，后者覆盖前者。
 
-![Diagram: Four CSS rules with same specificity applied in order](/images/css-rule-order-3edc42.png)
+![Diagram: Four CSS rules with same specificity applied in order](/images/html-css/css-rule-order-3edc42.png)
 
 但并非所有的样式都会被后者覆盖，css 存在优先级问题，也就是说不同的选择器权重不一样。这意味着，优先级搞的会覆盖优先级低的样式。
 
@@ -540,7 +540,7 @@ ID 选择器跟 类选择器不一样，在一个界面里 ID 只能有一个，
 
 ID 选择器的优先级比 类选择器高。所以它会覆盖之前的样式，无论它在代码里的书写顺序如何。
 
-![Diagram: Four CSS rules. Third one has higher specificity, so fourth one is ignored.](/images/css-specificity-and-rule-order-ec25f3.png)
+![Diagram: Four CSS rules. Third one has higher specificity, so fourth one is ignored.](/images/html-css/css-specificity-and-rule-order-ec25f3.png)
 
 我们之前用到的选择器优先级如下：( 从高到低 )
 

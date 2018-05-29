@@ -6,11 +6,11 @@ layout: SpecialLayout
 
 HTML 表单元素允许从网站访问者中收集输入，比如，邮件列表，联系表单和博客评论等。对于从网站获利的机构来说，表单不可或缺。
 
-![Examples of text inputs, textareas, radio buttons, checkboxes, and other HTML form elements](/images/html-form-elements-939709.png)
+![Examples of text inputs, textareas, radio buttons, checkboxes, and other HTML form elements](/images/html-css/html-form-elements-939709.png)
 
 表单意味着钱，电商通过它销售产品，saas 公司通过它收取服务费用，以及非营利组织通过它筹集资金。很多公司都是通过表单数据来衡量网站质量的，因为很多数据来源都来自表单。这意味着，表单需要持续 A/B 测试和优化。
 
-![Diagram: frontend form elements sending input to backend server for processing](/images/form-frontend-and-backend-2a0f80.png)
+![Diagram: frontend form elements sending input to backend server for processing](/images/html-css/form-frontend-and-backend-2a0f80.png)
 
 表单包含：前端和服务端。前者处理表达外观（由 HTML 和 css 定义），后者处理逻辑。（数据库中数据，电子邮件等。）本章主要讲前端，后端在以后的教程会涉及。
 
@@ -18,7 +18,7 @@ HTML 表单元素允许从网站访问者中收集输入，比如，邮件列表
 
 表达美化比较难。在码字前最好有个模型来表示你想要构建的界面。比如：
 
-![Mobile and desktop web page mockups with several form elements](/images/responsive-form-mockup-963e65.png)
+![Mobile and desktop web page mockups with several form elements](/images/html-css/responsive-form-mockup-963e65.png)
 
 如你所见，这是一个模拟的会议发言表单。包含了几乎所有的表单元素：文本，单选按钮，下来菜单，复选框，提交按钮。
 
@@ -93,7 +93,7 @@ body {
 
 `action` 属性添加表单发送的 URL。当用户按 submit 按钮后，表单内容就会被发送到这里。由服务器定义 ULR 并处理数据，常用后端技术包括：[Node.js](https://nodejs.org/en/), [PHP](http://php.net/), 和 [Ruby on Rails](http://rubyonrails.org/)
 
-![Diagram: <form> action and method attributes sent to backend server](/images/form-action-attribute-68258a.png)
+![Diagram: <form> action and method attributes sent to backend server](/images/html-css/form-action-attribute-68258a.png)
 
 `method` 接受 [`post`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) 或 [`get`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法。用于定义表单如何发送给后端服务，一般是由服务器决定，但常规是修改数据时使用 `post` 获取时使用 `get`。
 
@@ -128,11 +128,11 @@ body {
 
 首先，div 容器用于添加样式，常用于分离 input 元素。接着，添加 `<label>` 用于语义化，它的 `for` 属性跟 `input` 的 `id` 相对应。
 
-![Diagram: for attribute of <label> pointing to id attribute of <input> element](/images/label-element-for-attribute-313489.png)
+![Diagram: for attribute of <label> pointing to id attribute of <input> element](/images/html-css/label-element-for-attribute-313489.png)
 
 可以修改 `type` 来改变 input 的外观，用于交互式用户输入。后续会介绍其他类型的 input。记住不能滥用 `Id` 选择器，这里它只用于连接 `label` 元素。
 
-![Diagram: name attribute of <input> element sending variable to server](/images/sending-input-variable-to-server-653369.png)
+![Diagram: name attribute of <input> element sending variable to server](/images/html-css/sending-input-variable-to-server-653369.png)
 
 `name` 定义名称。`value` 用于记录用户输入，它可以预先设置值。
 
@@ -195,7 +195,7 @@ body {
 
 不知道 flex 的魅力的同学，可以看之前的章节
 
-![Web page showing single text field styled with CSS](/images/styling-text-input-field-6e4ed3.png)
+![Web page showing single text field styled with CSS](/images/html-css/styling-text-input-field-6e4ed3.png)
 
 ## 电子邮件输入框
 
@@ -213,7 +213,7 @@ body {
 
 电子邮件输入框除了会自动检查用户输入外，其他表现与文本输入框差不多。在火狐浏览器中，您可要输入非电子邮件地址，然点击输入以外的部分，使其失去焦点。它应该会变成红色来告知用户输入错误。谷歌和 safari 只会在提交表单的时候验证，后续操作会演示。
 
-![Web page showing invalid email field value highlighted with red border](/images/firefox-invalid-email-input-f98cc1.png)
+![Web page showing invalid email field value highlighted with red border](/images/html-css/firefox-invalid-email-input-f98cc1.png)
 
 不仅仅是验证，它会告知浏览器我们需要的电子邮件地址，浏览器会相应提升用户体验。比如，智能手机浏览器中的电子邮件输入框会提供一个电子邮件专用键盘，并且有 `@` 字符。
 
@@ -276,7 +276,7 @@ body {
 
 把 input 的 type 修改为 radio，可以让它变成单选按钮。稍微复杂一点，单选按钮一般是组合，允许用户选择其中一项。
 
-![Diagram: <fieldset> wrapping a <legend> and a series of radio buttons with associated <label> elements](/images/radio-label-fieldset-legend-elements-0affe5.png)
+![Diagram: <fieldset> wrapping a <legend> and a series of radio buttons with associated <label> elements](/images/html-css/radio-label-fieldset-legend-elements-0affe5.png)
 
 意味着每个 input 元素都需要 label，还得用`<fieldset>` 和 `<legend>` 去组合，同时需要遵循：
 
@@ -314,7 +314,7 @@ body {
 
 别怕!还有 float 呢!细心的你可能发现了，我们用 `.fegacy-form-row`类名代替了之前的 `.form-row` 。因为它将于其他元素完全分离，使用 float 而不是 flexbox。
 
-![Diagram: mobile layout created with block box <label> versus desktop layout with label as floated left](/images/radio-button-float-layout-df003b.png)
+![Diagram: mobile layout created with block box <label> versus desktop layout with label as floated left](/images/html-css/radio-button-float-layout-df003b.png)
 
 添加基础样式：
 
@@ -387,7 +387,7 @@ body {
 
 下拉框也是很难美化的，原因在于它复杂的交互型，在设备间会发现显著变化。比如，在 Iphone 上，点击下拉框会弹出一个本地可滚动的 UI 组件用于快速导航。
 
-![Screenshot showing three <option> elements in the scrolling <select> menu at the bottom of an iPhone screen](/images/select-dropdown-in-iphone-a9968d.png)
+![Screenshot showing three <option> elements in the scrolling <select> menu at the bottom of an iPhone screen](/images/html-css/select-dropdown-in-iphone-a9968d.png)
 
 建议尽量让浏览器/设备去预设下拉框，不过就算只用简单的样式也非常难，比如你要修改下拉框的字体。
 
@@ -508,7 +508,7 @@ body {
 
 宽度自适应可以使用 `width:auto`
 
-![Web page with several HTML form elements, including a checkbox](/images/adding-a-checkbox-8a0541.png)
+![Web page with several HTML form elements, including a checkbox](/images/html-css/adding-a-checkbox-8a0541.png)
 
 ## 提交按钮
 
@@ -522,7 +522,7 @@ body {
 
 单击按钮可以让浏览器验证表单所有 input 元素，如果没有任何验证问题，则会提交到 `action` URL。如果你输入错误的邮件地址，应该会看到一条错误信息。
 
-![Screenshot showing invalid input error message for email field](/images/chrome-invalid-email-input-3ae531.png)
+![Screenshot showing invalid input error message for email field](/images/html-css/chrome-invalid-email-input-3ae531.png)
 
 这就是用户输入发送到服务器的过程。首先，将一些值输入到 input ，验证邮件地址，然后，单击按钮并在浏览器中检查生成的 URL，你应该可以看到：
 
@@ -536,7 +536,7 @@ speaker-submission.html?full-name=Rick&email=rick%40internetingishard.com&talk-t
 
 之前有学过如何通过伪类美化按钮。之前是给 a 标签添加样式，同样也可以给 button 添加样式。
 
-![Web page showing the form’s submit button](/images/styling-a-submit-button-7e80de.png)
+![Web page showing the form’s submit button](/images/html-css/styling-a-submit-button-7e80de.png)
 
 添加厦门样式美化按钮：
 

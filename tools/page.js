@@ -9,7 +9,7 @@ const turndownService = new TurndownService({
 })
 const cheerio = require('cheerio')
 const basePath = './tools/docs/'
-const url = 'https://www.sarasoueidan.com/blog/svg-coordinate-systems/'
+const url = 'http://www.sarasoueidan.com/blog/nesting-svgs/'
 
 fs.exists(basePath, function (exists) {
     if (exists) {
@@ -51,10 +51,20 @@ function deleteall(path) {
                     })
                     $article = $('.article')
                     const removeCont = () => {
-                        
+
                     }
                     const modifyCont = () => {
-                       
+                        // $('pre').prependTo('<code>')
+                        // $('pre').prepend('</code>')
+                        $('pre').each(function (index, item) {
+                            const html = $(item).html()
+                            const newHtml = `<code class="language-html">${html}</code>`
+                            $(item).html(newHtml)
+                        })
+                        $article.find('img').each(function (i, n) {
+                            let imgSrc = '/images/svg/' + $(n).attr('src').split('/').pop()
+                            $(n).attr('src', imgSrc)
+                        })
                     }
                     const generate = () => {
                         const cont = $article.html()

@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 Way back in the [Links and Images](https://internetingishard.com//html-and-css/links-and-images/) chapter, we learned how to connect an HTML document to other files in our project. “CSS selectors” are similar, except instead of navigating between whole files, they let us map a single CSS rule to a specific HTML element. This makes it possible to _selectively_ style individual elements while ignoring others.
 
-![Diagram: CSS selector connecting a CSS rule to an HTML element](/images/css-selectors-1f0064.png)
+![Diagram: CSS selector connecting a CSS rule to an HTML element](/images/html-css/css-selectors-1f0064.png)
 
 Unless you want every section of your website to look exactly the same, this is a crucial bit of functionality for us. It’s how we say things like “I want this paragraph to be blue and that other paragraph to be yellow.” Until now, we’ve only been able to turn _all_ our paragraphs blue (or yellow).
 
@@ -54,7 +54,7 @@ If you’re just diving into this tutorial series, be sure to have a quick read 
 * A `class` attribute on the HTML element in question.
 * A matching CSS class selector in your stylesheet.
 
-![Diagram: CSS class selector connecting a CSS rule to a class attribute on an HTML element](/images/class-selector-ce3fd0.png)
+![Diagram: CSS class selector connecting a CSS rule to a class attribute on an HTML element](/images/html-css/class-selector-ce3fd0.png)
 
 We can use a class selector to style the first paragraph of our example page differently than the rest of them. This could be, for instance, the synopsis of a newspaper article. First, let’s add a `class` attribute to the desired paragraph:
 
@@ -74,7 +74,7 @@ Now, we can pluck out that `<p class='synopsis'>` element in our CSS with the fo
 
 This rule is _only_ applied to elements with the corresponding `class` attribute. Notice the dot (`.`) prefixing the class name. This distinguishes class selectors from the type selectors that we’ve been working with before this chapter.
 
-![Web page highlighting an italicized <p> element styled via a class selector](/images/selecting-a-paragraph-with-class-selector-05f491.png)
+![Web page highlighting an italicized <p> element styled via a class selector](/images/html-css/selecting-a-paragraph-with-class-selector-05f491.png)
 
 ### Class Naming Conventions
 
@@ -86,7 +86,7 @@ Adding a `class` attribute doesn’t alter the semantic meaning of your HTML doc
 
 The `class` attribute isn’t limited to `<p>` elements—it can be defined on _any_ HTML element. So, armed with CSS class selectors, our generic `<div>` and `<span>` boxes from the previous chapter become much, much more useful. We can use them to style both individual elements as well as arbitrary sections of our web page.
 
-![Web page highlighting a button <div> element styled via a class selector](/images/selecting-button-with-class-selector-a32bd4.png)
+![Web page highlighting a button <div> element styled via a class selector](/images/html-css/selecting-button-with-class-selector-a32bd4.png)
 
 Let’s start with individual elements by recreating our button from the previous chapter. This time, we’ll use a class instead of a `div` selector. Add the following to `styles.css`:
 
@@ -117,7 +117,7 @@ Unlike the previous chapter that styled _all_ the `<div>` elements, this lets us
 
 Remember that `<div>` doesn’t alter the semantic structure of a page. This makes it a great tool for defining the _presentational_ structure of a web page. By wrapping other HTML elements in `<div>` tags, we can organize our site into larger layout-oriented chunks without messing up how search engines view our content.
 
-![Diagram: people see <div> element with margins, robots do not see it](/images/container-divs-7d53f6.png)
+![Diagram: people see <div> element with margins, robots do not see it](/images/html-css/container-divs-7d53f6.png)
 
 For example, let’s try to create a fixed-width layout using the [auto-margin technique](https://internetingishard.com//html-and-css/css-box-model/#aligning-boxes) that we learned in the previous chapter. First, wrap our entire document in a generic `<div>` and give it a unique class:
 
@@ -152,7 +152,7 @@ Then, add the following to `styles.css`:
 
 No matter how you resize the browser window, our web page will always be 600 pixels wide and centered in the available space. Note that this was the exact same way we centered our button, but now we’re doing it to multiple elements at the same time by nesting them in a generic container.
 
-![Web page highlighting wrapper <div> around entire document](/images/centering-page-with-div-container-e3c8aa.png)
+![Web page highlighting wrapper <div> around entire document](/images/html-css/centering-page-with-div-container-e3c8aa.png)
 
 This is how layouts are defined in more complex web pages. For instance, if our page had a sidebar, we would nest all the sidebar elements in _another_ `<div>` with a `.sidebar` class. We’ll see this in action in the [next chapter](https://internetingishard.com//html-and-css/floats/). For now, the key takeaway is that without class selectors to differentiate our `<div>` elements, none of this would be possible.
 
@@ -167,13 +167,13 @@ The same class can be applied to multiple elements in a single HTML document. Th
 
 This gives us a second button that looks just like the first one—without writing a single line of CSS! Organizing similar graphical elements into reusable CSS rules like this makes life much easier as a web developer. If we ever wanted to, say, change the button color, we would only have to do it in one place and all our buttons would automatically update.
 
-![Diagram: Two arrows coming from one CSS rule to two different HTML elements](/images/reusing-css-styles-9e43c5.png)
+![Diagram: Two arrows coming from one CSS rule to two different HTML elements](/images/html-css/reusing-css-styles-9e43c5.png)
 
 ## Modifying Class Styles
 
 What if we want to alter our second button a little bit? Fortunately, we can apply multiple classes to the _same_ HTML element, too. The styles from each class will be applied to the element, giving us the opportunity to both reuse styles from `.button` and override some of them with a new class.
 
-![Diagram: Two arrows coming from two CSS rules to one HTML element](/images/modifying-classes-48bd19.png)
+![Diagram: Two arrows coming from two CSS rules to one HTML element](/images/html-css/modifying-classes-48bd19.png)
 
 Go ahead and add another class to our second button with the following markup. Notice how multiple classes live in the same `class` attribute, separated by spaces:
 
@@ -215,7 +215,7 @@ You may have noticed that the `<em>` in our first paragraph is no longer disting
 
 To alter that `<em>` element, we could add another class directly to it, but that won’t result in very maintainable code. We want to treat `.synopsis` as its own independent component that we can style entirely from CSS (i.e., without requiring alterations to our HTML just for the sake of styling something.)
 
-![Web page with span of text inside another element styled via a descendant selector](/images/selecting-em-with-descendant-selector-8050a5.png)
+![Web page with span of text inside another element styled via a descendant selector](/images/html-css/selecting-em-with-descendant-selector-8050a5.png)
 
 This is what “descendant selectors” are for. They let you target only those elements that are _inside_ of another element. For example, we can pull out that `<em>` in the `.synopsis` paragraph with the following:
 
@@ -227,7 +227,7 @@ This is what “descendant selectors” are for. They let you target only those 
 
 Adding this rule to `styles.css` will make the `<em>` display as upright (roman) characters, thus differentiating it from the italics we put on the entire `<p>` text. The rest of the `<em>` elements on the page will be unaffected.
 
-![Diagram: single arrow coming from a compound CSS rule to an HTML element inside another HTML element](/images/descendant-selectors-f52d49.png)
+![Diagram: single arrow coming from a compound CSS rule to an HTML element inside another HTML element](/images/html-css/descendant-selectors-f52d49.png)
 
 Descendant selectors aren’t limited to class selectors—you can combine any other group of selectors this way. For instance, if we wanted to select only `<em>` elements inside of headings, we might use something like this:
 
@@ -268,7 +268,7 @@ So far, all the CSS selectors we’ve seen map directly to a piece of HTML marku
 
 The classic example is a link. As a web developer, you create an `<a href>` element. After the browser renders it, the user can interact with that link. They can hover over it, click it, and visit the URL.
 
-![Diagram: pseudo-class selector connecting a CSS rule to a user’s hover state over a particular HTML element](/images/pseudo-classes-99188b.png)
+![Diagram: pseudo-class selector connecting a CSS rule to a user’s hover state over a particular HTML element](/images/html-css/pseudo-classes-99188b.png)
 
 CSS “pseudo-classes” provide a mechanism for hooking into this kind of temporary user information. At any given time, an `<a href>` element can be in a number of different states, and you can use pseudo-classes to style each one of them individually. Think of them as class selectors that you don’t have to write on your own because they’re built into the browser.
 
@@ -341,7 +341,7 @@ First, we need change our buttons to be `<a href>` elements instead of generic `
 
 If you reload this in your browser, you’ll see that we lost some of our styles even though we’re using the same classes. This is because `<a>` is an [inline element](https://internetingishard.com//html-and-css/css-box-model/#block-elements-and-inline-elements) by default and also has a default `color` value.
 
-![Web page showing buttons with broken CSS styles](/images/broken-button-styles-0d05d0.png)
+![Web page showing buttons with broken CSS styles](/images/html-css/broken-button-styles-0d05d0.png)
 
 We need to change it to a block element and remove some of the default link styling.
 
@@ -430,7 +430,7 @@ p:last-of-type {
 
 This avoids selecting the first two `<p>` elements _without_ requiring a new `class` attribute on the last paragraph:
 
-![Web page showing bottom margin of the last paragraph on the page, styled via a :last-of-type pseudo-class selector](/images/last-of-type-pseudo-class-8232e6.png)
+![Web page showing bottom margin of the last paragraph on the page, styled via a :last-of-type pseudo-class selector](/images/html-css/last-of-type-pseudo-class-8232e6.png)
 
 We could even use a `:first-of-type` pseudo-class in place of our `.synopsis` class. Replacing the existing `.synopsis` rule with the following snippet should result in the exact same page.
 
@@ -503,7 +503,7 @@ For this reason, ID selectors are generally frowned upon. Use class selectors in
 
 `id` attributes need to be unique because they serve as the target for “URL fragments”, which we sort of glossed over in our [discussion of URLs](https://internetingishard.com//html-and-css/links-and-images/#absolute-relative-and-root-relative-links). Fragments are how you point the user to a specific part of a web page. They look like an ID selector stuck on the end of a URL.
 
-![Diagram: syntax of a URL: scheme (https://), domain (example.com), path (/selectors.html), fragment (#button-2)](/images/fragment-url-syntax-d310e8.png)
+![Diagram: syntax of a URL: scheme (https://), domain (example.com), path (/selectors.html), fragment (#button-2)](/images/html-css/fragment-url-syntax-d310e8.png)
 
 For example, if we wanted to point the user to our second button, we could use the following. Note that we can omit the URL entirely if we’re linking to a different section on the same page:
 
@@ -517,7 +517,7 @@ For example, if we wanted to point the user to our second button, we could use t
 
 If you add the first option to our `selectors.html` page and click it, you’ll see the URL in the browser change. To actually see it jump down to the second button, you’ll need to add some more dummy content to the page or make the window height very short, as the browser will limit scrolling to the visible page.
 
-![Diagram: two arrows from URL fragments to two HTML elements and two arrows from CSS rules to those same elements](/images/dependency-between-fragments-and-css-4e4425.png)
+![Diagram: two arrows from URL fragments to two HTML elements and two arrows from CSS rules to those same elements](/images/html-css/dependency-between-fragments-and-css-4e4425.png)
 
 This overlapping functionality is more reason to avoid ID selectors. They create a dependency between your website’s URLs and your CSS styles. Imagine using a bunch of `id` attributes on your headings as both URL fragments and ID selectors. If you forgot to update your stylesheet every time you edited the URL of a section, you would actually break your website.
 
@@ -525,7 +525,7 @@ This overlapping functionality is more reason to avoid ID selectors. They create
 
 Earlier in this chapter, we talked about how [order matters](https://internetingishard.com/#modifying-class-styles) when it comes to CSS rules in an external stylesheet. All else being equal, rules are applied from top-to-bottom. This allowed us to override rules in a predictable manner.
 
-![Diagram: Four CSS rules with same specificity applied in order](/images/css-rule-order-3edc42.png)
+![Diagram: Four CSS rules with same specificity applied in order](/images/html-css/css-rule-order-3edc42.png)
 
 Unfortunately, not all CSS selectors are created equal. “CSS specificity” is the weight given to different categories of selectors. This means that certain selectors will _always_ override other ones, regardless of where they appear in the stylesheet.
 
@@ -548,7 +548,7 @@ Now, watch what happens when we try to do the same thing with an ID selector. Fi
 
 ID selectors have higher specificity than class selectors, so this _will_ turn our second button red even though we try to set the `background-color` with `.call-to-action:link` later in our stylesheet. The whole “order matters” concept only works when all your rules have the same specificity.
 
-![Diagram: Four CSS rules. Third one has higher specificity, so fourth one is ignored.](/images/css-specificity-and-rule-order-ec25f3.png)
+![Diagram: Four CSS rules. Third one has higher specificity, so fourth one is ignored.](/images/html-css/css-specificity-and-rule-order-ec25f3.png)
 
 The specificity of selectors we’ve seen in this chapter are show below, from greatest to least:
 

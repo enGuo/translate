@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "img": "node ./tools/downloadImg.js",
-    "md": "node ./tools/markdown.js",
-    "spa": "node ./tools/spa.js"
+    "re": "node ./tools/replace.js",
+    "imgs": "node ./tools/imgs.js",
+    "img": "node ./tools/img.js",
+    "pages": "node ./tools/pages.js",
+    "page": "node ./tools/page.js"
   },
   "author": "LE",
   "license": "ISC",

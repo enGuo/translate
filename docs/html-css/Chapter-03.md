@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 [上一章节](./Chapter-02.md) 介绍了一些重要的元素，图片、连接与这些元素不同，连接指向另一个网页，图片引入另一个连接。
 
-![Diagram: image pointing to <img> element in a web page and HTML link pointing from web page to another web page](/images/links-and-images-6820c7.png)
+![Diagram: image pointing to <img> element in a web page and HTML link pointing from web page to another web page](/images/html-css/links-and-images-6820c7.png)
 
 学习图片和连接首先得学习HTML属性，属性将开启网页新篇章。
 
@@ -16,7 +16,7 @@ layout: SpecialLayout
 
 在这个章节，网页是相互关联的，所以在编码前，我们先创建多个 包含图片的 html 文件。
 
-![Diagram: the 7 project files for this project (3 HTML files, 4 image files)](/images/links-and-images-example-7ab70f.png)
+![Diagram: the 7 project files for this project (3 HTML files, 4 image files)](/images/html-css/links-and-images-example-7ab70f.png)
 
 首先，用 Atom创建 `links-and-images` 文件夹，如果不清楚步骤，可参考 [Introduction](./Chapter-01.md) 章节.
 
@@ -74,7 +74,7 @@ layout: SpecialLayout
 
 我们在  `images.html`  文件里嵌入图片，先下载这些图片[example mochi images](https://internetingishard.com//html-and-css/links-and-images/images-4149f7.zip), 解压到`links-and-images` 目录中, 保存在 `images` 目录中。如
 
-![Screenshot: Atom’s file browser after creating the example files](/images/example-files-b21613.png)
+![Screenshot: Atom’s file browser after creating the example files](/images/html-css/example-files-b21613.png)
 
 ## 超链接
 
@@ -90,7 +90,7 @@ layout: SpecialLayout
 
 每个 html 属性都有一定的用途
 
-![Diagram: HTML attribute attached to an HTML element, which is attached to raw content](/images/html-attributes-6f5690.png)
+![Diagram: HTML attribute attached to an HTML element, which is attached to raw content](/images/html-css/html-attributes-6f5690.png)
 
 不同的元素接受不同的属性，可以参考 [MDN](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element) 查看哪些元素具备哪些属性，接下来给 a 标签添加 href 属性：
 
@@ -100,13 +100,13 @@ layout: SpecialLayout
 
 注意看属性的格式，如 a 标签的 href 会告浏览器将会连接到哪里，a 标签的默认样式为蓝色字体：
 
-![Web page with a blue <a href> link in it](/images/html-link-href-element-61348e.png)
+![Web page with a blue <a href> link in it](/images/html-css/html-link-href-element-61348e.png)
 
 ## 连接中绝对，相对，根路径的含义
 
 网站是 HTML 文件在目录中集中管理的一种表现形式，文件相互引用，互联网使用 url 来表示引用，它有三种表现形式：
 
-![Diagram: absolute links (pointing to other website), relative links (pointing to other page in same website), and root-relative links (pointing to other page in same site via its domain)](/images/absolute-relative-root-relative-links-104560.png)
+![Diagram: absolute links (pointing to other website), relative links (pointing to other page in same website), and root-relative links (pointing to other page in same site via its domain)](/images/html-css/absolute-relative-root-relative-links-104560.png)
 
 `href` 属性可以有，绝对、相对、根路径，下一小节将进一步讲解它们，首先在`links.html` 文件添加如下内容:
 
@@ -122,7 +122,7 @@ layout: SpecialLayout
 
 绝对连接 用 ( `http://` 或 `https://` 定义), 域名+目标地址。
 
-![Diagram: scheme (https://), domain (developer.mozilla.org), path (/en-us/docs/web/html)](/images/absolute-link-syntax-64d730.png)
+![Diagram: scheme (https://), domain (developer.mozilla.org), path (/en-us/docs/web/html)](/images/html-css/absolute-link-syntax-64d730.png)
 
 
 例如，添加指向 MDN 的连接
@@ -136,7 +136,7 @@ layout: SpecialLayout
 
 由于绝对连接有可能会跳出当前网站， 最好的方式是告诉用户具体去向。
 
-![Diagram: absolute link pointing from our web page to another website](/images/absolute-links-32f469.png)
+![Diagram: absolute link pointing from our web page to another website](/images/html-css/absolute-links-32f469.png)
 
 ### 相对连接
 
@@ -151,7 +151,7 @@ layout: SpecialLayout
 
 在这个例子中，由于文件不在同一目录，我们需要在 url 中包含`misc`目录
 
-![Diagram: relative link pointing from one page in our website to another one](/images/relative-links-e178d0.png)
+![Diagram: relative link pointing from one page in our website to another one](/images/html-css/relative-links-e178d0.png)
 
 每个目录和文件用`/`来分割。如果我们的目录层级比较深，可以这样：
 
@@ -171,7 +171,7 @@ misc/other-folder/extras.html
 
 当你打开浏览器后点击链接，跳出会出错，因为当前目录并没有这些文件。
 
-![Diagram: attempting to link to the wrong HTML page due to a missing parent reference](/images/relative-link-no-parent-4629d0.png)
+![Diagram: attempting to link to the wrong HTML page due to a missing parent reference](/images/html-css/relative-link-no-parent-4629d0.png)
 
 需要添加 `..` 语法，表示到父级目录查找：
 
@@ -183,7 +183,7 @@ misc/other-folder/extras.html
 
 前提你得确定这些文件在上一级目录当中
 
-![Diagram: linking to the correct HTML page after adding parent reference](/images/relative-link-with-parent-666b79.png)
+![Diagram: linking to the correct HTML page after adding parent reference](/images/html-css/relative-link-with-parent-666b79.png)
 
 多级目录可以使用:
 
@@ -199,7 +199,7 @@ misc/other-folder/extras.html
 
 根路径跟相对连接类似，只是它指向的是网站的根目录，例如网站根目录为 `our-site.com`，则根目录为该站点。
 
-![Diagram: a link from one web page in our site traveling through our domain, then to another page in our site](/images/root-relative-links-368060.png)
+![Diagram: a link from one web page in our site traveling through our domain, then to another page in our site](/images/html-css/root-relative-links-368060.png)
 
 可惜我们使用的不是服务器环境，所以无法体验根目录。
 
@@ -262,7 +262,7 @@ links-and-images/spaces%20are%20bad.html
 
 网页中图片有不同的格式，每个格式的出现要追溯网页的发展史。
 
-![Diagram: JPG, GIF, PNG, and SVG example images](/images/image-formats-62b23d.png)
+![Diagram: JPG, GIF, PNG, and SVG example images](/images/html-css/image-formats-62b23d.png)
 
 先来看下这些图片 [mochi images](https://internetingishard.com//html-and-css/links-and-images/images-4149f7.zip)
 
@@ -270,7 +270,7 @@ links-and-images/spaces%20are%20bad.html
 
 JPG 是多色块，小文件。比较适合像照片或者渐变比较多的图片，另外 JPGs 没有透明，如果有，会用白色替换。
 
-![a mochi in a transparent bubble that has a gradient on it](/images/mochi-77c69d.jpg)
+![a mochi in a transparent bubble that has a gradient on it](/images/html-css/mochi-77c69d.jpg)
 
 把 `mochi.jpg` 插入 `images.html` 界面，如：
 
@@ -290,7 +290,7 @@ JPG 是多色块，小文件。比较适合像照片或者渐变比较多的图�
 
 GIFs 适合一些有简单动画，少色块的图片，它并不适合透明像素，如果你想用透明，建议使用 PNG
 
-![an animated mochi bouncing up and down](/images/mochi-961ee5.gif)
+![an animated mochi bouncing up and down](/images/html-css/mochi-961ee5.gif)
 
 在 `images.html` 文件中添加:
 
@@ -306,7 +306,7 @@ GIFs 适合一些有简单动画，少色块的图片，它并不适合透明像
 
 PNGs 同样具备高清，没有颜色限制，而且具备透明像素，所以它必将适合 图标， 工业图表，logo 等
 
-![a plain old mochi](/images/mochi-f95fdf.png)
+![a plain old mochi](/images/html-css/mochi-f95fdf.png)
 
 代码如下:
 
@@ -322,7 +322,7 @@ PNGs 同样具备高清，没有颜色限制，而且具备透明像素，所以
 
 不同于像素文件，SVG 是矢量图。缩放不会对图片质量造成影响。非常适合响应式布局 [responsive design](./Chapter-10.md)。
 
-![SVG image with crisp edges compared to a pixelated PNG image](/images/svg-vs-png-image-3df7fd.png)
+![SVG image with crisp edges compared to a pixelated PNG image](/images/html-css/svg-vs-png-image-3df7fd.png)
 
 ```html
 <h2>SVGs</h2>
@@ -338,7 +338,7 @@ PNGs 同样具备高清，没有颜色限制，而且具备透明像素，所以
 
 `<img/>` 默认继承源文件尺寸.
 
-![Web page after embedding JPG, GIF, PNG, and SVG <img> elements](/images/html-img-formats-3b43c6.png)
+![Web page after embedding JPG, GIF, PNG, and SVG <img> elements](/images/html-css/html-img-formats-3b43c6.png)
 
 可以用下面的方法修改尺寸：
 
@@ -413,7 +413,7 @@ PNGs 同样具备高清，没有颜色限制，而且具备透明像素，所以
 
 你将会在浏览器看到如下：
 
-![Web page rendering gibberish for international characters](/images/html-character-sets-no-utf-8-304820.png)
+![Web page rendering gibberish for international characters](/images/html-css/html-character-sets-no-utf-8-304820.png)
 
 在 `<meta>` 的 `charset` 属性 设置 统一编码，如 `misc/extras.html` 文件:
 

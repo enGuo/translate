@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 Over the last few chapters, we’ve learned how to manipulate the size of [boxes](https://internetingishard.com//html-and-css/css-box-model/) and the space around them, but for the most part, we were stuck with the default vertical flow of the page. Block elements always appeared vertically one after another, effectively limiting us to a single-column layout.
 
-![Diagram: vertical arrow over column of boxes versus horizontal arrows over grid of boxes](/images/vertical-vs-horizontal-stacking-064f76.png)
+![Diagram: vertical arrow over column of boxes versus horizontal arrows over grid of boxes](/images/html-css/vertical-vs-horizontal-stacking-064f76.png)
 
 “Floats” let you put block-level elements side-by-side instead of on top of each other. This is a big deal. It lets us build all sorts of layouts, including sidebars, multi-column pages, grids, and magazine-style articles with text flowing around an image. This is where we finally start creating real web pages.
 
@@ -18,7 +18,7 @@ Perhaps more importantly, the limited nature of floats makes them a gentler intr
 
 This chapter demonstrates CSS floats with a pretty simple sample project. Instead of working with proper HTML content as we have been in previous chapters, we’ll be styling a bunch of empty `<div>` elements. We’ll end up with something that looks like the following, which is a pretty big divergence from the types of web pages we’ve been creating thus far.
 
-![Web page with floated sidebar, floated image, and floated grid in footer](/images/floats-final-example-e0e9f7.png)
+![Web page with floated sidebar, floated image, and floated grid in footer](/images/html-css/floats-final-example-e0e9f7.png)
 
 First, create a new folder called `floats`, then add a new web page called `floats.html` with the following markup:
 
@@ -85,7 +85,7 @@ We can get a better look at our example page by adding some background colors an
 
 This gives us a nice rainbow, which isn’t what we’re looking for, though it does demonstrate some useful concepts.
 
-![Web page with four colored blocks appearing vertically one after another](/images/default-css-layout-behavior-9b2b1f.png)
+![Web page with four colored blocks appearing vertically one after another](/images/html-css/default-css-layout-behavior-9b2b1f.png)
 
 The important part here is that each block-level element fills 100% of its parent elements’s width (`<div class='page'>` in this case), and they appear vertically one after another. Again, we’re essentially limited to a single-column layout.
 
@@ -103,7 +103,7 @@ It’s worth taking a look at what happens when we shrink an element’s width. 
 
 The sidebar element gets narrower, but the rest of the boxes stay in the exact same position. All the blocks are still rendered vertically one after another. This is the behavior we’ll be changing with floats.
 
-![Web page with red sidebar box on left of page with white background next to it](/images/default-css-layout-behavior-explicit-width-97b8ac.png)
+![Web page with red sidebar box on left of page with white background next to it](/images/html-css/default-css-layout-behavior-explicit-width-97b8ac.png)
 
 ## Floating an Element
 
@@ -120,7 +120,7 @@ The CSS `float` property gives us control over the _horizontal_ position of an e
 
 However, this doesn’t just _align_ the sidebar—it also tells surrounding elements that they can flow _around_ the sidebar instead of beginning underneath it. It’s as if the sidebar is inside the `.content` block, so any HTML markup in `.content` would wrap around the sidebar’s box. This gives us a magazine-style layout:
 
-![Web page with red sidebar box floating on top of the following element](/images/floated-sidebar-d926d5.png)
+![Web page with red sidebar box floating on top of the following element](/images/html-css/floated-sidebar-d926d5.png)
 
 You can also float elements right, as shown below (let’s keep our sidebar floated left though). Or, if you’re overriding a float declaration, you can cancel it with the `none` value. These are the most common values for the `float` property.
 
@@ -131,7 +131,7 @@ float: none;   /* Revert to default flow */
 
 We now have all the tools necessary to align block-level elements: floats for left/right alignment and auto-margins for center alignment. Remember that this only applies to _block_ boxes. Inline boxes are aligned with the `text-align` property, as discussed in the [previous chapter](https://internetingishard.com//html-and-css/css-box-model/#aligning-boxes).
 
-![Diagram: float left (box on left of container), auto margins (box in center of container), float right (box on right of container)](/images/floats-and-auto-margin-for-alignment-536a81.png)
+![Diagram: float left (box on left of container), auto margins (box in center of container), float right (box on right of container)](/images/html-css/floats-and-auto-margin-for-alignment-536a81.png)
 
 ## Floating Inside of Parents
 
@@ -148,7 +148,7 @@ Let’s change this by giving our page a fixed-width layout. Once again, the aut
 
 Now, we can see that `.sidebar` floats to the left of the `.page` container, opposed to the edge of the browser window.
 
-![Web page with colored boxes centered in the browser](/images/floating-in-fixed-width-page-a9c965.png)
+![Web page with colored boxes centered in the browser](/images/html-css/floating-in-fixed-width-page-a9c965.png)
 
 Positioning nested container divs like this is how you build up sophisticated website layouts. Here, we started with `.page` to center _everything_, then we left-aligned a sidebar _inside_ that centered page. Things can get way more complex, but our simple example demonstrates the universal truth of CSS layouts: everything is a box inside of a box inside of another box.
 
@@ -166,7 +166,7 @@ Let’s examine our current magazine-style float a little bit more by adding an 
 
 This clearly demonstrates that our sidebar is in fact _inside_ the `.content` block: if you take a screenshot of them, you’ll have an image that’s 650 pixels wide opposed to 850 pixels (our sidebar is 200 pixels wide).
 
-![Web page showing left-floated red sidebar on top of statically positioned element](/images/floating-inside-another-container-1cfd76.png)
+![Web page showing left-floated red sidebar on top of statically positioned element](/images/html-css/floating-inside-another-container-1cfd76.png)
 
 This kind of float behavior is nice for images (which we’ll see [later on](https://internetingishard.com/#floats-for-content)), but for page layout, we actually want the content block to be _next to_ the sidebar instead of flowing around it. For this, we need to tell the content block to float left, too. Add one more line to the `.content` rule:
 
@@ -181,11 +181,11 @@ This kind of float behavior is nice for images (which we’ll see [later on](htt
 
 When you float multiple elements in the same direction, they’ll stack horizontally, much like the default vertical layout algorithm, except rotated 90 degrees. The above code causes our entire content block to appear on the right of the sidebar instead of wrapping around it.
 
-![Web page showing left-lfoated red sidebar next to left-floated element](/images/two-floats-next-to-each-other-37f154.png)
+![Web page showing left-lfoated red sidebar next to left-floated element](/images/html-css/two-floats-next-to-each-other-37f154.png)
 
 This gives us true control over the horizontal alignment of our block boxes. Try playing with the `float` values for both `.sidebar` and `.content`, and you’ll find that we already have a couple of distinct layouts at our disposal:
 
-![Diagram: the four potential combinations of left and right floats for two elements](/images/float-layout-combinations-e52716.png)
+![Diagram: the four potential combinations of left and right floats for two elements](/images/html-css/float-layout-combinations-e52716.png)
 
 Make sure both of them are floating left before moving on. That takes care of the layout for the sidebar and content blocks, but it unfortunately messed up our `.footer` element…
 
@@ -193,7 +193,7 @@ Make sure both of them are floating left before moving on. That takes care of th
 
 You probably noticed that our footer shows up in the top right, directly below `.menu`. That’s because floated boxes are removed from the normal flow of the page. The height of our floated elements don’t contribute to the vertical position of the footer, so it simply sticks itself below the last element that _wasn’t_ floated.
 
-![Web page with transparent boxes showing floated boxes on top of statically positioned footer](/images/floats-outside-of-normal-flow-5dc559.png)
+![Web page with transparent boxes showing floated boxes on top of statically positioned footer](/images/html-css/floats-outside-of-normal-flow-5dc559.png)
 
 We can see this more clearly by adding a red border around our `.page` element:
 
@@ -223,7 +223,7 @@ We can use the `clear` property to make our `.footer` drop down to the bottom of
 
 Usually, you want to clear both left and right floats as we did here, but you can choose to clear only one or the other with the `left` or `right` values. Note that the red border now wraps all the way around the footer, indicating that the floated elements indeed count towards the height of the `.page` container:
 
-![Web page showing footer popping down to bottom of floated elements after being cleared](/images/clearing-a-float-44a4d5.png)
+![Web page showing footer popping down to bottom of floated elements after being cleared](/images/html-css/clearing-a-float-44a4d5.png)
 
 Depending on the type of layout you’re trying to create, this is a perfectly acceptable solution. We could stop here, but we’re going to explore float behavior more by transforming our page into a full-bleed layout that has background colors filling the entire browser window.
 
@@ -244,7 +244,7 @@ Watch what happens when we take the menu and footer out of the `.page` element. 
 
 Since `.menu` and `.footer` are outside our fixed-width `.page`, they’re the full width of the window, which is exactly what we want for a full-bleed layout. However, notice how `.page` has zero height again despite the fact that the footer still clears the sidebar and content blocks.
 
-![Web page highlighting the zero-height .page <div> with only floated elements in it](/images/full-bleed-layout-broken-clear-58057f.png)
+![Web page highlighting the zero-height .page <div> with only floated elements in it](/images/html-css/full-bleed-layout-broken-clear-58057f.png)
 
 Once again, the only elements in `.page` are floated, so they don’t count towards its height. In other words, moving the footer outside of the `.page` container broke our `clear` fix.
 
@@ -252,7 +252,7 @@ Once again, the only elements in `.page` are floated, so they don’t count towa
 
 Clearing floats only fixes the height issue when there’s an element _inside_ the container element that we can add a `clear` property to. Now that our footer is outside `.page`, we need a new way to make floated elements contribute to the height of their container.
 
-![Diagram: clearing with child (clear: both on child element) versus clearing  with parent (overflow: hidden on parent)](/images/methods-for-clearing-floats-6429d9.png)
+![Diagram: clearing with child (clear: both on child element) versus clearing  with parent (overflow: hidden on parent)](/images/html-css/methods-for-clearing-floats-6429d9.png)
 
 The solution is the [CSS `overflow` property](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/overflow). By adding an `overflow: hidden` declaration to a container div, we’re telling it to recognize the height of any floated elements it contains. This is how we can add a background color to our `.page` element and have it actually render:
 
@@ -267,7 +267,7 @@ The solution is the [CSS `overflow` property](https://internetingishard.com/http
 
 You should now be able to see a light gray background in `.page` instead of the default white. This isn’t full bleed yet (we’ll address that in the next section). The important part here is the behavior of `overflow: hidden`. Without it, we wouldn’t be able to see the `.page` container’s background because it would have zero height.
 
-![Web page showing gray background filling full height of .page <div>](/images/full-bleed-layout-overflow-hidden-826f9e.png)
+![Web page showing gray background filling full height of .page <div>](/images/html-css/full-bleed-layout-overflow-hidden-826f9e.png)
 
 To summarize, when you have an extra unfloated HTML element at the bottom of a container div, use the `clear` solution. Otherwise, add an `overflow: hidden` declaration to the container element. The underlying idea for both options is that you need a way to tell the browser to incorporate floats into the height of their container element in order for their backgrounds to show up.
 
@@ -275,7 +275,7 @@ To summarize, when you have an extra unfloated HTML element at the bottom of a c
 
 Next, we want to make our `.page` background fill the entire browser window without changing the alignment of our sidebar or content blocks. The problem is, our `.page` is busy centering everything—we can’t use it for a full-bleed background because centering requires an explicit `width` property.
 
-![Web page showing gray background filling full height of .page <div>, all the way to the left and right edges](/images/full-bleed-layout-with-container-85a6d1.png)
+![Web page showing gray background filling full height of .page <div>, all the way to the left and right edges](/images/html-css/full-bleed-layout-with-container-85a6d1.png)
 
 It’s time for _another_ container div. Putting a box around `.page` lets it continue centering stuff while giving us a place to define a `background-color` property. Change our `<body>` element to match the following:
 
@@ -340,7 +340,7 @@ We can style each of these columns just like we laid out the rest of our page. A
 
 This is the first time we’ve used percentage values instead of explicit pixel values. Percentages in CSS are relative to the width of the parent element. The result is three columns that automatically resize to one-third of the browser window. Resize the browser window, and you’ll see our columns grow and shrink accordingly. This is the beginning of [responsive design](https://internetingishard.com//html-and-css/responsive-design/).
 
-![Web page with footer that has three equal-width child elements](/images/floats-for-columns-8a52b0.png)
+![Web page with footer that has three equal-width child elements](/images/html-css/floats-for-columns-8a52b0.png)
 
 Anyhoo, let’s not lose sight of the central thesis of this chapter: floats let us stack things horizontally instead of vertically. By changing the widths of the elements we’re floating, we can get all kinds of different layouts, from sidebars to multiple columns to grids.
 
@@ -361,7 +361,7 @@ Want a grid in the footer instead of 3 columns? No problem! When there isn’t e
 
 Voilà! A grid! Well, almost…
 
-![Web page with footer that has 3 colums and 2 rows of child elements](/images/floats-for-grids-7ed8b0.png)
+![Web page with footer that has 3 colums and 2 rows of child elements](/images/html-css/floats-for-grids-7ed8b0.png)
 
 Our footer background is too short. Fortunately, we already know how to fix that. Let’s replace the footer’s explicit height with another `overflow: hidden` so it can accommodate any number of grid items:
 
@@ -436,13 +436,13 @@ p {
 
 Notice how we have a float inside of a float, and everything works just fine. Laying out a website is a recursive process: you build a high-level structure to work in, then you fill it with your actual content. More complex layouts may need another layer or two of nesting, but the idea is the same.
 
-![Web page showing floated image with text content flowing around it](/images/floats-final-example-e0e9f7.png)
+![Web page showing floated image with text content flowing around it](/images/html-css/floats-final-example-e0e9f7.png)
 
 ### Hiding Overflow (For Content)
 
 You’ll find examples of nested layouts all over the place. For our final example, consider a basic user-comment thread. You have an image that’s floated left with a heading and some text next to it:
 
-![Web page showing footer with icon and text next to it, not flowing around it due to overflow: hidden](/images/overflow-hidden-for-content-735981.png)
+![Web page showing footer with icon and text next to it, not flowing around it due to overflow: hidden](/images/html-css/overflow-hidden-for-content-735981.png)
 
 Let’s try creating this in our footer. In your favorite `.column` element, add the following:
 
@@ -480,7 +480,7 @@ And the corresponding CSS rules:
 
 This highlights another use case for our `overflow: hidden` trick. Sticking it on our `.comment` box made sure that the text “horizontally cleared” (that’s not a technical term) the floated image. Without it, the last line of the `.comment` text would hang underneath the image.
 
-![Web pages showing with hidden overflow (text left-aligned) and without hidden overflow (text flowing around icon)](/images/no-overflow-hidden-for-content-1cb097.png)
+![Web pages showing with hidden overflow (text left-aligned) and without hidden overflow (text flowing around icon)](/images/html-css/no-overflow-hidden-for-content-1cb097.png)
 
 In other words, `overflow: hidden` breaks the magazine-style layout from the previous section, but in a very useful way.
 

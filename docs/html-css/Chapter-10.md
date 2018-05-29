@@ -8,7 +8,7 @@ layout: SpecialLayout
 
 响应式设计是通过 css"媒体查询"完成的。将媒体查询看作是有在某种情况下使用某种样式的方法。它告诉浏览器根据用户的设备来忽略或者应用某些规则。
 
-![Diagram: HTML content pointing to media queries, which point to mobile, tablet, and desktop devices](/images/how-responsive-websites-work-5f0a33.png)
+![Diagram: HTML content pointing to media queries, which point to mobile, tablet, and desktop devices](/images/html-css/how-responsive-websites-work-5f0a33.png)
 
 媒体查询将相同的 HTML 内容呈现为不同的 css 布局。因此，我们可以使用相同的 HTML 标记(和 web 服务器)来代替智能手机的一个网站和一个完全不相干的笔记本/台式机网站。这意味着我们只需要维护一份内容，这也是为什么要关注点分离的原因。
 
@@ -34,13 +34,13 @@ layout: SpecialLayout
 
 然后下载图片 [download some images](https://internetingishard.com/html-and-css/responsive-design/images-e9877a.zip) 解压在项目目录。
 
-![Screenshot: Atom’s file browser with project files in it](/images/project-files-76223b.png)
+![Screenshot: Atom’s file browser with project files in it](/images/html-css/project-files-76223b.png)
 
 ## CSS 媒体查询
 
 我们先设置背景色，在布局变复杂前先确保媒体查询能否工作。
 
-![Diagram: mobile device with red background, tablet with yellow background, desktop with blue background. Background colors set with media queries.](/images/simple-responsive-media-queries-703f8b.png)
+![Diagram: mobile device with red background, tablet with yellow background, desktop with blue background. Background colors set with media queries.](/images/html-css/simple-responsive-media-queries-703f8b.png)
 
 让我们通过创建一个新的样式来区分窄、中、宽的布局。添加如下样式：
 
@@ -77,7 +77,7 @@ layout: SpecialLayout
 
 媒体查询由 `@media` 开始，然后是某种条件语句，然后是一些花括号。在大括号里面，你放了一些普通的 css 规则。浏览器在条件满足时采用这些规则。
 
-![Diagram: media query composed of the @media at-rule, a media type, a media feature, then a bunch of ordinary CSS](/images/media-query-terms-137d06.png)
+![Diagram: media query composed of the @media at-rule, a media type, a media feature, then a bunch of ordinary CSS](/images/html-css/media-query-terms-137d06.png)
 
 "only-screen" 媒体类型意味着所包含的样式只能应用于带有屏幕的设备 (与 文档相反，比如在浏览器中按下 "cmd+p") "min-width" 和 "max-width" 部分被称为 "媒体特性"，它们指定了你说描述的设备尺寸。
 
@@ -87,7 +87,7 @@ layout: SpecialLayout
 
 "@media" 是我们为特定设备宽度定义不同布局的方式，但是我们实际想要实现的是什么布局呢?本章的示例 web 界面将如下所示：
 
-![Mockups of mobile, tablet, and desktop web pages](/images/mobile-first-design-be30e4.png)
+![Mockups of mobile, tablet, and desktop web pages](/images/html-css/mobile-first-design-be30e4.png)
 
 实际上，设计人员提供响应式设计模型。开发人员的工作是用媒体查询和 css 来实现各个布局。
 
@@ -96,7 +96,7 @@ layout: SpecialLayout
 * 流布局是用拉伸或收缩来填充屏幕宽度的布局。
 * 固定布局则相反，它的宽度与屏幕尺寸相同。
 
-![Diagram: fluid layout expanding to fill entire width of the browser, fixed-width layout staying the same even if browser gets wider](/images/fixed-width-vs-fluid-layouts-258df9.png)
+![Diagram: fluid layout expanding to fill entire width of the browser, fixed-width layout staying the same even if browser gets wider](/images/html-css/fixed-width-vs-fluid-layouts-258df9.png)
 
 在我们的例子中，手机的表格是流式布局，桌面版的是固定宽度。
 
@@ -187,7 +187,7 @@ layout: SpecialLayout
 
 缩小浏览器窗口，你会看到这就是移动布局。都不需要媒体查询，这就是为什么它被称为 "移动优先" 移动版本不需要特殊处理。
 
-![Web page showing layout created with mobile-first CSS (no media queries)](/images/mobile-layout-55fdad.png)
+![Web page showing layout created with mobile-first CSS (no media queries)](/images/html-css/mobile-layout-55fdad.png)
 
 在媒体查询外面写这些基本样式，在需要实现特定布局时再覆盖它们。例如，你需要改变整个网站的颜色方案。你只需要在这里修改它，而不是在几个 "@media" 规则中冗余地定义。
 
@@ -211,7 +211,7 @@ layout: SpecialLayout
 
 首先确保浏览器窗口的宽度在 400 像素 到 960 像素之间，接着滚动到底部，你将会看到一个彩色的网格：
 
-![Web page showing the grid created from tablet media query](/images/tablet-layout-081d9e.png)
+![Web page showing the grid created from tablet media query](/images/html-css/tablet-layout-081d9e.png)
 
 同样，屏幕的切确宽度并不重要。这个布局在媒体查询范围内适配任何宽度。移动端也如此，在小于 `960px` 宽下，都可以适配。
 
@@ -239,7 +239,7 @@ layout: SpecialLayout
 
 如下效果：
 
-![Desktop layout of web page before and after flexbox re-ordering](/images/desktop-layout-8479d0.png)
+![Desktop layout of web page before and after flexbox re-ordering](/images/html-css/desktop-layout-8479d0.png)
 
 flexbox 真的很棒，如果用浮动布局将会变得非常困难。而 flexbox 只是几行 css，将这些规则附加到桌面媒体查询：
 
@@ -261,7 +261,7 @@ flexbox 真的很棒，如果用浮动布局将会变得非常困难。而 flexb
 
 在美柚响应式设计之前，移动设备只有一个桌面布局，用户经常需要通过缩放来与之交互。
 
-![Diagram: zoom enabled (desktop layout rendered in a tablet device) versus zoom disabled (tablet layout rendered in a tablet device)](/images/html-viewport-zooming-5c4be6.png)
+![Diagram: zoom enabled (desktop layout rendered in a tablet device) versus zoom disabled (tablet layout rendered in a tablet device)](/images/html-css/html-viewport-zooming-5c4be6.png)
 
 如果使用移动布局，这种默认行为下的用户体验会非常糟糕。所以我们要通过下面的方式禁用它：
 
@@ -272,7 +272,7 @@ flexbox 真的很棒，如果用浮动布局将会变得非常困难。而 flexb
 
 要看效果需要在浏览器中模拟一个移动设备，用谷歌 **View > Developer > Developer Tools** 按钮，然后选择 **Toggle Device Toolbar** 来模拟设备。
 
-![Screenshot: responsive icon in Chrome’s developer toolbar](/images/chrome-device-toolbar-bb030a.png)
+![Screenshot: responsive icon in Chrome’s developer toolbar](/images/html-css/chrome-device-toolbar-bb030a.png)
 
 在浏览器模拟设备中，你应该可以看到上述图片的 `zoom-disable` 版本。( 后续章节会深入介绍谷歌开发工具 )
 

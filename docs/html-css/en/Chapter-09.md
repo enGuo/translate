@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 “Static positioning” refers to the normal flow of the page that we’ve been working with up ’til this point. The [CSS Box Model](https://internetingishard.com//html-and-css/css-box-model/), [floats](https://internetingishard.com//html-and-css/floats/), and [flexbox](https://internetingishard.com//html-and-css/flexbox/) layout schemes all operate in this “static” flow, but that’s not the only positioning scheme available in CSS.
 
-![Diagram: comparison of static, relative, absolute, and fixed positioning schemes](/images/css-positioning-schemes-790d5b.png)
+![Diagram: comparison of static, relative, absolute, and fixed positioning schemes](/images/html-css/css-positioning-schemes-790d5b.png)
 
 The other three types of positioning are “relative”, “absolute”, and “fixed”. Each of them let you manually position elements using specific coordinates, opposed to the more semantic options in flexbox and floats. Instead of saying “Stick this box in the center of its container,” advanced positioning lets you say things like “Put that box 20 pixels above and 50 pixels to the right of its parent’s origin.”
 
@@ -58,7 +58,7 @@ Start by creating a new [Atom project](https://internetingishard.com//html-and-c
 
 We’ve got three examples to work with, all with the exact same HTML structure. Changing the positioning behavior inside each one will have dramatically different effects.
 
-![Screenshot: files in the example project](/images/project-files-714b6b.png)
+![Screenshot: files in the example project](/images/html-css/project-files-714b6b.png)
 
 This page relies on some [images](https://internetingishard.com//html-and-css/advanced-positioning/images-89bc45.zip) to make our example a little bit clearer. Keep the parent `images` folder when unzipping the files into your project, as show above. Be sure to create `styles.css` and populate it with the necessary base styles, as well:
 
@@ -94,13 +94,13 @@ body {
 
 Nothing new here, just some familiar [flexbox](https://internetingishard.com//html-and-css/flexbox/) techniques to create a grid of items. The only weird thing is the explicit `height` on the `<body>` element, which will let us scroll up and down the page to demonstration different positioning behaviors.
 
-![Web page with static, relative, absolute, and fixed boxes in different colors](/images/initial-project-screenshot-8ebe66.png)
+![Web page with static, relative, absolute, and fixed boxes in different colors](/images/html-css/initial-project-screenshot-8ebe66.png)
 
 ## Positioned Elements
 
 The CSS `position` property lets you alter the positioning scheme of a particular element. Its default value, as you might imagine, is `static`. When an element’s `position` property _doesn’t_ have a value of `static`, it’s called a “positioned element”. Positioned elements are what this entire chapter is about.
 
-![Diagram: relative, absolute, and fixed elements denoted as positioned elements](/images/positioned-elements-terminology-861fca.png)
+![Diagram: relative, absolute, and fixed elements denoted as positioned elements](/images/html-css/positioned-elements-terminology-861fca.png)
 
 It’s possible to mix-and-match different positioning schemes. Again, most of your web page should be statically positioned, but it’s common to find relatively and absolutely positioned elements inside of other elements that are part of the normal flow of the page.
 
@@ -108,7 +108,7 @@ It’s possible to mix-and-match different positioning schemes. Again, most of y
 
 “Relative positioning” moves elements around _relative_ to where they would normally appear in the static flow of the page. This is useful for nudging boxes around when the default flow is just a little bit off.
 
-![Diagram: relatively positioned box offset from the upper left corner of its static position](/images/css-relative-positioning-26842e.png)
+![Diagram: relatively positioned box offset from the upper left corner of its static position](/images/html-css/css-relative-positioning-26842e.png)
 
 Let’s turn the `.item-relative` element in `schemes.html` into a relatively positioned element. Add the following rule to `styles.css`:
 
@@ -122,13 +122,13 @@ Let’s turn the `.item-relative` element in `schemes.html` into a relatively po
 
 The `position: relative;` line makes it a positioned element, and the `top` and `left` properties let you define how far it’s offset from its static position. This is sort of like setting an (_x_, _y_) coordinate for the element.
 
-![Web page with a relatively positioned element](/images/relative-positioning-screenshot-4c23c2.png)
+![Web page with a relatively positioned element](/images/html-css/relative-positioning-screenshot-4c23c2.png)
 
 Relative positioning works similarly to margins, with one very important difference: neither the surrounding elements or parent element are affected by the `top` and `left` values. Everything else renders as if `.item-relative` was in its original position. Think of the offsets as being applied _after_ the browser finishes laying out the page.
 
 The `top` and `left` properties measure from the original box’s top and left edges, respectively. We can offset relative to the other edges with the `bottom` and `right` properties.
 
-![Diagram: top, left, bottom, and right offsets of a relatively positioned element](/images/relative-positioning-offsets-494268.png)
+![Diagram: top, left, bottom, and right offsets of a relatively positioned element](/images/html-css/relative-positioning-offsets-494268.png)
 
 For example, the following will nudge the box in the opposite direction:
 
@@ -146,7 +146,7 @@ Note that these properties accept negative values, which means there’s two way
 
 “Absolute positioning” is just like relative positioning, but the offset is relative to the entire browser window instead of the original position of the element. Since there’s no longer any relationship with the static flow of the page, consider this the most manual way to lay out an element.
 
-![Diagram: absolutely positioned element offset from the top-left of the browser window](/images/css-absolute-positioning-228ce0.png)
+![Diagram: absolutely positioned element offset from the top-left of the browser window](/images/html-css/css-absolute-positioning-228ce0.png)
 
 Let’s take a look by adding the following rule to our stylesheet:
 
@@ -160,7 +160,7 @@ Let’s take a look by adding the following rule to our stylesheet:
 
 Our HTML structure is the exact same as the previous example, but this will stick the purple image in the top-left corner of the browser window. You can also try setting a `bottom` or `right` value to get a clearer idea of what’s going on.
 
-![Web page with an absolutely positioned element](/images/absolute-positioning-screenshot-641ad7.png)
+![Web page with an absolutely positioned element](/images/html-css/absolute-positioning-screenshot-641ad7.png)
 
 The other interesting effect of `absolute` is that it completely removes an element from the normal flow of the page. This is easier to see with left-aligned elements, so let’s temporarily change the `justify-content` property in our `.example` rule:
 
@@ -174,7 +174,7 @@ The other interesting effect of `absolute` is that it completely removes an elem
 
 In our relative positioning example (the first row), there’s still a space where the positioned element used to be, but with absolute positioning, that space has vanished. It’s as if `.item-absolute` doesn’t even exist to its parent and surrounding elements. Be sure to change the `justify-content` back to `space-around` before moving on.
 
-![Web page highlighting the empty space left by an absolutely positioned element](/images/absolute-positioning-flex-start-screenshot-d4b627.png)
+![Web page highlighting the empty space left by an absolutely positioned element](/images/html-css/absolute-positioning-flex-start-screenshot-d4b627.png)
 
 This behavior isn’t really all that useful most of the time because it would mean _everything_ on your page needs to be absolutely positioned—otherwise we’d get unpredictable overlaps of static elements with absolute elements. So, why does `absolute` even exist?
 
@@ -182,7 +182,7 @@ This behavior isn’t really all that useful most of the time because it would m
 
 Absolute positioning becomes much more practical when it’s relative to some other element that _is_ in the static flow of the page. Fortunately, there’s a way to change the coordinate system of an absolutely positioned element.
 
-![Diagram: absolute element positioned relative to a parent positioned element](/images/css-relatively-absolute-positioning-1ba963.png)
+![Diagram: absolute element positioned relative to a parent positioned element](/images/html-css/css-relatively-absolute-positioning-1ba963.png)
 
 Coordinates for absolute elements are always relative to the closest container that is a positioned element. It only falls back to being relative to the browser when none of its ancestors are positioned. So, if we change `.item-absolute`’s parent element to be relatively positioned, it should appear in the top-left corner of _that_ element instead of the browser window.
 
@@ -194,7 +194,7 @@ Coordinates for absolute elements are always relative to the closest container t
 
 The `.absolute` div is laid out with the normal flow of the page, and we can manually move around our `.item-absolute` wherever we need to. This is great, because if we want to alter the normal flow of the container, say, for a mobile layout, any absolutely positioned elements will automatically move with it.
 
-![Web page with an absolutely positioned element inside another element that is relatively positioned](/images/relatively-absolute-positioning-screenshot-98bcce.png)
+![Web page with an absolutely positioned element inside another element that is relatively positioned](/images/html-css/relatively-absolute-positioning-screenshot-98bcce.png)
 
 Notice how we didn’t specify any offset coordinates for `.absolute`. We’re using relative positioning for the sole purpose of letting our absolute element hook back into the normal flow of the page. This is how we safely combine absolute positioning with static positioning.
 
@@ -202,7 +202,7 @@ Notice how we didn’t specify any offset coordinates for `.absolute`. We’re u
 
 “Fixed positioning” has a lot in common with absolute positioning: it’s very manual, the element is removed from the normal flow of the page, and the coordinate system is relative to the entire browser window. The key difference is that fixed elements don’t scroll with the rest of the page.
 
-![Diagram: fixed element positioned relative to the browser window, but with scrolling disabled](/images/css-fixed-positioning-342eff.png)
+![Diagram: fixed element positioned relative to the browser window, but with scrolling disabled](/images/html-css/css-fixed-positioning-342eff.png)
 
 Go ahead and update our third example to use fixed positioning:
 
@@ -243,7 +243,7 @@ These advanced positioning schemes allow JavaScript to move elements around whil
 
 This JavaScript code creates a simple animation that continually updates the `left` property of the `.item-relative`. When you reload the page, you should see the blue image float to the right edge of its container.
 
-![Web page showing simple animation of a relatively positioned element](/images/animated-relative-positioning-193400.png)
+![Web page showing simple animation of a relatively positioned element](/images/html-css/animated-relative-positioning-193400.png)
 
 This is a pretty rudimentary example, but you can hopefully see how it’s applicable to fancy UI animations. If you were to try to achieve the same effect by manipulating the `margin` or `padding` properties, you would inadvertently move the statically positioned boxes and/or the containing `.example` element, too.
 
@@ -251,7 +251,7 @@ This is a pretty rudimentary example, but you can hopefully see how it’s appli
 
 So, those are all the techniques. Let’s do something _advanced_ with them! The rest of this chapter applies our newfound skills towards a fancy navigation menu with an interactive dropdown for one of its links. We’ll be building [this page](https://internetingishard.com/example/menu.html) entirely from scratch.
 
-![Web page with a dropdown menu](/images/submenu-with-z-index-f458d3.png)
+![Web page with a dropdown menu](/images/html-css/submenu-with-z-index-f458d3.png)
 
 Fixed positioning will let us make the menu stick to the top of the page, and relative positioning will give us an anchor for the absolutely positioned dropdown. We’ll also get a chance to talk about navigation menu best practices and see some practical applications of the [pseudo-classes](https://internetingishard.com//html-and-css/css-selectors/#pseudo-classes-for-links) we talked about in _CSS Selectors_.
 
@@ -321,7 +321,7 @@ a:hover {
 
 This should all be familiar, but note the `fixed` position of the `.header`, which keeps our navigation menu on top of any content that would go into the page.
 
-![Web page with a menu made out of block <li> elements (no positioning)](/images/menu-block-list-items-c1ac6a.png)
+![Web page with a menu made out of block <li> elements (no positioning)](/images/html-css/menu-block-list-items-c1ac6a.png)
 
 ## Inline Menu Items
 
@@ -344,7 +344,7 @@ Despite being marked up as unordered lists, the navigation menus for most websit
 
 We have to use [child selectors](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/Child_selectors) here instead of [descendant selectors](https://internetingishard.com//html-and-css/css-selectors/#descendant-selectors) because we only want to select `<li>` elements that are directly inside the `.menu`. This will become important once we add our submenu, which has its own `<li>` elements that we don’t want to style with this rule. This snippet also adds margins to all the list items, but removes it from the final `<li>` using the `:last-of-type` pseudo-class. This is a pretty common technique for creating margins _between_ items.
 
-![Web page with a menu made out of inline <li> elements (no positioning)](/images/menu-inline-list-items-1e8d70.png)
+![Web page with a menu made out of inline <li> elements (no positioning)](/images/html-css/menu-inline-list-items-1e8d70.png)
 
 ## Submenus
 
@@ -394,7 +394,7 @@ As for the CSS, we’ll deal with the interactive dropdown part later. Right now
 
 The submenu itself is styled correctly, but it’s showing up in the wrong place and severely messing up the rest of our top-level menu items. This should be expected because it’s still statically positioned, which means it still interacts with its parent and surrounding elements.
 
-![Web page with an unstyled submenu (HTML-only)](/images/submenu-no-css-positioning-04280e.png)
+![Web page with an unstyled submenu (HTML-only)](/images/html-css/submenu-no-css-positioning-04280e.png)
 
 To create our desired layout, we need to call on our new CSS positioning skills.
 
@@ -428,7 +428,7 @@ The submenu resides in `<li class='dropdown'>`. Turning that into a positioned e
 
 Ok, next problem. Our submenu is in the right spot, but now it’s covering up the **Features** label.
 
-![Web page with a absolutely positioned submenu inside a relative element](/images/submenu-relative-and-absolute-positioning-9fe8a5.png)
+![Web page with a absolutely positioned submenu inside a relative element](/images/html-css/submenu-relative-and-absolute-positioning-9fe8a5.png)
 
 ## Z-Index
 
@@ -436,7 +436,7 @@ We’ve never had to deal with “depth” issues before. Until now, all our HTM
 
 The `z-index` property lets you control the depth of elements on the page. If you think of your screen as 3D space, negative `z-index` values go farther into the page, and positive ones come out of the page.
 
-![Diagram: positive z-index coming out of the page and negative z-index going into the page](/images/css-z-index-c87ef0.png)
+![Diagram: positive z-index coming out of the page and negative z-index going into the page](/images/html-css/css-z-index-c87ef0.png)
 
 In other words, the `.features-menu` element needs to have a lower `z-index` than the **Features** label. The default `z-index` value is `0`, so let’s make both of them higher than that. We conveniently wrapped the **Features** label in a `<span>`, allowing us to style it via a child selector, like so:
 
@@ -455,7 +455,7 @@ In other words, the `.features-menu` element needs to have a lower `z-index` tha
 
 The **Features** label should now appear on top of the submenu. Take note of that `position: relative;` line. It’s _required_ because only positioned elements pay attention to their `z-index` property. This is easy to forget, so make a mental note for the next time you’re having depth issues and your CSS rules don’t seem to have any effect.
 
-![Web page showing submenu after adding a positive z-index](/images/submenu-with-z-index-f458d3.png)
+![Web page showing submenu after adding a positive z-index](/images/html-css/submenu-with-z-index-f458d3.png)
 
 We threw in an example of the `cursor` property to make it look like a link when the user hovers over the label. You can read more about it at [Mozilla Developer Network](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
 
@@ -495,7 +495,7 @@ In this chapter, we took a look at four new CSS layout schemes:
 
 Relative positioning was for tweaking the position of an element without affecting its surrounding boxes. Absolute positioning took elements out of the static flow of the page and placed them relative to the browser window, while relatively absolute positioning allowed us to hook back into the static flow of the page. Finally, fixed positioning let us make elements that didn't scroll with the rest of the page.
 
-![Diagram: comparison of relative, absolute, relatively absolute, and fixed positioning schemes](/images/css-positioning-schemes-summary-d7f831.png)
+![Diagram: comparison of relative, absolute, relatively absolute, and fixed positioning schemes](/images/html-css/css-positioning-schemes-summary-d7f831.png)
 
 We used these new positioning techniques to create a rather sophisticated navigation menu. If it felt complicated, that’s cause it was. But don’t worry, you shouldn’t feel pressure to _memorize_ the HTML and CSS behind our menu. Your goal should be to have the ability to reference this example three months from now and understand what all those `position: relative;` and `position: absolute;` declarations are doing.
 

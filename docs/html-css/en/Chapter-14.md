@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 “Web typography” refers to the appearance of all the text on your website. It includes [basic CSS text properties](https://internetingishard.com//html-and-css/hello-css/#more-text-styles) like what font to use and whether it should be italic or not, but typography is much more than that. It’s about the space between and around letters, words, and lines. It’s the size of different runs of text in relation to one another, and the history behind each font family.
 
-![Diagram: examples of font families, relative font sizes, indent styles, text alignment, vertical spacing, and line length](/images/web-typography-terminology-e06b82.png)
+![Diagram: examples of font families, relative font sizes, indent styles, text alignment, vertical spacing, and line length](/images/html-css/web-typography-terminology-e06b82.png)
 
 A lot of your typography decisions will come from a designer. The only problem is that typography is an invisible art. To actually understand what your designer is asking for, you need to be able to _see_ typography the same way they do.
 
@@ -22,7 +22,7 @@ We’re going to start this chapter by learning how to display your web pages in
 
 Long, long ago, web developers only had “web safe fonts” at their disposal. These were a collection of a dozen or so fonts that were pre-installed on most computers. There was no such thing as a custom font file that you could send to browsers to use on your website.
 
-![Diagram: web server asking user’s computer to display text in Georgia font, user’s computer checking its system for that font](/images/web-safe-fonts-eaa8b0.png)
+![Diagram: web server asking user’s computer to display text in Georgia font, user’s computer checking its system for that font](/images/html-css/web-safe-fonts-eaa8b0.png)
 
 If you _needed_ a special font, your only option was to export an image of the text you wanted to display and include it in your web page with an `<img/>` element. This was ridiculously limiting for web designers and resulted in some pretty hacky situations for developers. Honestly, we don’t know how everybody survived through that era of HTML and CSS.
 
@@ -52,13 +52,13 @@ Newer browsers
 
 This resulted in the [“Bulletproof `@font-face` syntax”](https://internetingishard.com/https://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/), which you’ll likely encounter at some point in your web development career.
 
-![Diagram: web server providing .svg, .eot, .ttf, and .woff fonts for the browser to use](/images/bulletproof-font-face-d18a22.png)
+![Diagram: web server providing .svg, .eot, .ttf, and .woff fonts for the browser to use](/images/html-css/bulletproof-font-face-d18a22.png)
 
 ### WOFF Fonts
 
 Recently, the industry has standardized on the Web Open Font Format (WOFF), so things have gotten a little bit simpler for us. [Over 90%](https://internetingishard.com/http://caniuse.com/#search=woff) of modern browsers support `.woff` fonts, and support for its next evolution, `.woff2`, is growing. WOFF2 is similar to the original WOFF format, but offers a significant reduction in file size (which means better performance).
 
-![Diagram: web server providing only .woff and .woff2 fonts for the browser to use](/images/woff-and-woff-2-fonts-0cced1.png)
+![Diagram: web server providing only .woff and .woff2 fonts for the browser to use](/images/html-css/woff-and-woff-2-fonts-0cced1.png)
 
 Eventually, you’ll only need to support WOFF2, but right now, we suggest providing both WOFF and WOFF2 web fonts to get decent coverage for older browsers and improved performance on modern ones. Unless legacy browsers make up a large chunk of your target audience, `.ttf`, `.svg`, and `.eot` fonts are a thing of the past.
 
@@ -104,11 +104,11 @@ Note that Font Squirrel and Fontspring offer both web fonts and desktop fonts (`
 
 Ok! We’re ready to experiment with web fonts. We’re going to be building this [example website](https://internetingishard.com//html-and-css/web-typography/example/final/web-fonts.html). We figured you probably don’t want to start this one from scratch, so go ahead and [download the initial project](https://internetingishard.com//html-and-css/web-typography/web-typography-338d1d.zip). Unzip it and open up the `web-typography` folder with your favorite text editor. If you don’t have a favorite text editor, you might want to check out [Atom](https://internetingishard.com//html-and-css/introduction/#atom-text-editor).
 
-![Screenshot: Atom’s file browser after unzipping the example project](/images/project-files-af1f60.png)
+![Screenshot: Atom’s file browser after unzipping the example project](/images/html-css/project-files-af1f60.png)
 
 We’ve got 6 HTML documents all using the same `typo.css` stylesheet. We’ll be demonstrating various typographic principles by adding some [page-specific styles](https://internetingishard.com//html-and-css/hello-css/#the-cascade) to each of these HTML files.
 
-![Web page with web fonts versus system fonts example (before adding web fonts)](/images/web-typography-screenshot-669f41.png)
+![Web page with web fonts versus system fonts example (before adding web fonts)](/images/html-css/web-typography-screenshot-669f41.png)
 
 Open up one of the HTML files with a web browser, and you’ll find that our initial project is pretty close to the final example, minus all the web fonts and other CSS typography properties.
 
@@ -126,7 +126,7 @@ We’ll be experimenting in the `web-fonts.html` and `typo.css` files. Go ahead 
 
 So, we need to get our hands on a web font. Our example uses the free Roboto font, which you should [download from Font Squirrel](https://internetingishard.com/https://www.fontsquirrel.com/fonts/roboto). Make sure to click the **Webfont Kit** tab, not the **Download TTF** button. Unclick all the formats except **WOFF**, since that’s the only one we’ll be using, then click the **Download @font-face Kit** button.
 
-![Screenshot: downloading the Roboto font family from Font Squirrel](/images/download-roboto-screenshot-348421.png)
+![Screenshot: downloading the Roboto font family from Font Squirrel](/images/html-css/download-roboto-screenshot-348421.png)
 
 This will give you a ZIP file with a license, some instructions, and a `web fonts` folder containing a ton of subdirectories. The Roboto font comes in a bunch of different [font faces](https://internetingishard.com/#font-families-and-font-faces) like light, regular, bold, italic, and condensed. Each of those folders contains a different face. The one we want is called `roboto_light_macroman`. Open up that folder and copy the `Roboto-Light-webfont.woff` file into our `web-typography` project.
 
@@ -174,7 +174,7 @@ _Everything_ should now render as Roboto Light, which means we lost our comparis
 
 The `.system-fonts` class is applied to the second box in `web-fonts.html`. The above rule takes precedence over the `body` rule in `typo.css`, so when you open up `web-fonts.html` in a browser, you should see our Roboto Light web font on the top and the default system font on the bottom:
 
-![Web page with web fonts versus system fonts example (after adding web fonts)](/images/custom-web-font-vs-system-font-0aa7bc.png)
+![Web page with web fonts versus system fonts example (after adding web fonts)](/images/html-css/custom-web-font-vs-system-font-0aa7bc.png)
 
 ## Font Families and Font Faces
 
@@ -182,13 +182,13 @@ A single font “family” is made up of multiple font “faces”. Each font fa
 
 In our example, Roboto Light is one font face in the Roboto family. The other 17 faces in the ZIP file we downloaded earlier can be visualized like so:
 
-![Chart of Roboto fonts: font weights (100-900) on x-axis, font styles (roman, italic, condensed) on y-axis](/images/font-weights-and-styles-9bf7f0.png)
+![Chart of Roboto fonts: font weights (100-900) on x-axis, font styles (roman, italic, condensed) on y-axis](/images/html-css/font-weights-and-styles-9bf7f0.png)
 
 In CSS, font weights are expressed as numeric values between 100 and 900. Fortunately, there are relatively standardized, human-friendly terms for each of these numeric values. “Black” usually means 900, “bold” is 700, “regular” is 400, etc. As you can see above, most families don’t supply a face for every single weight. Roboto is missing “extra light” (200), “semi bold” (600), and “extra bold” (800).
 
 It’s worth noting that each style and weight combination is designed as an entirely distinct face. In a high-quality font family, the condensed styles aren’t simply squashed versions of the roman faces, nor is the bold face merely a thicker version. Each letter in every face is hand-crafted to ensure it provides a uniform flow to its text.
 
-![Roman letter a versus italic letter a](/images/roman-versus-italic-a-fe7025.png)
+![Roman letter a versus italic letter a](/images/html-css/roman-versus-italic-a-fe7025.png)
 
 This is particularly apparent in the italic and roman faces of many serif fonts. For instance, the lowercase “a” in Century Schoolbook FS (the font you’re reading right now) takes on a completely different shape when it’s _italicized_.
 
@@ -210,7 +210,7 @@ But first, let’s take a look at what happens when we _don’t_ offer multiple 
 
 When you reload the page, you’ll notice that the bold text isn’t really all that bold. This is because it’s being _synthesized_. We didn’t supply a bold font face for the `<strong>` element to use, so the browser is trying to fake it by auto-converting Roboto Light into a thicker face. The same thing is going on with the italics in the `<em>` element, but it’s a little bit harder to tell. This auto-conversion almost always results in low-quality typography.
 
-![Screenshot: synthesized bold as slightly bolder text versus genuine bold as much bolder text](/images/synthesized-bold-vs-genuine-bold-363a2f.png)
+![Screenshot: synthesized bold as slightly bolder text versus genuine bold as much bolder text](/images/html-css/synthesized-bold-vs-genuine-bold-363a2f.png)
 
 To verify that the bold and italic faces really are being synthesized, try adding the following rule to `typo.css`. The `font-synthesis` property determines if a browser is allowed to fake it or not. At the time of this writing, only Firefox actually pays attention to `font-synthesis`, so this won’t work in Chrome or Safari:
 
@@ -260,7 +260,7 @@ strong {
 
 This _will_ work, and you should now see proper italic and bold fonts when you reload `web-fonts.html` in your browser. The problem is that manually specifying the `font-family` every time we want to use an italic or bold font is a little weird. We should be using the CSS `font-style` and `font-weight` properties for this.
 
-![Diagram: Mapping three related .woff files to three unrelated @font-face declarations](/images/at-font-face-multiple-faces-wrong-way-68feb0.png)
+![Diagram: Mapping three related .woff files to three unrelated @font-face declarations](/images/html-css/at-font-face-multiple-faces-wrong-way-68feb0.png)
 
 We ended up in this awkward situation because of the way we embedded our new `.woff` files. Using separate `font-family` values in `@font-face` makes them look like entirely unrelated font faces. It doesn’t reflect the fact that they are all actually part of the Roboto family.
 
@@ -295,7 +295,7 @@ To maintain the familial relationship between our three font faces, they all nee
 
 Think of each `@font-face` at-rule as a description of the underlying `.woff` file. The first `@font-face` is saying it’s a Roboto font that’s roman (`normal`) and has a font weight of 300 (aka “light”). The second says it’s also in the Roboto family and has a weight of 300, but it’s italic. Finally, the third at-rule lets our the browser know that `Roboto-Bold-webfont.woff` contains the 700-weight (aka “bold”) roman face.
 
-![Diagram: Mapping three related .woff files to three related @font-face declarations by specifying font-style and font-weight](/images/at-font-face-multiple-faces-8198c0.png)
+![Diagram: Mapping three related .woff files to three related @font-face declarations by specifying font-style and font-weight](/images/html-css/at-font-face-multiple-faces-8198c0.png)
 
 Letting the browser know that our font faces are related makes our CSS much more intuitive. We can set the default font family and weight in our `body` selector. Then, when we want to use italics or bold for a particular element, we can simply specify a `font-style` or `font-weight` and the browser will pull the corresponding `.woff` file:
 
@@ -321,11 +321,11 @@ These happen to be the default `font-style` and `font-weight` values for `<em>` 
 
 Ok! That was complicated. Next, we’re going to explore the easier method of using web fonts: externally hosted via [Google Fonts](https://internetingishard.com/https://fonts.google.com/). This lets us skip the first two steps of locally hosted fonts. Instead of adding `.woff` files to our project and embedding them with `@font-face`, we can let Google Fonts do this part for us.
 
-![Diagram: serving web fonts from our own web server versus serving them from Google Fonts’ servers](/images/locally-vs-externally-hosted-fonts-7bba77.png)
+![Diagram: serving web fonts from our own web server versus serving them from Google Fonts’ servers](/images/html-css/locally-vs-externally-hosted-fonts-7bba77.png)
 
 In this section, we’re going to be working on `history.html`, so open up that file in both your text editor and a web browser. If you want a brief history of typography going all the way back to the first printing press, take a quick read through the example text. Right now, each section in `history.html` is using Roboto Light, but we’re going to change all of them to be representative of the period they’re talking about.
 
-![Screenshot: copying web fonts <link> from Google Fonts](/images/selecting-a-google-font-3a5534.png)
+![Screenshot: copying web fonts <link> from Google Fonts](/images/html-css/selecting-a-google-font-3a5534.png)
 
 Let’s begin by changing the font for the _Gothic/Blackletter_ section. In [Google Fonts](https://internetingishard.com/https://www.google.com/fonts), search for **UnifrakturMaguntia**. It should look like something a monk wrote in the middle ages. Click **Select this font**. In the pop-up menu, you’ll see a `<link/>` element. Copy this into the `<head>` of `history.html`, above the `<link/>` element that includes our `typo.css` stylesheet.
 
@@ -347,7 +347,7 @@ Now that we’ve embedded our `UnifrakturMaguntia` web font, we should be able t
 
 That first section has a `class='blackletter'` attribute, so it should now be printed in gothic letters:
 
-![Screenshot: text rendered in a blackletter font](/images/adding-a-google-font-e4afca.png)
+![Screenshot: text rendered in a blackletter font](/images/html-css/adding-a-google-font-e4afca.png)
 
 Google Fonts are a quick and easy solution, but professional sites should typically use locally hosted web fonts. This gives you a lot more flexibility (you’re not limited to Google’s font offering) and can have performance/reliability gains if you’ve optimized the rest of your site correctly.
 
@@ -404,7 +404,7 @@ And that’s more than you could ever want to know about web fonts. The rest of 
 
 Separating paragraphs from one another is one of the most fundamental functions of typography. There’s two generally accepted solutions: either use a first-line indent _or_ a margin between the paragraphs. Your readers (hopefully) aren’t stupid—they don’t need two signs that a new paragraph is happening, so never use _both_ an indent and a margin. That would be redundant.
 
-![Diagram: indenting first line of new paragraphs (ok), adding margins between paragraphs (ok), both (not ok)](/images/paragraph-indents-vs-margins-943b17.png)
+![Diagram: indenting first line of new paragraphs (ok), adding margins between paragraphs (ok), both (not ok)](/images/html-css/paragraph-indents-vs-margins-943b17.png)
 
 The CSS `text-indent` property defines the size of the first-line indent of a particular element (usually a `<p>`). We can explore this in our `indents.html` page. Go ahead and change the existing bottom margin styles in the first section to an indent by adding the following rules to the `<style>` element:
 
@@ -438,7 +438,7 @@ It might seem silly, but we’re not kidding when we say that good designers _wi
 
 The alignment of text has a subconscious impact on how you read it. You’ve probably never noticed it before, but your eyes don’t move in a smooth motion as they read over a paragraph—they jump from word to word and from line to line. Your eyes fixate on certain spots and skip over other ones.
 
-![Diagram: text with several dots on it (you read like this) versus gradients over lines of text (you don’t read like this)](/images/fixation-reading-vs-smooth-eye-motions-9c0886.png)
+![Diagram: text with several dots on it (you read like this) versus gradients over lines of text (you don’t read like this)](/images/html-css/fixation-reading-vs-smooth-eye-motions-9c0886.png)
 
 In a well-designed HTML document, text alignment is never an arbitrary decision. It takes into account this little bit of human physiology. Good text alignment actually makes it easier for users to read your content by giving their eyes an anchor to jump to when they move from line to line.
 
@@ -448,7 +448,7 @@ The next few sections explain the proper times to use left, center, right, and j
 
 Most of your text should be left-aligned because it gives the reader a vertical anchor to jump back to on every line. Long runs of text, in particular, should almost always be left-aligned. Short runs of text and headings have a little bit more leeway.
 
-![Diagram: vertically aligned dots on left side of left-aligned text serving as an anchor for your eyes](/images/left-text-alignment-26dbc5.png)
+![Diagram: vertically aligned dots on left side of left-aligned text serving as an anchor for your eyes](/images/html-css/left-text-alignment-26dbc5.png)
 
 Left alignment is the default value for `text-align`, but if we wanted to be explicit, we could add the following rule to the `<style>` element of our `alignment.html` file:
 
@@ -466,7 +466,7 @@ Of course, if you’re working on a website that’s in a language that’s writ
 
 Center-aligned text doesn’t have that anchor, so it’s easier for the eye to get lost when it tries to jump to the next line. It’s best suited for short line lengths (more on that later) and for special kinds of content like poems, lyrics, and headings.
 
-![Diagram: uneven dots on center-aligned text](/images/center-text-alignment-29e1d3.png)
+![Diagram: uneven dots on center-aligned text](/images/html-css/center-text-alignment-29e1d3.png)
 
 Go ahead and center-align the second paragraph in `alignment.html` with another page-specific style:
 
@@ -482,7 +482,7 @@ Notice how the page now feels a little disjointed. The center-aligned second par
 
 Another consideration when choosing text alignment is the relationship it creates with the surrounding elements. For instance, take a look at that third section in `alignment.html`. We want to move the image’s caption to the left of the image and right-align it to make it look like it’s attached to the image:
 
-![Diagram: image with right-aligned text caption to the left of it](/images/right-aligning-a-caption-cb645b.png)
+![Diagram: image with right-aligned text caption to the left of it](/images/html-css/right-aligning-a-caption-cb645b.png)
 
 Our example image is wrapped in a `<figure>` and the caption text is in a `<figcaption>`, so adding the following to the `<style>` element of `alignment.html` should result in the above layout.
 
@@ -516,7 +516,7 @@ Like centered text, right alignment should usually be reserved for these kinds o
 
 Justified text is created by subtly adjusting the space between words/letters and splitting long words with hyphens until each line is the same width. Without a high-quality hyphenation engine, justified text results in awkwardly large spaces between words. These uneven spaces make it harder for the eye to move horizontally across the text.
 
-![Diagram: paragraph with bad hyphenation (uneven spaces between letters and words) versus paragraph with good hyphenation (even spaces between letters and words)](/images/good-vs-bad-hyphenation-engine-ba40e3.png)
+![Diagram: paragraph with bad hyphenation (uneven spaces between letters and words) versus paragraph with good hyphenation (even spaces between letters and words)](/images/html-css/good-vs-bad-hyphenation-engine-ba40e3.png)
 
 Unfortunately, most browsers don’t have _any_ kind of built-in hyphenation engine, so you’re better off avoiding justified text in HTML documents. We can take a look by adding one more `text-align` rule to our `alignment.html` file:
 
@@ -568,7 +568,7 @@ To demonstrate this, we’re going to destroy the vertical rhythm in the second 
 
 A few small changes to line height, paddings, and margins can have a dramatic impact on the quality of a page:
 
-![Web page with large, consistent spacing versus web page with cramped, uneven spacing](/images/vertical-text-spacing-a9d71f.png)
+![Web page with large, consistent spacing versus web page with cramped, uneven spacing](/images/html-css/vertical-text-spacing-a9d71f.png)
 
 There’s a surprising amount of math and psychology that goes into calculating the vertical rhythm of a page, but that’s a job for your designer. As a developer, you need to know the CSS properties to implement what they’re asking for. More importantly, you have to understand that your designer really cares about this kind of stuff, so you should be paying very careful attention to your `margin`, `padding`, and `line-height` properties.
 
@@ -582,7 +582,7 @@ If the vertical spacing of your text isn’t arbitrary, it should be no surprise
 
 A good rule-of-thumb is to limit the number of characters on a single line to around 80. Like alignment, this subtly affects the readability of your content. It takes energy for your eye to move from the left edge of a paragraph to the right, and the farther it has to scan, the faster it gets tired. Longer lines also make it easier to get lost when you finish a line and need to jump back to the beginning of the next line.
 
-![Diagram: line length as the width of a paragraph](/images/line-length-measure-ce052b.png)
+![Diagram: line length as the width of a paragraph](/images/html-css/line-length-measure-ce052b.png)
 
 These are the reasons why so many websites (including this one) use [fixed-width layouts](https://internetingishard.com//html-and-css/responsive-design/#a-few-notes-on-design) or split content into multiple columns on wider screens. Without constraining the width of the page or dividing it into manageable columns, line length becomes unacceptably long.
 

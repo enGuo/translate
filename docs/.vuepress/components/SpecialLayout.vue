@@ -3,9 +3,9 @@
     <div class="cont">
       <Content :custom="false" />
     </div>
-    <div class="cont">
+    <!-- <div class="cont">
       <component :is="componentId"></component>
-    </div>
+    </div> -->
   </div>
 </template>
 

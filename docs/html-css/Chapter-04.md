@@ -8,7 +8,7 @@ layout: SpecialLayout
 
 为什么要样式分离，职责分离是网页设计的基本准则。HTML 展现内容，css 展现样式。
 
-![Diagram: designer’s mockup turning into CSS and raw content turning into HTML markup. Both CSS and HTML markup turn into a rendered web page](/images/css-vs-html-f4fdfa.png)
+![Diagram: designer’s mockup turning into CSS and raw content turning into HTML markup. Both CSS and HTML markup turn into a rendered web page](/images/html-css/css-vs-html-f4fdfa.png)
 
 css 提供了网页展示对照表，"我想让头部大点，侧边栏展示主要文章"，仅用 HTML 无法表达哪个是头，哪个是侧边栏
 
@@ -88,7 +88,7 @@ body {
 
 css 规则是以 由 HTML 中定义的选择器开始，首先给`<body>`元素添加样式。选择器空格后面有"中括号"，所有添加的属性都将作用于`<body>`
 
-![Diagram: CSS rule composed of a selector and a series of property-value pairs](/images/css-rule-terminology-1a7961.png)
+![Diagram: CSS rule composed of a selector and a series of property-value pairs](/images/html-css/css-rule-terminology-1a7961.png)
 
 `color` 是 HTML 文本 css 颜色属性，它接受一个 HAX 值表示变色值，比如"#F00"表示红色
 
@@ -108,13 +108,13 @@ css 属性跟 [HTML attributes](./Chapter-03.md) 都是 key-value 的形式。 �
 
 `<link/>`在渲染`hello-css.html`界面前告诉浏览器加载`styles.css`，接着我们会看到如下效果：
 
-![Web page with a lot of bright red text due to body selector](/images/linking-a-css-stylesheet-572fd1.png)
+![Web page with a lot of bright red text due to body selector](/images/html-css/linking-a-css-stylesheet-572fd1.png)
 
 `<link/>`元素虽然跟`<a>`元素很像，但它只能写在文档头部的`<head>`里面，`<link/>`关联外部文件的元数据，可以看到它是自闭合元素[empty element](./Chapter-01.md), 所以不需要闭合标签。
 
 `rel`属性定义了源文件和 HTML 文档的关系。默认值为 `stylesheet`，还可以为别的值 [few other options](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types). 跟上节的`href`类似 ，引用地址可以为[absolute, relative, or root-relative link](./Chapter-03.md).
 
-![Diagram: HTML <link> element directing the browser to a CSS stylesheet](/images/link-element-1beb38.png)
+![Diagram: HTML <link> element directing the browser to a CSS stylesheet](/images/html-css/link-element-1beb38.png)
 
 注意浏览器和我们的样式没有直接联系，只是在 HTML 可以包含 css，图片和 js。这些就是网页的核心部分
 
@@ -172,7 +172,7 @@ h2 {
 
 很多 css 属性都可以设置尺寸单位，比如 [a lot of units](https://developer.mozilla.org/en-US/docs/Web/CSS/length) , 常用的是 `px` (pixel) 和 `em` (有点像字母 _m_)。前者是真实像素值，不管用户用得是否是 Retina 设备，后者跟元素的字体大小有关
 
-![Diagram: 1em, 1.6em, and 2em sizes for base font size of 12px, 16px, and 20px. Em sizes get bigger as base font sizes increase.](/images/em-units-dad09a.png)
+![Diagram: 1em, 1.6em, and 2em sizes for base font size of 12px, 16px, and 20px. Em sizes get bigger as base font sizes increase.](/images/html-css/em-units-dad09a.png)
 
 `em` 比较适合定义依赖于基础字体大小的尺寸，在上个图表，可以看 `em` 对应 字体尺寸 `12px`, `16px`, 和 `20px` ，跑下下面代码：
 
@@ -229,13 +229,13 @@ h6 {
 
 这样我们就可以用一条 css 来给所有标头添加字体设置，如果我们想改变它，只需要在一个地方修改就可以了。多选择器可以提高开发体验。
 
-![Web page showing <h1> and <h2> headings in a different font](/images/heading-font-families-68964e.png)
+![Web page showing <h1> and <h2> headings in a different font](/images/html-css/heading-font-families-68964e.png)
 
 ### 字体定义
 
 `font-family` 是设置字体的 css 内置属性，它可以为多种值，因为每个用户安装的字体不一样。如代码所示，浏览器首先选用 `Helvetica` 然后是 `Arial`，都没有则选用系统默认字体 sans serif
 
-![Diagram: Helvetica falling back to Arial falling back to any sans serif font](/images/system-fonts-6a5c38.png)
+![Diagram: Helvetica falling back to Arial falling back to any sans serif font](/images/html-css/system-fonts-6a5c38.png)
 
 由于用户自定义字体的局限性，现在更多使用的是网络字体。可以在 [Web Typography](./Chapter-14.md) 章节了解详情。
 
@@ -255,7 +255,7 @@ ol {
 
 在`hello-css.html`例子中，你会看到列表样式为`none`的，像按钮一样。在[Advanced Positioning](./Chapter-09.md) 章节我们将进一步了解
 
-![Web page showing <ul> and <li> elements without list item bullets](/images/list-items-for-menus-70abb2.png)
+![Web page showing <ul> and <li> elements without list item bullets](/images/html-css/list-items-for-menus-70abb2.png)
 
 内容样式分离总是好的，比如菜单栏是无序列表，建议用按钮替换点列表展示，让网页保持 SEO 的同时，采用 css 让网页更漂亮
 
@@ -273,7 +273,7 @@ ol {
 
 现在 `dummy.html` 和 `hello-css.html` 有相同的样式。只需在一个文件修改，就可以同时作用于多个界面。
 
-![Diagram: Three HTML files pointing to the same global CSS stylesheet](/images/reusable-css-stylesheets-43a99a.png)
+![Diagram: Three HTML files pointing to the same global CSS stylesheet](/images/html-css/reusable-css-stylesheets-43a99a.png)
 
 css 好的引用方式可以参考 [root-relative paths](./Chapter-03.md) ，可以解决一些嵌套问题
 
@@ -305,7 +305,7 @@ p {
 
 有这些值 `right`, `center`, 或 `justify`，注意会影响整个网页
 
-![Web page with right-aligned text](/images/css-text-align-right-3c6a95.png)
+![Web page with right-aligned text](/images/html-css/css-text-align-right-3c6a95.png)
 
 在下一章节 css 盒模型中 将详细讲解这一现象的原因 [next chapter](./Chapter-05.md)
 
@@ -358,7 +358,7 @@ strong {
 
 上面优先级是递增的，意味着优先级高的会覆盖优先级低的样式。例如，行内样式会取代浏览器默认样式。接下来重点讲解最后两种
 
-![Diagram: external stylesheets pointing to page-specific styles pointing to inline styles](/images/css-cascade-0755f2.png)
+![Diagram: external stylesheets pointing to page-specific styles pointing to inline styles](/images/html-css/css-cascade-0755f2.png)
 
 接下来对比 `<style>` 的形式跟行内样式，虽然这两者都不太优雅，非得用的话建议优先使用`<style>`
 
@@ -383,15 +383,15 @@ strong {
 
 这些样式值作用于 `dummy.html`，`hello-css.html`界面不受影响，无误情况下，你会在浏览器看到相应效果
 
-![Web page with all blue text due to page-specific styles overriding global CSS stylesheet](/images/page-specific-css-styles-example-99d6c8.png)
+![Web page with all blue text due to page-specific styles overriding global CSS stylesheet](/images/html-css/page-specific-css-styles-example-99d6c8.png)
 
 所有在 `styles.css` 文件定义的样式都可以 移植到 `<style>` 元素内。同样的语法，只是 `<style>` 会重写 `styles.css` 的内容。在这个例子中。你会看到 `<body>` 的字体颜色被修改为 蓝色
 
-![Diagram: three page-specific CSS rules attached to three individual HTML documents](/images/page-specific-css-styles-c6b688.png)
+![Diagram: three page-specific CSS rules attached to three individual HTML documents](/images/html-css/page-specific-css-styles-c6b688.png)
 
 内联样式的缺点是难以维护。如上图所示，当你想服用样式代码的时候。你只能复制黏贴，最好的复用方式，还是使用外部引用 `.css` 文件。
 
-![Diagram: three web pages referring to a single global CSS stylesheet](/images/external-css-styles-b073ea.png)
+![Diagram: three web pages referring to a single global CSS stylesheet](/images/html-css/external-css-styles-b073ea.png)
 
 虽然有时候内联样式很方便，但建议还是使用外部引入的方式添加样式。
 
@@ -407,7 +407,7 @@ strong {
 
 行内样式优先级最高，与内联样式语法一样，但不能换行。
 
-![Diagram: 10 CSS rules attached directly to 10 different HTML elements via inline styles](/images/inline-css-styles-are-bad-73261b.png)
+![Diagram: 10 CSS rules attached directly to 10 different HTML elements via inline styles](/images/html-css/inline-css-styles-are-bad-73261b.png)
 
 如果你不想在全局 `styles.css` 给多个界面修改样式的话，你只能在每个界面的 `style` 属性里面修改。界面多的话，将会变得非常可怕。
 
@@ -441,7 +441,7 @@ strong {
 
 这章我们讲了很多内容样式分离，这不仅可以让我们复用样式，同时可以让我们为同个界面在不同情况引入不同样式。比如用户使用的是 手机、平板、或 PC ，更多内容参考[Responsive Design](./Chapter-10.md).
 
-![Diagram: single HTML file rendered with separate mobile and desktop CSS styles](/images/responsive-css-b7a057.png)
+![Diagram: single HTML file rendered with separate mobile and desktop CSS styles](/images/html-css/responsive-css-b7a057.png)
 
 作为网页开发者，我们都想用 css 完美还原原型。单独写样式很简单，但如果要快速准确地还原设计还是得下点功夫。
 

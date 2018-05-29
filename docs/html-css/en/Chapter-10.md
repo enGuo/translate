@@ -8,7 +8,7 @@ layout: SpecialLayout
 
 Responsive design is accomplished through CSS “media queries”. Think of media queries as a way to conditionally apply CSS rules. They tell the browser that it should ignore or apply certain rules depending on the user’s device.
 
-![Diagram: HTML content pointing to media queries, which point to mobile, tablet, and desktop devices](/images/how-responsive-websites-work-5f0a33.png)
+![Diagram: HTML content pointing to media queries, which point to mobile, tablet, and desktop devices](/images/html-css/how-responsive-websites-work-5f0a33.png)
 
 Media queries let us present the same HTML content as distinct CSS layouts. So, instead of maintaining one website for smartphones and an entirely unrelated site for laptops/desktops, we can use the same HTML markup (and web server) for both of them. This means that whenever we add a new article or edit a typo in our HTML, those changes are automatically reflected in both mobile and widescreen layouts. _This_ is the reason why we [separate content from presentation](https://internetingishard.com//html-and-css/basic-web-pages/#structure-versus-presentation).
 
@@ -34,13 +34,13 @@ Create a [new project](https://internetingishard.com//html-and-css/introduction/
 
 You’ll also need to [download some images](https://internetingishard.com//html-and-css/responsive-design/images-e9877a.zip) for later in the chapter. Unzip everything into the same folder as `responsive.html`, keeping the parent `images` folder. Your project should look like this before moving on:
 
-![Screenshot: Atom’s file browser with project files in it](/images/project-files-76223b.png)
+![Screenshot: Atom’s file browser with project files in it](/images/html-css/project-files-76223b.png)
 
 ## CSS Media Queries
 
 We’ll start small by simply updating the background color on the `<body>` element based on the device width. This is a good way to make sure our media queries are actually working before getting into complicated layouts.
 
-![Diagram: mobile device with red background, tablet with yellow background, desktop with blue background. Background colors set with media queries.](/images/simple-responsive-media-queries-703f8b.png)
+![Diagram: mobile device with red background, tablet with yellow background, desktop with blue background. Background colors set with media queries.](/images/html-css/simple-responsive-media-queries-703f8b.png)
 
 Let’s differentiate between narrow, medium, and wide layouts by creating a new `styles.css` stylesheet and adding the following:
 
@@ -77,7 +77,7 @@ When you resize your browser, you should see three different background colors: 
 
 Media queries always begin with the `@media` “at-rule” followed by some kind of conditional statement, and then some curly braces. Inside the curly braces, you put a bunch of ordinary CSS rules. The browser only pays attention to those rules if the condition is met.
 
-![Diagram: media query composed of the @media at-rule, a media type, a media feature, then a bunch of ordinary CSS](/images/media-query-terms-137d06.png)
+![Diagram: media query composed of the @media at-rule, a media type, a media feature, then a bunch of ordinary CSS](/images/html-css/media-query-terms-137d06.png)
 
 The `only screen` “media type” means that the contained styles should only be applied to devices with screens (opposed to printed documents, like when you hit **Cmd+P** in a browser). The `min-width` and `max-width` parts are called “media features”, and they specify the device dimensions you’re targeting.
 
@@ -87,7 +87,7 @@ The above media queries are by far the most common ones you’ll encounter, but 
 
 Ok, so `@media` is how we define different layouts for specific device widths, but what layouts are we actually trying to implement? The example web page for this chapter is going to look something like this:
 
-![Mockups of mobile, tablet, and desktop web pages](/images/mobile-first-design-be30e4.png)
+![Mockups of mobile, tablet, and desktop web pages](/images/html-css/mobile-first-design-be30e4.png)
 
 In the real world, it’s up to your web designer to supply you with these kinds of mockups. Your job as a developer is to implement the individual layouts using media queries to separate out the various CSS rules that apply to each one.
 
@@ -96,7 +96,7 @@ There’s a few [well defined patterns](https://internetingishard.com/https://de
 * A “fluid” layout is one that stretches and shrinks to fill the width of the screen, just like the [flexible boxes](https://internetingishard.com//html-and-css/flexbox/#flexible-items) we covered a few chapters ago.
 * A “fixed-width” layout is the opposite: it has the same width regardless of the screen dimensions (we created one of these in the [CSS Selectors](https://internetingishard.com//html-and-css/css-selectors#container-divs) chapter).
 
-![Diagram: fluid layout expanding to fill entire width of the browser, fixed-width layout staying the same even if browser gets wider](/images/fixed-width-vs-fluid-layouts-258df9.png)
+![Diagram: fluid layout expanding to fill entire width of the browser, fixed-width layout staying the same even if browser gets wider](/images/html-css/fixed-width-vs-fluid-layouts-258df9.png)
 
 In our example web page, the mobile and tablet versions are fluid, and the desktop version is fixed-width.
 
@@ -187,7 +187,7 @@ And here’s our base styles, which should apply to _all_ layouts (mobile, table
 
 If you make the browser window narrow, you'll see that this gives us our entire mobile layout. Pretty easy, huh? No media queries required. That’s why it’s called “mobile-first”—the mobile version doesn’t require any special handling. Also notice that [`flex-wrap` property](https://internetingishard.com//html-and-css/flexbox/#wrapping-flex-items) in the containing `.page` div. This will make it very easy to implement our tablet and desktop layouts.
 
-![Web page showing layout created with mobile-first CSS (no media queries)](/images/mobile-layout-55fdad.png)
+![Web page showing layout created with mobile-first CSS (no media queries)](/images/html-css/mobile-layout-55fdad.png)
 
 By keeping these base styles outside of the media queries, we’re able to override and add on to them as we implement our specific layouts. This is really convenient when, for instance, your designer wants to tweak the color scheme for the entire website. Instead of tracking down redundant `background-color` declarations in several `@media` rules, you only have to update it here. That change automatically applies to the mobile, tablet, and desktop layouts.
 
@@ -211,7 +211,7 @@ Flexbox makes this real easy. Simply adjust the widths of the flex items to be h
 
 To see these changes, make sure your browser window is between 400 pixels and 960 pixels wide, then scroll down to the bottom of the page. You should see a colorful grid:
 
-![Web page showing the grid created from tablet media query](/images/tablet-layout-081d9e.png)
+![Web page showing the grid created from tablet media query](/images/html-css/tablet-layout-081d9e.png)
 
 Again, it doesn’t matter what the exact width of the screen is: this layout will fluidly respond to any width in the media query’s range. Our mobile layout is also fluid, so we now have a website that looks beautiful (if a bit empty) in every device smaller than `960px` wide.
 
@@ -239,7 +239,7 @@ And that’s where our desktop layout comes in. We don’t want our web page to 
 
 This gives us the correct widths for everything, and we have more real estate to play with, so we made the header a little taller, too. Almost there, but our desktop layout calls for some reordering: the **Sign Up** and **Content** boxes should appear _underneath_ all the **Feature** sections.
 
-![Desktop layout of web page before and after flexbox re-ordering](/images/desktop-layout-8479d0.png)
+![Desktop layout of web page before and after flexbox re-ordering](/images/html-css/desktop-layout-8479d0.png)
 
 This is where flexbox really shines. Trying to create this combination of mobile and desktop layouts would be very difficult with [floats](https://internetingishard.com//html-and-css/floats/). With flexbox’s [`order` property](https://internetingishard.com//html-and-css/flexbox/#flex-item-order), it’s just a few lines of CSS. Append these rules to the desktop media query:
 
@@ -261,7 +261,7 @@ This was just one example of laying out a responsive site. You can use these exa
 
 We’ve got one final task for making a responsive web page. Before responsive design was a thing, mobile devices only had a desktop layout to work with. To cope with this, they zoomed out to fit the entire desktop layout into the width of the screen, letting the user interact with it by zooming in when necessary.
 
-![Diagram: zoom enabled (desktop layout rendered in a tablet device) versus zoom disabled (tablet layout rendered in a tablet device)](/images/html-viewport-zooming-5c4be6.png)
+![Diagram: zoom enabled (desktop layout rendered in a tablet device) versus zoom disabled (tablet layout rendered in a tablet device)](/images/html-css/html-viewport-zooming-5c4be6.png)
 
 This default behavior will prevent mobile devices from using our mobile layout, which is obviously very terrible. To disable it, add the following element to the `<head>` of our document. Just like [`<meta charset='UTF-8'/>`](https://internetingishard.com//html-and-css/links-and-images/#more-html-attributes), this is a critical element that should be on every single web page you create:
 
@@ -272,7 +272,7 @@ This default behavior will prevent mobile devices from using our mobile layout, 
 
 To see this in action, we’ll need to _simulate_ a mobile device in our desktop browser. This is a little advanced for where we’re at right now, but we can give it a shot. Open up `responsive.html` in Google Chrome, then hit **View > Developer > Developer Tools** in the menu bar. Then, to simulate a mobile device, click the **Toggle Device Toolbar** icon, highlighted below.
 
-![Screenshot: responsive icon in Chrome’s developer toolbar](/images/chrome-device-toolbar-bb030a.png)
+![Screenshot: responsive icon in Chrome’s developer toolbar](/images/html-css/chrome-device-toolbar-bb030a.png)
 
 You should see the zoom-disabled version of the above diagram in your browser, since it’s now pretending to be a mobile device. (We’ll save the in-depth discussion of Chrome dev tools for a future tutorial.)
 

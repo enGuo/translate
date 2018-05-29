@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 The [previous chapter](https://internetingishard.com//html-and-css/basic-web-pages/) covered some very important HTML elements, but we were only dealing with a single web page. Links and images are fundamentally different from those elements in that they deal with _external_ resources. Links point the user to a different HTML document, and images pull another resource into the page.
 
-![Diagram: image pointing to <img> element in a web page and HTML link pointing from web page to another web page](/images/links-and-images-6820c7.png)
+![Diagram: image pointing to <img> element in a web page and HTML link pointing from web page to another web page](/images/html-css/links-and-images-6820c7.png)
 
 To use links and images, we’ll also need to learn about another component of the HTML syntax: attributes. Attributes will open up a whole new world of possibilities for our web pages.
 
@@ -16,7 +16,7 @@ In this chapter, we’ll create a simple website composed of several HTML docume
 
 This chapter is all about linking web pages together, so we’ll need to create some new HTML files before we code anything up. We’ll be working with three separate web pages this chapter, along with a few image files of various formats:
 
-![Diagram: the 7 project files for this project (3 HTML files, 4 image files)](/images/links-and-images-example-7ab70f.png)
+![Diagram: the 7 project files for this project (3 HTML files, 4 image files)](/images/html-css/links-and-images-example-7ab70f.png)
 
 To get started, create a new folder called `links-and-images` to store all our files. You should be able to do this in Atom using the same process we followed in the [Introduction](https://internetingishard.com//html-and-css/introduction/#atom-text-editor) chapter.
 
@@ -74,7 +74,7 @@ Note that you can create a new folder in Atom by right-clicking the file browser
 
 We’ll be embedding images in our `images.html` file, so be sure to download these [example mochi images](https://internetingishard.com//html-and-css/links-and-images/images-4149f7.zip), too. Unzip them in your `links-and-images` folder, keeping the parent `images` folder from the ZIP file. Your project should now look like this:
 
-![Screenshot: Atom’s file browser after creating the example files](/images/example-files-b21613.png)
+![Screenshot: Atom’s file browser after creating the example files](/images/html-css/example-files-b21613.png)
 
 ## Anchors
 
@@ -90,7 +90,7 @@ If you load the page in a web browser, you’ll notice that the `<a>` element do
 
 In the same way that an element adds meaning to the content it contains, an HTML “attribute” adds meaning to the element it’s attached to.
 
-![Diagram: HTML attribute attached to an HTML element, which is attached to raw content](/images/html-attributes-6f5690.png)
+![Diagram: HTML attribute attached to an HTML element, which is attached to raw content](/images/html-css/html-attributes-6f5690.png)
 
 Different elements allow different attributes, and you can refer to [MDN](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element) for details about which elements accept which attributes. Right now, we’re concerned with the `href` attribute because it determines where the user goes when they click an `<a>` element. Update your link to match the following:
 
@@ -102,13 +102,13 @@ Notice how attributes live inside the _opening_ tag. The attribute name comes fi
 
 The extra bit of information provided by the `href` attribute tells the browser that this `<a>` element is in fact a link, and it should render the content in its default blue text:
 
-![Web page with a blue <a href> link in it](/images/html-link-href-element-61348e.png)
+![Web page with a blue <a href> link in it](/images/html-css/html-link-href-element-61348e.png)
 
 ## Absolute, Relative, and Root-Relative Links
 
 Now that we’re working with links, we need to understand how a website is structured. For our purposes, a website is just a collection of HTML files organized into folders. To refer to those files from inside of another file, the Internet uses “uniform resource locators” (URLs). Depending on what you’re referring to, URLs can take different forms. The three types of URLs we’ll be dealing with are highlighted below:
 
-![Diagram: absolute links (pointing to other website), relative links (pointing to other page in same website), and root-relative links (pointing to other page in same site via its domain)](/images/absolute-relative-root-relative-links-104560.png)
+![Diagram: absolute links (pointing to other website), relative links (pointing to other page in same website), and root-relative links (pointing to other page in same site via its domain)](/images/html-css/absolute-relative-root-relative-links-104560.png)
 
 Absolute, relative, and root-relative links refer to the value of the `href` attribute. The next few sections will explain how and when to use each of them. But first, let’s add the following content to our `links.html` file:
 
@@ -124,7 +124,7 @@ Absolute, relative, and root-relative links refer to the value of the `href` att
 
 “Absolute” links are the most detailed way you can refer to a web resource. They start with the “scheme” (typically `http://` or `https://`), followed by the domain name of the website, then the path of the target web page.
 
-![Diagram: scheme (https://), domain (developer.mozilla.org), path (/en-us/docs/web/html)](/images/absolute-link-syntax-64d730.png)
+![Diagram: scheme (https://), domain (developer.mozilla.org), path (/en-us/docs/web/html)](/images/html-css/absolute-link-syntax-64d730.png)
 
 For example, try creating a link to the Mozilla Developer Network’s HTML element reference:
 
@@ -137,7 +137,7 @@ For example, try creating a link to the Mozilla Developer Network’s HTML eleme
 
 It’s possible to use absolute links to refer to pages in your own website, but hard-coding your domain name everywhere can make for some tricky situations. It’s usually a better idea to reserve absolute links only for directing users to a different website.
 
-![Diagram: absolute link pointing from our web page to another website](/images/absolute-links-32f469.png)
+![Diagram: absolute link pointing from our web page to another website](/images/html-css/absolute-links-32f469.png)
 
 ### Relative Links
 
@@ -152,7 +152,7 @@ Here’s how we can link to our `extras.html` file from inside of `links.html`:
 
 In this case, the `href` attribute represents the file path to `extras.html` from the `links.html` file. Since `extras.html` isn’t in the same folder as `links.html`, we need to include the `misc` folder in the URL.
 
-![Diagram: relative link pointing from one page in our website to another one](/images/relative-links-e178d0.png)
+![Diagram: relative link pointing from one page in our website to another one](/images/html-css/relative-links-e178d0.png)
 
 Each folder and file in a path is separated by a forward slash (`/`). So, if we were trying to get to a file that was _two_ folders deep, we’d need a URL like this:
 
@@ -172,7 +172,7 @@ That works for referring to files that are in the same folder or a deeper folder
 
 When you click either of those links in a web browser, it will complain that the page doesn’t exist. Examining the address bar, you’ll discover that the browser is trying to load `misc/links.html` and `misc/images.html`—it’s looking in the wrong folder! That’s because our links are _relative_ to the location of `extras.html`, which lives in the `misc` folder.
 
-![Diagram: attempting to link to the wrong HTML page due to a missing parent reference](/images/relative-link-no-parent-4629d0.png)
+![Diagram: attempting to link to the wrong HTML page due to a missing parent reference](/images/html-css/relative-link-no-parent-4629d0.png)
 
 To fix this, we need the `..` syntax. Two consecutive dots in a file path represent a pointer to the parent directory:
 
@@ -184,7 +184,7 @@ To fix this, we need the `..` syntax. Two consecutive dots in a file path repres
 
 This is like saying, “I know `extras.html` is in the `misc` folder. Go up a folder and look for `links.html` and `images.html` in there.”
 
-![Diagram: linking to the correct HTML page after adding parent reference](/images/relative-link-with-parent-666b79.png)
+![Diagram: linking to the correct HTML page after adding parent reference](/images/html-css/relative-link-with-parent-666b79.png)
 
 To navigate up through multiple directories, use multiple `..` references, like so:
 
@@ -200,7 +200,7 @@ For example, all the images in [_HTML & CSS Is Hard_](https://internetingishard.
 
 “Root-relative” links are similar to the previous section, but instead of being relative to the current page, they’re relative to the “root” of the entire website. For instance, if your website is hosted on `our-site.com`, all root-relative URLs will be relative to `our-site.com`.
 
-![Diagram: a link from one web page in our site traveling through our domain, then to another page in our site](/images/root-relative-links-368060.png)
+![Diagram: a link from one web page in our site traveling through our domain, then to another page in our site](/images/html-css/root-relative-links-368060.png)
 
 Unfortunately, there is one caveat to our discussion of root-relative links: this entire tutorial uses local HTML files instead of a website hosted on a web server. This means we won’t be able to experiment with root-relative links. But, if we did have a real server, the link to our home page would look like this:
 
@@ -265,7 +265,7 @@ For now, let’s focus on the many image formats floating around the Internet.
 
 There’s four main image formats in use on the web, and they were all designed to do different things. Understanding their intended purpose goes a long way towards improving the quality of your web pages.
 
-![Diagram: JPG, GIF, PNG, and SVG example images](/images/image-formats-62b23d.png)
+![Diagram: JPG, GIF, PNG, and SVG example images](/images/html-css/image-formats-62b23d.png)
 
 The next few sections will walk through ideal use cases for each of these image formats. Make sure you’ve unzipped these [mochi images](https://internetingishard.com//html-and-css/links-and-images/images-4149f7.zip) into your `links-and-images` project before moving on.
 
@@ -273,7 +273,7 @@ The next few sections will walk through ideal use cases for each of these image 
 
 JPG images are designed for handling large color palettes without exorbitantly increasing file size. This makes them great for photos and images with lots of gradients in them. On the other hand, JPGs don’t allow for transparent pixels, which you can see in the white edges of the image below if you look real close:
 
-![a mochi in a transparent bubble that has a gradient on it](/images/mochi-77c69d.jpg)
+![a mochi in a transparent bubble that has a gradient on it](/images/html-css/mochi-77c69d.jpg)
 
 Embed this `mochi.jpg` image in our `images.html` page with the following snippet (this also includes a bit of navigation to our other pages):
 
@@ -293,7 +293,7 @@ Embed this `mochi.jpg` image in our `images.html` page with the following snippe
 
 GIFs are the go-to option for simple animations, but the trade off is that they’re somewhat limited in terms of color palette—never use them for photos. Transparent pixels are a binary option for GIFs, meaning you can’t have semi-opaque pixels. This can make it difficult to get high levels of detail on a transparent background. For this reason, it’s usually better to use PNG images if you don’t need animation.
 
-![an animated mochi bouncing up and down](/images/mochi-961ee5.gif)
+![an animated mochi bouncing up and down](/images/html-css/mochi-961ee5.gif)
 
 You can add this little guy to our `images.html` file with the following:
 
@@ -309,7 +309,7 @@ You can add this little guy to our `images.html` file with the following:
 
 PNGs are great for anything that’s not a photo or animated. For photos, a PNG file of the same quality (as perceived the human eye) would generally be bigger than an equivalent JPG file. However, they do deal with opacity just fine, and they don’t have color palette limitations. This makes them an excellent fit for icons, technical diagrams, logos, etc.
 
-![a plain old mochi](/images/mochi-f95fdf.png)
+![a plain old mochi](/images/html-css/mochi-f95fdf.png)
 
 Let’s add this PNG image to our example project as well:
 
@@ -325,7 +325,7 @@ Let’s add this PNG image to our example project as well:
 
 Unlike the pixel-based image formats above, SVG is a vector-based graphics format, meaning it can scale up or down to _any_ dimension without loss of quality. This property makes SVG images a wonderful tool for [responsive design](https://internetingishard.com//html-and-css/responsive-design/). They’re good for pretty much all the same use cases as PNGs, and you should use them whenever you can.
 
-![SVG image with crisp edges compared to a pixelated PNG image](/images/svg-vs-png-image-3df7fd.png)
+![SVG image with crisp edges compared to a pixelated PNG image](/images/html-css/svg-vs-png-image-3df7fd.png)
 
 These 300×300 pixel images were originally 100×100 pixels, but scaling them up clearly shows the difference between them. Notice the crisp, clean lines on the left SVG image, while the PNG image on the right is now very pixelated.
 
@@ -345,7 +345,7 @@ There is one potential issue with SVGs: for them to display consistently across 
 
 By default, the `<img/>` element uses the inherit dimensions of its image file. Our JPG, GIF, and PNG images are actually 150×150 pixels, while our SVG mochi is only 75×75 pixels.
 
-![Web page after embedding JPG, GIF, PNG, and SVG <img> elements](/images/html-img-formats-3b43c6.png)
+![Web page after embedding JPG, GIF, PNG, and SVG <img> elements](/images/html-css/html-img-formats-3b43c6.png)
 
 As we’ll discuss further in [Responsive Images](https://internetingishard.com//html-and-css/responsive-images/), pixel-based image formats need to be twice as big as you want them to appear on retina displays. To get our pixel-based images down to the intended size (75×75), we can use the `<img/>` element’s `width` attribute. In `images.html`, update all of our pixel-based images to match the following:
 
@@ -420,7 +420,7 @@ A “character set” is kind of like a digital alphabet for your browser. It’
 
 When you view this in a browser, you’ll see some weird stuff where the `ü`, `ç`, `ö`, and `ş` characters should be:
 
-![Web page rendering gibberish for international characters](/images/html-character-sets-no-utf-8-304820.png)
+![Web page rendering gibberish for international characters](/images/html-css/html-character-sets-no-utf-8-304820.png)
 
 That’s because the default character set for most browsers doesn’t accommodate these “special” characters. To fix this, specify a UTF-8 character encoding by adding a `<meta>` element with a `charset` attribute to the `<head>` of our `misc/extras.html` file:
 

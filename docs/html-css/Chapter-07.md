@@ -6,7 +6,7 @@ layout: SpecialLayout
 
 在之前的章节里我们学习了如何修改盒子的大小 [boxes](./Chapter-05.md) 以及边距，但这些都是垂直布局的块级元素，并没有实现列布局。
 
-![Diagram: vertical arrow over column of boxes versus horizontal arrows over grid of boxes](/images/vertical-vs-horizontal-stacking-064f76.png)
+![Diagram: vertical arrow over column of boxes versus horizontal arrows over grid of boxes](/images/html-css/vertical-vs-horizontal-stacking-064f76.png)
 
 "浮动"可以让块级元素由上至下变成从左到右，这样我们就可以实现非常多的布局，如侧边栏，多列布局，栅格，图文杂志风格。意味着我们可以开始创建更生动的网页
 
@@ -18,7 +18,7 @@ layout: SpecialLayout
 
 本章通过一个小例子去介绍浮动，不同于之前的章节，我们并不会太在意网页的内容，更多的是使用空 `<div>` 元素。最终将显示成：
 
-![Web page with floated sidebar, floated image, and floated grid in footer](/images/floats-final-example-e0e9f7.png)
+![Web page with floated sidebar, floated image, and floated grid in footer](/images/html-css/floats-final-example-e0e9f7.png)
 
 首先创建一个 `floats` 目录，然后添加 `floats.html` 文件：
 
@@ -85,7 +85,7 @@ layout: SpecialLayout
 
 有没有看起来像彩虹，但至此还没有接触有用的概念。
 
-![Web page with four colored blocks appearing vertically one after another](/images/default-css-layout-behavior-9b2b1f.png)
+![Web page with four colored blocks appearing vertically one after another](/images/html-css/default-css-layout-behavior-9b2b1f.png)
 
 重点是每个块级元素会占据父元素的宽度( 在本例中就是 `<div class='page'></div>` 宽度 )，并且在垂直方向一个挨着一个。这种情况下是无法实现列布局的。
 
@@ -103,7 +103,7 @@ layout: SpecialLayout
 
 侧边栏变窄了，但是其他盒子还是在同样的位置，依然是垂直方向一个挨着一个，我们将用浮动改变这个布局。
 
-![Web page with red sidebar box on left of page with white background next to it](/images/default-css-layout-behavior-explicit-width-97b8ac.png)
+![Web page with red sidebar box on left of page with white background next to it](/images/html-css/default-css-layout-behavior-explicit-width-97b8ac.png)
 
 ## 给元素添加浮动
 
@@ -120,7 +120,7 @@ layout: SpecialLayout
 
 浮动会打破默认块级上下布局格式，现在所有的元素都围绕侧边栏，有点类似杂志布局：
 
-![Web page with red sidebar box floating on top of the following element](/images/floated-sidebar-d926d5.png)
+![Web page with red sidebar box floating on top of the following element](/images/html-css/floated-sidebar-d926d5.png)
 
 也可以向右浮动，如果你要取消浮动可以使用 `none` ，这些都是 `float` 属性常用的值：
 
@@ -131,7 +131,7 @@ float: none; /* Revert to default flow */
 
 我们掌握了几种对齐块级元素的方式：左/右 浮动，`auto-margin` 的居中对齐，仅对块级元素有效，行内元素请用 `text-align` 属性 [previous chapter](./Chapter-05.md)
 
-![Diagram: float left (box on left of container), auto margins (box in center of container), float right (box on right of container)](/images/floats-and-auto-margin-for-alignment-536a81.png)
+![Diagram: float left (box on left of container), auto margins (box in center of container), float right (box on right of container)](/images/html-css/floats-and-auto-margin-for-alignment-536a81.png)
 
 ## 相对于父级浮动
 
@@ -148,7 +148,7 @@ float: none; /* Revert to default flow */
 
 可以看到侧边栏现在显示在 `.page` 容器的左边了。
 
-![Web page with colored boxes centered in the browser](/images/floating-in-fixed-width-page-a9c965.png)
+![Web page with colored boxes centered in the browser](/images/html-css/floating-in-fixed-width-page-a9c965.png)
 
 像这样定位嵌套容器就可以得到精致的网页布局，我们用 `.page` 让所有元素居中显示。接着让侧边栏左对齐，当然还有更复杂的情况，但目前我们只展示传统布局方式：所有元素作为盒子一个挨着一个。
 
@@ -166,7 +166,7 @@ float: none; /* Revert to default flow */
 
 会看到侧边栏在 `.content` 里面，这时如果你截图的话，将会得到一张 850 像素的图片。( 我们的侧边栏宽 200 像素 )
 
-![Web page showing left-floated red sidebar on top of statically positioned element](/images/floating-inside-another-container-1cfd76.png)
+![Web page showing left-floated red sidebar on top of statically positioned element](/images/html-css/floating-inside-another-container-1cfd76.png)
 
 图片比较适合浮动 ( 接下来我们会讲解 ) ，事实上我们想要得到的结果是 `content` 部分应该在接着侧边栏而不是围绕它，所以还得加个浮动：
 
@@ -181,11 +181,11 @@ float: none; /* Revert to default flow */
 
 当有多个元素往同一方向浮动时，它们将在水平方向重叠，有点像默认的垂直布局算法，只是旋转了 90 度。上面代码最终的效果是内容部分显示在了侧边栏的右边。
 
-![Web page showing left-lfoated red sidebar next to left-floated element](/images/two-floats-next-to-each-other-37f154.png)
+![Web page showing left-lfoated red sidebar next to left-floated element](/images/html-css/two-floats-next-to-each-other-37f154.png)
 
 这就是处理块级元素水平对齐的正确方式，给 `.sidebar` 和 `.content` 都添加浮动值就可以得到你想要的布局效果。
 
-![Diagram: the four potential combinations of left and right floats for two elements](/images/float-layout-combinations-e52716.png)
+![Diagram: the four potential combinations of left and right floats for two elements](/images/html-css/float-layout-combinations-e52716.png)
 
 在侧边栏和内容部分都浮动的情况下，`.footer` 元素就悲剧了
 
@@ -193,7 +193,7 @@ float: none; /* Revert to default flow */
 
 你可能注意到了，底部显示在了按钮的下方。原因是浮动改变了正常文档流。浮动元素的高度对于垂直方向的 footer 来说是无效的。
 
-![Web page with transparent boxes showing floated boxes on top of statically positioned footer](/images/floats-outside-of-normal-flow-5dc559.png)
+![Web page with transparent boxes showing floated boxes on top of statically positioned footer](/images/html-css/floats-outside-of-normal-flow-5dc559.png)
 
 给 `.page` 加红色边框可以看得更明白：
 
@@ -223,7 +223,7 @@ float: none; /* Revert to default flow */
 
 通常我们希望清除左右浮动，当然你也可以清除左边或右边。现在布局看起来应该正常了：
 
-![Web page showing footer popping down to bottom of floated elements after being cleared](/images/clearing-a-float-44a4d5.png)
+![Web page showing footer popping down to bottom of floated elements after being cleared](/images/html-css/clearing-a-float-44a4d5.png)
 
 至此我们应该可以很好的处理网页布局了，但我们可以更深入模拟别的浮动的场景，比如百分百布局。
 
@@ -244,7 +244,7 @@ float: none; /* Revert to default flow */
 
 按钮和底部放在了固定宽度 page 的外面，那么他们的宽度将跟窗口的一致，正是我们想要的百分百布局。但结果是 `.page` 的高度变为了 0，尽管 footer 已经清除了浮动。
 
-![Web page highlighting the zero-height .page <div> with only floated elements in it](/images/full-bleed-layout-broken-clear-58057f.png)
+![Web page highlighting the zero-height .page <div> with only floated elements in it](/images/html-css/full-bleed-layout-broken-clear-58057f.png)
 
 现在只有一个元素在 page 里浮动。也就是说，把 footer 放在 page 容器外面打破了清除浮动。
 
@@ -252,7 +252,7 @@ float: none; /* Revert to default flow */
 
 清除浮动能解决元素高度问题，但前提是元素在同一个容器，如果 footer 在 page 外面，则外面需要别的方式去解决容器高度塌陷问题。
 
-![Diagram: clearing with child (clear: both on child element) versus clearing  with parent (overflow: hidden on parent)](/images/methods-for-clearing-floats-6429d9.png)
+![Diagram: clearing with child (clear: both on child element) versus clearing  with parent (overflow: hidden on parent)](/images/html-css/methods-for-clearing-floats-6429d9.png)
 
 解决的方式是 [CSS `overflow` property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)。通过给容器添加 `overflow:hidden` 样式可以重新获得容器内浮动元素的高度：
 
@@ -267,7 +267,7 @@ float: none; /* Revert to default flow */
 
 你应该可以看到 page 的背景变成了淡灰色。但不是百分百布局 ( 稍后讲解 )，重点是 `overflow:hidden`，没有它外面将 看不到 `.page` 容器的背景，因为高度为 0。
 
-![Web page showing gray background filling full height of .page <div>](/images/full-bleed-layout-overflow-hidden-826f9e.png)
+![Web page showing gray background filling full height of .page <div>](/images/html-css/full-bleed-layout-overflow-hidden-826f9e.png)
 
 总之，如果你在容器底部有一个未浮动的元素，这时可以用 `clear` 解决，否则，需要给容器添加 `overflow:hidden` 。这种方式会让浏览器重新获取浮动元素的高度。
 
@@ -275,7 +275,7 @@ float: none; /* Revert to default flow */
 
 接着我们让除了侧边栏和内容区外的元素按百分百布局 ( 水平居中的 page 无法百分百布局，因为采用 margin-auto 方式的水平居中必须要有宽度。 )
 
-![Web page showing gray background filling full height of .page <div>, all the way to the left and right edges](/images/full-bleed-layout-with-container-85a6d1.png)
+![Web page showing gray background filling full height of .page <div>, all the way to the left and right edges](/images/html-css/full-bleed-layout-with-container-85a6d1.png)
 
 这时可以给 `.page` 外包裹一层容器：
 
@@ -338,7 +338,7 @@ float: none; /* Revert to default flow */
 
 这是我们第一次使用百分比，百分比高度是相对于父元素的。得到的结果是三个等宽的列(宽度为浏览器窗口的 1/3) 缩小浏览器窗口，你会发现三个列的宽度会跟着缩小。这就是响应式布局 [responsive design](./Chapter-10.md).
 
-![Web page with footer that has three equal-width child elements](/images/floats-for-columns-8a52b0.png)
+![Web page with footer that has three equal-width child elements](/images/html-css/floats-for-columns-8a52b0.png)
 
 额,回归正题：浮动可以让元素从垂直变为水平布局。修改浮动元素的宽可以得到不同的布局：侧边栏，多列，栅格等。
 
@@ -359,7 +359,7 @@ float: none; /* Revert to default flow */
 
 栅格布局像这样
 
-![Web page with footer that has 3 colums and 2 rows of child elements](/images/floats-for-grids-7ed8b0.png)
+![Web page with footer that has 3 colums and 2 rows of child elements](/images/html-css/floats-for-grids-7ed8b0.png)
 
 给 footer 添加 `overflow:hidden` 让它可以自适应栅格的数量：
 
@@ -434,13 +434,13 @@ p {
 
 我们实现了如何在实现浮动嵌套，网页布局其实是一个循环的过程，首先创建布局结构然后往里面添加内容，更复杂的布局可能需要别的图层或等深层次的嵌套，但其实原理都一样。
 
-![Web page showing floated image with text content flowing around it](/images/floats-final-example-e0e9f7.png)
+![Web page showing floated image with text content flowing around it](/images/html-css/floats-final-example-e0e9f7.png)
 
 ### 内容溢出隐藏
 
 看下例子最终展示：
 
-![Web page showing footer with icon and text next to it, not flowing around it due to overflow: hidden](/images/overflow-hidden-for-content-735981.png)
+![Web page showing footer with icon and text next to it, not flowing around it due to overflow: hidden](/images/html-css/overflow-hidden-for-content-735981.png)
 
 在 footer 添加 `.column` 元素：
 
@@ -478,7 +478,7 @@ p {
 
 这是 `overflow:hidden` 另一个技巧，给 `.comment` 添加内容隐藏。
 
-![Web pages showing with hidden overflow (text left-aligned) and without hidden overflow (text flowing around icon)](/images/no-overflow-hidden-for-content-1cb097.png)
+![Web pages showing with hidden overflow (text left-aligned) and without hidden overflow (text flowing around icon)](/images/html-css/no-overflow-hidden-for-content-1cb097.png)
 
 换句话说 `overflow:hidden` 打破了杂志风格布局。
 

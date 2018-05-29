@@ -7,7 +7,7 @@ layout: SpecialLayout
 HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一步。
 
 
-![Diagram: raw content turning into HTML markup turning into a web page](/images/html-markup-0761f7.png)
+![Diagram: raw content turning into HTML markup turning into a web page](/images/html-css/html-markup-0761f7.png)
 
 在这一章，我们将开发第一个网页。没有 css 可能看起来会比较丑。网页开发者每天都跟 html 元素打交道。
 
@@ -17,7 +17,7 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 让我们用 atom 开始创建一个新项目`basic-web-pages`。接着新建一个`basics.html` 文件。这个 HTML 文件包含了网页所有代码。如果你还没安装 atom 可以看下[Introduction](./Chapter-01.md) 
 
-![Diagram: editing HTML code in a text editor and viewing changes in a web browser](/images/web-dev-workflow-1faddb.png)
+![Diagram: editing HTML code in a text editor and viewing changes in a web browser](/images/html-css/web-dev-workflow-1faddb.png)
 
 网页开发的基本流程是在编辑器中敲代码，在浏览器中查看变化。这些就是你在这章节接下来经常要做的事。
 
@@ -41,12 +41,12 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 网页用`<html>`标签包裹着，`<html>`叫作起始标签，`</html>`叫作结束标签。当网页完成解析后 `<html>` 里面的元素就会被创建。
 
-![Diagram: an HTML element composed of an opening tag and a closing tag](/images/html-tags-elements-72813b.png)
+![Diagram: an HTML element composed of an opening tag and a closing tag](/images/html-css/html-tags-elements-72813b.png)
 
 在 `<html>` 元素里, 还有两个元素 `<head>` 、 `<body>`. 网页头部包含了网站所有的元数据。像标题，级联样式表，一些你不想让用户看到的信息，
 `<body>`里面就是我们想要展示的内容。
 
-![Diagram: web page split into <head> and <body> elements](/images/html-head-body-7c2a73.png)
+![Diagram: web page split into <head> and <body> elements](/images/html-css/html-head-body-7c2a73.png)
 
  学完接下来的章节我们会对 `<head>`/`<body>` 有更深入的了解。
 
@@ -72,7 +72,7 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 打开浏览器你会看到一个标签页上显示 **Interneting Is Easy!**的空网页
 
-![Web page showing <title> element displayed in a browser tab](/images/html-title-element-f4eb85.png)
+![Web page showing <title> element displayed in a browser tab](/images/html-css/html-title-element-f4eb85.png)
 
 网页有它的嵌套规则，不可以在`</head>`结束后添加`</title>` 标签
 
@@ -101,7 +101,7 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 现在可以在浏览器中看到内容，记住是在`<body>` 元素内添加内容而不是`<head>`。
 
-![Web page showing a <p> element with some content in it](/images/html-paragraph-element-842f23.png)
+![Web page showing a <p> element with some content in it](/images/html-css/html-paragraph-element-842f23.png)
 
 缩进有助于美化代码格式，便于开发。格式取决于你的团队，在 **Atom > Preferences > Editor** 中的 **Tab Type** 可以设置。
 
@@ -139,7 +139,7 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 就像
 
-![Web page showing a big <h1> element and a smaller <h2> element](/images/html-heading-elements-f7fe6a.png)
+![Web page showing a big <h1> element and a smaller <h2> element](/images/html-css/html-heading-elements-f7fe6a.png)
 
 好的网站应该用标头合理展示不同层级的内容
 
@@ -161,7 +161,7 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 把内容添加到 `<body>` 元素中，浏览器展示：
 
-![Web page showing a <ul> with <li> elements inside of it](/images/html-unordered-lists-f45526.png)
+![Web page showing a <ul> with <li> elements inside of it](/images/html-css/html-unordered-lists-f45526.png)
 
 `<ul>` 元素中不能包裹其他内容， 应该在 `<li>` 元素中添加：
 
@@ -202,7 +202,7 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 刷新界面后就可以看到有序列表，在[Hello, CSS](./Chapter-04.md)章节中,我们将学习如何修改列表样式。
 
-![Web page showing a <ol> with <li> elements inside of it](/images/html-ordered-lists-120411.png)
+![Web page showing a <ol> with <li> elements inside of it](/images/html-css/html-ordered-lists-120411.png)
 
 无序和有序对于搜索引擎和用户体验是不一样的。
 
@@ -212,7 +212,7 @@ HTML 标签是网页的构成元素，创建HTML 文档是开发网页的第一�
 
 至此，我们仅接触了“块级元素”，“行内元素”是另一个重要部分，块级元素会强制换行，行内元素在一行内显示。
 
-![Diagram: comparison of block elements (wrapping several inline elements) with inline elements (inside of a block element)](/images/inline-vs-block-elements-44860e.png)
+![Diagram: comparison of block elements (wrapping several inline elements) with inline elements (inside of a block element)](/images/html-css/inline-vs-block-elements-44860e.png)
 
 例如 `<p>` 是块级元素,  `<em>` 是行内元素，并且会让字体变斜体。
 
@@ -225,7 +225,7 @@ phrase.</p>
 
 `<em>` 显示斜体， 在 [CSS Box Model](./Chapter-05.md) 章节, 我们将深入讲解行内及块级元素如何影响网页布局的。
 
-![Web page highlighting the italic text created with an <em> element](/images/html-emphasis-element-87be03.png)
+![Web page highlighting the italic text created with an <em> element](/images/html-css/html-emphasis-element-87be03.png)
 
 注意元素间的嵌套规则：
 
@@ -245,7 +245,7 @@ of a word or phrase.</p>
 
 显示如下
 
-![Web page highlighting the bold text created with a <strong> element](/images/html-strong-element-d3135f.png)
+![Web page highlighting the bold text created with a <strong> element](/images/html-css/html-strong-element-d3135f.png)
 
 `<strong>` 、`<em>` 嵌套使用，样式会叠加：
 
@@ -255,13 +255,13 @@ of a word or phrase.</p>
 
 更多文本内容请参考 [Web Typography](./Chapter-14.md) 章节
 
-![Web page highlighting the bold italic text created with a <strong> element wrapped in an <em> element](/images/html-strong-emphasis-element-5b0eb2.png)
+![Web page highlighting the bold italic text created with a <strong> element wrapped in an <em> element](/images/html-css/html-strong-emphasis-element-5b0eb2.png)
 
 ## 结构化
 
 在没有css 的情况下，我们应该让网页具备一定的结构，称之为语义化。
 
-![Diagram: HTML as an abstract tree of nodes compared to CSS as various types of rendered text](/images/structure-vs-presentation-05c228.png)
+![Diagram: HTML as an abstract tree of nodes compared to CSS as various types of rendered text](/images/html-css/structure-vs-presentation-05c228.png)
 
 每个标签都扮演了各自的角色，我们应该使用正确元素来表达网页内容
 
@@ -286,7 +286,7 @@ The Authors</p>
 
 在代码片段后，一般会采用换行。
 
-![Web page showing a plaintext line break collapsing into a space in the rendered page](/images/html-collapsing-whitespace-c4012d.png)
+![Web page showing a plaintext line break collapsing into a space in the rendered page](/images/html-css/html-collapsing-whitespace-c4012d.png)
 
 一般编辑器会设置80个字符为换行界定，代码格式化可以增强代码可读性。另外可以使用`<br/>` 元素强制浏览器换行, 如：
 
@@ -297,7 +297,7 @@ The Authors</p>
 
 `<br/>` 有助于格式化文本，增强可读性。
 
-![Web page highlighting an actual line break with the <br/> element](/images/html-line-break-element-f40443.png)
+![Web page highlighting an actual line break with the <br/> element](/images/html-css/html-line-break-element-f40443.png)
 
 仅仅是为了 添加段落间距，不应该滥用`<br/>` 标签，如：
 
@@ -330,7 +330,7 @@ soon.</p>
 
 本章节的另一个主题是内容与样式分离，一些元素具有默认样式，在使用 css 之前，我们应该知道这些元素的特性。如 `</hr> <strong>` 等
 
-![Web page demonstrating an <hr/> element](/images/html-horizontal-rule-element-49f526.png)
+![Web page demonstrating an <hr/> element](/images/html-css/html-horizontal-rule-element-49f526.png)
 
 不能为了实现某些特定的样式，而滥用标签，在接下来的章节我们会告诉你为什么以及如何用 css 实现这些效果
 
@@ -351,6 +351,6 @@ The Authors</p>
 
 本章讲解了一些常用的元素，网页有元素组成，每个元素有各自的作用，元素相互嵌套后组合成网页。
 
-![Web page showing <title>, <p>, <h1>, <ol>, and other basic HTML elements](/images/basic-web-pages-f786d5.png)
+![Web page showing <title>, <p>, <h1>, <ol>, and other basic HTML elements](/images/html-css/basic-web-pages-f786d5.png)
 
 每个网页都是按照有一定的标准来编码及展现的，在下一个章节，我们将围绕网页元素讲。在这之前，可以先了解下MDN’s [HTML Element Reference](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTML/Element) 

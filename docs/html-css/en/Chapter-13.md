@@ -6,11 +6,11 @@ layout: SpecialLayout
 
 HTML form elements let you collect input from your website’s visitors. Mailing lists, contact forms, and blog post comments are common examples for small websites, but in organizations that rely on their website for revenue, forms are sacred and revered.
 
-![Examples of text inputs, textareas, radio buttons, checkboxes, and other HTML form elements](/images/html-form-elements-939709.png)
+![Examples of text inputs, textareas, radio buttons, checkboxes, and other HTML form elements](/images/html-css/html-form-elements-939709.png)
 
 Forms are the “money pages.” They’re how e-commerce sites sell their products, how SaaS companies collect payment for their service, and how non-profit groups raise money online. Many companies measure the success of their website by the effectiveness of its forms because they answer questions like “how many leads did our website send to our sales team?” and “how many people signed up for our product last week?” This often means that forms are subjected to endless A/B tests and optimizations.
 
-![Diagram: frontend form elements sending input to backend server for processing](/images/form-frontend-and-backend-2a0f80.png)
+![Diagram: frontend form elements sending input to backend server for processing](/images/html-css/form-frontend-and-backend-2a0f80.png)
 
 There are two aspects of a functional HTML form: the frontend user interface and the backend server. The former is the _appearance_ of the form (as defined by HTML and CSS), while the latter is the code that processes it (storing data in a database, sending an email, etc). We’ll be focusing entirely on the frontend this chapter, leaving backend form processing for a future tutorial.
 
@@ -18,7 +18,7 @@ There are two aspects of a functional HTML form: the frontend user interface and
 
 Unfortunately, there’s really no getting around that fact that styling forms is _hard_. It’s always a good idea to have a mockup representing the exact page you want to build before you start coding it up, but this is particularly true for forms. So, here’s the example we’ll be creating in this chapter:
 
-![Mobile and desktop web page mockups with several form elements](/images/responsive-form-mockup-963e65.png)
+![Mobile and desktop web page mockups with several form elements](/images/html-css/responsive-form-mockup-963e65.png)
 
 As you can see, this is a speaker submission form for a fake conference. It hosts a pretty good selection of HTML forms elements: various types of text fields, a group of radio buttons, a dropdown menu, a checkbox, and a submit button.
 
@@ -93,7 +93,7 @@ On to forms! Every HTML form begins with the aptly named `<form>` element. It ac
 
 The `action` attribute defines the URL that processes the form. It’s where the input collected by the form is sent when the user clicks the **Submit** button. This is typically a special URL defined by your web server that knows how to process the data. Common backend technologies for processing forms include [Node.js](https://internetingishard.com/https://nodejs.org/en/), [PHP](https://internetingishard.com/http://php.net/), and [Ruby on Rails](https://internetingishard.com/http://rubyonrails.org/), but again, we’ll be focusing on the frontend in this chapter.
 
-![Diagram: <form> action and method attributes sent to backend server](/images/form-action-attribute-68258a.png)
+![Diagram: <form> action and method attributes sent to backend server](/images/html-css/form-action-attribute-68258a.png)
 
 The `method` attribute can be either [`post`](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) or [`get`](https://internetingishard.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET), both of which define how the form is submitted to the backend server. This is largely dependent on how your web server wants to handle the form, but the general rule of thumb is to use `post` when you’re _changing_ data on the server, reserving `get` for when you’re only _getting_ data.
 
@@ -128,11 +128,11 @@ To actually collect user input, we need a new tool: the `<input/>` element. Inse
 
 First, we have a container `<div>` to help with styling. This is pretty common for separating input elements. Second, we have a `<label>`, which you can think of as another [semantic HTML element](https://internetingishard.com//html-and-css/semantic-html/), like `<article>` or `<figcaption>`, but for form labels. A label’s `for` attribute must match the `id` attribute of its associated `<input/>` element.
 
-![Diagram: for attribute of <label> pointing to id attribute of <input> element](/images/label-element-for-attribute-313489.png)
+![Diagram: for attribute of <label> pointing to id attribute of <input> element](/images/html-css/label-element-for-attribute-313489.png)
 
 Third, the `<input/>` element creates a text field. It’s a little different from other elements we’ve encountered because it can dramatically change appearance depending on its `type` attribute, but it always creates some kind of interactive user input. We’ll see other values besides `text` throughout the chapter. Remember that [ID selectors are bad](https://internetingishard.com//html-and-css/css-selectors/#id-selectors)—the `id` attribute here is _only_ for connecting it to a `<label>` element.
 
-![Diagram: name attribute of <input> element sending variable to server](/images/sending-input-variable-to-server-653369.png)
+![Diagram: name attribute of <input> element sending variable to server](/images/html-css/sending-input-variable-to-server-653369.png)
 
 Conceptually, an `<input/>` element represents a “variable” that gets sent to the backend server. The `name` attribute defines the name of this variable, and the value is whatever the user entered into the text field. Note that you can pre-populate this value by adding a `value` attribute to an `<input/>` element.
 
@@ -195,7 +195,7 @@ Finally, let’s tweak these base styles to create our desktop layout. Add the f
 
 Check out that awesome use of the [`flex-direction` property](https://internetingishard.com//html-and-css/flexbox/#flex-container-direction) to make the `<label>` appear on top of its `<input/>` element in the mobile layout, but to the left of it in the desktop layout.
 
-![Web page showing single text field styled with CSS](/images/styling-text-input-field-6e4ed3.png)
+![Web page showing single text field styled with CSS](/images/html-css/styling-text-input-field-6e4ed3.png)
 
 ## Email Input Fields
 
@@ -213,7 +213,7 @@ The `<input/>` element’s `type` attribute also lets you do basic input validat
 
 This works exactly like the `type='text'` input, except it automatically checks that user entered an email address. In Firefox, you can try typing something that’s not an email address, then clicking outside of the field to make it lose focus and validate its input. It should turn red to show the user that it’s an incorrect value. Chrome and Safari don’t attempt to validate until user tries to submit the form, so we’ll see this in action later in this chapter.
 
-![Web page showing invalid email field value highlighted with red border](/images/firefox-invalid-email-input-f98cc1.png)
+![Web page showing invalid email field value highlighted with red border](/images/html-css/firefox-invalid-email-input-f98cc1.png)
 
 This is more than just validation though. By telling browsers that we’re looking for an email address, they can provide a more intuitive user experience. For instance, when a smartphone browser sees this `type='email'` attribute, it gives the user a special email-specific keyboard with an easily-accessible `@` character.
 
@@ -275,7 +275,7 @@ Until we include a submit button, you’ll only be able to see this in Firefox, 
 
 Changing the `type` property of the `<input/>` element to `radio` transforms it into a radio button. Radio buttons are a little more complex to work with than text fields because they always operate in groups, allowing the user to choose one out of many predefined options.
 
-![Diagram: <fieldset> wrapping a <legend> and a series of radio buttons with associated <label> elements](/images/radio-label-fieldset-legend-elements-0affe5.png)
+![Diagram: <fieldset> wrapping a <legend> and a series of radio buttons with associated <label> elements](/images/html-css/radio-label-fieldset-legend-elements-0affe5.png)
 
 This means that we not only need a label for each `<input/>` element, but also a way to group radio buttons and label the entire group. This is what the `<fieldset>` and `<legend>` elements are for. Every radio button group you create should:
 
@@ -313,7 +313,7 @@ We have a few things working against us with when it comes to styling radio butt
 
 But don’t fret! This is a good example of [floats](https://internetingishard.com//html-and-css/floats/) being a useful fallback for legacy/troublesome elements. You’ll notice that we didn’t wrap the radio buttons in our existing `.form-row` class, opting instead for a new `.legacy-form-row` class. This is because it’s going to be completely separate from our other elements, using floats instead of flexbox.
 
-![Diagram: mobile layout created with block box <label> versus desktop layout with label as floated left](/images/radio-button-float-layout-df003b.png)
+![Diagram: mobile layout created with block box <label> versus desktop layout with label as floated left](/images/html-css/radio-button-float-layout-df003b.png)
 
 Start with the mobile and tablet styles by adding the following rules outside of our media query. We want to get rid of the default `<fieldset>` and `<legend>` styles, then float the radio buttons and labels so they appear in one line underneath the `<legend>`:
 
@@ -388,7 +388,7 @@ Just like our radio button `<input/>` elements, we have `name` and `value` attri
 
 And, also just like our radio buttons, `<select>` elements are notoriously hard to style. However, there’s a reason for this. Dropdowns are a complex piece of interactivity, and their behavior changes significantly across devices. For instance, on an iPhone, clicking a `<select>` element brings up a native scrolling UI component that makes it much easier to navigate the menu.
 
-![Screenshot showing three <option> elements in the scrolling <select> menu at the bottom of an iPhone screen](/images/select-dropdown-in-iphone-a9968d.png)
+![Screenshot showing three <option> elements in the scrolling <select> menu at the bottom of an iPhone screen](/images/html-css/select-dropdown-in-iphone-a9968d.png)
 
 It’s usually a good idea to let the browser/device determine the best way to preset a `<select>` element, so we’ll be keeping our CSS pretty simple. Unfortunately, even the simplest things are surprisingly hard. For instance, try changing the font size of our `<select>` element:
 
@@ -509,7 +509,7 @@ And inside the media query, we have to take that 120-pixel label column into acc
 
 By wrapping both the checkbox and the label text, we’re able to use a `width: auto` to make the entire form field be on a single line (remember that the `auto` width makes the box match the size of its contents).
 
-![Web page with several HTML form elements, including a checkbox](/images/adding-a-checkbox-8a0541.png)
+![Web page with several HTML form elements, including a checkbox](/images/html-css/adding-a-checkbox-8a0541.png)
 
 ## Submit Buttons
 
@@ -523,7 +523,7 @@ Finally, let’s finish off our form with a submit button. The `<button>` elemen
 
 Clicking the button tells the browser to validate all of the `<input/>` elements in the form and submit it to the `action` URL if there aren’t any validation problems. So, you should now be able to type in something that’s not an email address into our email field, click the `<button>`, and see an error message.
 
-![Screenshot showing invalid input error message for email field](/images/chrome-invalid-email-input-3ae531.png)
+![Screenshot showing invalid input error message for email field](/images/html-css/chrome-invalid-email-input-3ae531.png)
 
 This also gives us a chance to see how the user’s input gets sent to the server. First, enter some values into all the `<input/>` fields, making sure the email address validates correctly. Then, click the button and inspect the resulting URL in your browser. You should see something like this:
 
@@ -537,7 +537,7 @@ Everything after the `?` represents the variables in our form. Each `<input/>`�
 
 We had some experience styling buttons in the [pseudo-classes section](https://internetingishard.com//html-and-css/css-selectors/#pseudo-classes-for-links) of the _CSS Selectors_ chapter. Back then, we were applying these styles to an `<a>` element, but we can use the same techniques on a `<button>`.
 
-![Web page showing the form’s submit button](/images/styling-a-submit-button-7e80de.png)
+![Web page showing the form’s submit button](/images/html-css/styling-a-submit-button-7e80de.png)
 
 Clean up that ugly default `<button>` styling by adding the following to our stylesheet:
 
