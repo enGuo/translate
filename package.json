@@ -5,11 +5,19 @@
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "vuepress build docs",
+    "img": "node ./tools/downloadImg.js",
+    "md": "node ./tools/markdown.js",
+    "spa": "node ./tools/spa.js"
   },
   "author": "LE",
   "license": "ISC",
   "devDependencies": {
     "vuepress": "^0.8.4"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "cheerio": "^1.0.0-rc.2",
+    "turndown": "^4.0.2"
   }
 }
