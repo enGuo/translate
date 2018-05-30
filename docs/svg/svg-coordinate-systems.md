@@ -1,32 +1,32 @@
-# svg-coordinate-systems
+# SVG 坐标系统之一
 
-SVG elements aren't governed by a CSS box model like HTML elements are. This makes positioning and transforming these elements trickier and may seem—at first glance—less intuitive. However, once you understand how SVG coordinate systems and transformations work, manipulating SVGs becomes a lot easier and makes a lot more sense. In this article we're going to go over three of the most important SVG attributes that control SVG coordinate systems: `viewport`, `viewBox`, and `preserveAspectRatio`.
+SVG 不受 css 盒模型的影响，使得定位和转换这些元素更加灵活，虽然咋一眼看上去不太直观。然而，当你理解 svg 的坐标系统和转换原理后，操作 svg 就会变得非常简单。本篇文章奖讨论控制 svg 坐标系统最重要的三个属性 `viewport`, `viewBox`, 和 `preserveAspectRatio`。
 
-This is the first in a series of three articles covering the topic of coordinate systems and transformations in SVG.
+下面是三篇关于 svg 的坐标和转换系统的文章：
 
-* Understanding SVG Coordinate Systems & Transformations (Part 1) – The viewport, `viewBox`, & `preserveAspectRatio`
-* [Understanding SVG Coordinate Systems & Transformations (Part 2) – The `transform` Attribute](http://sarasoueidan.com/blog/svg-transformations)
-* [Understanding SVG Coordinate Systems & Transformations (Part 3) – Establishing New Viewports](http://sarasoueidan.com/blog/nesting-svgs)
+* [SVG 坐标系统之一 viewport, `viewBox`, & `preserveAspectRatio`](./svg-coordinate-systems.md)
+* [SVG 坐标系统之二 `transform`](./svg-transformations.md)
+* [SVG 坐标系统之三 – Establishing New Viewports](./nesting-svgs.md)
 
-For the sake of visualizing the concepts and explanations in the article even further, I created an interactive demo that allows you to play with the values of the `viewBox` and `preserveAspectRatio` attributes.
+为了直观地理解文章的介绍概念，我创建了一个交互 DEMO 允许改变 `viewBox` 和 `preserveAspectRatio` 的值来查看结果。
 
-[Check the interactive demo out.](/demos/interactive-svg-coordinate-system.md)
+[DEMO](/demos/interactive-svg-coordinate-system.md)
 
-The demo is the cherry on top of the cake, so do make sure you come back to read the article if you check it out before you do!
+在迅速看完 DEMO 后记得回来先看文章。
 
-### The SVG Canvas
+### SVG 画布
 
-The **canvas** is the space or area where the SVG content is drawn. Conceptually, this canvas is infinite in both dimensions. The SVG can therefore be of any size. However, it is rendered on the screen relative to a **finite region** known as _the viewport_. Areas of the SVG that lie beyond the boundaries of the viewport are clipped off and not visible.
+画布指的是 SVG 内容的绘制区域。理论上，画布是无限大的。SVG 可以是任意大小。然而，它需要在一个称为 `viewport` 的有限区域内显示，超出 `viewport` 区域的部分会被裁剪，不可见。
 
-### The viewport
+### viewport
 
-The viewport is the viewing area where the SVG will be visible. You can think of the viewport as a window through which you can see a particular scene. The scene may be entirely or partially visible through that window.
+`viewport` 是 SVG 的可视区域。可以把它当做一个窗口，通过它可以看到一个场景，该场景可能在窗口里完全或部分可见。
 
-The SVG viewport is similar to the viewport of the browser you’re viewing this page through. A web page can be of any size; it can be wider than the viewport’s width, and is in most cases also longer than the viewport’s length. However, only portions of a web page are visible through the viewport at a time.
+SVG viewport 有点像你现在看网页的浏览器的 viewport。网页可以是任意大小，可以比 viewport 宽或者长。然而，只有在 viewport 区域内的部分才可见。
 
-Whether or not the entire SVG canvas or part of it is visible depends on the **size of that canvas\*** and **the value of the `preserveAspectRatio` attribute**. You don't have to worry about these now; we'll talk about them further in more detail.
+是否可以看到整个 SVG 画布或部分可见取决于画布的大小以及 `preserveAspectRatio` 属性。目前你不需要关心它，接下来会介绍细节。
 
-You specify the size of the viewport using the `width` and `height` attributes on the outermost `<svg>` element.
+可以通过设置最外层 svg 元素的 `width` 和 `height` 来指定 viewport 的大小：
 
 ```html
 <!-- the viewport will be 800px by 600px -->
@@ -35,53 +35,53 @@ You specify the size of the viewport using the `width` and `height` attributes o
 </svg>
 ```
 
-In SVG, values can be set with or without a unit identifier. A unitless value is said to be specified _in user space_ using _user units_. If a value is specified in user units, then the value is assumed to be equivalent to the same number of “px” units. This means that the viewport in the above example will be rendered as a 800px by 600px viewport.
+在 SVG 中，可以不用设置单位。没有设置单位意味着使用用户单位也就是 `px`，本例中，将呈现为高 600px 宽 800px 的 viewport。
 
-You can also specify values using units. The supported length unit identifiers in SVG are: `em`, `ex`, `px`, `pt`, `pc`, `cm`, `mm`, `in`, and percentages.
+当然也可以指定当我，比如 `em`, `ex`, `px`, `pt`, `pc`, `cm`, `mm`, `in`, 和 百分比.
 
-Once the width and height of the outermost SVG element are set, the browser establishes an initial _viewport coordinate system_ and an initial _user coordinate system_.
+一旦最外层的 SVG 设置了高宽，浏览器将会初始化 _viewport coordinate system_ 和 _user coordinate system_。
 
-#### The initial coordinate system
+#### 初始化坐标系统
 
-The initial **viewport coordinate system** is a coordinate system established on the viewport, with the origin at the top left corner of the viewport at point (0, 0), the positive x-axis pointing towards the right, the positive y-axis pointing down, and one unit in the initial coordinate system equals one “pixel” in the viewport. This coordinate system is similar to the coordinate system established on an HTML element with a CSS box model.
+最初的 **viewport coordinate system** 是以左上角 (0,0) 为原点的朝右的 x 轴和朝下的 y 轴，默认单位为像素(px)。与 css 盒模型的坐标系统有点类似。
 
-The initial **user coordinate system** is the coordinate system established on the SVG canvas. This coordinate system is initially identical to the viewport coordinate system—it has its origin at the top left corner of the viewport with the positive x-axis pointing towards the right, the positive y-axis pointing down. Using the `viewBox` attribute, the initial user coordinate system—also known as **the current coordinate system**, or **user space in use**—can be modified so that it is not identical to the viewport coordinate system anymore. We’ll talk about modifying it in the next section.
+最初的 **user coordinate system** 建立在 SVG 画布上，和 viewport 坐标系统保持一致。使用 `viewBox` 属性，可以初始化当前坐标系统，可以修改它，此时跟 viewport 的坐标系统不再一致。下一节将讲解如何修改它。
 
-For now, we won’t specify a `viewBox` attribute value. The user coordinate system of the SVG canvas is identical to that of the viewport.
+目前没有设置 `viewBox` 属性值，所以用户的 SVG 画布坐标系统跟 viewport 是一样的。
 
-In the following image, the viewport coordinate system “ruler” is grey, and that of the user coordinate system (the `viewBox`) is blue. Since they are both identical at this point, the two coordinate systems overlap.
+下面几幅图中，灰色的标尺表示 viewport 的坐标系统，蓝色的表示 用户的坐标系统(viewBox)。目前两个坐标重叠在一起。
 
 ![Viewport Coordinate System](/images/svg/initial-coordinate-systems.jpg)
 
-The initial coordinate systems established on the viewport and SVG canvas. Grey units represent the viewport coordinate system; blue units represent the user coordinate system. Both coordinate systems are identical and coincide.
+在 viewport 和 SVG 画布上建立的初始化系统，灰色单位表示视口坐标，蓝色单位表示用户坐标系统。两个坐标系统都是相同，重合的。
 
-The parrot in the above SVG has a bounding box that is 200 units (200 pixels in this case) in width and 300 units in height. The parrot is drawn on the canvas based on the initial coordinate system.
+SVG 中的鹦鹉宽 200px ，高 300px，并且依赖于初始化坐标系统。
 
-A new user space (i.e., a new current coordinate system) can also be established by specifying **transformations** using the `transform` attribute on a container element or graphics element. We'll talk about transformations in the second part of this article, and then in more details in the third and last part.
+还可以通过给容器或图形添加 `transform` 属性来指定 `transformations` 来生成新用户空间（即新坐标系统）。后续内容中会详细介绍 `transformations`。
 
 ### The `viewBox`
 
-I like to think of the `viewBox` as the “real” coordinate system. After all, it is _the_ coordinate system used to draw the SVG graphics onto the canvas. This coordinate system can be smaller or bigger than the viewport, and it can be fully or partially visible inside the viewport too.
+我喜欢把 `viewBox` 当成真实坐标系统。毕竟它是用来在画布上绘制 SVG 图形的坐标系统，它可以比 viewport 大或者小，同样可以在视口中全部或部分显示。
 
-In the previous section, this coordinate system—the user coordinate system—was identical to the viewport coordinate system. The reason for that is that we did not specify it to be otherwise. That’s why all the positioning and drawing seemed to be done relative to the viewport coordinate system. Because once we created a viewport coordinate system (using `width` and `height`), the browser created a default user coordinate system that is identical to it.
+上部分中，在没有指定的情况下用户坐标系统和视口坐标系统是一样的，通过 `width` 和 `height` 设置 viewport 坐标系统后浏览器会创建一样的坐标系统。
 
-You specify your own user coordinate system using the `viewBox` attribute. If the user coordinate system you choose has the same aspect ratio (ratio of height to width) as the viewport coordinate system, it will stretch to fill the viewport area (we’ll talk examples in a minute). However, if your user coordinate system does not have the same aspect ratio, you can use the `preserveAspectRatio` attribute to specify whether or not the entire system will be visible inside the viewport or not, and you can also use it to specify how it is positioned inside the viewport. We’ll get into details and lots of examples for this case in the next section. In this section, we’ll stick to examples where the aspect ratio of the `viewBox` matches that of the viewport—in these examples, `preserveAspectRatio` has no effect.
+通过 `viewBox` 属性设置用户坐标系统，如果用户坐标系统的高宽比和 viewport 坐标系统的一样。它会拉伸以填充视口。（稍后例子中会说明）。然而，如果你的用户和 viewport 坐标系统比例不一致，此时可以使用 `preserveAspectRatio` 属性去指定是否要显示整个系统，同样你可以通过它指定元素在视口中的位置。后续部分将详细讨论这个例子，目前保持比例一致（不使用`preserveAspectRatio`）
 
-Before we get into the examples, we’ll go over the syntax of `viewBox`.
+讲例子前，先来看下 `viewBox` 的语法。
 
-#### The `viewBox` syntax
+#### The `viewBox` 语法
 
-The `viewBox attribute` takes four parameters as a value: `<min-x>`, `<min-y>`, `width` and `height`.
+`viewBox` 属性接受四个参数：`<min-x>`, `<min-y>`, `width` 和 `height`。
 
 ```html
 viewBox = <min-x> <min-y> <width> <height>
 ```
 
-The `<min-x>` and `<min-y>` values determine the upper left corner of the viewbox, and the `width` and `height` determine the width and height of that viewBox. Note here that the width and height of the viewBox need not be the same as the width and height set on the parent `<svg>` element. A negative value for `<width>` or `<height>` is invalid. A value of zero disables rendering of the element.
+`<min-x>` 和 `<min-y>` 用于指定 viewbox 的左上角坐标，`width` 和 `height` 用于指定 `viewBox` 的高宽。注意，`viewBox` 的高宽可以和 `svg` 元素的不一样，且不能为负值，值为零将不会渲染元素。
 
-Note that the width of the viewport can also be set in CSS to any value. For example, setting `width: 100%` will make the SVG viewport fluid in a document. Whatever value of the `viewBox`, it will then be mapped to the computed width of the outer SVG element.
+另外，viewport 的宽度也可以在 css 中设置为任意值。例如，设置 `width:100%` 将使 SCG 视口充满文档。无论 `viewBox` 的值是多少，它都将映射到最外层 SVG 元素的计算宽度。
 
-An example of setting `viewBox` would look like the following:
+设置 `viewBox` 值的例子：
 
 ```html
 <!-- The viewbox in this example is equal to the viewport, but it can be different -->
@@ -90,13 +90,13 @@ An example of setting `viewBox` would look like the following:
 </svg>
 ```
 
-If you’ve read about the `viewBox` somewhere before, you may have come across a few definitions saying that you can use the `viewBox` attribute to transform the SVG graphic by scaling or translating it. This is true. I’m going to go further and say that you can even _crop_ the SVG graphic using `viewBox`.
+如果你之前接触过 `viewBox` 可能会看到一些定义，可以使用 `viewBox` 来缩放和平移 SVG 图形。不仅如此，你还可以用 `viewBox` 来调用 SVG 图形，后续将说明。
 
-The best way to understand the `viewBox` and differentiate it from the viewport is by visualizing it. So let’s start with some examples. We’ll start with examples where th aspect ratio of the viewbox is the same as the aspect ratio of the viewport, so we won’t need to dig into `preserveAspectRatio` yet.
+理解 `viewBox` 与 viewport 的区别的最好方式是将其可视化。先从一个它们具有相同长宽比的例子开始。
 
-#### `viewBox` with aspect ratio equal to the viewport's aspect ratio
+#### `viewBox` `viewport` 相同长宽比
 
-We’ll start with a simple example. The `viewbox` in this example will be half the size of the viewport. We won’t change the origin of the viewbox in this one, so both `<min-x>` and `<min-y>` will be set to zero. The width and height of the viewbox will be half the width and height of the viewport. This means that we’re preserving the aspect ratio.
+先来个简单的例子，`viewbox` 的大小是 viewport 一半的情况。保持原点不变 （`<min-x>` 和 `<min-y>` 为零），一半意味着比例一致。
 
 ```html
 <svg width="800" height="600" viewbox="0 0 400 300">
@@ -104,24 +104,24 @@ We’ll start with a simple example. The `viewbox` in this example will be half 
 </svg>
 ```
 
-So, what does `viewbox="0 0 400 300"` exactly do?
+`viewbox="0 0 400 300"` 到底做了什么呢？
 
-* It specifies a specific region of the canvas spanning from a top left point at (0, 0) to a point at (400, 300).
-* The SVG graphic is then **cropped** to that region.
-* The region is **scaled up** (in a zoom-in-like effect) to fill the entire viewport.
-* The user coordinate system is mapped to the viewport coordinate system so that—in this case—one user unit is equal to two viewport units.
+* 它指定了从(0,0)的左上角到(400,300)画布的特定区域
+* SVG 图形被裁剪到该区域
+* 放大该区域（zoom in 相关）来填充整个 viewport
+* 用户坐标系统隐射为视口坐标系统，意味着用户单位为视口单位的两倍
 
-The following image shows the result of applying the above viewbox to the `<svg>` canvas in our example. The grey units represent the viewport coordinate system, and the blue coordinate system represents the user coordinate system established by the `viewBox`.
+下图是实例的结果，灰色为视口坐标系统，蓝色为 `viewBox` 坐标系统。
 
 ![](/images/svg/viewbox-400-300-crop.jpg)
 
-Specifying a viewbox has a result similar to cropping the graphic to that viewbox and then zooming it in so that it fills the entire viewport area. Remember that we're still maintaining the same aspect ratio as the viewport in this case.
+在保持比例一致的情况下，指定 viewbox 有点像裁剪图形后缩放以填充整个视口区域。
 
-Anything you draw on the SVG canvas will be drawn relative to the new user coordinate system.
+在 SVG 中绘制的任何图形都依赖于用户坐标系统。
 
-I like to visualize the SVG canvas with a `viewBox` the same way as Google maps. You can zoom in to a specific region or area in Google maps; that area will be the only area visible, scaled up, inside the viewport of the browser. However, you know that the rest of the map is still there, but it's not visible because it extends beyond the boundaries of the viewport—it's being clipped out.
+可以把 `viewBox` 想象成谷歌地图。在谷歌地图里，你可以针对某个区域进行缩放。在浏览器视口里面，区域被放大显示。此时，整个地图仍然存在，只是它超出部分被裁剪掉了 （不显示）。
 
-Now let’s try changing the `<min-x>` and `<min-y>` values. We’ll set both to `100`. They can be any number you want. The width and height ratio will also be the same as width and height ratio of the viewport.
+保持宽高比例一致，现在让我们来试一下修改 `<min-x>` 和 `<min-y>` 的值。都设置为 100 （可以为任意值）。
 
 ```html
 <svg width="800" height="600" viewbox="100 100 200 150">
@@ -129,21 +129,21 @@ Now let’s try changing the `<min-x>` and `<min-y>` values. We’ll set both to
 </svg>
 ```
 
-The effect of applying `viewBox="100 100 200 150"` is also a crop effect like the one in the previous example. The graphic is cropped and scaled up to fill the entire viewport area.
+`viewBox="100 100 200 150"` 跟像个例子一样具有裁剪效果，图形被裁剪以填充整个视口区域。
 
 ![](/images/svg/viewbox-200-150-crop.jpg)
 
-The result of "cropping" the graphic to a viewbox with an origin at (100, 100) and width 200 and height 150.
+裁剪结果为原点 (100,100) 宽 200 高 150 的图形
 
-Again, the user coordinate system is mapped to the viewport coordinate system—200 user units are mapped to 800 viewport units so that every user unit is equal to four viewport units. This results in a zoom-in effect like the one you can see in the above screenshot.
+用户坐标再次隐射为 viewport 坐标系，用户的 200 单元映射为 viewport 的 800 单元。四倍的放大效果，像上面的截图那样。
 
-Also note, at this point, that specifying non-zero values for the `<min-x>` and `<min-y>` values has a transformation effect on the graphic; more specifically, it is as though the SVG canvas was translated by 100 units to the top and 100 units to the left (`transform="translate(-100 -100)"`).
+还要注意的是，`<min-x>` 和 `<min-y>` 不为零，也就是对图形进行了平移。相当于 svg 画布被移动到了距离顶部 100 左 100 的位置。(`transform="translate(-100 -100)"`)
 
-Indeed, as the specification states, the effect of the `viewBox` attribute is that the user agent automatically supplies the appropriate transformation matrix to map the specified rectangle in user space to the bounds of a designated region (often, the viewport).
+按规范，viewbox 属性的效果是，使用者提供适当的转换矩阵，然后将用户空间中指定的矩形映射到指定区域（通常是 viewport）的边界。
 
-This is just a fancy way of saying what we already mentioned before: the graphic is cropped and then **scaled** to fit into the viewport. The spec then goes on to add a note: in some cases the user agent will need to supply a **translate transformation** in addition to a scale transformation. For example, on an outermost svg element, **a translate transformation will be needed if the `viewBox` attributes specifies values other than zero for `<min-x>` or `<min-y>`**.)
+如前所述：图形裁剪后缩放至视口，规范提示：在某些情况，使用者需要提供平移属性。例如，在最外层的 svg 元素上，如果 viewBox 属性中 `<min-x>` 或 `<min-y>` 指定了零以外的值这时就会平移了。
 
-To demonstrate the translation transformation even better, let’s try applying negative values (-100) to `<min-x>` and `<min-y>`. The translation effect would be then similar to `transform="translate(100 100)"`; meaning that the graphic will be translated to the bottom and to the right after being cropped and scaled. If were to revisit the second to last example with a crop size of 400 by 300, and then add the new negative `<min-x>` and `<min-y>` values, this would be our new code:
+为了演示，让我们把 `<min-x>` 和 `<min-y>` 设置为 -100 。效果跟 `transform="translate(100 100)"` 一致，缩放后的图形会往右下角平移。修改代码如下：
 
 ```html
 <svg width="800" height="600" viewbox="-100 -100 400 300">
@@ -151,17 +151,17 @@ To demonstrate the translation transformation even better, let’s try applying 
 </svg>
 ```
 
-The result of applying the above `viewBox` transformation to the graphic is shown in the following image:
+效果如图所示：
 
 ![](/images/svg/viewbox-400-300-crop-translate.jpg)
 
-Note that, unlike the `transform` attribute, the automatic transformation that is created due to a `viewBox` does not affect the `x`, `y`, `width` and `height` attributes on the element with the `viewBox` attribute. Thus, in the example above which shows an `svg` element which has attributes `width`, `height` and `viewBox`, the `width` and `height` attributes represent values in the coordinate system that exists before the `viewBox` transformation is applied. You can see this in the above examples as the initial (grey) viewport coordinate system remains unaffected even after using the `viewBox` attribute on the `<svg>`.
+跟 `transform` 属性不同的是，viewBox 造成的平移并不会影响其自身的 `x`, `y`, `width` 和 `height` 属性。因此，在上面的例子中，一个具备 `width`, `height` 和 `viewBox` 的 svg 元素，`width` 和 `height` 表示应用 `viewbox` 之前的坐标系统的值。通过上面的例子可以看到，初始(灰色) viewport 坐标系统并不受 `viewBox` 的影响。
 
-On the other hand, like the `transform` attribute, it does establish a new coordinate system for all other attributes and for descendant elements. You can also see that in the above examples as the user coordinate system established is a new one—it does not remain as the initial user coordinate system which was identical to the viewport coordinate system before the `viewBox` was used. And any descendants of the `<svg>` will be positioned and sized in the **new** user coordinate system, not the initial one.
+另外，就像 `transform` 属性一样，它确实为掐他属性和子元素创建了新坐标系统。在上个例子汇总，由于用户坐标建立了一个新系统，在 viewBox 使用前，它不作为最初的用户坐标系统，它与 viewport 坐标系统时相同的。所有的 `svg` 子元素都会受新坐标系统的影响。
 
-Our last `viewBox` example is similar to the previous ones, but instead of cropping the canvas, we’re going to _extend_ it inside the viewport and see how it affects the graphic. We’re going to specify a viewbox with a width and height that are larger than those of the viewport, while also maintaining the aspect ratio of the viewport. We’ll deal with different aspect ratios in the next section.
+两个例子有点类似，但是我们并不裁剪它而是在 viewport 中扩展它，并查看它如何影响图形。指定一个带有高宽的 viewbox，它比 viewport 更大，但保持纵横比。下节将处理不同比例的情况。
 
-In this example, we’ll make the viewbox 1.5 times the size of the viewport.
+本例中，viewbox 是 viewport 的 1.5 倍
 
 ```html
 <svg width="800" height="600" viewbox="0 0 1200 900">
@@ -169,246 +169,163 @@ In this example, we’ll make the viewbox 1.5 times the size of the viewport.
 </svg>
 ```
 
-What will happen now is that the user coordinate system is going to be scaled up to 1200x900. It will then be mapped to the viewport coordinate system so that every 1 unit in the user coordinate system is equal to `viewport-width / viewBox-width` horizontally, and `viewport-height / viewBox-height` units vertically in the viewport coordinate system. This means that, in this case, every one x-unit in the user coordinate system is equal to 0.66 x-units in the viewport coordinate system, and every one user y-unit is mapped to 0.66 viewport y-units.
+用户坐标系统被放大到了 1200x900 。映射到 viewport 坐标系统就是水平方向用户中 1 单元 等于 `viewport-width / viewBox-width`，垂直方向 `viewport-height / viewBox-height`。也就是 x 和 y 都是 1 等于 0.66。
 
-Of course, the best way to understand this is to visualize the result. The viewbox is scaled so that it fits inside the viewport as shown in the following image. And because the graphic is drawn on the canvas based on the new user coordinate system, not the viewport coordinate system, it will look smaller inside the viewport.
+可视化结果还是最好的理解方式，如图，由于图形依赖于用户坐标系统而非视口坐标系统。所以在视口中看起来会比较小。
 
 ![](/images/svg/viewbox-1200-900.jpg)
 
-A 1200x900 user coordinate system mapped into the 800x600 viewport coordinate system. The grey units represent the viewport coordinate system; the blue units represent the system established from the `viewBox`.
+1200x900 用户坐标系统映射为 800x600 视口坐标系统。
 
-So far, all of our examples have been in conformity with the viewport’s height to width aspect ratio. But what happens if the height and width specified in the `viewBox` have a different aspect ratio than that of the viewport’s? For example, suppose we set the dimensions of the viewbox to be 1000x500. The aspect ratio of height to width is no longer the same as that of the viewport. The result of using `viewBox = "0 0 1000 500"` in our example looks like the following:
+到目前为止，所有示例都符合 viewport 的纵横比。但如果不同呢，会发生什么情况。例如，假设我们将 viewport 的维度设置为 1000x500。此时比例不在相同，结果如图所示：
 
 ![](/images/svg/viewbox-1000-500.jpg)
 
-The result of defining a 1000x500 user coordinate system in a 800x600 viewport.
+在用户坐标系统下，图形在 viewport 定位情况：
 
-The user coordinate system and hence the graphic is positioned inside the viewport so that:
+* 整个 viewbox 填充 viewprot
+* 保持纵横比不变，viewbox 不会拉伸以覆盖 viewport 区域
+* viewbox 的中心位于视图的垂直水平方向
 
-* The entire viewbox fits inside the viewport.
-* The aspect ratio of the viewbox is preserved. The viewbox was _not_ stretched to cover the viewport area.
-* THe viewbox is centered inside the viewport both vertically and horizontally.
+这是默认行为，控制这种行为的是什么？如果我们要修改 viewport 的位置会怎么样呢？此时就得用 `preserveAspectRatio`
 
-This is the default behavior. What controls this behavior? And what if we want to change the position of the viewbox inside the viewport? This is where the `preserveAspectRatio` attribute comes in.
+### `preserveAspectRatio` 属性
 
-### The `preserveAspectRatio` Attribute
+`preserveAspectRatio` 属性用于强制统一的缩放，以保持图形的纵横比。
 
-The `preserveAspectRatio` attribute is used to force a uniform scaling for the purposes of preserving the aspect ratio of a graphic.
-
-If you define a user coordinate system with an aspect ratio different from that of the viewport’s, and if the browser were to stretch the viewbox to fit into the viewport as we’ve seen in previous examples, the difference in aspect ratios will cause the graphic to be distorted in either direction. So if the viewbox in the last example were to be stretched to fill the viewport in both directions, the graphic would look like so:
+如果纵横比例不同，纵横比的差异会导致图像失真。因此，如果最后一个例子中的 viewbox 被拉伸以填充两个方向的 viewport，那么图形是这样的：
 
 ![](/images/svg/viewbox-1000-500-stretched.jpg)
 
-The result of mapping the user coordinate system to the viewport without preserving its aspect ratio. The graphic is distorted and looks shrunk horizontally while also being stretched vertically.
+不同纵横比下，图形被扭曲了，水平缩小，垂直拉伸。
 
-The distortion is also clearly visible (and unwanted, of course) when using a viewbox value of `0 0 200 300`, which would be smaller than the dimensions of the viewport. I chose this value in particular so that the viewbox matches the size of the bounding box of the parrot. If the browser were to stretch the graphic to fill the entire viewport, it would look like the so:
+当 viewbox 设置为 `0 0 200 300`，这种失真也是清晰可见的 （当然是不需要的），比 viewport 的尺寸要小。结果如下：
 
 ![](/images/svg/viewbox-200-300-stretched.jpg)
 
-The result of mapping the user coordinate system to the viewport without preserving its aspect ratio. The graphic is distorted.
+不同纵横比下，图形就会失真。
 
-The `preserveAspectRatio` attribute allows you to force uniform scaling of the viewbox, while maintaining the aspect ratio, and it allows you to specify how to position the viewbox inside the viewport if you don’t want it to be centered by default.
+`preserveAspectRatio` 用于强制 viewbox 的缩放比，另外允许你修改默认的居中位置。
 
-#### The `preserveAspectRatio` syntax
+#### `preserveAspectRatio` 语法
 
-The official syntax for `preserveAspectRatio` is:
+`preserveAspectRatio` 如下：
 
 ```html
 preserveAspectRatio = defer? <align> <meetOrSlice>?
 ```
 
-It is usable on any element that establishes a new viewport (we’ll get into these in the next parts of the series).
+这对创建新视口非常有帮助（后续介绍）。
 
-The `defer` argument is optional, and is used only when you’re applying `preserveAspectRatio` to an `<image>`. It is ignored when used on any other element. Since `<image>` it outside the scope of this article, we’ll skip the `defer` option for now.
+`defer` 参数是备选项，仅当你对 `<image>` 使用 `preserveAspectRatio` 时有用。由于 `<image>` 不是本章重点，就此打住。
 
-The `align` parameter indicates whether to force uniform scaling and, if so, the alignment method to use in case the aspect ratio of the `viewBox` doesn’t match the aspect ratio of the viewport.
+`align` 表示是否强制统一缩放
 
-If the `align` value is set to `none`, for example:
+如果 `align` 值为 `none` ，例如：
 
 ```html
 preserveAspectRatio = "none"
 ```
 
-The graphic will be scaled to fit inside the viewport without maintaining the aspect ratio, just like we saw in the last two examples.
+图形不会强制缩放，跟之前的例子一样。
 
-All other values of `preserveAspectRatio` force uniform scaling while preserving the viewbox’s aspect ratio, and specify how to align the viewbox inside the viewport. We’ll get into the values of `align` shortly.
+`preserveAspectRatio` 其他值在保留 viewbox 的纵横比的同时，会强制执行统一缩放，并制定如何对齐 viewport 中的 viewbox。
 
-The last argument, `meetOrSlice` is also optional, and it defaults to `meet`. This argument specifies whether or not the entire `viewBox` should be visible inside the viewport. If provided, it is separated from the `align` parameter by one or more spaces. For example:
+最后一个 `meetOrSlice` 参数也是可选项，默认值为 `meet`。这个参数指定是否应该在 viewport 中可见整个 viewBox。形式如下：
 
 ```html
 preserveAspectRatio = "xMinYMin slice"
 ```
 
-These values may seem foreign at first. To make understanding them easier and make them more familiar, you can think of the `meetOrSlice` value as being similar to the `background-size` values `contain` and `cover`; they work pretty much the same. `meet` is similar to `contain`, and `slice` is similar to `cover`. Here are the definitions and meaning of each value:
+这些值咋一看毫无关联，为了更容易理解，可以把它们想象为 `background-size` 中的 `contain` 和 `cover` 值。工作原理相似，`meet` 跟 `contain`，`slice` 跟 `cover`，具体含义如下：
 
-meet (The default value)
+meet (默认值) - 图形将缩放到:
 
-Scale the graphic as much as possible while maintaining the following two criteria:
+* 宽高比将会被保留
 
-* aspect ratio is preserved
-* the entire `viewBox` is visible within the viewport
+* 整个 SVG 的 viewbox 在视图范围内是可见的
 
-In this case, if the aspect ratio of the graphic does not match the viewport, some of the viewport will extend beyond the bounds of the `viewBox` (i.e., the area into which the `viewBox` will draw will be smaller than the viewport). (See the last example of The viewBox section.) In this case, the boundaries of the \`viewBox\` are contained inside the viewport such that the boundaries \*meet\*.
+* 尽可能的放大 SVG 的 viewbox，同时仍然满足其他的条件。
 
-This value is similar to `background-size: contain`. The background image is scaled as much as possible while preserving its aspect ratio and making sure it fits entirely into the background painting area. If the aspect ratio of the background is not the same as that of the element it is being applied to, parts of the background painting area will not be covered by the background image.
+在这种情况下，如果图形的宽高比和视图窗口不匹配，则某些视图将会超出 viewbox 范围（即 SVG 的 viewbox 视图将会比可视窗口小）。
 
-slice
+slice - 图形将缩放到:
 
-Scale the graphic so that the `viewBox` covers the entire viewport area, while maintaining its aspect ratio. The `viewBox` is scaled **just enough** to cover the viewport area (in both dimensions), but it is not scaled any more than needed to achieve that. In other words, it is scaled to the smallest size such that the width and height of the `viewBox` can completely cover the viewport.
+* 宽高比将会被保留
 
-In this case, if the aspect ratio of the `viewBox` does not match the viewport, some of the `viewBox` will extend beyond the bounds of the viewport (i.e., the area into which the `viewBox` will draw is larger than the viewport). This will result in part of the \`viewBox\` being \*sliced off\*.
+* 整个视图窗口将覆盖 viewbox
 
-You can think of this as being similar to `background-size: cover`. In the case of a background image, the image is scaled while preserving its intrinsic aspect ratio (if any), to the smallest size such that both its width and its height can completely cover the background positioning area.
+* SVG 的 viewbox 属性将会被尽可能的缩小，但是仍然符合其他标准。在这种情况下，如果 SVG 的 viewbox 宽高比与可视区域不匹配，则 viewbox 的某些区域将会延伸到视图窗口外部（即 SVG 的 viewbox 将会比可视窗口大）。
 
-So, `meetOrSlice` is used to specify whether or not the `viewBox` will be completely contained inside the viewport, or if it should be scaled as much as needed to cover the entire viewport, even if this means that a part of the viewbox will be “sliced off”.
-
-For example, if we were to apply `viewBox` size of 200x300, and using both the `meet` and `slice` values, keeping the `align` value set to the default by the browser, the result for each value will look like the following:
+例如，`viewBox` 的大小为 200x300，让 `align` 为默认值，设置 `meet` 和 `slice` 的值，效果如下：
 
 ![](/images/svg/viewbox-200-300-meet-vs-slice.jpg)
 
-The result of applying the `meet` parameter vs the `slice` parameter on a `viewBox` with an aspect ratio different from that of the viewport's aspect ratio.
+`align` 的默认值是 `xMidYMid`，在这两种情况下，图形处于缩放，这样它的中轴与视图的中轴对齐。
 
-The default value for `align` is `xMidYMid`, so, in both cases, the graphic is scaled so that its mid axes align with the mid axes of the viewport.
+还记得 viewBox 的 `<min-x>` 和 `<min-y>` 值吗？我们将修改他们的值，另外两个轴 `max-x` 和 `max-y` 也就是 `<min-x> + <width>` 和 `<min-y> + <height>`。另外，`mid-x` 和 `mid-y` 代表 `<min-x> + (<width>/2)` 和 `<min-y> + (<height>/2)`。
 
-The `align` parameter takes one of nine values, or the `none` value. Any value other than `none` is used to uniformly scale the image preserving its aspect ratio, _**and**_ it is also used to _align_ the `viewBox` inside the viewport.
-
-The `align` values works similar to the way `background-position` works when used with percentage values. You can think of the `viewBox` as being the background image. The way the positioning with `align` differs from `background-position` is that instead of positioning a specific point of the viewbox over a corresponding point of the viewport, it _aligns_ specific “axes” of the viewBox with corresponding “axes” of the viewport.
-
-In order to understand the meaning of each of the `align` values, we’re going to first introduce each of the “axes”.
-
-Remember the `<min-x>` and `<min-y>` values of the `viewBox`? We’re going to use each of these to define the “min-x” axis and “min-y” axis on the `viewBox`. Additionally, we’re going to define two axes “max-x” and “max-y”, which will be positioned at `<min-x> + <width>` and `<min-y> + <height>`, respectively. And last but not least, we’ll define two axes “mid-x” and “mid-y”, which are positioned at `<min-x> + (<width>/2)` and `<min-y> + (<height>/2)`, respectively.
-
-Did that make things more confusing? If so, have a look at the following image to see what each of those axes represents. In the image, both `<min-x>` and `<min-y>` are set to their default `0` values. The `viewBox` is set to `viewBox = "0 0 300 300"`.
+如果有些混乱可以看下下图，这些轴代表了什么。
 
 ![](/images/svg/viewbox-x-y-axes.jpg)
 
-The pink and orange solid lines represent the min-y and min-x values respectively. The dashed pink and orange lines represent the mid and max x and y values.
+`<align>` 属性值表示是否强制统一缩放，当 SVG 的 viewbox 属性与视图属性宽高比不一致时使用. `<align>` 属性的值一定是下列的值之一:
 
-The dashed grey lines in the above image represent the mid-x and mid-y axes of the viewport. We’re going to use those to align the mid-x and mid-y of axes of the `viewBox` for some values. For the viewport, the min-x value is equal to 0, the min-y value is also 0, the max-x value is equal to the width of the `viewBox`, the max-y value is equal to its height, and the mid-x and mid-y represent the middle values of the width and height, respectively.
+* none - 不会进行强制统一缩放，如果需要，会缩放指定元素的图形内容，使元素的边界完全匹配视图矩形。(注意：如果 <align> 的值是 none ，则 <meetOrSlice> 属性的值将会被忽略。)
 
-The alignment values are:
+* xMinYMin - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的最小值与视图的 X 的最小值对齐。将 SVG 元素的 viewbox 属性的 Y 的最小值与视图的 Y 的最小值对齐。
 
-none
+* xMidYMin - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的中点值与视图的 X 的中点值对齐。将 SVG 元素的 viewbox 属性的 Y 的最小值与视图的 Y 的最小值对齐。
 
-Do not force uniform scaling. Scale the graphic content of the given element non-uniformly (without preserving aspect ratio) if necessary such that the element's bounding box exactly matches the viewport rectangle.
+* xMaxYMin - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的最小值+元素的宽度与视图的 X 的最大值对齐。将 SVG 元素的 viewbox 属性的 Y 的最小值与视图的 Y 的最小值对齐。
 
-In other words, the `viewBox` is stretched or shrunk as necssary so that it fills the entire viewport exactly, disregarding the aspect ratio. The graphic may be distorted.
+* xMinYMid - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的最小值与视图的 X 的最小值对齐。将 SVG 元素的 viewbox 属性的 Y 的中点值与视图的 Y 的中点值对齐。
 
-(Note: if `<align>` is none, then the optional `<meetOrSlice>` value is ignored.)
+* xMidYMid (默认值) - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的中点值与视图的 X 的中点值对齐。将 SVG 元素的 viewbox 属性的 Y 的中点值与视图的 Y 的中点值对齐。
 
-xMinYMin
+* xMaxYMid - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的最小值+元素的宽度与视图的 X 的最大值对齐。将 SVG 元素的 viewbox 属性的 Y 的中点值与视图的 Y 的中点值对齐。
 
-Force uniform scaling.  
-Align the `<min-x>` of the element's `viewBox` with the smallest X value of the viewport.  
-Align the `<min-y>` of the element's `viewBox` with the smallest Y value of the viewport.
+* xMinYMax - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的最小值与视图的 X 的最小值对齐。将 SVG 元素的 viewbox 属性的 Y 的最小值+元素的高度与视图的 Y 的最大值对齐。
 
-Think of this as being similar to `background-position: 0% 0%;`.
+* xMidYMax - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的中点值与视图的 X 的中点值对齐。将 SVG 元素的 viewbox 属性的 Y 的最小值+元素的高度与视图的 Y 的最大值对齐。
 
-xMinYMid
+* xMaxYMax - 强制统一缩放。将 SVG 元素的 viewbox 属性的 X 的最小值+元素的宽度与视图的 X 的最大值对齐。将 SVG 元素的 viewbox 属性的 Y 的最小值+元素的高度与视图的 Y 的最大值对齐。
 
-Force uniform scaling.  
-Align the `<min-x>` of the element's `viewBox` with the smallest X value of the viewport.  
-Align the midpoint Y value of the element's `viewBox` with the midpoint Y value of the viewport.
+可以跟 `background-position: 100% 100%;` 联系起来
 
-Think of this as being similar to `background-position: 0% 50%;`.
+所以通过设置 `preserveAspectRatio` 的属性，`align` 和 `meetORSlice`，可以决定是否要强制统一缩放，在 viewprot 如何对齐，以及是否要在 viewport 显示整个内容。
 
-xMinYMax
-
-Force uniform scaling.  
-Align the `<min-x>` of the element's `viewBox` with the smallest X value of the viewport.  
-Align the `<min-y>`+`<height>` of the element's `viewBox` with the maximum Y value of the viewport.
-
-Think of this as being similar to `background-position: 0% 100%;`.
-
-xMidYMin
-
-Force uniform scaling.  
-Align the midpoint X value of the element's `viewBox` with the midpoint X value of the viewport.  
-Align the `<min-y>` of the element's `viewBox` with the smallest Y value of the viewport.
-
-Think of this as being similar to `background-position: 50% 0%;`.
-
-xMidYMid (The default value)
-
-Force uniform scaling.  
-Align the midpoint X value of the element's `viewBox` with the midpoint X value of the viewport.  
-Align the midpoint Y value of the element's `viewBox` with the midpoint Y value of the viewport.
-
-Think of this as being similar to `background-position: 50% 50%;`.
-
-xMidYMax
-
-Force uniform scaling.  
-Align the midpoint X value of the element's `viewBox` with the midpoint X value of the viewport.  
-Align the `<min-y>`+`<height>` of the element's `viewBox` with the maximum Y value of the viewport.
-
-Think of this as being similar to `background-position: 50% 100%;`.
-
-xMaxYMin
-
-Force uniform scaling.  
-Align the `<min-x>`+`<width>` of the element's `viewBox` with the maximum X value of the viewport.  
-Align the `<min-y>` of the element's `viewBox` with the smallest Y value of the viewport.
-
-Think of this as being similar to `background-position: 100% 0%;`.
-
-xMaxYMid
-
-Force uniform scaling.  
-Align the `<min-x>`+`<width>` of the element's `viewBox` with the maximum X value of the viewport.  
-Align the midpoint Y value of the element's `viewBox` with the midpoint Y value of the viewport.
-
-Think of this as being similar to `background-position: 100% 50%;`.
-
-xMaxYMax
-
-Force uniform scaling.  
-Align the `<min-x>`+`<width>` of the element's `viewBox` with the maximum X value of the viewport.  
-Align the `<min-y>`+`<height>` of the element's `viewBox` with the maximum Y value of the viewport.
-
-Think of this as being similar to `background-position: 100% 100%;`.
-
-So, using the `align` and `meetOrSlice` values of the `preserveAspectRatio` attribute, you can specify whether or not to scale the `viewBox` uniformly, how to align it inside the viewport, and whether or not it should be entirely visible inside the viewport.
-
-Sometimes, and depending on the size of the `viewBox`, some values may have similar results. For example, in the `viewBox="0 0 200 300"` example from earlier, some alignments are identical using different `align` values. The value of `meetOrSlice` is set to `meet` in this case so that the entire `viewBox` is contained inside the viewport.
+有时候，viewBox 的有些值会有类似的效果，例如在之前的例子 `viewBox="0 0 200 300"` ，通过设置 `align` 和 `meetORSlice` 也能有相同效果：
 
 ![](/images/svg/viewbox-meet-align-same.jpg)
 
-The result of aligning the `viewBox` using different align values. **The `meetOrSlice` value is set to `meet`**.
+viewBox 的对齐方式通过设置不同的 align 值得到。**The `meetOrSlice` value is set to `meet`**。
 
-If we were to change the `meetOrSlice` value to `slice`, we’d get different results for different values. Notice how the `viewBox` is stretched so that it covers the entire viewport. The x-axis is stretched so that the 200 units cover the viewport’s 800 units. In order for this to happen, and to maintain the aspect ratio of the viewbox, the y-axis gets “sliced off” at the bottom, but you can image it extending below the viewport’s height.
+如果把 `meetORSlice` 设置为 `slice` 会得到不同的结果。注意，`viewBox` 是拉伸至整个视口的。x 轴从 200 拉伸到 800。为了保持 viewbox 的纵横比，y 轴在底部被 "切掉"，但是，你可以将图像扩展到视口的高度以下。
 
 ![](/images/svg/viewbox-slice-align-same.jpg)
 
-The result of aligning the `viewBox` using different align values. **The `meetOrSlice` value is set to `slice`**.
+使用不同的 viewBox 对齐方式得到不同的结果。**The `meetOrSlice` value is set to `slice`**.
 
-Of course, different `viewBox` values will also look different from the 200x300 we’re using here. For the sake of brevity, I won’t get into more examples, and I’ll leave you to play with an interactive demo I created to help you better visualize how the `viewBox` and different `preserveAspectRatio` values work together when different values are used. You can check the interactive demo out by visiting the link in the next section.
+当然，不同的 `viewBox` 值会与在这里使用的 200x300 不同。简单起见，不会讲更多的例子，你可以通过访问下一节的链接来查看交互式演示。
 
-But before we move to that, I just want to note that the mid-x, mid-y, max-x, and max-y values _change if the values of the `<min-x>` and `<min-y>` change_. You can play with the interactive demo and change these values to see how the axes and thus the alignment of the `viewBox` changes accordingly.
+开始之前，要注意的是如果 `<min-x>` 和 `<min-y>` 变化的话，mid-x, mid-y, max-x, and max-y 值会发生变化，你可以再交互式演示中测试一下。
 
-The following image shows the effect of using `viewBox = "100 0 200 300"` on the position of the alignment axes. We’re using the same example as earlier, but instead of having the `<min-x>` value be set to zero, we’re setting it to 100. You can set them to any number value you want. Notice how the min-x, mid-x, and max-x axes change. The `preserveAspectRatio` used here is the default `xMidYMid meet`, which means that the mid-\* axes are aligned with the middle axes of the viewport.
+下图是测试的结果
 
 ![](/images/svg/viewbox-axes-changed-min-x-min-y.jpg)
 
-The effect of changing the value of `<min-x>` on the position of the x-axes. **The translucent blue area shows the area which is considered to be the `viewBox` area after changing the value of `<min-x>`**.
-
 ### The Interactive Demo
 
-The best way to understand how the viewport, `viewBox`, and different `preserveAspectRatio` values work and interact together is by visualizing them.
+最直观的方式就是用交互式演示来测试这些属性，我弄了一个可以修改这些属性的简单交互式 DEMO。
 
-For that purpose, I created a simple interactive demo that allows you to change the values of these attributes and see the result of the new values live.
-
-![](/images/svg/viewbox-demo-screenshot.jpg)
-
-Screenshot of the interactive demo.
+![Screenshot of the interactive demo](/images/svg/viewbox-demo-screenshot.jpg)
 
 [Check the interactive demo out.](/demos/interactive-svg-coordinate-system.md)
 
-I hope you found this article useful in understanding the SVG viewport, `viewBox`, and `preserveAspectRatio` concepts. If you’d like to learn more about SVG coordinate systems, like nesting coordinate systems, establishing new ones, and transformations in SVG, stay tuned for the remaining parts of this series. You can subscribe to the RSS (link below) or follow me on Twitter to stay updated. Thank you very much for reading!
+希望这个文章对你理解 SVG viewport ，`viewBox` 和 `preserveAspectRatio` 的概念会有所帮助。如果你想了解更多关于 SVG 坐标系统的只是，比如，嵌套坐标系统，建立新坐标系统和 SVG 中的变换，请继续关注本系列的其余部分。非常感谢你的阅读!
 
-The SVG parrot illustration used is a freebie from [Freepik.com](http://freepik.com).
-
-If you enjoyed this article you may also be interested in:
+猜你喜欢：
 
 * [Structuring, Grouping, and Referencing in SVG – The `<g>`, `<use>`, `<defs>` and `<symbol>` Elements](http://sarasoueidan.com/blog/structuring-grouping-referencing-in-svg/)
 * [Clipping in CSS and SVG – The `clip-path` Property and `<clipPath>` Element](http://sarasoueidan.com/blog/css-svg-clipping)
