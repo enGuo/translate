@@ -1,152 +1,139 @@
-# svg-transformations
+# SVG 坐标系统和变换之二
 
-SVG elements can be transformed by scaling, translating, skewing, and rotating—much like HTML elements can be transformed using CSS Transforms. However, there are certain inevitable differences when it comes to the coordinate systems used and affected by these transformations. In this article we'll go over the SVG `transform` attribute and CSS property, covering how to use it, and things you should know about SVG coordinate system transformations.
+SVG 元素可以通过缩放，平移，倾斜和旋转来实现跟用 css 来变换 HTML 元素类似的效果。然而，涉及到坐标系统变换产生的影响必然有一定差别。在这篇文章中我们讨论 SVG 的 transform 和 css 属性。包括如何使用，以及你必须了解的 SVG 坐标系统变换的知识。
 
-This is the second article in a series I’m writing about SVG coordinate systems and transformations. In the first article, I covered everything you need to know to understand the basics of SVG coordinate systems; more specifically, the SVG viewport, and the `viewBox` and `preserveAspectRatio` attributes.
+这是 SVG 坐标系统和变换之二，上一篇介绍了必备的 SVG 坐标系统相关基础知识，特别是 `viewBox` 和 `preserveAspectRatio` 属性。
 
-*   [Understanding SVG Coordinate Systems & Transformations (Part 1) – The viewport, `viewBox`, and `preserveAspectRatio`](http://sarasoueidan.com/blog/svg-coordinate-systems)
-*   Understanding SVG Coordinate Systems & Transformations (Part 2) – The `transform` Attribute
-*   [Understanding SVG Coordinate Systems & Transformations (Part 3) – Establishing New Viewports](http://sarasoueidan.com/blog/nesting-svgs)
+* [SVG 坐标系统之一 viewport, `viewBox`, & `preserveAspectRatio`](./svg-coordinate-systems.md)
+* [SVG 坐标系统之二 `transform`](./svg-transformations.md)
+* [SVG 坐标系统之三 – Establishing New Viewports](./nesting-svgs.md)
 
-In this part I’m going to assume you read the first one, so, if you haven’t, make sure you do before you continue reading this article.
+继续阅读前，请确保你已经了解了 [SVG 坐标系统之一 viewport, `viewBox`, & `preserveAspectRatio`](./svg-coordinate-systems.md) 的相关知识。
 
-### The `transform` Attribute Values
+### `transform` 属性值
 
-The `transform` attribute is used to specify one or more transformations on an element. It takes a `<transform-list>` as a value which is defined as a list of transform definitions, which are applied in the order provided. The individual transform definitions are separated by whitespace and/or a comma. An example of applying a transformation to an element may look like the following:
+`transform` 属性用于给元素声明一个或多个变换效果。 属性值以逗号分隔，例如 **rotation**, **scaling**, **translation**, **skewing** 。变换函数跟 css 中 transform 原理类似，只是参数不同。
 
-The possible SVG transformations are: **rotation**, **scaling**, **translation**, and **skewing**. The transformation functions used in the `transform` attribute work similar to the way CSS transform functions work in the `transform` property, except that they take different arguments.
-
-Note that the function syntax defined below only works in the `transform` attribute. See the [section about transforming SVGs with CSS properties](#css-transformation-properties) for information on the syntax used in the CSS transform properties.
+注意下面的函数语法只在 `transform` 属性中有效。
 
 #### Matrix
 
-You can apply one or more transformations to an SVG element using the `matrix()` function. The syntax for the matrix transformation is:
+可以通过 `matrix()` 函数给 SVG 元素添加一个或多个变换相关。语法如下：
 
 ```html
 matrix(<a> <b> <c> <d> <e> <f>)
-
 ```
 
-The above declaration specifies a transformation in the form of a transformation matrix of six values. `matrix(a,b,c,d,e,f)` is equivalent to applying the transformation **matrix \[a b c d e f\]**.
+上述声明通过一个有 6 个值的变化矩阵声明一个变换。`matrix(a,b,c,d,e,f)` 等同于 **matrix \[a b c d e f\]**
 
-For those of you who are not math-savvy, you’re probably not going to be using this function. Those of you who are, you can read more about the math behind it [here](http://www.w3.org/TR/SVG/coords.html#TransformMatrixDefined). Since this function is rarely used—if ever—I’m just going to skip to the other transformation functions.
+如果不精通数学最好不要用这个函数。而对于精通的，可以阅读 [here](http://www.w3.org/TR/SVG/coords.html#TransformMatrixDefined) 获取更多数学知识。因为这个函数比较少用，就此跳过。
 
 #### Translation
 
-To translate an SVG element, you can use the `translate()` function. The syntax for the translation function is:
+平移一个 SVG 元素可以通过 `translate()` 函数。语法如下：
 
 ```html
 translate(<tx> [<ty>])
-
 ```
 
-The `translate()` function takes one or two values which specify the horizontal and vertical translation values, respectively. `tx` represents the translation value along the x-axis; `ty` represents the translation value along the y-axis.
+`translate()` 接受一个或两个值，分别代表水平跟垂直。`tx` 代表 x 轴。 `ty` 代表 y 轴。
 
-The `ty` value is optional; and, if omitted, it defaults to zero. The `tx` and `ty` values can be either space-separated or comma-separated, and they don’t take any units inside the function—they default to the current user coordinate system units.
+`ty` 是可选项，缺省默认为 0。`tx` 和 `ty` 可以通过空格或逗号隔开，不带单位时默认使用当前用户系统单位。
 
-The following example translates an element by 100 user units to the right, and 300 user units to the bottom:
+下面是一个元素往右平移 100 ，往下平移 300 的例子：
 
 ```html
 <circle cx="0" cy="0" r="100" transform="translate(100 300)" />
-
 ```
 
-The above example is still valid if the transformation was applied using `translate(100, 300)` where the values are comma-separated.
+同样可以使用逗号 `translate(100, 300)`
 
 #### Scaling
 
-You can resize an SVG element by scaling it up or down using the `scale()` function transformation. The syntax for the scale transformation is:
+通过 `scale()` 改变 SVG 元素的大小。语法如下：
 
 ```html
 scale(<sx> [<sy>])
-
 ```
 
-The `scale()` function takes one or two values which specify the horizontal and vertical scaling values, respectively. `sx` represents the scaling value along the x-axis, used to stretch or shrink the element horizontally; `sy` represents the scaling value along the y-axis, used to stretch or shrink the element vertically.
+`scale()` 接受两个值，`sx` 表示水平方向的缩放。 `sy` 表示垂直方向的缩放。
 
-The `sy` value is optional; and, if omitted, it is assumed to be equal to `sx`. The `sx` and `sy` values can be either space-separated or comma-separated, and they are unitless numbers.
+`sy` 可选，缺省默认为 0。可用空格或逗号分隔，允许无单位。
 
-The following example doubles the size of an element by scaling it to twice its original size:
+下面是元素放大两倍的例子：
 
 ```html
 <rect width="150" height="100" transform="scale(2)" x="0" y="0" />
-
 ```
 
-The following stretches an element horizontally to 1.5 its original width, and shrinks it vertically to half its original height:
+下面是元素水平方向放大两倍，垂直方向缩小一半的例子：
 
 ```html
 <rect width="150" height="100" transform="scale(2 0.5)" x="0" y="0" />
-
 ```
 
-The above example is still valid if the transformation was applied using `scale(2, .5)` where the values are comma-separated.
+同样也能用逗号分隔 `scale(2, .5)`。
 
-It is important to note here that **when an SVG element is scaled, its entire current coordinate system is scaled, resulting in the element also being repositioned inside the viewport**. Don’t worry about this now, we’ll get into it in more detail in the next section.
+注意，当元素缩放时，它的整个坐标系统也跟着缩放，视口中的元素会重新定位，后续会讨论细节。
 
 #### Skew
 
-An SVG element can also be skewed. To skew it, you can use one or both of the two skew transformation functions: `skewX` and `skewY`.
+SVG 元素可以倾斜，可以使用 `skewX` 或 `skewY` ：
 
 ```html
 skewX(<skew-angle>)
 skewY(<skew-angle>)
-
 ```
 
-The `skewX` function specifies a skew transformation along the x-axis; and the `skewY` function specifies a skew transformation along the y-axis.
+`skewX` 表示 x 轴方向的倾斜，`skewY` 表示 y 轴方向的倾斜，缺省单位为度。
 
-The skew angle specified is a **unitless** angle that defaults to degrees.
-
-Note that skewing an element may result in the element being repositioned inside the viewport. More about this in the next section.
+同样倾斜也会使视口元素重新定位，后续会讨论细节。
 
 #### Rotation
 
-You can rotate an SVG element using the `rotate()` function. The syntax for the function is:
+通过 `routate()` 函数可以旋转一个 SVG 元素，语法如下：
 
 ```html
 rotate(<rotate-angle> [<cx> <cy>])
-
 ```
 
-The `rotate()` function specifies a rotation by `rotate-angle` **degrees** about a given point. Unlike rotation transformations in CSS, you cannot specify an angle unit other than degrees. The angle value is specified **unitless**, and is considered a degrees value by default.
+`rotate()` 函数基于给定点和角度进行旋转，与 css 中的旋转不同的是不能声明度以外的单位，角度单位默认缺省，且默认为度。
 
-The optional `cx` and `cy` values represent the **unitless** coordinates of the point used as a center of rotation. If `cx` and `cy` are not provided, the rotation is about **the origin of the current user coordinate system**. (See [Part 1](http://sarasoueidan.com/blog/svg-coordinate-systems) if you’re not sure what a user coordinate system is.)
+`cx` 和 `cy` 是可选项，用于定义旋转点。不设置，默认为用户坐标系统原点。（不了解的同学可以看上一篇文章）
 
-Specifying a center of rotation inside the `rotate()` function is like a shorthand way for setting `transform: rotate()` and `transform-origin` in CSS. Since the default center of rotation in SVG is the upper left corner of the current user coordinate system in use, and since that may not allow you to create the rotation effect you want, you will probably end up specifying a new center inside `rotate()`. If you know your element’s dimensions and position in the SVG canvas, you can easily specify its center as the center of rotation.
+`rotate()` 就像 css 中 `transform: rotate()` 和 `transform-origin` 的简写形式。旋转中心默认是使用用户坐标系的左上角，可以通过 `rotate()` 自定义旋转中心点。
 
-The following example rotates a group of elements around a specified center of rotation positioned at (50, 50) in the current user coordinate system:
+下例演示了如何修改旋转中心点：
 
 ```html
 <g id="parrot" transform="rotate(45 50 50)" x="0" y="0">
     <!-- elements making up a parrot shape -->
 </g>
-
 ```
 
-However, if you want an element to rotate around its center, you’d probably rather specify the center as `50% 50%` like you would do in CSS; but unfortunately doing that inside the `rotate()` function is not possible—you need to use absolute coordinates. However, you _can_ do this using the CSS `transform-origin` property in conjunction with the CSS `transform` property. More about this later in the article.
+当元素想围绕它的中心旋转时，你可能会想到用 css 的 `50%,50%` 的方式，可惜，在 `rotate` 函数中，只能用绝对坐标。但是，你可以再 css 的 `transform` 属性中使用 `transform-origin` 属性。后续会讨论更多细节。
 
-### Coordinate System Transformations
+### 坐标系变换
 
-Now that we’ve covered all possible SVG transformation functions, we’ll dig into the visual part and the effect of applying each transformation to an SVG element. This is the most important aspect of SVG transformations. And they are called “coordinate system transformations” not just “element transformations” for a reason.
+我们已经认识了所有 SVG 变换相关的函数。现在来深入 SVG 添加变换后的视觉效果部分，这是 SVG 变换的重点，因为它们被称为 “坐标系统变换” 而不仅仅是 “元素变换”。
 
-In the [specification](http://www.w3.org/TR/SVG/coords.html), the `transform` attribute is defined as being one of the two attributes that **establish a new user space (current coordinate system)** on the element it is applied to — the `viewBox` attribute is the second of the two attributes that create a new user space. So what exactly does this mean?
+在 [规范中](http://www.w3.org/TR/SVG/coords.html), `transform` 属性被作为建立用户空间（新坐标系统）的两个属性中的一个。另外一个是 `viewBox` ，什么意思呢？
 
 > The `transform` attribute establishes a new user space (current coordinate system) on the element it is applied to.
 
-This behavior is similar to the behavior of CSS transformations applied to an HTML element—the HTML element’s coordinate system is transformed, and this is usually most obvious when you’re chaining tranformations (we’ll get to this later). Despite being similar in many aspects, HTML and SVG transformations have some differences.
+有点类似与在 HTML 元素上添加 css 变换，导致 HTML 元素坐标系发生了变化，组合使用变换时尤为明显。即便非常多的相似点，当 svg 的变换还是有些不同的。
 
-The main difference is the coordinate system. The coordinate system of an HTML element is established on the element itself. Meanwhile, in SVG, the coordinate system of an element is, initially, the current coordinate system or user space in use.
+主要的不同是坐标系，HTML 元素的坐标系建立在自身。而 SVG 是当前坐标系或者用户空间。
 
-When you apply the `transform` attribute to an SVG element, that element gets a “copy” of the current user coordinate system in use. You can think of it as just creating a new “layer” for the transformed element, where the new layer has its own copy of the current user coordinate system (the `viewBox`).
+当给 SVG 元素添加 `transform` 属性时，意味着复制了一份用户坐标系，你可以认为是拷贝了一个新图层，这个图层的坐标系是基于用户给定的 （`viewBox`）
 
-Then, **the element’s new current coordinate system is transformed by the transformation functions specified inside the `transform` attribute**, thus resulting in the transformation of the element itself. It is as if the elements are drawn onto the canvas in the transformed coordinate system.
+然后，`transform` 在新坐标系上起作用，意味着元素会在变换坐标系中重新绘制。
 
-To understand how SVG transformations are applied, let’s start with the visual part. The following image shows the SVG canvas we’re going to be working with.
+下面通过可视化来理解如何添加 SVG 变换，如图所示：
 
 ![](/images/svg/svg-transforms-canvas.png)
 
-The parrot and the dog are the elements (groups `<g>`) that we’re going to be transforming.
+下面来变换鹦鹉和狗的组合元素：
 
 ```html
 <svg width="800" height="800" viewBox="0 0 800 600">
@@ -157,16 +144,13 @@ The parrot and the dog are the elements (groups `<g>`) that we’re going to be 
         <!-- shapes and paths forming the dog -->
     </g>
 </svg>
-
 ```
 
-The grey coordinate system is the initial coordinate system of the canvas established by the `viewBox`. For simplicity’s sake, I’m going to not change the initial coordinate system—I’m using a `viewBox` that is the same size as the viewport, as you see in the above code.
+灰色坐标是通过 `viewBox` 建立的画布初始坐标系。简单起见，使用同一个坐标，即 `viewBox` 与视口一致。
 
-> When you apply the `transform` attribute to an SVG element, that element gets a "copy" of the current user coordinate system in use.
+用户空间初始化好了，接着来变换元素，我们先让鹦鹉向左移动 150，再向下移动 200。
 
-Now that we’ve established our canvas and an initial user space, we’re going to start transforming elements. Let’s start by translating the parrot by 150 units to the left and 200 units downwards.
-
-The parrot is, of course, made of several paths and shapes. It’s enough to apply the `transform` attribute to the group wrapping these shapes `<g>`; this will in turn apply the transformation to the entire set of shapes and paths, and the parrot will be translated as one whole item. See the [article on structuring and grouping SVGs](http://sarasoueidan.com/blog/structuring-grouping-referencing-in-svg) for more information.
+即便鹦鹉由很多 路径和形状组成，只要 `transform` 属性作用于 `<g>` ，就会对整个路径和形状起到变换作用。 详情参阅 [article on structuring and grouping SVGs](http://sarasoueidan.com/blog/structuring-grouping-referencing-in-svg)。
 
 ```html
 <svg width="800" height="800" viewBox="0 0 800 600">
@@ -175,26 +159,23 @@ The parrot is, of course, made of several paths and shapes. It’s enough to app
     </g>
     <!-- ... -->
 </svg>
-
 ```
 
-The following image shows the result of translating the parrot by the above translation. The translucent version of the parrot shows the initial position before the transformation was applied.
+结果如下：
 
 ![](/images/svg/svg-transformations-translate.png)
 
-The translation transformation in SVG is as simple and straightforward as it is in CSS when applied on an HTML element. We mentioned earlier that applying the `transform` attribute to an element establishes a new current user coordinate system on it. The following image shows the “copy” of the initial coordinate system, that is established on the parrot element when it was transformed. Notice how the parrot’s current coordinate system is translated.
+SVG 中的变换和 HTML 元素上 css 中的一样简单直观。我们之前提到在元素上添加 `transform` 属性时会在元素上创建一个新的用户坐标系。下图显示了初始化坐标系的副本，它在鹦鹉发生变换时建立，注意观察鹦鹉当前坐标系是如何变换的。
 
 ![](/images/svg/svg-transformations-translate-system.png)
 
-It’s important to notice here that **the new current coordinate system established on the element is a replicate of the initial user space, with the position of the element preserved inside it. This means that it is _not_ established on the element’s bounding box, nor is the size of the new current coordinate system restricted to the size of the element**. This is where the difference between HTML and SVG coordinate system shines.
+需要注意重要的一点是元素当前坐标系是复制初始坐标系的，意味着它不是建立在元素边界盒上，新坐标系的尺寸受制于元素尺寸。这就是 HTML 和 SVG 坐标系之间的区别。
 
-> The new current coordinate system established on a transformed element is `not` established on the element's bounding box, nor is its size restricted to the size of the element.
-
-This is more evident if we are to transform the dog at the bottom right of the canvas. Suppose we want to translate the dog by 50 units to the right and then 50 units downwards. This is how the dog, its initial position, and the new current coordinate system (that is also translated with the dog) will look. Notice how the origin of the dog’s new current coordinate system is not positioned at the top left cornder of the dog’s bounding box. Also notice how the dog and its new coordinate system seem as if they were moved to a new “layer” on top of the canvas.
+把狗移动到画布的右下角会更明显，假设把狗往右下方移动 50，会怎么显示呢。注意，狗的坐标原点并不是基于狗边框的左上角。另外注意狗和它新的坐标系看起来它们好像移动到了画布新的一层上。
 
 ![](/images/svg/svg-transformations-translate-dog.png)
 
-Now let’s try something else. Instead of translating the parrot, let’s try scaling it. We’re going to scale the parrot to double its size:
+接着我们试一下缩放：
 
 ```html
 <svg width="800" height="800" viewBox="0 0 800 600">
@@ -203,32 +184,31 @@ Now let’s try something else. Instead of translating the parrot, let’s try s
     </g>
     <!-- ... -->
 </svg>
-
 ```
 
-The result of scaling an SVG element differs from that of scaling an HTML element. The scaled SVG’s element’s position changes inside the viewport when it is scaled. The following image shows the result of doubling the size of the parrot. Notice the initial position and size, and the final size and position.
+对 SVG 元素进行缩放跟缩放 HTML 元素不太一样，缩放后，SVG 元素在视口的位置会发生改变。如图，注意对比前后大小及位置的改变。
 
 ![](/images/svg/svg-transformations-scale.png)
 
-What we can notice from the above image is that not only the size (width and height) of the parrot were doubled, but the coordinates (x and y) were also multiplied by the scaling factor (which is two, here).
+从上面图例中可以发现，不仅是元素的大小变成了 2 倍，坐标系也也变成了 2 倍。
 
-The reason we ended up with this result is something we’ve mentioned earlier: the element’s current coordinate system is transformed, and then the parrot is drawn into the new system. So, in this example, the current coordinate system was scaled. This effect is similar to the effect of using `viewBox = "0 0 400 300"`, which “zooms in” to the coordinate system, thus doubling the size of the content inside it (see [part 1](http://sarasoueidan.com/blog/svg-coordinate-systems) of the series if you haven’t already).
+原因很明了：元素的当前坐标系统改变了，鹦鹉画在了新的坐标系，在本例中，当前坐标系放大的结果跟设置 `viewBox = "0 0 400 300"` 的 zoom in 效果类似。
 
-So, if we were to visualize the coordinate system transformation showing the current transformed system of the parrot, we’d get the following result:
+效果如下：
 
 ![](/images/svg/svg-transformations-scale-system.png)
 
-The new current coordinate system of the parrot is scaled up, “zooming in” to the parrot at the same time. Notice that, inside its current coordinate system, the parrot is not repositioned—it is only the effect of scaling the coordinate system that repositions it inside the viewport. The parrot is simply drawn at its original x and y coordinates inside the new scaled up system.
+鹦鹉的当前新坐标系统被放大了，自身也被 “zooming in”。注意在当前坐标系统里，鹦鹉没有重新定位，只是相对于 viewport 重新定位了。鹦鹉依然基于坐标系左上角的原点被放大。
 
-Let’s trying scaling the parrot in both directions using different scaling factors. If we scale the parrot by applying `transform="scale(2 0.5)`, we’re doubling its width while making it half its original height. The effect will be similar to applying `viewBox="0 0 400 1200"`.
+如果我们设置不同的缩放比 `transform="scale(2 0.5)"`，效果跟 `viewBox = "0 0 400 1200"` 类似。
 
 ![](/images/svg/svg-transformations-scale-2.png)
 
-Notice the position of the parrot inside the scaled coordinate system, and compare it to the position in the initial system (translucent parrot): the x and y position coordinates are preserved.
+注意鹦鹉在缩放坐标系中的位置，并将其与初始系统中的位置（半透明鹦鹉）进行对比：保留 x 和 y 的坐标。
 
-Skewing an element in SVG also results in the element being “moved” as a result of its current coordinate system being skewed.
+在 SVG 中倾斜元素还会导致元素由于当前坐标系统的倾斜而被 “移动”。
 
-Suppose we apply a skew transformation to the dog along the x-axis using the `skewX` function. We’re going to skew the dog by 25 degrees horizontally.
+假设我们使用 `skewX` 函数对沿 x 轴的狗进行一个倾斜变换。比如倾斜 25 度：
 
 ```html
 <svg width="800" height="800" viewBox="0 0 800 600">
@@ -237,20 +217,19 @@ Suppose we apply a skew transformation to the dog along the x-axis using the `sk
         <!-- shapes and paths forming the dog -->
     </g>
 </svg>
-
 ```
 
-The following image shows the result of applying the skewing transformation to the dog. Its coordinate system is skewed, and so is the dog itself.
+如图是变换后的结果：
 
 ![](/images/svg/svg-transformations-skew-system.png)
 
-Note that the position of the dog with respect to its original position also changes, as a result of skewing its coordinate system.
+注意坐标系倾斜导致狗的位置原点也改变了。
 
-The following image shows the result of skewing the dog by the same angle using `skewY()` instead of `skewX`:
+下图是，修改 `skewY()` 的结果
 
 ![](/images/svg/svg-transformations-skew-system-2.png)
 
-And last but not least, let’s try rotating the parrot. The default center of rotation is the upper left corner of the current user coordinate system. The new current system established on the rotated element will also be rotated. In the following example, we’re going to rotate the parrot by 45 degrees. The positive direction of rotation is clockwise.
+接着，让我们旋转鹦鹉。旋转的原点默认是当前用户坐标系统的左上角。旋转的同时，坐标系也旋转了。下面是旋转 45 的例子：
 
 ```html
 <svg width="800" height="800" viewBox="0 0 800 600">
@@ -259,14 +238,13 @@ And last but not least, let’s try rotating the parrot. The default center of r
     </g>
     <!-- ... -->
 </svg>
-
 ```
 
-The result of applying the above transformation looks like this:
+效果如下：
 
 ![](/images/svg/svg-transformations-rotate.png)
 
-You are probably going to want to rotate an element around a point other than the default origin of the coordinate system. Using the `rotate()` function in the `transform` attribute, you can specify that point explicitly. Suppose we want to rotate the parrot in this example around its own center. According to the width, height, and position of the parrot, I can determine its center to be at approximately (150, 170). The parrot can then be rotated around this point:
+你可能给希望自定义旋转的原点，通过在 `transform` 属性中使用 `rotate()` 函数，你可以指定原点。比如，鹦鹉相对自己中心点旋转。通过鹦鹉的宽高和位置，可以计算出中心点在 150,170。鹦鹉可以绕这个点旋转：
 
 ```html
 <svg width="800" height="800" viewBox="0 0 800 600">
@@ -275,70 +253,63 @@ You are probably going to want to rotate an element around a point other than th
     </g>
     <!-- ... -->
 </svg>
-
 ```
 
-At this point, the parrot is rotated and will look like so:
+效果如下：
 
 ![](/images/svg/svg-transformations-rotate-center.png)
 
-We said that the transformations are applied to the coordinate system, and because of that, the element is eventually affected and transformed. So how exactly does changing the center of rotation work on the coordinate system whose origin is at the point (0, 0)?
+我们说过这些变换会应用到左边系中，正因如此，元素最终被影响和转换。那么在坐标系的原点 0,0 上旋转是怎么样的呢？
 
-When you change the center or rotation, the coordinate system is translated, rotated by the specified angle, and then translated again by specific values depending on the center of rotation you specify. In this example, this:
-
-```html
-<g id="parrot" transform="rotate(45 150 170)">    
-
-```
-
-is performed by the browser as a series of translation and rotation operations equivalent to:
+当你改变中心点或旋转，坐标系会跟着变换，旋转一定的角度，同时会平移一段距离，这取决于你旋转中心点：
 
 ```html
-<g id="parrot" transform="translate(150 170) rotate(45) translate(-150 -170)">    
-
+<g id="parrot" transform="rotate(45 150 170)">
 ```
 
-The current coordinate system is translated to the point you want to be the center. It is then rotated by the angle you specify. And then finally the system is translated by the negation of the values. The above transformation applied on the system looks like this:
+相当于执行了一系列的旋转和平移：
+
+```html
+<g id="parrot" transform="translate(150 170) rotate(45) translate(-150 -170)">
+```
+
+当前坐标系被移到了你指定的中心点，接着旋转你指定的角度，最后镜像平移：
 
 ![](/images/svg/svg-transformations-rotate-center-system.png)
 
-Before we move on to the next section where we’re going to nest and chain transformations, I want to note that the current user coordinate system established on a transformed element is independent from other coordinate systems established on other transformed elements. The following image shows the two coordinate systems established on the dog and the parrot, and how they are independent from each other.
+在进入下一节之前，我们先来讨论嵌套和链式转换。首先，转换元素上建立的当前用户坐标系统是独立的。下图显示了建立在狗和鹦鹉上的两个坐标系，以及它们是如何相互独立的。
 
 ![](/images/svg/svg-transformations-multiple.png)
 
-The new current user coordinate systems established on the parrot and the dog when they are transformed.
+在鹦鹉和狗发生变换后会建立新的坐标系统。
 
-Also note that each current coordinate system still lies inside the main coordinate system of the canvas established using the `viewBox` attribute on the containing `<svg>`. Any transformations applied to the `viewBox` will affect the entire canvas and all elements inside it as well, whether they have their own established coordinate systems or not.
+还要注意的是，每个当前坐标系仍然在 SVG 使用了`viewBox` 属性后的坐标系中。任何在 `viewBox` 中的变换都将影响整个画布和里面的每个元素，无论它们是否有自己的坐标系统。
 
-For example, the following is the result of changing the user space of the entire canvas from `viewBox="0 0 800 600"` to `viewBox="0 0 600 450"`. The entire canvas is scaled up, preserving any transformations applied to the individual elements.
+例如，下面是通过修改 `viewBox ="0 0 800 600"` 到 `viewBox="0 0 600 450"`的结果。整个画布被放大了，元素的任何转换仍然不变。
 
-![](/images/svg/svg-transformations-multiple-2.png)
+![The result of changing the user coordinate system on the entire canvas.](/images/svg/svg-transformations-multiple-2.png)
 
-The result of changing the user coordinate system on the entire canvas.
+#### 嵌套和链式变换
 
-#### Nested and Chained Transformations
+通常希望给某个元素添加多个转换，同时应用多个变换可以认为是链式变换。
 
-A lot of times you may want to apply several transformations to an element. Applying multiple transformations in a raw is what is referred to as “chaining” transformations.
+对于链式变换值得注意的是，跟 HTML 元素的转换类似，每个转换一个接着一个地应用于坐标系统。
 
-When transformations are chained, the most important thing to be aware of is that, just like with HTML element transformations, each transformation is applied to the coordinate system after that system is transformed by the previous transformations.
+例如，在对一个元素旋转后，平移它。那么平移将是根据新的坐标系统进行的，而非没有旋转前的坐标系统。
 
-For example, if you’re going to apply a rotation to an element, followed by a translation, the translation happens according to the new coordinate system, not the inital non-rotated one.
-
-The following example does just that. We’re applying the previous rotation, and then translating the parrot using by 200 units along the positive x-axis`transform="rotate(45 150 170) translate(200)"`.
+试下 `transform="rotate(45 150 170) translate(200)"`
 
 ![](/images/svg/svg-transformations-rotate-translate.png)
 
-Depending on the final position and transformation you’re after, you need to chain your transformations accordingly. Always keep the coordinate system in mind.
+坐标系统一直在变换
 
-Note that when you skew an element—and its coordinate system with it—the coordinate system will no longer be an orthogonal one, and the coordinates will no longer be calculated as orthogonal ones—they will be [skew coordinates](http://en.wikipedia.org/wiki/Skew_coordinates). Simply put, this just means that the coordinate system’s origin is no longer a 90 degrees angle, and hence the new coordinates will be computed based on this new angle.
+注意当你倾斜一个元素的时候，坐标系统将不在是正交直线。会变成[skew coordinates](http://en.wikipedia.org/wiki/Skew_coordinates)，简单的说，坐标系已经不成九十度了，会按倾斜的角度计算一个新的值。
 
-Nested transformations occur when a child of a transformed element is also transformed. The transformation applied to the child element will be an accumulation of the transformations applied on its ancestors and the transformation applied on it.
+嵌套转换的意思当一个转换元素的子元素也发生了转换。此时，子元素的转换会叠加。
 
-> \[For nested transformations,\] the transformation applied to the child element will be an accumulation of the transformations applied on its ancestors and the transformation applied on it.
+实际上，嵌套转换跟链式转换有点类似。唯一的区别是，它不 hi 对一个元素应用一系列转换，而是自动地将转换应用到它的执行器上，然后最终它自己的转换应用到自己，就像我们在链式上一个接一个地应用转换一样。
 
-So, in effect, nesting transforms is similar to chaining them; only difference is that instead of applying a series of transformations on one element, it automatically gets the transformations applied on its acestors, and then finally its own transformations are applied to it, just like we applied transformations in the chain above—one after the other.
-
-This is particularly useful for when you want to transform one element relative to another. For example, suppose you want to animate the tail of the dog. The tail is a descendant of the `#dog` group.
+这个对于你处理元素间相互联系的情况非常有帮助，比如，你要给狗的尾巴加动画，这个尾巴是狗组合下的子孙元素。
 
 ```html
 <svg width="800" height="800" viewBox="0 0 800 600">
@@ -350,7 +321,7 @@ This is particularly useful for when you want to transform one element relative 
         </g>
         <g id="body" transform="rotate(.. .. ..)">
             <path id="tail" d="..." transform="rotate(..)">
-                
+
             </path>
             <g id="legs">
                 <!-- ... -->
@@ -358,62 +329,57 @@ This is particularly useful for when you want to transform one element relative 
         </g>
     </g>
 </svg>
-
 ```
 
-Suppose we translate the dog group; then rotate its body by some angle around some point, and then we want to animate the tail by rotating it and animating that rotation.
+假设，我们要平移狗这个组合，然后旋转它的身体，最后，给尾巴添加旋转的动画。
 
-When the tail is to be rotated, it “inherits” the transformed coordinate system of its ancestor (`#body`), which in turn inherits the transformed coordinate system of its transformed ancestor (`#dog`) as well. So, in effect, when the taill is rotated, it is as though it has been translated (by the same translation of the `#dog` group), then rotated (by the same rotation of the `#body` group), and _then_ rotated by its own rotation. And the effect of applying a series of transformations here is the same as we explained in the chaining example above.
+当尾巴旋转的同时，继承了身体坐标系的转换。同样也继承了整个狗的转换。结果看起来就是一个完整的联动动画。
 
-So, you see, nesting transformations has practically the same effect as chaining them on the `#tail`.
+如你所见，嵌套转换跟链式转换同时对尾巴产生了影响。
 
-### Transforming SVGs using CSS Properties
+### 用 css 属性转换 SVG
 
-In SVG 2, the `transform` attribute is referred to as the `transform` property; this is because SVG transformations have been “exported” into the [CSS3 Transforms specification](http://dev.w3.org/csswg/css-transforms/). The latter combines the SVG Transforms, CSS 2D Transforms, and CSS 3D Transforms specifications, and introduces features like `transform-origin` and 3D transformations into SVG.
+在 SVG 2，the `transform` attribute is referred to as the `transform` property （ svg 中的属性跟 css 中的属性 ）；因为 SVG 的转换在[CSS3 Transforms specification](http://dev.w3.org/csswg/css-transforms/)已 "exported" 。接着结合了 SVG Transforms, CSS 2D Transforms, and CSS 3D Transforms specifications 等。
 
-The CSS transform properties specified in the CSS Transforms specifications can be applied to SVG elements. However, the values for the `transform` property functions need to follow the syntax specified in the CSS spec: function arguments must be separated with commas — space-separation alone isn’t valid, but you can include one or more white space before and/or after the comma; and the `rotate()` function does not take `<cx> <cy>` values anymore — the center of rotation is specified using the `transform-origin` property. Also, the CSS transformatio functions do accept units for angles and coordinates, such as `rad` (radians) for angles (among others) and `px`, `em`, etc. for coordinate values.
+css 中 transform 规范 中的 transform 属性可以应用在 SVG 元素。然而，`transform`属性的函数需要遵循 css 规范的语法。函数参数必须要带逗号，空格无效。但在逗号前后可以有空格。`rotate()`方式不再接受 `<cx> <cy>` 旋转中心点的值了，可以用 `transform-origin` 属性。另外，css 的转换函数的角度和坐标系统需要指定单位。比如用于角度的 `rad` 用于坐标系统的 `px`，`em`等。
 
-An example of rotating an SVG element using CSS may look like the following:
+例子如下：
 
-```html
+```css
 #parrot {
-    transform-origin: 50% 50%; /* center of rotation is set to the center of the element */
-    transform: rotate(45deg);
+  transform-origin: 50% 50%; /* center of rotation is set to the center of the element */
+  transform: rotate(45deg);
 }
-
 ```
 
-And SVG element can also be transformed in three-dimensional space using CSS 3D Transforms. Note that the coordinate systems are still, however, different from the coordinate systems established on HTML elements. This means that 3D rotations will also look different unless you change the center of rotation.
+另外 SVG 元素可以通过 css 的 3D 转换实现三维空间转换，然而，跟 HTML 元素的坐标系统不同的是，坐标系统保持不变。意味着，3D 旋转看起来不一样，除非你改变旋转中心点。
 
-```html
+```css
 #SVGel {
-    transform: perspective(800px) rotate3d(1, 1, 0, 45deg);
+  transform: perspective(800px) rotate3d(1, 1, 0, 45deg);
 }
-
 ```
 
-Because transforming SVG elements with CSS is pretty much the same as transforming HTML elements with CSS—syntax-wise—I’m going to skip elaborating on this topic in this article.
+由于使用 css 转换 SVG 元素与使用 css 转换 HTML 元素的语法几乎是一样的，就此跳过
 
-That said, at the time of writing of this article, implementations are still incomplete in some browsers and for some features. Because of how fast browser support changes, I recommend you experiment with the properties to determine what currently works and what doesn’t, and decide on what you can start using today and what not.
+也就是书殴打和在撰写本文时，某些浏览器和某些特性的实现仍然不完整。由于浏览器支持更改的速度非常快，所以我建议你可以尝试下这些属性，以确定哪些有效，哪些无效，并确定可以开始用哪些。
 
-Note that once CSS Transforms are fully implemented for SVG elements, it is recommended that you use the CSS transforms function syntax even when you apply the transformation in the form of a `transform` attribute. That said, the above mentioned syntax of the `transform` attribute functions will still be valid.
+注意，一旦实现了可以用 css 转换 svg 元素，建议你使用 css 转换函数语法，即使您转换应用于 `transform` 属性的形式。也就是说，上面提到的 `transform` 属性函数的语法仍然有效。
 
-### Animating `transform`
+### `transform` 动画
 
-SVG transformations can be animated, just like CSS transforms can be. If you’re using the CSS `transform` property to transform the SVG, you can animate the transformation using CSS animations and transitions just like you would animate CSS transforms on HTML elements.
+SVG 转换可以动画，跟 css transform 一样。可以用 css 动画和过度就像处理 HTML 元素一样。
 
-The SVG `transform` attribute can be animated using the SVG `<animateTransform>` element. The `<animateTransform>` element is one of three elements in SVG that are used to animate different SVG attributes.
+SVG `transform` 属性可以通过用 SVG `<animateTransform>` 元素，`<animateTransform>` 元素是用于 SVG 动画的三个元素之一。
 
-Details of the `<animateTransform>` element are outside the scope of this article. Stay tuned for an article I’ll be writing about the different SVG animation elements, including `<animateTransform>`.
+`<animateTransform>`超出了本文讨论范围，今后文章可能会涉及。
 
-### Final Words
+### 总结
 
-Working with SVGs can be really frustrating at first, if the concepts behind the coordinate system transformations aren’t very clear, especially if you’re coming from a CSS HTML transformations background, and naturally expect SVG elements to respond the same way to transformations as HTML elements do.
+首先，如果对 SVG 坐标系统的概念不是很清楚的话，用起来是非常蛋疼的。特别是当你还出于 css HTML 的转换系统中，而且还用同样的方式处理 SVG。
 
-However, once you get a grip of how they work, you gain a better control over your SVG canvas, and can manipulate elements more easily.
+但是，一旦掌握了他们的工作方式，就可以更好地控制 SVG 画布，并且更容易操作元素了。
 
-In the last part of this series, I’m going to go over nesting SVGs and establishing new viewports and viewboxes. Stay tuned!
+在本系列的最后一部分，我将介绍如何嵌套 SVG 并建立新的 viewport 和 viewbox。请继续关注。
 
-The SVG parrot & dog illustrations used are freebies from [Freepik.com](http://freepik.com).
-
-I hope you liked this article and found it useful. Thank you for reading!
+希望本文对你有用，感谢阅读!
