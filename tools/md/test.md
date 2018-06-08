@@ -1,39 +1,167 @@
-In this article, we examine how Scalable Vector Graphics (SVG) represents the positions and sizes of objects within a drawing context, including coordinate system and what a "pixel" measurement means in a scalable context.
+There are several basic shapes used for most SVG drawing. The purpose of these shapes is fairly obvious from their names. Some of the attributes that determine their position and size are given, but an element reference would probably contain more accurate and complete descriptions along with other properties that won't be covered in here. However, since they're used in most SVG documents, it's necessary to give them some sort of introduction.
 
-## The grid
+## Basic shapes
 
-![](/@api/deki/files/78/=Canvas_default_grid.png)For all elements, SVG uses a coordinate system or **grid** system similar to the one used by [canvas](/en/HTML/Canvas "en/HTML/Canvas") (and by a whole lot of other computer drawing routines). That is, the top left corner of the document is considered to be the point (0,0), or point of origin. Positions are then measured in pixels from the top left corner, with the positive x direction being to the right, and the positive y direction being to the bottom. Note that this is the opposite of the way you're taught to graph as a kid. However, this is the same way elements in HTML are positioned (By default, LTR documents are considered not the RTL documents which position X from right-to-left).
+To insert a shape, you create an element in the document. Different elements correspond to different shapes and take different attributes to describe the size and position of those shapes. Some are slightly redundant in that they can be created by other shapes, but they're all there for your convenience and to keep your SVG documents as short and as readable as possible. All the basic shapes are shown in the image to the right. The code to generate that looks something like:
 
-#### Example:
+![](/@api/deki/files/359/=Shapes.png)
 
-The element
+```xml
+<?xml version="1.0" standalone="no"?>
+<svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
 
-```html
-<rect x="0" y="0" width="100" height="100" />
+  <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
+  <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
+
+  <circle cx="25" cy="75" r="20" stroke="red" fill="transparent" stroke-width="5"/>
+  <ellipse cx="75" cy="75" rx="20" ry="5" stroke="red" fill="transparent" stroke-width="5"/>
+
+  <line x1="10" x2="50" y1="110" y2="150" stroke="orange" stroke-width="5"/>
+  <polyline points="60 110 65 120 70 115 75 130 80 125 85 140 90 135 95 150 100 145"
+      stroke="orange" fill="transparent" stroke-width="5"/>
+
+  <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180"
+      stroke="green" fill="transparent" stroke-width="5"/>
+
+  <path d="M20,230 Q40,205 50,230 T90,230" fill="none" stroke="blue" stroke-width="5"/>
+</svg>
 ```
 
-defines a rectangle from the upper left corner, that spans from there 100px to the right and to the bottom.
+**Note:** The `stroke`, `stroke-width` and `fill` attributes are explained later in the tutorial.
 
-### What are "pixels"?
+### Rectangles
 
-In the most basic case one pixel in an SVG document maps to one pixel on the output device (a.k.a. the screen). But SVG wouldn't have the "Scalable" in its name, if there weren't several possibilities to change this behaviour. Much like absolute and relative font sizes in CSS, SVG defines absolute units (ones with a dimensional identifier like "pt" or "cm") and so-called user units, that lack that identifier and are plain numbers.
+The [rect](/en-US/Web/SVG/Element/rect "en-US/Web/SVG/Element/rect") element does exactly what you would expect and draws a rectangle on the screen. There are really only 6 basic attributes that control the position and shape of the rectangle on screen here. The image shown earlier shows two rect elements, which I admit is a bit redundant. The one on the right has its rx and ry attributes set, giving it rounded corners. If they're not set, they default to 0.
 
-Without further specification, one user unit equals one screen unit. To explicitly change this behaviour, there are several possibilities in SVG. We start with the `svg` root element:
-
-```html
-<svg width="100" height="100">
+```xml
+<rect x="10" y="10" width="30" height="30"/>
+<rect x="60" y="10" rx="10" ry="10" width="30" height="30"/>
 ```
 
-The above element defines a simple SVG canvas with 100x100px. One user unit equals one screen unit.
+x
 
-```html
-<svg width="200" height="200" viewBox="0 0 100 100">
+The x position of the top left corner of the rectangle.
+
+y
+
+The y position of the top left corner of the rectangle.
+
+width
+
+The width of the rectangle
+
+height
+
+The height of the rectangle
+
+rx
+
+The x radius of the corners of the rectangle
+
+ry
+
+The y radius of the corners of the rectangle
+
+### Circle
+
+As you would have guessed, the [circle](/en-US/Web/SVG/Element/circle "en-US/Web/SVG/Element/circle") element draws a circle on the screen. There are really only 3 attributes that are applicable here.
+
+```xml
+<circle cx="25" cy="75" r="20"/>
 ```
 
-The whole SVG canvas here is 200px by 200px in size. However, the `viewBox` attribute defines the portion of that canvas to display. These 200x200 pixels display an area that starts at user unit (0,0) and spans 100x100 user units to the right and to the bottom. This effectively zooms in on the 100x100 unit area and enlarges the image to double size.
+r
 
-The current mapping (for a single element or the whole image) of user units to screen units is called **user coordinate system**. Apart from scaling the coordinate system can also be rotated, skewed and flipped. The default user coordinate system maps one user pixel to one device pixel. (However, the device may decide, what it understands as one pixel.) Lengths in the SVG file with specific dimensions, like "in" or "cm", are then calculated in a way that makes them appear 1:1 in the resulting image.
+The radius of the circle.
 
-A quote from the SVG 1.1 specification illustrates this:
+cx
 
-> \[...\] suppose that the user agent can determine from its environment that "1px" corresponds to "0.2822222mm" (i.e., 90dpi). Then, for all processing of SVG content: \[...\] "1cm" equals "35.43307px" (and therefore 35.43307 user units)
+The x position of the center of the circle.
+
+cy
+
+The y position of the center of the circle.
+
+### Ellipse
+
+[Ellipse](/en-US/Web/SVG/Element/ellipse "en-US/Web/SVG/Element/ellipse")s are actually just a more general form of the circle element, where you can scale the x and y radius (commonly called the semimajor and semiminor axis by math people) of the circle separately.
+
+```xml
+<ellipse cx="75" cy="75" rx="20" ry="5"/>
+```
+
+rx
+
+The x radius of the ellipse.
+
+ry
+
+The y radius of the ellipse.
+
+cx
+
+The x position of the center of the ellipse.
+
+cy
+
+The y position of the center of the ellipse.
+
+### Line
+
+[Line](/en-US/Web/SVG/Element/line "en-US/Web/SVG/Element/line")s are again, just straight lines. They take as attributes two points which specify the start and end point of the line.
+
+```xml
+<line x1="10" x2="50" y1="110" y2="150"/>
+```
+
+x1
+
+The x position of point 1.
+
+y1
+
+The y position of point 1.
+
+x2
+
+The x position of point 2.
+
+y2
+
+The y position of point 2.
+
+### Polyline
+
+[Polyline](/en-US/Web/SVG/Element/polyline "en-US/Web/SVG/Element/polyline")s are groups of connected straight lines. Since that list can get quite long, all the points are included in one attribute:
+
+```xml
+<polyline points="60 110, 65 120, 70 115, 75 130, 80 125, 85 140, 90 135, 95 150, 100 145"/>
+```
+
+points
+
+A list of points, each number separated by a space, comma, EOL, or a line feed character. Each point must contain two numbers, an x coordinate and a y coordinate. So the list (0,0), (1,1) and (2,2) could be written: "0 0, 1 1, 2 2".
+
+### Polygon
+
+[Polygon](/en-US/Web/SVG/Element/polygon "en-US/Web/SVG/Element/polygon")s are a lot like polylines in that they're composed of straight line segments connecting a list of points. For polygons though, the path automatically returns to the first point for you at the end, creating a closed shape. Note that a rectangle is a type of polygon, so a polygon can be used to create a `<rect/>` element in cases where you need a little more flexibility.
+
+```xml
+<polygon points="50 160, 55 180, 70 180, 60 190, 65 205, 50 195, 35 205, 40 190, 30 180, 45 180"/>
+```
+
+points
+
+A list of points, each number separated by a space, comma, EOL, or a line feed character. Each point must contain two numbers, an x coordinate and a y coordinate. So the list (0,0), (1,1) and (2,2) could be written: "0 0, 1 1, 2 2". The drawing then closes the path, so a final straight line would be drawn from (2,2) to (0,0).
+
+### Path
+
+[Path](/en-US/Web/SVG/Element/path "en-US/Web/SVG/Element/path") is probably the most general shape that can be used in SVG. Using a path element you can draw rectangles (with or without rounded corners), circles, ellipses, polylines, and polygons. Basically any of the other types of shapes, bezier curves, quadratic curves, and many more. For that reason, paths alone will be [the next section](/en-US/Web/SVG/Tutorial/Paths "en-US/Web/SVG/Tutorial/Paths") in this tutorial, but for now I will just point out that there is a single attribute used to control its shape.
+
+```xml
+<path d="M 20 230 Q 40 205, 50 230 T 90230"/>
+```
+
+d
+
+A list of points and other information about how to draw the path. See the [Paths](/en-US/Web/SVG/Tutorial/Paths "en-US/Web/SVG/Tutorial/Paths") section for more information.

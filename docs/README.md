@@ -15,3 +15,11 @@ dimensional | 空间的
 lack | 不足
 
 portion | 部分
+
+accurate | 精确的
+
+fairly | 公平地
+
+obvious | 明显的
+
+correspond | 对应
