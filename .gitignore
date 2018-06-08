@@ -4,3 +4,5 @@ node_modules
 Typescript
 ./tools/docs/
 ./tools/images/
+./tools/html/
+./tools/md/
