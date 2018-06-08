@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .content:not(.custom) {
   max-width: 1140px;
 }

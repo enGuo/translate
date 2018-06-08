@@ -227,7 +227,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .svg-demo {
   margin-top: 50px;
   display: flex;
