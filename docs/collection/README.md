@@ -36,3 +36,7 @@ provides A for ...
 In much the same way
 
 > 与此类似
+
+In the most basic case
+
+> 基本上
