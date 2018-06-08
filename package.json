@@ -10,7 +10,8 @@
     "imgs": "node ./tools/imgs.js",
     "img": "node ./tools/img.js",
     "pages": "node ./tools/pages.js",
-    "page": "node ./tools/page.js"
+    "page": "node ./tools/page.js",
+    "md": "node ./tools/html2md.js"
   },
   "author": "LE",
   "license": "ISC",
