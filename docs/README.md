@@ -23,3 +23,7 @@ fairly | 公平地
 obvious | 明显的
 
 correspond | 对应
+
+abbreviated | 简短的
+
+reflection | 反射
