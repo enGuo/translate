@@ -120,7 +120,7 @@ The path will move to point (10,10) and then move horizontally 80 points to the 
 
 > 上述路径是：画笔移动到(10,10)点，由此开始，向右移动 80 像素构成一条水平线，然后向下移动 80 像素，然后向左移动 80 像素，然后再回到起点。
 
-In these examples, it would probably be simpler to use the <polygon> or <polyline> elements. However, paths are used so often in drawing SVG that developers may be more comfortable using them instead. There is no real performance penalty or bonus for using one or the other.
+In these examples, it would probably be simpler to use the `<polygon>` or `<polyline>`elements. However, paths are used so often in drawing SVG that developers may be more comfortable using them instead. There is no real performance penalty or bonus for using one or the other.
 
 > 你可能会为这些命令有什么用，因为 polygon 和 polyine 可以做到画出一样的图形。答案是，这些命令可以做的更多，如果你只是话直线，那么其他元素可能会更好用，但是，path 却是众多开发者在 svg 绘制中经常用到的。据我所知，它们之间不存在性能上的优劣。但是用过脚本生成 path 可能有所不同，因为另外两种方法只需要指明点，儿 path 在这方面的语法会更复杂一些。
 
