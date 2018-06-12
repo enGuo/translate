@@ -1,6 +1,6 @@
-# Grid layout
+# 网格布局
 
-Basic website layout using `grid`.
+`grid` 实现网页基础布局
 
 ## HTML
 
@@ -94,16 +94,16 @@ Basic website layout using `grid`.
 
 ## Explanation
 
-1. `display: grid` enables grid.
-2. `grid-gap: 10px` defines spacing between the elements.
-3. `grid-template-columns: repeat(3, 1fr)` defines 3 columns of the same size.
-4. `grid-template-areas` defines the names of grid areas.
-5. `grid-area: sidebar` makes the element use the area with the name `sidebar`.
+1.  `display: grid` 开启网格布局。
+2.  `grid-gap: 10px` 规定元素间隔。
+3.  `grid-template-columns: repeat(3, 1fr)` 定义 3 个大小相同的列。
+4.  `grid-template-areas` 定义网格区域的名称。
+5.  `grid-area: sidebar` 区域名称命名为 `sidebar`。
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#feat=css-grid
+- https://caniuse.com/#feat=css-grid
 
 <!-- tags: layout -->

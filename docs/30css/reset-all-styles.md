@@ -1,6 +1,6 @@
-# Reset all styles
+# 重置所有样式
 
-Resets all styles to default values with one property. This will not affect `direction` and `unicode-bidi` properties.
+用一个属性来重置所有样式，这个不会影响 `direction` 和 `unicode-bidi` 属性。
 
 ## HTML
 
@@ -36,12 +36,12 @@ Resets all styles to default values with one property. This will not affect `dir
 
 ## Explanation
 
-The `all` property allows you to reset all styles (inherited or not) to default values.
+`all` 属性允许你重置所有样式为默认值（不管是否是继承过来的）
 
 ## Browser support
 
-<span class="snippet__support-note">⚠️ MS Edge status is under consideration.</span>
+<span class="snippet__support-note">⚠️ 正在兼容 MS Edge</span>
 
-* https://caniuse.com/#feat=css-all
+- https://caniuse.com/#feat=css-all
 
 <!-- tags: visual -->

@@ -1,7 +1,6 @@
-# Hairline border
+# 细线边框
 
-Gives an element a border equal to 1 native device pixel in width, which can look
-very sharp and crisp.
+设置 1 物理像素的边框，让其看起来非常精致。
 
 ## HTML
 
@@ -67,19 +66,18 @@ very sharp and crisp.
 
 ## Explanation
 
-1. `box-shadow`, when only using spread, adds a pseudo-border which can use subpixels\*.
-2. Use `@media (min-resolution: ...)` to check the device pixel ratio (`1dppx` equals 96 DPI),
-   setting the spread of the `box-shadow` equal to `1 / dppx`.
+1.  `box-shadow`, 来实现伪边框效果。
+2.  使用 `@media (min-resolution: ...)` 解决分辨率问题 (`1dppx` 等于 96 DPI),将 `box-shadow` 设置为 `1 / dppx`。
 
 ## Browser Support
 
-<span class="snippet__support-note">⚠️ Needs alternate syntax and JavaScript user agent checking for full support.</span>
+<span class="snippet__support-note">⚠️ 需要用 JavaScript 检测设备，以使用特定备用语法</span>
 
-* https://caniuse.com/#feat=css-boxshadow
-* https://caniuse.com/#feat=css-media-resolution
+- https://caniuse.com/#feat=css-boxshadow
+- https://caniuse.com/#feat=css-media-resolution
 
 <hr>
 
-\*Chrome does not support subpixel values on `border`. Safari does not support subpixel values on `box-shadow`. Firefox supports subpixel values on both.
+谷歌不支持边框子像素，Safari 不支持 `box-shadow` 上的子像素。Firefox 均支持。
 
 <!-- tags: visual -->

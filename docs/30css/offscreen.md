@@ -1,6 +1,6 @@
 # Offscreen
 
-A bulletproof way to completely hide an element visually and positionally in the DOM while still allowing it to be accessed by JavaScript and readable by screen readers. This method is very useful for accessibility ([ADA](https://adata.org/learn-about-ada)) development when more context is needed for visually-impaired users. As an alternative to `display: none` which is not readable by screen readers or `visibility: hidden` which takes up physical space in the DOM.
+一种隐藏 DOM 可见性和位置的优雅方式，JavaScript 和屏幕阅读器仍然可以获取该元素。所以这种方法非常适合提高可访问性([ADA](https://adata.org/learn-about-ada))，比如一个隐藏的阅读更多的详情内容。可用于替换 `display: none` 这种屏幕阅读器无法获取隐藏元素的方法或者 `visibility: hidden` 这种仍然占用 DOM 空间的方法。
 
 ## HTML
 
@@ -27,6 +27,7 @@ A bulletproof way to completely hide an element visually and positionally in the
 ```
 
 ## Demo
+
 <div class="snippet-demo">
   <a class="button" href="javascript:;">
     Learn More
@@ -67,20 +68,20 @@ A bulletproof way to completely hide an element visually and positionally in the
 
 ## Explanation
 
-1. Remove all borders.
-2. Use `clip` to indicate that no part of the element should be shown.
-3. Make the height and width of the element 1px.
-4. Negate the elements height and width using `margin: -1px`.
-5. Hide the element's overflow.
-6. Remove all padding.
-7. Position the element absolutely so that it does not take up space in the DOM.
+1.  不要边框。
+2.  用 `clip` 隐藏元素。
+3.  设置元素高宽为 1px。
+4.  使用 `margin: -1px`。
+5.  对元素里的内容超出隐藏。
+6.  不要内边距。
+7.  使用绝对定位，这样就不会占用 DOM 空间了
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-(Although `clip` technically has been depreciated, the newer `clip-path` currently has very limited browser support.)
+( `clip` 技术过时了, `clip-path` 浏览器兼容性不佳。)
 
-* https://caniuse.com/#search=clip
+- https://caniuse.com/#search=clip
 
 <!-- tags: layout, visual -->

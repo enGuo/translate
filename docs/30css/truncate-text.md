@@ -1,6 +1,6 @@
-# Truncate text
+# 截断文本
 
-If the text is longer than one line, it will be truncated and end with an ellipsis `…`.
+当文本在某行中过长时，用 `...` 截断。
 
 ## HTML
 
@@ -39,17 +39,15 @@ If the text is longer than one line, it will be truncated and end with an ellips
 
 ## Explanation
 
-1. `overflow: hidden` prevents the text from overflowing its dimensions
-   (for a block, 100% width and auto height).
-2. `white-space: nowrap` prevents the text from exceeding one line in height.
-3. `text-overflow: ellipsis` makes it so that if the text exceeds its dimensions, it
-   will end with an ellipsis.
-4. `width: 200px;` ensures the element has a dimension, to know when to get ellipsis
+1.  `overflow: hidden` 防止文本溢出（比如块级元素，100%宽度和自动高度）
+2.  `white-space: nowrap` 防止文本高度超过一行。
+3.  `text-overflow: ellipsis` 当文本超出维度时以省略号结尾。
+4.  `width: 200px;` 设定元素超出什么宽度时采用省略号。
 
 ## Browser support
 
-<span class="snippet__support-note">⚠️ Only works for single line elements.</span>
+<span class="snippet__support-note">⚠️ 只对单行元素有效。</span>
 
-* https://caniuse.com/#feat=text-overflow
+- https://caniuse.com/#feat=text-overflow
 
 <!-- tags: layout -->

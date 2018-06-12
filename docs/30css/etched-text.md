@@ -1,6 +1,6 @@
-# Etched text
+# 雕刻文本效果
 
-Creates an effect where text appears to be "etched" or engraved into the background.
+实现文字雕刻进背景的效果
 
 ## HTML
 
@@ -36,18 +36,16 @@ Creates an effect where text appears to be "etched" or engraved into the backgro
 
 ## Explanation
 
-`text-shadow: 0 2px white` creates a white shadow offset `0px` horizontally and `2px` vertically
-from the origin position.
+`text-shadow: 0 2px white` 相对于原点生成一个水平偏移 `0px` 垂直偏移 `2px` 的白色阴影。
 
-The background must be darker than the shadow for the effect to work.
+背景色必须比阴影深色才会有效果。
 
-The text color should be slightly faded to make it look like it's engraved/carved out
-of the background.
+文本颜色稍微淡一点，这样看起来才像是刻在背景上的。
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#feat=css-textshadow
+- https://caniuse.com/#feat=css-textshadow
 
 <!-- tags: visual -->

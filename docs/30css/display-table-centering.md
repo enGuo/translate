@@ -1,6 +1,6 @@
-# Display Table Centering
+# 表格居中法
 
-Vertically and horitonally centers a child element within its parent element using `display: table` (as an alternative to `flexbox`).
+父元素使用 `display: table` （类似 `flexbox`）来让子元素垂直水平居中
 
 ## HTML
 
@@ -35,6 +35,7 @@ Vertically and horitonally centers a child element within its parent element usi
 ```
 
 ## Demo
+
 <div class="snippet-demo">
   <div class="snippet-demo__container">
     <div class="snippet-demo__center">
@@ -63,18 +64,18 @@ Vertically and horitonally centers a child element within its parent element usi
 
 ## Explanation
 
-1. `display: table` on '.center' allows the element to behave like a `<table>` HTML element.
-2. 100% height and width on '.center' allows the element to fill the available space within its parent element.
-3. `display: table-cell` on '.center > span' allows the element to behave like an `<td>` HTML element.
-2. `text-align: center` on '.center > span' centers the child element horizontally.
-2. `vertical-align: middle` on '.center > span' centers the child element vertically.
+1.  `display: table` 作用于 '.center' ，使得元素具备 `<table>` 特性。
+2.  '.center'设置为 100% 高宽，使其占满父容器。
+3.  `display: table-cell` 作用于 '.center > span' ，使得元素具备 `<td>` 特性。
+4.  `text-align: center` 作用于 '.center > span' 使其水平居中。
+5.  `vertical-align: middle` 作用于 '.center > span' 使其垂直居中。
 
-The outer parent ('.container' in this case) must have a fixed height and width.
+最外层父元素（在这里是 `.container`） 必须有固定高宽。
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#search=display%3A%20table
+- https://caniuse.com/#search=display%3A%20table
 
 <!-- tags: layout -->

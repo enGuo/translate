@@ -1,6 +1,6 @@
-# Popout menu
+# 弹出菜单
 
-Reveals an interactive popout menu on hover.
+悬浮时弹出菜单
 
 ## HTML
 
@@ -64,13 +64,11 @@ Reveals an interactive popout menu on hover.
 
 ## Explanation
 
-1. `position: relative` on the reference parent establishes a Cartesian positioning context for its child.
-2. `position: absolute` takes the popout menu out of the flow of the document and positions it
-   in relation to the parent.
-3. `left: 100%` moves the the popout menu 100% of its parent's width from the left.
-4. `visibility: hidden` hides the popout menu initially and allows for transitions (unlike `display: none`).
-5. `.reference:hover > .popout-menu` means that when `.reference` is hovered over, select immediate
-   children with a class of `.popout-menu` and change their `visibility` to `visible`, which shows the popout.
+1.  `position: relative` 为子元素建立笛卡尔坐标系统。
+2.  `position: absolute` 让菜单脱离文档流。
+3.  `left: 100%` 让菜单向左偏移父元素 100% 的宽度。
+4.  `visibility: hidden` 隐藏菜单，但可以变换 (不像 `display: none`).
+5.  `.reference:hover > .popout-menu` 用于当鼠标悬浮在 `.reference` 时, 选中 `.popout-menu` 接着改变 `visibility` 为 `visible`。
 
 ## Browser support
 

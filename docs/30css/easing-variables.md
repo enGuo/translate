@@ -1,7 +1,6 @@
-# Easing variables
+# 缓动变量
 
-Variables that can be reused for `transition-timing-function` properties, more
-powerful than the built-in `ease`, `ease-in`, `ease-out` and `ease-in-out`.
+创建优于 `ease`, `ease-in`, `ease-out` and `ease-in-out` 的可复用 `transition-timing-function` 变量。
 
 ## HTML
 
@@ -97,12 +96,12 @@ powerful than the built-in `ease`, `ease-in`, `ease-out` and `ease-in-out`.
 
 ## Explanation
 
-The variables are defined globally within the `:root` CSS pseudo-class which matches the root element of a tree representing the document. In HTML, `:root` represents the `<html>` element and is identical to the selector `html`, except that its specificity is higher.
+`:root` 伪类表示匹配文档树的根元素。在 HTML 中，`:root` 意味着 `<html>` 此时相当于选中 `html`，只是优先级高些。
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#feat=css-variables
+- https://caniuse.com/#feat=css-variables
 
 <!-- tags: animation -->

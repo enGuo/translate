@@ -1,6 +1,6 @@
-# Height transition
+# 高度过渡
 
-Transitions an element's height from `0` to `auto` when its height is unknown.
+使高度未知的元素的高度从 `0` 过渡到 `auto`。
 
 ## HTML
 
@@ -28,9 +28,9 @@ Transitions an element's height from `0` to `auto` when its height is unknown.
 ## JavaScript
 
 ```js
-var el = document.querySelector('.el')
-var height = el.scrollHeight
-el.style.setProperty('--max-height', height + 'px')
+var el = document.querySelector('.el');
+var height = el.scrollHeight;
+el.style.setProperty('--max-height', height + 'px');
 ```
 
 ## Demo
@@ -69,27 +69,24 @@ el.style.setProperty('--max-height', height + 'px')
 
 ### CSS
 
-1. `transition: max-height: 0.5s cubic-bezier(...)` specifies that changes to `max-height` should be transitioned over 0.5 seconds, using an `ease-out-quint` timing function.
-2. `overflow: hidden` prevents the contents of the hidden element from overflowing its container.
-3. `max-height: 0` specifies that the element has no height initially.
-4. `.target:hover > .el` specifies that when the parent is hovered over, target a child `.el` within
-   it and use the `--max-height` variable which was defined by JavaScript.
+1.  `transition: max-height: 0.5s cubic-bezier(...)` 当 `max-height` 改变时会有 0.5 秒的过渡效果,用的是 `ease-out-quint` 时间函数。
+2.  `overflow: hidden` 防止隐藏元素的内容溢出其容器。
+3.  `max-height: 0` 默认初始高度为零。
+4.  `.target:hover > .el` 在父元素上悬浮时 `.el` 会使用 JavaScript 生成的 `--max-height` 变量。
 
 ### JavaScript
 
-1. `el.scrollHeight` is the height of the element including overflow, which will change dynamically
-   based on the content of the element.
-2. `el.style.setProperty(...)` sets the `--max-height` CSS variable which is used to specify the `max-height` of the element the target is hovered over, allowing it to transition smoothly from 0 to auto.
+1.  `el.scrollHeight` 元素的动态高度，包括溢出的内容。
+2.  `el.style.setProperty(...)` 设置 `--max-height` CSS 变量，用于定义悬浮时元素的 `max-height` , 这样就可以得到高度从 0 过渡到内容高度的效果。
 
 ## Browser Support
 
-<div class="snippet__requires-javascript">Requires JavaScript</div>
+<div class="snippet__requires-javascript">需要用到 JavaScript</div>
 <span class="snippet__support-note">
-  ⚠️ Causes reflow on each animation frame, which will be laggy if there are a large number of elements
-  beneath the element that is transitioning in height.
+  ⚠️ 由于每个动画帧会引起回流，如果元素下方有大量的元素高度发生变化，则回流将会滞后。
 </span>
 
-* https://caniuse.com/#feat=css-variables
-* https://caniuse.com/#feat=css-transitions
+- https://caniuse.com/#feat=css-variables
+- https://caniuse.com/#feat=css-transitions
 
 <!-- tags: animation -->

@@ -1,6 +1,6 @@
-# Sibling fade
+# 淡出兄弟元素
 
-Fades out the siblings of a hovered item.
+淡出悬停项目的兄弟元素
 
 ## HTML
 
@@ -60,15 +60,14 @@ span {
 
 ## Explanation
 
-1. `transition: opacity 0.2s` specifies that changes to opacity will be transitioned over 0.2 seconds.
-2. `.sibling-fade:hover span:not(:hover)` specifies that when the parent is hovered, select any `span` children
-   that are not currently being hovered and change their opacity to `0.5`.
+1.  `transition: opacity 0.2s` 给透明度改变添加 0.2s 的过渡效果
+2.  `.sibling-fade:hover span:not(:hover)` 当鼠标悬浮在父级时, 选中所有没有被悬浮的 `span` 子元素，然后设置透明度为 0.5
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#feat=css-sel3
-* https://caniuse.com/#feat=css-transitions
+- https://caniuse.com/#feat=css-sel3
+- https://caniuse.com/#feat=css-transitions
 
 <!-- tags: interactivity -->

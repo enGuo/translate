@@ -1,6 +1,6 @@
-# Hover underline animation
+# 下划线动画效果
 
-Creates an animated underline effect when the text is hovered over.
+当鼠标悬浮文本在文本上时，触发一个下划线动画。
 
 <small>**Credit:** https://flatuicolors.com/</small>
 
@@ -68,26 +68,22 @@ Creates an animated underline effect when the text is hovered over.
 
 ## Explanation
 
-1. `display: inline-block` makes the block `p` an `inline-block` to prevent the underline from
-   spanning the entire parent width rather than just the content (text).
-2. `position: relative` on the element establishes a Cartesian positioning context for pseudo-elements.
-3. `::after` defines a pseudo-element.
-4. `position: absolute` takes the pseudo element out of the flow of the document and positions it in relation to the parent.
-5. `width: 100%` ensures the pseudo-element spans the entire width of the text block.
-6. `transform: scaleX(0)` initially scales the pseudo element to 0 so it has no width and is not visible.
-7. `bottom: 0` and `left: 0` position it to the bottom left of the block.
-8. `transition: transform 0.25s ease-out` means changes to `transform` will be transitioned over 0.25 seconds
-   with an `ease-out` timing function.
-9. `transform-origin: bottom right` means the transform anchor point is positioned at the bottom right of the block.
-10. `:hover::after` then uses `scaleX(1)` to transition the width to 100%, then changes the `transform-origin`
-    to `bottom left` so that the anchor point is reversed, allowing it transition out in the other direction when
-    hovered off.
+1.  `display: inline-block` 让块级 `p` 变成 `inline-block` ，这样做的目的是让下划线宽度保持文本内容宽度而不是父级宽度。
+2.  `position: relative` 为伪元素创建笛卡尔坐标系统。
+3.  `::after` 定义伪元素。
+4.  `position: absolute` 让伪元素脱离正常文档流。
+5.  `width: 100%` 让伪元素充满整个文本块。
+6.  `transform: scaleX(0)` 默认伪元素缩放值为 0，所以它将不会显示。
+7.  `bottom: 0` 和 `left: 0` 让元素位于左下角。
+8.  `transition: transform 0.25s ease-out` 意味着 `transform` 会有个 0.25 秒的过渡效果，用的是 `ease-out` 时间函数。
+9.  `transform-origin: bottom right` 设置变换原点为右下角。
+10. `:hover::after` 通过使用 `scaleX(1)` 让宽度过渡到 100%, 然后改变 `transform-origin` 为 `bottom left` 这样定位点就会反转，从而允许其在悬停时转换到另一个方向。
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#feat=transforms2d
-* https://caniuse.com/#feat=css-transitions
+- https://caniuse.com/#feat=transforms2d
+- https://caniuse.com/#feat=css-transitions
 
 <!-- tags: animation -->

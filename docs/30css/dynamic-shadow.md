@@ -1,6 +1,6 @@
-# Dynamic shadow
+# 动态阴影
 
-Creates a shadow similar to `box-shadow` but based on the colors of the element itself.
+有点类似 `box-shadow` 但阴影的颜色基于元素本身。
 
 ## HTML
 
@@ -60,21 +60,23 @@ Creates a shadow similar to `box-shadow` but based on the colors of the element 
 
 ## Explanation
 
-1. `position: relative` on the element establishes a Cartesian positioning context for psuedo-elements.
-2. `z-index: 1` establishes a new stacking context.
-3. `::after` defines a pseudo-element.
-4. `position: absolute` takes the pseudo element out of the flow of the document and positions it in relation to the parent.
-5. `width: 100%` and `height: 100%` sizes the pseudo-element to fill its parent's dimensions, making it equal in size.
-6. `background: inherit` causes the pseudo-element to inherit the linear gradient specified on the element.
-7. `top: 0.5rem` offsets the pseudo-element down slightly from its parent.
-8. `filter: blur(0.4rem)` will blur the pseudo-element to create the appearance of a shadow underneath.
-9. `opacity: 0.7` makes the pseudo-element partially transparent.
-10. `z-index: -1` positions the pseudo-element behind the parent but in front of the background.
+[笛卡尔坐标系](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)
+
+1.  `position: relative` 作用于父元素，目的是给伪元素建立笛卡尔坐标系统。
+2.  `z-index: 1` 改变层叠关系。
+3.  `::after` 定义伪元素
+4.  `position: absolute` 使伪元素脱离文档流，并将其相对于父元素定位。
+5.  `width: 100%` 和 `height: 100%` 让伪元素填充父元素，使其尺寸相等。
+6.  `background: inherit` 使伪元素继承父元素的渐变效果。
+7.  `top: 0.5rem` 使伪元素相对于父元素向下偏移 0.5rem。
+8.  `filter: blur(0.4rem)` 模糊伪元素来模拟阴影效果。
+9.  `opacity: 0.7` 使伪元素部分透明。
+10. `z-index: -1` 将伪元素定位在父元素后面。
 
 ## Browser support
 
-<span class="snippet__support-note">⚠️ Requires prefixes for full support.</span>
+<span class="snippet__support-note">⚠️ 需要浏览器前缀来获取兼容性。</span>
 
-* https://caniuse.com/#feat=css-filters
+- https://caniuse.com/#feat=css-filters
 
 <!-- tags: visual -->

@@ -1,6 +1,6 @@
-# :not selector
+# :not 选择器
 
-The `:not` psuedo selector is useful for styling a group of elements, while leaving the last (or specified) element unstyled.
+`:not` 伪类选择器对于给一组元素(除了最后一个或指定元素)添加样式时非常有用。
 
 ## HTML
 
@@ -63,13 +63,12 @@ li:not(:last-child) {
 
 ## Explanation
 
-`li:not(:last-child)` specifies that the styles should apply to all `li` elements except
-the `:last-child`.
+`li:not(:last-child)` 给所有 `li` 元素添加样式，除了 `:last-child` 最后一个。
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#feat=css-sel3
+- https://caniuse.com/#feat=css-sel3
 
 <!-- tags: visual -->

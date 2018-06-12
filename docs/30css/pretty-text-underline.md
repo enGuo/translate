@@ -1,7 +1,6 @@
-# Pretty text underline
+# 美化文本下划线
 
-A nicer alternative to `text-decoration: underline` where descenders do not clip the underline.
-Natively implemented as `text-decoration-skip-ink: auto` but it has less control over the underline.
+实现一种替代 `text-decoration: underline` 的下划线，效果是超出部分不会裁剪下划线，原生实现是 `text-decoration-skip-ink: auto` ，但其对下划线的可控性不足。
 
 ## HTML
 
@@ -14,7 +13,8 @@ Natively implemented as `text-decoration-skip-ink: auto` but it has less control
 ```css
 .pretty-text-underline {
   display: inline;
-  text-shadow: 1px 1px #f5f6f9, -1px 1px #f5f6f9, -1px -1px #f5f6f9, 1px -1px #f5f6f9;
+  text-shadow: 1px 1px #f5f6f9, -1px 1px #f5f6f9, -1px -1px #f5f6f9, 1px -1px
+      #f5f6f9;
   background-image: linear-gradient(90deg, currentColor 100%, transparent 100%);
   background-position: bottom;
   background-repeat: no-repeat;
@@ -62,23 +62,16 @@ Natively implemented as `text-decoration-skip-ink: auto` but it has less control
 
 ## Explanation
 
-1. `text-shadow` uses 4 values with offsets that cover a 4x4 px area to ensure the underline
-   has a "thick" shadow that covers the line where descenders clip it. Use a color
-   that matches the background. For a larger font, use a larger `px` size. Additional values
-   can create an even thicker shadow, and subpixel values can also be used.
-2. `background-image: linear-gradient(...)` creates a 90deg gradient using the
-   text color (`currentColor`).
-3. The `background-*` properties size the gradient as 100% of the width of the block and 1px
-   in height at the bottom and disables repetition, which creates a 1px underline beneath
-   the text.
-4. The `::selection` pseudo selector rule ensures the text shadow does not interfere with text
-   selection.
+1.  `text-shadow` 用 4 个偏移值，覆盖 4x4px 区域，以确保下划线具有厚阴影，该阴影覆盖裁剪后的下划线。使用与背景色匹配的颜色。对于较大字体，请使用较大值。
+2.  `background-image: linear-gradient(...)` 使用当前文本颜色 (`currentColor`) 创建一个 90 度的渐变。
+3.  `background-*` 等属性将渐变大小设置为 1x1px，并延 x 轴重复。
+4.  `::selection` 伪类选择器用于确保文本阴影不会影响文本选择。
 
 ## Browser support
 
 <span class="snippet__support-note">✅ No caveats.</span>
 
-* https://caniuse.com/#feat=css-textshadow
-* https://caniuse.com/#feat=css-gradients
+- https://caniuse.com/#feat=css-textshadow
+- https://caniuse.com/#feat=css-gradients
 
 <!-- tags: visual -->

@@ -1,6 +1,6 @@
-# Transform Centering
+# Transform 居中
 
-Vertically and horitonally centers a child element within its parent element using `position: absolute` and `transform: translate()` (as an alternative to `flexbox` or `display: table`). Similar to `flexbox`, this method does not require you to know the height or width of your parent or child so it is ideal for responsive applications.
+用 `position: absolute` 和 `transform: translate()` 实现垂直水平居中 (作为 `flexbox` 或 `display: table` 的替换方法). 类似于 `flexbox` ，这种方法不需要知道元素的高宽，所以非常适合响应式布局。
 
 ## HTML
 
@@ -29,6 +29,7 @@ Vertically and horitonally centers a child element within its parent element usi
 ```
 
 ## Demo
+
 <div class="snippet-demo">
   <div class="snippet-demo__parent">
     <div class="snippet-demo__child">Centered content</div>
@@ -52,16 +53,16 @@ Vertically and horitonally centers a child element within its parent element usi
 
 ## Explanation
 
-1. `position: absolute` on the child element allows it to be positioned based on its containing block.
-2. `left: 50%` and `top: 50%` offsets the child 50% from the left and top edge of its containing block.
-3. `transform: translate(-50%, -50%)` allows the height and width of the child element to be negated so that it is vertically and horizontally centered.
+1.  `position: absolute` 让子元素基于容器布局
+2.  `left: 50%` 和 `top: 50%` 让子元素相对父容器左上角偏移 50%
+3.  `transform: translate(-50%, -50%)` 让子元素方向偏移自身宽高，刚好垂直水平居中。
 
-Note: Fixed height and width on parent element is for the demo only.
+注: 适用于父元素高宽固定的情况。
 
 ## Browser support
 
-<span class="snippet__support-note">⚠️ Requires prefix for full support.</span>
+<span class="snippet__support-note">⚠️ 需要浏览器前缀来获取兼容性。</span>
 
-* https://caniuse.com/#search=transform
+- https://caniuse.com/#search=transform
 
 <!-- tags: layout -->

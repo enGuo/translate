@@ -1,6 +1,6 @@
-# Flexbox centering
+# 弹性居中
 
-Horizontally and vertically centers a child element within a parent element using `flexbox`.
+用 `flexbox` 实现水平垂直居中
 
 ## HTML
 
@@ -39,14 +39,14 @@ Horizontally and vertically centers a child element within a parent element usin
 
 ## Explanation
 
-1. `display: flex` enables flexbox.
-2. `justify-content: center` centers the child horizontally.
-3. `align-items: center` centers the child vertically.
+1.  `display: flex` 开启 flexbox 布局
+2.  `justify-content: center` 水平居中
+3.  `align-items: center` 垂直居中
 
 ## Browser support
 
 <span class="snippet__support-note">⚠️ Needs prefixes for full support.</span>
 
-* https://caniuse.com/#feat=flexbox
+- https://caniuse.com/#feat=flexbox
 
 <!-- tags: layout -->
